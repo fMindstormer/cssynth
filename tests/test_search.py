@@ -1,6 +1,7 @@
 import numpy as np
+from scipy import ndimage
 
-from cssynth.search import extract_palette, reduce_polygon, trace_outline
+from cssynth.search import _regions, _vertex_delta, area_sums, extract_palette, gain, reduce_polygon, trace_outline
 from cssynth.shapes import Shape, coverage
 
 
@@ -38,3 +39,41 @@ def test_extract_palette_ignores_antialiasing():
     pal, labels = extract_palette(img)
     assert len(pal) == 2
     assert labels.shape == (300, 400)
+
+
+def test_box_gain_matches_coverage():
+    rng = np.random.default_rng(1)
+    A = rng.random((300, 400)) < 0.3
+    B = (rng.random((300, 400)) < 0.3) & ~A
+    sums = area_sums(A, B)
+    for _ in range(2000):
+        s = Shape(float(rng.integers(-40, 420)) + rng.choice([0, 0.5]), float(rng.integers(-40, 320)),
+                  float(rng.integers(1, 250)) + rng.choice([0, 0.5]), float(rng.integers(1, 200)), 1,
+                  radii=tuple(int(v) * (rng.random() < 0.6) for v in rng.integers(0, 150, 4)))
+        assert gain(s, A, B, sums) == gain(s, A, B)
+
+
+def test_regions_split_shapes_touching_at_a_corner():
+    region = np.zeros((300, 400), dtype=bool)
+    region[50:150, 50:150] = True
+    region[150:250, 150:250] = True                 # meets the first only at a corner
+    lab, _ = ndimage.label(region, structure=np.ones((3, 3)))
+    boxes = {(xs.start, ys.start, xs.stop, ys.stop)
+             for _, xs, ys in _regions(region, lab, list(enumerate(ndimage.find_objects(lab), 1)))}
+    assert {(50, 50, 150, 150), (150, 150, 250, 250)} <= boxes
+
+
+def test_vertex_delta_matches_full_gain():
+    rng = np.random.default_rng(2)
+    A = rng.random((300, 400)) < 0.3
+    B = (rng.random((300, 400)) < 0.3) & ~A
+    for _ in range(300):
+        pts = [tuple(int(v) for v in p) for p in rng.integers(-20, 420, (rng.integers(3, 10), 2))]
+        old = Shape.polygon(pts, 1)
+        i = int(rng.integers(len(pts)))
+        moved = pts.copy()
+        moved[i] = (pts[i][0] + int(rng.integers(-16, 17)), pts[i][1] + int(rng.integers(-16, 17)))
+        new = Shape.polygon(moved, 1)
+        d = _vertex_delta(old, new, A, B)
+        if d is not None:
+            assert gain(old, A, B) + d == gain(new, A, B)

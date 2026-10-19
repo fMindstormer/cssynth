@@ -16,7 +16,7 @@ import math
 import numpy as np
 from scipy import ndimage
 
-from .shapes import Gradient, Shape, base_labels, coverage, render_labels
+from .shapes import Gradient, H, Shape, W, _in_polygon, base_labels, coverage, render_labels
 
 MIN_COLOR_PX = 40
 MIN_GAIN = 25          # pixels a shape must fix to be worth its characters
@@ -150,15 +150,68 @@ def fit_gradient(T, K):
 # Gain and hill climbing
 # --------------------------------------------------------------------------
 
-def gain(s: Shape, A: np.ndarray, B: np.ndarray) -> int:
+def gain(s: Shape, A: np.ndarray, B: np.ndarray, sums=None) -> int:
     """Pixels fixed minus pixels broken by painting s on top.
-    A: target is s.color and currently wrong.  B: currently right and not s.color."""
+    A: target is s.color and currently wrong.  B: currently right and not s.color.
+    sums: summed-area table of A - B (see area_sums), which makes boxes cheap."""
+    if sums is not None and not s.rot % 360 and not s.ell and not s.poly:
+        return _box_gain(s, A, B, sums)
     x0, y0, m = coverage(s)
     if m is None:
         return -10**9
     h, w = m.shape
     return (np.count_nonzero(A[y0:y0 + h, x0:x0 + w] & m)
             - np.count_nonzero(B[y0:y0 + h, x0:x0 + w] & m))
+
+
+def area_sums(A, B) -> np.ndarray:
+    S = np.zeros((A.shape[0] + 1, A.shape[1] + 1), dtype=np.int32)
+    S[1:, 1:] = (A.astype(np.int32) - B).cumsum(0).cumsum(1)
+    return S
+
+
+def _box_gain(s: Shape, A, B, S) -> int:
+    """gain() for an unrotated box: the sum over its rectangle from the table,
+    minus what its rounded corners cut away. Cuts lie in disjoint corner
+    blocks (CSS scales radii so adjacent ones never overlap), and each is
+    computed exactly as coverage() does, so the result is identical."""
+    # pixel i is inside when its center i + 0.5 lies in [x, x + w]
+    i0 = max(0, math.ceil(s.x - 0.5))
+    i1 = min(W, math.floor(s.x + s.w - 0.5) + 1)
+    j0 = max(0, math.ceil(s.y - 0.5))
+    j1 = min(H, math.floor(s.y + s.h - 0.5) + 1)
+    x0, y0, x1, y1 = s.bbox()
+    if x1 <= x0 or y1 <= y0 or s.w <= 0 or s.h <= 0:
+        return -10**9                       # as gain(): nothing on the canvas
+    if i1 <= i0 or j1 <= j0:
+        return 0
+    g = int(S[j1, i1] - S[j0, i1] - S[j1, i0] + S[j0, i0])
+    if not any(s.radii):
+        return g
+    hw, hh = s.w / 2, s.h / 2
+    cx, cy = s.x + hw, s.y + hh
+    for (rx, ry), (sx, sy) in zip(s.corner_radii(), ((-1, -1), (1, -1), (1, 1), (-1, 1))):
+        if rx <= 0 or ry <= 0:
+            continue
+        # the corner block: pixels whose centers lie beyond the arc's center
+        ccx, ccy = cx + sx * (hw - rx), cy + sy * (hh - ry)
+        if sx < 0:
+            a0, a1 = i0, min(i1, max(i0, math.ceil(ccx - 0.5)))
+        else:
+            a0, a1 = max(i0, min(i1, math.floor(ccx - 0.5) + 1)), i1
+        if sy < 0:
+            b0, b1 = j0, min(j1, max(j0, math.ceil(ccy - 0.5)))
+        else:
+            b0, b1 = max(j0, min(j1, math.floor(ccy - 0.5) + 1)), j1
+        if a1 <= a0 or b1 <= b0:
+            continue
+        u = (np.arange(a0, a1) + 0.5 - cx)[None, :]
+        v = (np.arange(b0, b1) + 0.5 - cy)[:, None]
+        cu, cv = sx * (hw - rx), sy * (hh - ry)
+        du, dv = (u - cu) / rx, (v - cv) / ry
+        cut = ((u - cu) * sx > 0) & ((v - cv) * sy > 0) & (du * du + dv * dv > 1)
+        g -= (np.count_nonzero(A[b0:b1, a0:a1] & cut) - np.count_nonzero(B[b0:b1, a0:a1] & cut))
+    return g
 
 
 def _moves(s: Shape, step: int):
@@ -199,14 +252,48 @@ def _moves(s: Shape, step: int):
                         yield s.copy(radii=tuple(r2))
 
 
+def _vertex_delta(old: Shape, new: Shape, A, B):
+    """gain(new) - gain(old) when the polygons differ in one vertex, or None.
+    Only pixels near the vertex's two edges can change, so both polygons are
+    tested on that window alone (the even-odd test of a pixel does not depend
+    on which other pixels are sampled, so this is exact)."""
+    if not (old.poly and new.poly) or len(old.poly) != len(new.poly) or new.w <= 0 or new.h <= 0:
+        return None
+    diff = [i for i, (p, q) in enumerate(zip(old.poly, new.poly)) if p != q]
+    if len(diff) != 1:
+        return None
+    i, n = diff[0], len(old.poly)
+    pts = [old.poly[i - 1], old.poly[i], new.poly[i], old.poly[(i + 1) % n]]
+    x0 = max(0, min(p[0] for p in pts))
+    x1 = min(W, max(p[0] for p in pts) + 1)
+    y0 = max(0, min(p[1] for p in pts))
+    y1 = min(H, max(p[1] for p in pts) + 1)
+    if x1 <= x0 or y1 <= y0:
+        return 0
+    xs, ys = np.arange(x0, x1) + 0.5, np.arange(y0, y1) + 0.5
+    change = _in_polygon(xs, ys, new.poly).astype(np.int8) - _in_polygon(xs, ys, old.poly)
+    a, b = A[y0:y1, x0:x1], B[y0:y1, x0:x1]
+    return int((change * a).sum() - (change * b).sum())
+
+
 def hill_climb(s: Shape, A, B, steps=(16, 8, 4, 2, 1)) -> tuple[Shape, int]:
-    best, bg = s, gain(s, A, B)
+    sums = area_sums(A, B)
+    seen = {}
+
+    def score(c, parent=None, parent_gain=None):
+        k = repr(c)
+        if k not in seen:
+            d = _vertex_delta(parent, c, A, B) if parent is not None and parent_gain > -10**9 else None
+            seen[k] = parent_gain + d if d is not None else gain(c, A, B, sums)
+        return seen[k]
+
+    best, bg = s, score(s)
     for step in steps:
         improved = True
         while improved:
             improved = False
             for cand in _moves(best, step):
-                g = gain(cand, A, B)
+                g = score(cand, best, bg)
                 if g > bg:
                     best, bg, improved = cand, g, True
     return best, bg
@@ -244,13 +331,20 @@ def candidates(color: int, comp: np.ndarray, x0: int, y0: int, outlines=False):
         cxx, cyy, cxy = ((X - mx) ** 2).mean(), ((Y - my) ** 2).mean(), ((X - mx) * (Y - my)).mean()
         t = 0.5 * math.atan2(2 * cxy, cxx - cyy)
         deg = round(math.degrees(t))
+        u = (X - mx) * math.cos(t) + (Y - my) * math.sin(t)
+        v = -(X - mx) * math.sin(t) + (Y - my) * math.cos(t)
+        bw, bh = u.max() - u.min() + 1, v.max() - v.min() + 1
+        ccx = mx + (u.max() + u.min()) / 2 * math.cos(t) - (v.max() + v.min()) / 2 * math.sin(t)
+        ccy = my + (u.max() + u.min()) / 2 * math.sin(t) + (v.max() + v.min()) / 2 * math.cos(t)
         if deg % 90:
-            u = (X - mx) * math.cos(t) + (Y - my) * math.sin(t)
-            v = -(X - mx) * math.sin(t) + (Y - my) * math.cos(t)
-            bw, bh = u.max() - u.min() + 1, v.max() - v.min() + 1
-            ccx = mx + (u.max() + u.min()) / 2 * math.cos(t) - (v.max() + v.min()) / 2 * math.sin(t)
-            ccy = my + (u.max() + u.min()) / 2 * math.sin(t) + (v.max() + v.min()) / 2 * math.cos(t)
-            yield Shape(round(ccx - bw / 2), round(ccy - bh / 2), round(bw), round(bh), color, rot=deg)
+            bar = Shape(round(ccx - bw / 2), round(ccy - bh / 2), round(bw), round(bh), color, rot=deg)
+            yield bar
+            yield bar.copy(radii=(round(min(bw, bh) / 2),) * 4)
+        # a leaf: a square rounded on two opposite corners, turned so its tips
+        # lie on the axis (border-radius:100% 0 and a rotation)
+        side = round(bw / math.sqrt(2))
+        yield Shape(round(ccx - side / 2), round(ccy - side / 2), side, side, color,
+                    radii=(side, 0, side, 0), rot=(deg + 45) % 180)
     # triangles and quads from the region's convex hull
     for k in (3, 4, 5):
         pts = hull_polygon(comp, x0, y0, k)
@@ -386,17 +480,42 @@ def _layers(T, bg, shapes):
     return belows, frees
 
 
+def _regions(region, lab, objs):
+    """Connected parts of region to propose shapes for: the 8-connected ones,
+    plus the 4-connected parts of those that split, since shapes that touch
+    only at a corner (a checkerboard, stacked tiles) form one 8-connected
+    region whose bounding box fits neither."""
+    for idx, sl in objs:
+        comp = lab[sl] == idx
+        parts = [(comp, sl)]
+        lab4, n4 = ndimage.label(comp)
+        if n4 > 1:
+            for i, sub in enumerate(ndimage.find_objects(lab4), start=1):
+                (ys, xs), (oy, ox) = sub, sl
+                parts.append((lab4[sub] == i,
+                              (slice(oy.start + ys.start, oy.start + ys.stop),
+                               slice(ox.start + xs.start, ox.start + xs.stop))))
+        for comp, (ys, xs) in parts:
+            if (ys.stop - ys.start) * (xs.stop - xs.start) >= 16:
+                yield comp, xs, ys
+
+
 def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
-           min_gain=MIN_GAIN, per_color=3, bbox_starts=True, outlines=False):
+           min_gain=MIN_GAIN, per_color=3, bbox_starts=True, outlines=False, also=()):
     """Add shapes one at a time, each at whatever depth in the stack fixes the
     most pixels. Inserting below existing shapes lets the search build rings,
-    eyes and other nested figures that no top-only greedy can."""
+    eyes and other nested figures that no top-only greedy can.
+
+    Returns {min_gain: shapes}. also: higher thresholds to report too; a run
+    with a higher threshold would mostly retrace this one and stop where no
+    shape fixes that many pixels, so the stack at that point stands in for it."""
     shapes: list[Shape] = []
+    out = {}
     for _ in range(max_shapes):
         belows, frees = _layers(T, bg, shapes)
         C = belows[-1]
         wrong = C != T
-        pool = []
+        pool = {}
         forced = []
         for c in colors:
             region = wrong & (T == c)
@@ -413,23 +532,21 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
                 ys, xs = sl
                 forced.append((len(belows) - 1, Shape(xs.start, ys.start, xs.stop - xs.start,
                                                       ys.stop - ys.start, c)))
-            for idx, sl in objs:
-                ys, xs = sl
-                if (ys.stop - ys.start) * (xs.stop - xs.start) < 16:
-                    continue
-                comp = lab[sl] == idx
+            for comp, xs, ys in _regions(region, lab, objs):
                 for cand in candidates(c, comp, xs.start, ys.start, outlines):
                     x0, y0, m = coverage(cand)
                     if m is None:
                         continue
                     hh, ww = m.shape
-                    for k, (A, B) in enumerate(AB):
-                        g = (np.count_nonzero(A[y0:y0 + hh, x0:x0 + ww] & m)
-                             - np.count_nonzero(B[y0:y0 + hh, x0:x0 + ww] & m))
-                        pool.append((g, k, cand))
+                    # each candidate enters at its best depth only, so that a
+                    # few shapes at many depths don't fill every start
+                    g, k = max(((np.count_nonzero(A[y0:y0 + hh, x0:x0 + ww] & m)
+                                 - np.count_nonzero(B[y0:y0 + hh, x0:x0 + ww] & m), -k)
+                                for k, (A, B) in enumerate(AB)))
+                    pool.setdefault(repr(cand), (g, -k, cand))
         if not pool and not forced:
             break
-        pool.sort(key=lambda t: -t[0])
+        pool = sorted(pool.values(), key=lambda t: -t[0])
         # Climb the best starts overall, plus the best few for every color:
         # a start can score badly (a bounding box over a compound region)
         # and still climb to the right shape.
@@ -453,10 +570,14 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
                 best, best_k, best_g = s, k, g
         if best is None:
             break
+        for g in also:
+            if best_g < g and g not in out:
+                out[g] = list(shapes)
         shapes.insert(best_k, best)
         if log:
             log(f"  + at depth {best_k}: {best}  fixes {best_g}px, wrong now {error(T, bg, shapes)}")
-    return shapes
+    out[min_gain] = shapes
+    return {g: out.get(g, shapes) for g in (min_gain, *also)}
 
 
 def _layer_masks(T, bg, shapes, i):
@@ -565,9 +686,12 @@ def snap(T, bg, shapes, tol=0):
     return shapes
 
 
-def decompose(img: np.ndarray, log=None, min_gain=MIN_GAIN, per_color=3, bbox_starts=True,
+def decompose(img: np.ndarray, log=None, min_gains=(MIN_GAIN,), per_color=3, bbox_starts=True,
               base="flat", outlines=False):
-    """base: "flat" (a background color) or "gradient" (a fitted linear-gradient;
+    """Returns (palette, base layer, labels, {min_gain: shapes}), one stack per
+    threshold in min_gains (see greedy), or None.
+
+    base: "flat" (a background color) or "gradient" (a fitted linear-gradient;
     returns None when no gradient fits). outlines: propose polygons fitted to
     region outlines (see candidates)."""
     pal, T = extract_palette(img)
@@ -581,7 +705,7 @@ def decompose(img: np.ndarray, log=None, min_gain=MIN_GAIN, per_color=3, bbox_st
     else:
         bg = background(T)
         colors = [c for c in range(len(pal)) if c != bg] + [bg]
-    shapes = greedy(T, bg, colors, log=log, min_gain=min_gain, per_color=per_color,
-                    bbox_starts=bbox_starts, outlines=outlines)
-    shapes = refine(T, bg, shapes, log=log, min_gain=min_gain)
-    return pal, bg, T, shapes
+    lo, *also = sorted(min_gains)
+    stacks = greedy(T, bg, colors, log=log, min_gain=lo, per_color=per_color,
+                    bbox_starts=bbox_starts, outlines=outlines, also=also)
+    return pal, bg, T, {g: refine(T, bg, s, log=log, min_gain=g) for g, s in stacks.items()}

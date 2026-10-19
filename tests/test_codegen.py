@@ -1,4 +1,6 @@
-from cssynth.codegen import bgcolor_attr, color_css, num, px, radius_css
+import numpy as np
+
+from cssynth.codegen import bgcolor_attr, color_css, emit, num, px, radius_css
 from cssynth.shapes import Shape
 
 
@@ -32,3 +34,15 @@ def test_radius_css():
     assert radius_css(Shape(0, 0, 100, 100, 1)) is None
     # a saturated radius on a square: 50px, 50% and 4em all draw a circle
     assert len(radius_css(Shape(0, 0, 100, 100, 1, radii=(50,) * 4))) == 3
+
+
+def test_alike_elements_share_a_tag():
+    # two rounded petals at different angles plus two unrelated boxes: the
+    # petals share size, corners and color under their own tag and rule
+    pal = np.array([(255, 255, 255), (109, 72, 10), (20, 90, 160)])
+    shapes = [Shape(10, 10, 30, 40, 2), Shape(300, 200, 60, 20, 2),
+              Shape(150, 100, 100, 100, 1, radii=(100, 0, 100, 0), rot=45),
+              Shape(150, 100, 100, 100, 1, radii=(100, 0, 100, 0), rot=-45)]
+    code, _ = emit(pal, 0, shapes)
+    assert code.count(radius_css(shapes[2])) == 1
+    assert "i{position:fixed" in code or "u{position:fixed" in code or "s{position:fixed" in code

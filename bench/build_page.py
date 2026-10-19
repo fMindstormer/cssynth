@@ -248,6 +248,10 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
     <h2 id="h-new">What changed since the first version</h2>
     <div class="changes">
       <article class="change">
+        <h3>Search fixes, shared rules, faster</h3>
+        <p>Shapes that touch only at a corner used to count as one region, which no single shape fits; each edge-connected part is now proposed on its own, and Ups &amp; Downs went from 831 to 207 characters (the human solution is 406). A leaf, a square rounded on two opposite corners and turned onto the region's axis, joined the candidates. Alike elements can now share their own tag and rule (<code>&lt;i&gt;</code>, <code>&lt;u&gt;</code>, <code>&lt;s&gt;</code>), which also lets turned copies of a shape share their CSS. Box gains come from a summed-area table, a polygon vertex move only re-tests nearby pixels, and one search now serves two thresholds: the whole benchmark runs in less than half the time (70 to 33 CPU-minutes on the same machine).</p>
+      </article>
+      <article class="change">
         <h3>Outline polygons</h3>
         <p>Polygons used to come only from a region's convex hull, with at most five vertices, so a notched or many-sided figure was tiled from slivers. The search now also traces each region's outline, which may be concave, and simplifies it to 4&ndash;12 vertices; a clean-up move then drops vertices while that lowers the score. Missing Piece went from 1,887 to 336 characters, shorter than the human solution.</p>
       </article>
@@ -302,10 +306,10 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
     <ol class="steps">
       <li><b>Palette.</b> Find the flat colors and assign each pixel to one. A color that sits between two others counts as antialiasing only if it forms thin lines; a solid patch of it is a real fill.</li>
       <li><b>Base layer.</b> A flat background color, or for striped pictures a hard-stop linear gradient fitted at any angle.</li>
-      <li><b>Layered search.</b> Repeatedly add the shape that fixes the most wrong pixels: a box with any corner radii, an ellipse, a rotated bar, or a polygon clipped with <code>clip-path</code>, fitted to the region's convex hull or traced from its outline, concave or not. A new shape can go at any depth in the stack, not just on top. That is how rings, eyes and other nested figures get built.</li>
+      <li><b>Layered search.</b> Repeatedly add the shape that fixes the most wrong pixels: a box with any corner radii, an ellipse, a rotated bar or leaf, or a polygon clipped with <code>clip-path</code>, fitted to the region's convex hull or traced from its outline, concave or not. A new shape can go at any depth in the stack, not just on top. That is how rings, eyes and other nested figures get built.</li>
       <li><b>Refine.</b> Merge two pieces of the same color into one shape when that costs almost nothing, re-fit every shape against its final surroundings, drop shapes that no longer pay for their characters, and round coordinates where that changes no pixels.</li>
-      <li><b>Code generation.</b> A shape that is a shifted, uniformly grown or shrunk copy of another becomes a <code>box-shadow</code> of it, when the paint order allows and CSS keeps the shape exact (a spread larger than the corner radius bends the corners). The grouping and the paint order are chosen together by an exact solver. Boxes are sized with unitless <code>padding</code> (allowed in quirks mode), saturated corner radii get short spellings like <code>7em</code>, and properties shared by every element move into one rule in a trailing, unclosed <code>&lt;style&gt;</code>.</li>
-      <li><b>Choose.</b> Nine search settings run per image; each result is cleaned up for length and scored by characters + wrong pixels &divide; &rho;. The lowest score wins.</li>
+      <li><b>Code generation.</b> A shape that is a shifted, uniformly grown or shrunk copy of another becomes a <code>box-shadow</code> of it, when the paint order allows and CSS keeps the shape exact (a spread larger than the corner radius bends the corners). The grouping and the paint order are chosen together by an exact solver. Boxes are sized with unitless <code>padding</code> (allowed in quirks mode), saturated corner radii get short spellings like <code>7em</code>, and properties shared by every element move into one rule in a trailing, unclosed <code>&lt;style&gt;</code>; families of alike elements can take their own tag and rule.</li>
+      <li><b>Choose.</b> Eight search settings run per image (six searches, two of which also stop early at a higher threshold); each result is cleaned up for length and scored by characters + wrong pixels &divide; &rho;. The lowest score wins.</li>
     </ol>
   </section>
 

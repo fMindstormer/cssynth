@@ -12,7 +12,8 @@ Golf passes:
     when the paint order allows it
   * properties shared by every element move into a single `b{...}` rule,
     placed in a `<style>` at the very end, left unclosed (the parser closes
-    the element and the rule at end of input)
+    the element and the rule at end of input); families of alike elements
+    (copies of one shape, turned or moved) can take their own tag and rule
   * a striped background becomes one hard-stop `linear-gradient`
 """
 
@@ -404,11 +405,11 @@ def _insert_after(d: dict, key: str, item) -> dict:
 # Rotation and clip-path apply to an element's descendants too (rotation also
 # makes it their containing block), so such elements are closed at once unless
 # nothing follows.
-def _tag(decls: dict, e: dict, last: bool) -> str:
+def _tag(decls: dict, e: dict, last: bool, name: str = "b") -> str:
     st = _style(decls)
-    t = "<b>" if not st else f"<b style={st}>"
+    t = f"<{name}>" if not st else f"<{name} style={st}>"
     closes = "rotate" in e or "clip-path" in e
-    return t + ("</b>" if closes and not last else "")
+    return t + (f"</{name}>" if closes and not last else "")
 
 
 SHAREABLE = ["width", "height", "padding", "background", "border-radius", "left", "top", "rotate"]
@@ -448,19 +449,15 @@ def body_options(palette, bg) -> list[tuple[str, str]]:
             ("", f"body{{background:{color_css(palette[bg])}}}")]
 
 
-def assemble(body_opts, elements: list[dict]) -> str:
-    n = len(elements)
-    outs = []
-    if n == 0:
-        for tag, rule in body_opts:
-            outs.append(tag if tag else "<style>" + rule[:-1])
-        return min(outs, key=len)
-    # Option A: inline everything.
-    inline = "".join(_tag({"position": "fixed", **e}, e, i == n - 1)
-                     for i, e in enumerate(elements))
-    # Option B: one shared rule with position:fixed plus any property every
-    # element has, set to its most common value. The style element goes last
-    # and stays unclosed, and so does its last rule.
+# Tags that draw nothing of their own, so a group of elements can share one
+# rule: copies of a shape at different angles or positions share their size,
+# corners and color under one tag while the rest stay <b>.
+TAGS = ("b", "i", "u", "s")
+
+
+def _shared(elements: list[dict]) -> dict:
+    """position:fixed plus every property all these elements have, set to its
+    most common value when at least two of them use it."""
     shared = {"position": "fixed"}
     common = set.intersection(*(set(e) for e in elements))
     for p in SHAREABLE:
@@ -469,17 +466,67 @@ def assemble(body_opts, elements: list[dict]) -> str:
         v, k = Counter(e[p] for e in elements).most_common(1)[0]
         if k >= 2:
             shared[p] = v
-    rule_b = "b{" + ";".join(f"{p}:{v}" for p, v in shared.items()) + "}"
+    return shared
+
+
+def assemble(body_opts, elements: list[dict], tags=None) -> str:
+    """tags: the tag name of each element (default all <b>)."""
+    n = len(elements)
+    outs = []
+    if n == 0:
+        for tag, rule in body_opts:
+            outs.append(tag if tag else "<style>" + rule[:-1])
+        return min(outs, key=len)
+    tags = tags or ["b"] * n
+    # Option A: inline everything.
+    inline = "".join(_tag({"position": "fixed", **e}, e, i == n - 1)
+                     for i, e in enumerate(elements))
+    # Option B: one rule per tag with position:fixed and what its elements
+    # share. The style element goes last and stays unclosed, and so does its
+    # last rule.
+    used = [t for t in TAGS if t in tags]
+    shared = {t: _shared([e for e, t2 in zip(elements, tags) if t2 == t]) for t in used}
+    rules = "".join(t + "{" + ";".join(f"{p}:{v}" for p, v in shared[t].items()) + "}" for t in used)
     with_rule = "".join(
-        _tag({p: v for p, v in e.items() if shared.get(p) != v}, e, i == n - 1)
-        for i, e in enumerate(elements))
+        _tag({p: v for p, v in e.items() if shared[t].get(p) != v}, e, i == n - 1, t)
+        for i, (e, t) in enumerate(zip(elements, tags)))
     for tag, rule in body_opts:
         if tag:
-            outs.append(tag + inline)
-            outs.append(tag + with_rule + "<style>" + rule_b[:-1])
+            if len(used) == 1:
+                outs.append(tag + inline)
+            outs.append(tag + with_rule + "<style>" + rules[:-1])
         else:
-            outs.append(with_rule + "<style>" + rule + rule_b[:-1])
+            outs.append(with_rule + "<style>" + rule + rules[:-1])
     return min(outs, key=len)
+
+
+_FAMILY_KEYS = (("width", "height", "padding", "border-radius", "background"),
+                ("width", "height", "padding", "border-radius"),
+                ("width", "height", "padding"), ("background",))
+
+
+def tag_options(elements: list[dict]):
+    """Tag assignments worth trying: everything <b>, and for several notions
+    of "same shape", the largest families of alike elements moved to their
+    own tags, in every combination."""
+    yield None
+    seen = set()
+    for keys in _FAMILY_KEYS:
+        fams = {}
+        for i, e in enumerate(elements):
+            k = tuple(e.get(p) for p in keys)
+            if any(v is not None for v in k):
+                fams.setdefault(k, []).append(i)
+        big = sorted((f for f in fams.values() if len(f) >= 2), key=len, reverse=True)[:len(TAGS) - 1]
+        for mask in range(1, 1 << len(big)):
+            tags = ["b"] * len(elements)
+            for j, f in enumerate(big):
+                if mask >> j & 1:
+                    for i in f:
+                        tags[i] = TAGS[1 + j]
+            if tuple(tags) not in seen:
+                seen.add(tuple(tags))
+                yield tags
 
 
 def _elements(shapes, palette, edges, group_of, members):
@@ -499,7 +546,8 @@ def _code(body_opts, elements) -> str:
     if not elements:
         return assemble(body_opts, [])
     per_element = [min(size_encodings(e), key=lambda d: len(_style(d))) for e in elements]
-    return min((assemble(body_opts, els) for els in (per_element, elements)), key=len)
+    return min((assemble(body_opts, els, tags) for els in (per_element, elements)
+                for tags in tag_options(els)), key=len)
 
 
 def emit(palette, bg, shapes, grouping="best", edges=None) -> tuple[str, dict]:

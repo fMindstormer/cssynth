@@ -1,7 +1,9 @@
 """End to end: draw a target, compile it, check the code and the internal render."""
+import numpy as np
 from PIL import Image, ImageDraw
 
 from cssynth import compile_image
+from cssynth.shapes import Shape, render_rgb
 
 
 def compile_drawing(tmp_path, bg, rects=(), polys=()):
@@ -36,3 +38,14 @@ def test_concave_polygon_is_one_shape(tmp_path):
     assert len(shapes) == 1 and shapes[0].poly is not None
     assert info["wrong_px"] < 150
     assert len(code) < 200
+
+
+def test_leaf_is_one_turned_shape(tmp_path):
+    pal = np.array([(146, 105, 39), (255, 255, 255)])
+    leaf = Shape(150, 100, 100, 100, 1, radii=(100, 0, 100, 0), rot=135)
+    path = tmp_path / "leaf.png"
+    Image.fromarray(render_rgb(0, pal, [leaf])).save(path)
+    code, info, (_, _, _, shapes) = compile_image(path)
+    assert len(shapes) == 1 and shapes[0].rot and any(shapes[0].radii)
+    assert info["wrong_px"] < 500           # the curved edges' antialiasing, mostly
+    assert len(code) < 140

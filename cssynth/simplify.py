@@ -10,7 +10,8 @@ where rho is how many wrong pixels we accept to save one character. Moves:
   * drop a shape
   * harmonize two near-equal shapes (same size, or sizes differing by the
     same amount in both directions) so they can become box-shadows of one
-    another or share CSS; the changed shape is then re-positioned
+    another or share CSS, also at different angles; the changed shape is then
+    re-positioned
   * drop a polygon vertex (re-fitting the rest), since the search may pick a
     many-vertex polygon for a few pixels' gain
   * make an odd width or height even, so `padding` can size the box
@@ -26,6 +27,8 @@ import numpy as np
 from .codegen import emit
 from .search import _masks, gain, hill_climb
 from .shapes import H, Shape, W, base_labels, coverage
+
+REFIT_DROPS = 2
 
 
 class Scorer:
@@ -86,8 +89,14 @@ def _recenter(s: Shape, w, h) -> Shape:
 
 
 def _harmonized(a: Shape, b: Shape, tol: int):
-    """Versions of b changed to be shadow-compatible with a."""
-    if not (_box(a) and _box(b)) or a.ell != b.ell:
+    """Versions of b changed to be shadow-compatible with a, or for turned
+    shapes, to share a's size and corners (and so a rule) at b's angle."""
+    if a.poly or b.poly or a.ell != b.ell:
+        return
+    if a.rot or b.rot:
+        if (abs(a.w - b.w) <= tol and abs(a.h - b.h) <= tol and (a.w, a.h, a.radii) != (b.w, b.h, b.radii)
+                and (a.ell or all(abs(p - q) <= tol for p, q in zip(a.radii, b.radii)))):
+            yield _recenter(b, a.w, a.h).copy(radii=a.radii)
         return
     if not a.ell and any(abs(p - q) > tol for p, q in zip(a.radii, b.radii)):
         return
@@ -181,11 +190,13 @@ def simplify(T, bg, palette, shapes, rho=2.0, tol=4, passes=3, log=None):
                             log(f"  harmonize {cur[k]} with {cur[i]}: J {J:.1f} -> {j:.1f}")
                         cur, J, improved = trial, j, True
                         break
-        # drop polygon vertices, one at a time, re-fitting what remains
+        # drop polygon vertices, one at a time, re-fitting what remains; only
+        # the drops that look best before re-fitting are re-fitted
         for i in range(len(cur)):
             while True:
                 best = None
-                for s2 in _fewer_vertices(cur[i]):
+                drops = sorted(_fewer_vertices(cur[i]), key=lambda s2: sc.J(cur[:i] + [s2] + cur[i + 1:]))
+                for s2 in drops[:REFIT_DROPS]:
                     trial = cur[:i] + [_refit(sc, cur, i, s2)] + cur[i + 1:]
                     j = sc.J(trial)
                     if j < J - 1e-9 and (best is None or j < best[0]):

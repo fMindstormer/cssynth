@@ -88,14 +88,18 @@ flowchart LR
    so the model samples pixel centers only (matches Chromium to 2–3 pixels).
 3. **Layered greedy search** (`search.greedy`): repeatedly add the shape that
    fixes the most wrong pixels. Candidates come from connected regions of wrong
-   pixels: boxes, ellipses, boxes with various corner radii, a 45° diamond, a
-   bar along the region's principal axis, and `clip-path` polygons, both from
+   pixels (and, where a region only holds together at corners, from each of its
+   edge-connected parts): boxes, ellipses, boxes with various corner radii, a
+   45° diamond, a plain and a rounded bar along the region's principal axis, a
+   leaf (a square rounded on two opposite corners, turned onto that axis), and
+   `clip-path` polygons, both from
    the region's convex hull (3–5 vertices) and traced from its outline, which
    may be concave (4–12 vertices, simplified by Visvalingam's algorithm). The
    plain bounding box of each color's largest regions is always climbed too:
    from there a climb peels a compound region (a cross, an I-beam) down to its
-   biggest bar. Each candidate is hill-climbed on its edges, radii, rotation or
-   vertices. A shape may be inserted **at any depth** in the stack: for each
+   biggest bar. The best starts (each at its best depth) are hill-climbed on
+   their edges, radii, rotation or vertices; box gains come from a summed-area
+   table and a polygon vertex move only re-tests the pixels near it. A shape may be inserted **at any depth** in the stack: for each
    depth the gain is computed against the canvas below it and only the pixels
    that the shapes above leave visible. This is what lets it build rings and
    nested figures.
@@ -107,8 +111,8 @@ flowchart LR
    with code length measured by running the real code generator: drop a
    shape; drop a polygon vertex and re-fit; snap two near-equal shapes to
    identical (or uniformly grown) geometry so they can become box-shadows of
-   one another or share CSS, then re-position; make odd sizes even so
-   `padding` can size the box.
+   one another or share CSS (also turned copies at different angles), then
+   re-position; make odd sizes even so `padding` can size the box.
 6. **Code generation** (`codegen.emit`):
    - paint-order constraints: shape *i* must stay below *j* if they overlap
      with different colors;
@@ -130,11 +134,15 @@ flowchart LR
      gradient rule;
    - properties shared by every element move into one `b{...}` rule, in a
      `<style>` at the very end of the document, left unclosed along with its
-     last rule (the parser closes both at end of input).
-7. **Choose** (`compiler.VARIANTS`): nine search settings run per image; each
-   result is simplified and scored by J, and the lowest J wins. Outline
-   polygons run as separate variants because the greedy search can also take
-   them where boxes and shadows would end up shorter.
+     last rule (the parser closes both at end of input);
+   - families of alike elements (same size and corners, same color, or both)
+     can move to their own tag, `<i>`, `<u>` or `<s>`, with their own rule,
+     which is how copies of a shape at different angles share their CSS.
+7. **Choose** (`compiler.VARIANTS`): eight search settings run per image, from
+   six searches (two of them also report where a higher `min_gain` would have
+   stopped); each result is simplified and scored by J, and the lowest J
+   wins. Outline polygons run as separate variants because the greedy search
+   can also take them where boxes and shadows would end up shorter.
 
 ## Benchmark
 
@@ -197,16 +205,16 @@ tests/
   pixels next; length only enters afterwards. Scoring partial programs by
   their final code length during the search (e.g. beam search over J) is the
   next step.
-- **Reuse.** A shape repeated with a rotation or mirror (a common CSSBattle
-  pattern) is written out each time; box-shadows only cover translated copies.
-  Different tag names as free selectors would let groups share geometry.
-- **More primitives.** Borders (39 of the 66 human solutions use them),
-  repeated patterns via `repeating-*-gradient`, gradients on boxes (not only
-  the background), text.
+- **Reuse.** Turned copies of a shape now share a rule, but mirrored copies of
+  a polygon don't (their vertex lists differ), and nothing yet uses
+  `::before`/`::after` or `scale:-1` to repeat a shape.
+- **More primitives.** Repeated patterns via `repeating-*-gradient`, gradients
+  on boxes (not only the background), borders (only a handful of the human
+  solutions use them, for frames and outlined shapes), text.
 - **Antialiasing.** Hard gradient stops and some rotated edges differ from the
   target's antialiasing by a pixel band, which caps the match on a few flags.
-- **Speed.** A full benchmark run takes 1.5–2 CPU-hours; most variants
-  could stop early once they are clearly beaten.
+- **Speed.** A full benchmark run takes about half an hour of CPU time, most
+  of it in the greedy search's hill climbs on rotated shapes and polygons.
 
 ## License
 
