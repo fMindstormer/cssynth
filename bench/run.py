@@ -23,8 +23,8 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from cssc.compiler import compile_image  # noqa: E402
-from cssc.shapes import bg_to_json, render_rgb  # noqa: E402
+from cssynth.compiler import compile_image  # noqa: E402
+from cssynth.shapes import bg_to_json, render_rgb  # noqa: E402
 
 BENCH = ROOT / "bench"
 OUT = BENCH / "out"

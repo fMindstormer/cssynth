@@ -1,4 +1,4 @@
-"""python -m cssc target.png  ->  prints HTML/CSS that draws the target."""
+"""python -m cssynth target.png  ->  prints HTML/CSS that draws the target."""
 import argparse
 import sys
 
@@ -6,7 +6,7 @@ from .compiler import RHO, compile_image
 
 
 def main():
-    ap = argparse.ArgumentParser(description=__doc__)
+    ap = argparse.ArgumentParser(prog="cssynth", description=__doc__)
     ap.add_argument("image")
     ap.add_argument("-v", action="store_true", help="log the search")
     ap.add_argument("--rho", type=float, default=RHO,

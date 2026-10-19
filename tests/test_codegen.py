@@ -1,5 +1,5 @@
-from cssc.codegen import bgcolor_attr, color_css, num, px, radius_css
-from cssc.shapes import Shape
+from cssynth.codegen import bgcolor_attr, color_css, num, px, radius_css
+from cssynth.shapes import Shape
 
 
 def test_color_css_picks_shortest_spelling():

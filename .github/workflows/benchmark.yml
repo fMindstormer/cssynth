@@ -29,4 +29,4 @@ jobs:
           path: |
             bench/results.json
             bench/out/
-            bench/cssc-results.html
+            bench/cssynth-results.html

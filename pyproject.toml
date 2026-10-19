@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cssc"
+name = "cssynth"
 version = "0.3.0"
 description = "Compile flat images into short HTML/CSS, for CSSBattle-style code golf"
 readme = "README.md"
@@ -28,10 +28,10 @@ classifiers = [
 dev = ["pytest>=8", "ruff>=0.6"]
 
 [project.scripts]
-cssc = "cssc.__main__:main"
+cssynth = "cssynth.__main__:main"
 
 [tool.setuptools]
-packages = ["cssc"]
+packages = ["cssynth"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -42,7 +42,7 @@ target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I"]
-ignore = ["E402"]   # bench scripts put the repo on sys.path before importing cssc
+ignore = ["E402"]   # bench scripts put the repo on sys.path before importing cssynth
 
 [tool.ruff.lint.per-file-ignores]
 "bench/build_page.py" = ["E501"]   # the page template

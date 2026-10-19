@@ -1,6 +1,6 @@
 import numpy as np
 
-from cssc.shapes import Shape, _in_polygon, coverage, render_labels
+from cssynth.shapes import Shape, _in_polygon, coverage, render_labels
 
 
 def naive_in_polygon(xs, ys, pts):

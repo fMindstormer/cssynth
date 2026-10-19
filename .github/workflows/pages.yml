@@ -1,11 +1,11 @@
-# Publish the committed results page (bench/cssc-results.html) to GitHub Pages.
+# Publish the committed results page (bench/cssynth-results.html) to GitHub Pages.
 # Enable it once under Settings > Pages > Source: GitHub Actions.
 name: Pages
 
 on:
   push:
     branches: [main]
-    paths: [bench/cssc-results.html]
+    paths: [bench/cssynth-results.html]
   workflow_dispatch:
 
 permissions:
@@ -25,7 +25,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - run: mkdir site && cp bench/cssc-results.html site/index.html
+      - run: mkdir site && cp bench/cssynth-results.html site/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

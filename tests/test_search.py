@@ -1,7 +1,7 @@
 import numpy as np
 
-from cssc.search import extract_palette, reduce_polygon, trace_outline
-from cssc.shapes import Shape, coverage
+from cssynth.search import extract_palette, reduce_polygon, trace_outline
+from cssynth.shapes import Shape, coverage
 
 
 def test_trace_outline_of_concave_region_is_exact():

@@ -107,12 +107,12 @@ def main():
     page = page.replace("{{HIGHLIGHTS}}", json.dumps([r["id"] for r in hl]))
     page = page.replace("{{TRADEOFF}}", tradeoff_table())
     assert "{{" not in page
-    out = BENCH / "cssc-results.html"
+    out = BENCH / "cssynth-results.html"
     out.write_text(page)
     print(f"wrote {out} ({len(page) // 1024} KB)", stats)
 
 
-TEMPLATE = r"""<title>cssc</title>
+TEMPLATE = r"""<title>cssynth</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@75..150,500;75..150,800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -224,7 +224,7 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
 <main>
   <header>
     <div class="kicker">Prototype · image-to-CSS compiler</div>
-    <h1>cssc</h1>
+    <h1>cssynth</h1>
     <p class="lede">Give it a target image from <b>CSSBattle</b>, the code-golf game where you redraw a 400×300 picture in as few characters of HTML and CSS as you can. It returns the code. Every result below was rendered by Chromium from the generated code and compared pixel by pixel with the target.</p>
   </header>
 

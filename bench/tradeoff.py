@@ -20,10 +20,10 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from cssc.codegen import emit  # noqa: E402
-from cssc.search import extract_palette  # noqa: E402
-from cssc.shapes import Shape, bg_from_json  # noqa: E402
-from cssc.simplify import simplify  # noqa: E402
+from cssynth.codegen import emit  # noqa: E402
+from cssynth.search import extract_palette  # noqa: E402
+from cssynth.shapes import Shape, bg_from_json  # noqa: E402
+from cssynth.simplify import simplify  # noqa: E402
 
 BENCH = ROOT / "bench"
 OUT = BENCH / "tradeoff"

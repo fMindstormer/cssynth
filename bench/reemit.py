@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Re-run only code generation on the shapes saved in results.json, render
-the new code in Chromium and re-score. Use after changing cssc/codegen.py."""
+the new code in Chromium and re-score. Use after changing cssynth/codegen.py."""
 
 import json
 import subprocess
@@ -12,8 +12,8 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from cssc.codegen import emit  # noqa: E402
-from cssc.shapes import Shape, bg_from_json  # noqa: E402
+from cssynth.codegen import emit  # noqa: E402
+from cssynth.shapes import Shape, bg_from_json  # noqa: E402
 
 BENCH = ROOT / "bench"
 OUT = BENCH / "out"

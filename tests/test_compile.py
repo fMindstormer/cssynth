@@ -1,7 +1,7 @@
 """End to end: draw a target, compile it, check the code and the internal render."""
 from PIL import Image, ImageDraw
 
-from cssc import compile_image
+from cssynth import compile_image
 
 
 def compile_drawing(tmp_path, bg, rects=(), polys=()):

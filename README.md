@@ -1,11 +1,11 @@
-# cssc
+# cssynth
 
 A compiler from images to short HTML/CSS. It is aimed at
 [CSSBattle](https://cssbattle.dev) targets: flat 400×300 pictures that players
 redraw in as few characters as they can.
 
 <table>
-<tr><th>Target</th><th>Rendered from cssc's output</th></tr>
+<tr><th>Target</th><th>Rendered from cssynth's output</th></tr>
 <tr>
 <td><img src="bench/human/om-20240318.png" width="300" alt="Target: a dark red arch with a stepped notch on a red background"></td>
 <td><img src="bench/out/om-20240318.png" width="300" alt="The same arch, rendered in Chromium from the generated code"></td>
@@ -34,21 +34,21 @@ The human solutions are readable code from two public repositories, minified
 but not golfed. Top CSSBattle players write far shorter code, so these
 lengths are a baseline, not a leaderboard. The full results, with every
 target, output and generated program, are on the results page
-(`bench/cssc-results.html`, published through GitHub Pages).
+(`bench/cssynth-results.html`, published through GitHub Pages).
 
 ## Usage
 
 ```sh
 pip install .
-cssc target.png              # prints the code; length and details on stderr
-cssc -v target.png           # also logs the search
-cssc --rho 2 target.png      # golf harder (see "Objective")
+cssynth target.png           # prints the code; length and details on stderr
+cssynth -v target.png        # also logs the search
+cssynth --rho 2 target.png   # golf harder (see "Objective")
 ```
 
 From Python:
 
 ```python
-from cssc import compile_image
+from cssynth import compile_image
 code, info, model = compile_image("target.png")
 ```
 
@@ -159,7 +159,7 @@ python bench/fetch.py               # download and render the remaining targets
 python bench/run.py                 # compile all, render in Chromium, score
 python bench/reemit.py              # re-run only code generation on saved shapes
 python bench/tradeoff.py            # characters vs match for several rho
-python bench/build_page.py          # results page -> bench/cssc-results.html
+python bench/build_page.py          # results page -> bench/cssynth-results.html
 ```
 
 The targets were rendered with `@sparticuz/chromium` 131 on Linux, which only
@@ -179,7 +179,7 @@ ruff check .
 ```
 
 ```
-cssc/
+cssynth/
   compiler.py   compile_image: run the variants, simplify, keep the lowest J
   search.py     palette, base layer, greedy shape search, refine
   shapes.py     the Shape model and a rasterizer that predicts Chromium's
