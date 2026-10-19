@@ -27,8 +27,8 @@ On a benchmark of 66 targets, rendered in Chromium and compared pixel by pixel:
 |---|---|
 | Shorter than the human solution (minified) | **50 of 66** |
 | Total code length | **27,426** characters (human: 35,532) |
-| Targets at ≥ 99% pixel match | 63 of 66 (lowest 98.8%) |
-| Mean pixel match | 99.64% |
+| Targets at ≥ 99% pixel match | 65 of 66 (lowest 98.98%) |
+| Mean pixel match | 99.72% |
 
 The human solutions are readable code from two public repositories, minified
 but not golfed. Top CSSBattle players write far shorter code, so these
@@ -167,8 +167,10 @@ runs there. Elsewhere, point `CHROME_PATH` at Chrome for Testing 131
 (`npx @puppeteer/browsers install chrome@131.0.6778.204`). Its edges differ
 slightly from the Linux build: the human solutions themselves match their
 Linux targets by 99.8% on average on macOS (99.1% at worst), which lowers
-match scores by the same amount. The committed results were measured this way
-on macOS; the **Benchmark** workflow re-runs everything on Linux.
+match scores by the same amount. The generated code is the same on both. The
+committed results come from the **Benchmark** workflow, which runs everything
+on Linux (about half an hour); the trade-off table in `tradeoff.json` was
+measured on macOS.
 
 ## Development
 
@@ -203,7 +205,7 @@ tests/
   the background), text.
 - **Antialiasing.** Hard gradient stops and some rotated edges differ from the
   target's antialiasing by a pixel band, which caps the match on a few flags.
-- **Speed.** A full benchmark run takes about 80 CPU-minutes; most variants
+- **Speed.** A full benchmark run takes 1.5–2 CPU-hours; most variants
   could stop early once they are clearly beaten.
 
 ## License

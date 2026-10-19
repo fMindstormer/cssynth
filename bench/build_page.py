@@ -241,7 +241,7 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
       <div><b>{{v1_total}} &rarr; {{total}}</b><span>characters across all targets</span></div>
       <div><b>&minus;{{saved_pct}}%</b><span>total code length since the first version</span></div>
     </div>
-    <p class="note">Match counts pixels whose color is within 8/255 per channel of the target. The human solutions come from two public GitHub repos and are written to be readable, not golfed. Top CSSBattle players are far shorter, so these lengths are a baseline, not a leaderboard. The first version was rendered on Linux, like the targets; the current results were rendered on macOS, whose Chromium draws some edges slightly differently (about 0.2% of pixels on average), so match scores across the two are not exactly comparable.</p>
+    <p class="note">Match counts pixels whose color is within 8/255 per channel of the target. The human solutions come from two public GitHub repos and are written to be readable, not golfed. Top CSSBattle players are far shorter, so these lengths are a baseline, not a leaderboard. All results are rendered on Linux, with the same Chromium build as the targets. The trade-off table below was measured on macOS, whose Chromium draws some edges slightly differently (about 0.2% of pixels on average), so its match scores run a little lower.</p>
   </section>
 
   <section aria-labelledby="h-new">
