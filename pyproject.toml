@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cssc"
+version = "0.3.0"
+description = "Compile flat images into short HTML/CSS, for CSSBattle-style code golf"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Fedir" }]
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pillow>=10",
+    "ortools>=9.8",
+]
+keywords = ["css", "code-golf", "cssbattle", "program-synthesis", "inverse-rendering"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Software Development :: Compilers",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+cssc = "cssc.__main__:main"
+
+[tool.setuptools]
+packages = ["cssc"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E402"]   # bench scripts put the repo on sys.path before importing cssc
+
+[tool.ruff.lint.per-file-ignores]
+"bench/build_page.py" = ["E501"]   # the page template

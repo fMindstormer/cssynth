@@ -25,7 +25,7 @@ import numpy as np
 
 from .codegen import emit
 from .search import _masks, gain, hill_climb
-from .shapes import H, W, Shape, base_labels, coverage
+from .shapes import H, Shape, W, base_labels, coverage
 
 
 class Scorer:

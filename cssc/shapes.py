@@ -9,7 +9,7 @@ radii in px (top-left, top-right, bottom-right, bottom-left).
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field, replace
+from dataclasses import dataclass, replace
 
 import numpy as np
 

@@ -16,7 +16,7 @@ import math
 import numpy as np
 from scipy import ndimage
 
-from .shapes import H, W, Gradient, Shape, base_labels, coverage, render_labels
+from .shapes import Gradient, Shape, base_labels, coverage, render_labels
 
 MIN_COLOR_PX = 40
 MIN_GAIN = 25          # pixels a shape must fix to be worth its characters

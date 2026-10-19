@@ -3,18 +3,27 @@
 //
 //   node render.js jobs.json
 // jobs.json: [{html, out}]  -> writes a 400x300 PNG per job.
+//
+// Chromium: @sparticuz/chromium (Linux x64, the build the targets were made
+// with), or any Chrome given by CHROME_PATH, e.g. Chrome for Testing 131:
+//   npx @puppeteer/browsers install chrome@131.0.6778.204
+// Other platforms render edges slightly differently (about 0.2% of pixels on
+// average against the Linux targets).
 const fs = require('fs');
-const path = require('path');
-const chromium = require(process.env.CHROMIUM_PKG || '@sparticuz/chromium');
-const puppeteer = require(process.env.PUPPETEER_PKG || 'puppeteer-core');
+const puppeteer = require('puppeteer-core');
+
+async function launchOptions() {
+  const flags = ['--font-render-hinting=none', '--force-color-profile=srgb'];
+  if (process.env.CHROME_PATH) {
+    return { executablePath: process.env.CHROME_PATH, args: ['--disable-gpu', ...flags] };
+  }
+  const chromium = require('@sparticuz/chromium');
+  return { executablePath: await chromium.executablePath(), args: [...chromium.args, ...flags] };
+}
 
 (async () => {
   const jobs = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
-  const browser = await puppeteer.launch({
-    executablePath: await chromium.executablePath(),
-    args: [...chromium.args, '--font-render-hinting=none', '--force-color-profile=srgb'],
-    headless: true,
-  });
+  const browser = await puppeteer.launch({ ...(await launchOptions()), headless: true });
   const page = await browser.newPage();
   await page.setViewport({ width: 400, height: 300, deviceScaleFactor: 1 });
   await page.setRequestInterception(true);

@@ -22,7 +22,7 @@ from collections import Counter
 
 import numpy as np
 
-from .shapes import H, W, Gradient, Shape, coverage
+from .shapes import Gradient, H, Shape, W, coverage
 
 NAMED = {
     "#ff0000": "red", "#d2b48c": "tan", "#ffd700": "gold", "#808080": "gray",

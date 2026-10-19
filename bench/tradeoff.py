@@ -62,14 +62,14 @@ def main():
         rows = [row for rs in p.map(work, [(r, rhos) for r in res]) for row in rs]
     jobs = []
     for row in rows:
-        row["png"] = str(OUT / f"{row['id']}__{row['rho']}.png")
-        jobs.append({"html": row["code"], "out": row["png"]})
+        row["png"] = f"bench/tradeoff/{row['id']}__{row['rho']}.png"     # relative to the repo
+        jobs.append({"html": row["code"], "out": str(ROOT / row["png"])})
     (BENCH / "jobs_tradeoff.json").write_text(json.dumps(jobs))
     subprocess.run(["node", str(BENCH / "render.js"), str(BENCH / "jobs_tradeoff.json")],
                    check=True, cwd=BENCH)
     for row in rows:
         tgt = np.asarray(Image.open(BENCH / "human" / f"{row['id']}.png").convert("RGB")).astype(int)
-        got = np.asarray(Image.open(row["png"]).convert("RGB")).astype(int)
+        got = np.asarray(Image.open(ROOT / row["png"]).convert("RGB")).astype(int)
         row["match"] = round(float((np.abs(got - tgt).max(2) <= 8).mean() * 100), 2)
     (BENCH / "tradeoff.json").write_text(json.dumps(rows, indent=1))
     print(f"{'rho':>5} {'>=99%':>6} {'>=99.5%':>8} {'median chars':>13} {'total chars':>12} {'median match':>13}")

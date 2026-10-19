@@ -1,0 +1,32 @@
+# Full benchmark on Linux, with the same Chromium build the targets were
+# rendered with. Takes about half an hour; run it by hand from the Actions tab.
+name: Benchmark
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: pip install -e .
+      - run: npm ci
+        working-directory: bench
+      - run: python bench/fetch.py
+      - run: python bench/run.py
+      - run: python bench/build_page.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: benchmark
+          path: |
+            bench/results.json
+            bench/out/
+            bench/cssc-results.html
