@@ -402,17 +402,18 @@ def _insert_after(d: dict, key: str, item) -> dict:
     return out
 
 
-# Rotation and clip-path apply to an element's descendants too (rotation also
-# makes it their containing block), so such elements are closed at once unless
-# nothing follows.
+# Transforms and clip-path apply to an element's descendants too (a transform
+# also makes it their containing block), so such elements are closed at once
+# unless nothing follows.
 def _tag(decls: dict, e: dict, last: bool, name: str = "b") -> str:
     st = _style(decls)
     t = f"<{name}>" if not st else f"<{name} style={st}>"
-    closes = "rotate" in e or "clip-path" in e
+    closes = "rotate" in e or "scale" in e or "clip-path" in e
     return t + (f"</{name}>" if closes and not last else "")
 
 
-SHAREABLE = ["width", "height", "padding", "background", "border-radius", "left", "top", "rotate"]
+SHAREABLE = ["width", "height", "padding", "background", "border-radius", "left", "top", "rotate",
+             "clip-path", "scale"]
 
 
 def gradient_css(g: Gradient, palette) -> str:
@@ -507,7 +508,8 @@ def assemble(body_opts, elements: list[dict], tags=None) -> str:
 
 _FAMILY_KEYS = (("width", "height", "padding", "border-radius", "background"),
                 ("width", "height", "padding", "border-radius"),
-                ("width", "height", "padding"), ("background",))
+                ("width", "height", "padding"), ("background",),
+                ("width", "height", "clip-path", "background"), ("width", "height", "clip-path"))
 
 
 def tag_options(elements: list[dict]):
@@ -534,11 +536,51 @@ def tag_options(elements: list[dict]):
                 yield tags
 
 
+# How a polygon can reuse another's clip-path: (flip x, flip y, CSS scale).
+FLIPS = ((False, False, None), (True, False, "-1 1"), (False, True, "1 -1"), (True, True, "-1"))
+
+
+def _same_polygon(p, q) -> bool:
+    """Same vertices in the same cyclic order, either direction."""
+    if len(p) != len(q) or set(p) != set(q):
+        return False
+    n = len(p)
+    k = q.index(p[0])
+    return (all(p[i] == q[(k + i) % n] for i in range(n))
+            or all(p[i] == q[(k - i) % n] for i in range(n)))
+
+
+def reused_clip(a: Shape, b: Shape):
+    """The CSS scale (or "" for none) that draws polygon b as polygon a's
+    clip-path, mirrored within the same-size box, or None."""
+    if not (a.poly and b.poly) or (a.w, a.h) != (b.w, b.h) or len(a.poly) != len(b.poly):
+        return None
+    rel = tuple((x - b.x, y - b.y) for x, y in b.poly)
+    for fx, fy, scale in FLIPS:
+        f = a.flipped(fx, fy)
+        if _same_polygon(tuple((x - f.x, y - f.y) for x, y in f.poly), rel):
+            return scale or ""
+    return None
+
+
 def _elements(shapes, palette, edges, group_of, members):
     order = paint_order(len(shapes), edges, group_of)
     elements = []
+    clips = []                       # (shape, its clip-path) emitted so far
     for a in order:
         props = shape_props(shapes[a], palette)
+        if shapes[a].poly:
+            # a copy or mirror of an earlier polygon takes that polygon's
+            # clip-path (and a flip), so a rule can share it
+            for prev, clip in clips:
+                scale = reused_clip(prev, shapes[a])
+                if scale is not None:
+                    props = [(p, clip if p == "clip-path" else v) for p, v in props]
+                    if scale:
+                        props.append(("scale", scale))
+                    break
+            else:
+                clips.append((shapes[a], dict(props)["clip-path"]))
         sh = sorted(members.get(a, []), key=lambda t: -t[0])  # topmost shadow first
         if sh:
             props.append(("box-shadow", ",".join(

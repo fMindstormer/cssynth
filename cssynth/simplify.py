@@ -10,8 +10,9 @@ where rho is how many wrong pixels we accept to save one character. Moves:
   * drop a shape
   * harmonize two near-equal shapes (same size, or sizes differing by the
     same amount in both directions) so they can become box-shadows of one
-    another or share CSS, also at different angles; the changed shape is then
-    re-positioned
+    another or share CSS, also at different angles, and polygons to exact
+    copies or mirror images of one another (sharing a clip-path); the
+    changed shape is then re-positioned
   * drop a polygon vertex (re-fitting the rest), since the search may pick a
     many-vertex polygon for a few pixels' gain
   * make an odd width or height even, so `padding` can size the box
@@ -89,8 +90,19 @@ def _recenter(s: Shape, w, h) -> Shape:
 
 
 def _harmonized(a: Shape, b: Shape, tol: int):
-    """Versions of b changed to be shadow-compatible with a, or for turned
-    shapes, to share a's size and corners (and so a rule) at b's angle."""
+    """Versions of b changed to be shadow-compatible with a; for turned
+    shapes, to share a's size and corners (and so a rule) at b's angle; for
+    polygons, to be a copy or mirror of a in b's place (sharing a clip-path)."""
+    if a.poly and b.poly:
+        if (len(a.poly) == len(b.poly) and a.color == b.color
+                and abs(a.w - b.w) <= tol and abs(a.h - b.h) <= tol):
+            for fx in (False, True):
+                for fy in (False, True):
+                    f = a.flipped(fx, fy)
+                    f = f.moved(round(b.x + b.w / 2 - f.x - f.w / 2), round(b.y + b.h / 2 - f.y - f.h / 2))
+                    if f.poly != b.poly and _near_polygon(f.poly, b.poly, tol):
+                        yield f
+        return
     if a.poly or b.poly or a.ell != b.ell:
         return
     if a.rot or b.rot:
@@ -110,6 +122,18 @@ def _harmonized(a: Shape, b: Shape, tol: int):
         if d and abs(d) <= tol:
             yield _recenter(b, b.w, b.h + d)
             yield _recenter(b, b.w - d, b.h)
+
+
+def _near_polygon(p, q, tol) -> bool:
+    """Every vertex within tol of the other's, in the same cyclic order
+    (either direction)."""
+    n = len(p)
+    for qq in (q, q[::-1]):
+        for k in range(n):
+            if all(abs(a[0] - b[0]) <= tol and abs(a[1] - b[1]) <= tol
+                   for a, b in zip(p, qq[k:] + qq[:k])):
+                return True
+    return False
 
 
 def _even(s: Shape):
@@ -137,7 +161,7 @@ def _nudge(sc: Scorer, shapes, i, s: Shape) -> Shape:
     while improved:
         improved = False
         for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-            c = best.copy(x=best.x + dx, y=best.y + dy)
+            c = best.moved(dx, dy)
             g = gain(c, A, B)
             if g > bg:
                 best, bg, improved = c, g, True

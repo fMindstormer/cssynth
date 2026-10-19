@@ -37,6 +37,17 @@ class Shape:
     def copy(self, **kw) -> "Shape":
         return replace(self, **kw)
 
+    def moved(self, dx, dy) -> "Shape":
+        if self.poly:
+            return Shape.polygon([(a + dx, b + dy) for a, b in self.poly], self.color)
+        return self.copy(x=self.x + dx, y=self.y + dy)
+
+    def flipped(self, fx: bool, fy: bool) -> "Shape":
+        """A polygon mirrored within its own box: across the vertical axis
+        (fx), the horizontal one (fy), or both."""
+        return Shape.polygon([(self.x + self.w - (a - self.x) if fx else a,
+                               self.y + self.h - (b - self.y) if fy else b) for a, b in self.poly], self.color)
+
     def pos(self) -> tuple[float, float]:
         """Where Chromium actually puts the box. A rotated (transformed) box's
         fractional position is rounded to whole pixels, half up, before the

@@ -140,6 +140,10 @@ odd sizes even so `padding` can size the box.
   parser closes both). Families of alike elements can take their own tag,
   `<i>`, `<u>` or `<s>`, with their own rule; this is how turned copies of a
   shape share their size, corners and color.
+- A polygon that is a copy or a mirror image of another, in a box of the
+  same size, reuses its `clip-path` and adds `scale:-1 1`, `1 -1` or `-1`
+  (the clip is applied before the transform, so it flips with the box). The
+  clean-up snaps near-mirrors to exact mirrors when that lowers J.
 
 ### Box-shadow grouping as a constraint problem
 
@@ -192,8 +196,6 @@ every target, and the generated code.
 - **Search order.** Re-search fixes some greedy mistakes, but a lotus of
   three overlapping leaves is still drawn with polygons where a golfer uses
   three rotated leaves.
-- **Mirrored copies** of a polygon don't share CSS; `scale:-1` would let
-  them.
 - **More primitives:** `repeating-*-gradient`, gradients on shapes,
   borders, text.
 - **Antialiasing:** a linear ramp only approximates how Chromium smooths a

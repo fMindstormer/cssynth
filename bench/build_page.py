@@ -249,7 +249,7 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
     <div class="changes">
       <article class="change">
         <h3>Re-search and soft gradient stops</h3>
-        <p>The greedy search commits to shapes in the order they first help. The best result is now taken apart and refilled, one polygon or one color at a time, and kept when the score drops; Pythagoras went from 330 to 240 characters. Chromium doesn't antialias hard gradient stops, so a flag whose bands were drawn with rotated boxes used to leave a band of wrong pixels along every edge. Each stop is now fitted to a sub-pixel position with a short ramp, which Chromium draws within 3/255 of the model: Tanzania became a single gradient, 602 &rarr; 142 characters (human: 336).</p>
+        <p>The greedy search commits to shapes in the order they first help. The best result is now taken apart and refilled, one polygon or one color at a time, and kept when the score drops; Pythagoras went from 330 to 240 characters. Chromium doesn't antialias hard gradient stops, so a flag whose bands were drawn with rotated boxes used to leave a band of wrong pixels along every edge. Each stop is now fitted to a sub-pixel position with a short ramp, which Chromium draws within 3/255 of the model: Tanzania became a single gradient, 602 &rarr; 142 characters (human: 336). A polygon that mirrors another now reuses its <code>clip-path</code> with <code>scale:-1 1</code>.</p>
       </article>
       <article class="change">
         <h3>Search fixes, shared rules, faster</h3>

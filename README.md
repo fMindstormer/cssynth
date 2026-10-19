@@ -146,7 +146,10 @@ flowchart LR
      last rule (the parser closes both at end of input);
    - families of alike elements (same size and corners, same color, or both)
      can move to their own tag, `<i>`, `<u>` or `<s>`, with their own rule,
-     which is how copies of a shape at different angles share their CSS.
+     which is how copies of a shape at different angles share their CSS;
+   - a polygon that is a copy or mirror image of another reuses its
+     `clip-path` with `scale:-1 1`, `1 -1` or `-1`, so the two can share it
+     in a rule (the clean-up snaps near-mirrors to exact ones).
 7. **Choose** (`compiler.VARIANTS`): eight search settings run per image, from
    six searches (two of them also report where a higher `min_gain` would have
    stopped); each result is simplified and scored by J, and the lowest J
@@ -223,9 +226,9 @@ tests/
   is still drawn with polygons where a golfer uses three rotated leaves.
   Scoring partial programs by their final code length during the search
   (e.g. beam search over J) is the next step.
-- **Reuse.** Turned copies of a shape now share a rule, but mirrored copies of
-  a polygon don't (their vertex lists differ), and nothing yet uses
-  `::before`/`::after` or `scale:-1` to repeat a shape.
+- **Reuse.** Turned copies of a box share a rule and mirrored copies of a
+  polygon share a `clip-path`, but nothing yet uses `::before`/`::after` to
+  repeat a shape, or mirrors a rounded box.
 - **More primitives.** Repeated patterns via `repeating-*-gradient`, gradients
   on boxes (not only the background), borders (only a handful of the human
   solutions use them, for frames and outlined shapes), text.

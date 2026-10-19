@@ -1,6 +1,6 @@
 import numpy as np
 
-from cssynth.codegen import bgcolor_attr, color_css, emit, gradient_css, num, px, radius_css
+from cssynth.codegen import bgcolor_attr, color_css, emit, gradient_css, num, px, radius_css, reused_clip
 from cssynth.shapes import Gradient, Shape
 
 
@@ -54,3 +54,15 @@ def test_soft_gradient_stops_are_placed_exactly():
     soft = Gradient(90.0, ((1, 100.0), (2, 400.0)), (1.0,))
     assert gradient_css(hard, pal) == "linear-gradient(90deg,red 25%,navy 0)"
     assert gradient_css(soft, pal) == "linear-gradient(90deg,red 99.5px,navy 100.5px)"
+
+
+def test_mirrored_polygon_reuses_the_clip_path():
+    pal = np.array([(250, 240, 220), (30, 60, 120)])
+    a = Shape.polygon([(10, 10), (60, 10), (40, 50), (20, 30)], 1)
+    for fx, fy, scale in [(True, False, "-1 1"), (False, True, "1 -1"), (True, True, "-1")]:
+        b = a.flipped(fx, fy).moved(200, 100)
+        assert reused_clip(a, b) == scale
+        code, _ = emit(pal, 0, [a, b])
+        assert code.count("polygon(") == 1 and f"scale:{scale}" in code
+    assert reused_clip(a, a.moved(5, 5)) == ""
+    assert reused_clip(a, Shape.polygon([(10, 10), (60, 10), (41, 50), (20, 30)], 1)) is None
