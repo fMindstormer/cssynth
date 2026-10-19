@@ -131,9 +131,13 @@ class Gradient:
     angle: CSS degrees (180 = top to bottom, the default; 90 = left to right).
     stops: ((color, end), ...), ends in px along the gradient line, which runs
            through the center and is |W sin a| + |H cos a| long (as in CSS).
-           Color i fills [end[i-1], end[i]); the last end is ignored."""
+           Color i fills [end[i-1], end[i]); the last end is ignored.
+    soft:  a ramp width in px per boundary (empty: all hard). A ramp of width
+           w blends linearly from end - w/2 to end + w/2, which stands in for
+           the antialiasing of a rotated edge."""
     angle: float
     stops: tuple
+    soft: tuple = ()
 
     def length(self) -> float:
         t = math.radians(self.angle)
@@ -163,8 +167,11 @@ def base_labels(bg) -> np.ndarray:
 def base_rgb(bg, palette, ss: int = 4) -> np.ndarray:
     pal = np.asarray(palette, dtype=np.float64)
     if isinstance(bg, Gradient):
-        # Chromium does not antialias hard gradient stops: sample centers only.
-        return pal[bg.labels()]
+        # Chromium evaluates the gradient at pixel centers and does not
+        # antialias hard stops; soft ones blend linearly across their ramp.
+        if not any(bg.soft):
+            return pal[bg.labels()]
+        return gradient_rgb(bg, pal, bg.positions())
     img = np.empty((H, W, 3), dtype=np.float64)
     img[:] = pal[bg]
     return img
@@ -217,13 +224,24 @@ def _in_polygon(xs, ys, pts) -> np.ndarray:
     return ((total - left) & 1).astype(bool)
 
 
+def gradient_rgb(g: Gradient, pal, pos) -> np.ndarray:
+    """Colors of a gradient at positions pos (any shape) along its line."""
+    img = np.empty(pos.shape + (3,))
+    img[:] = pal[g.stops[0][0]]
+    for (_, e), (c, _), w in zip(g.stops, g.stops[1:], g.soft or [0] * len(g.stops)):
+        t = (np.clip((pos - (e - w / 2)) / w, 0, 1) if w > 0 else (pos >= e).astype(float))[..., None]
+        img = img * (1 - t) + pal[c] * t
+    return img
+
+
 def bg_to_json(bg):
     if isinstance(bg, Gradient):
-        return {"angle": bg.angle, "stops": [[int(c), float(e)] for c, e in bg.stops]}
+        return {"angle": bg.angle, "stops": [[int(c), float(e)] for c, e in bg.stops],
+                "soft": [float(w) for w in bg.soft]}
     return int(bg)
 
 
 def bg_from_json(obj):
     if isinstance(obj, dict):
-        return Gradient(obj["angle"], tuple((c, e) for c, e in obj["stops"]))
+        return Gradient(obj["angle"], tuple((c, e) for c, e in obj["stops"]), tuple(obj.get("soft", ())))
     return int(obj)

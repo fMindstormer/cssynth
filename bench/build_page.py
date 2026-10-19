@@ -248,6 +248,10 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
     <h2 id="h-new">What changed since the first version</h2>
     <div class="changes">
       <article class="change">
+        <h3>Re-search and soft gradient stops</h3>
+        <p>The greedy search commits to shapes in the order they first help. The best result is now taken apart and refilled, one polygon or one color at a time, and kept when the score drops; Pythagoras went from 330 to 240 characters. Chromium doesn't antialias hard gradient stops, so a flag whose bands were drawn with rotated boxes used to leave a band of wrong pixels along every edge. Each stop is now fitted to a sub-pixel position with a short ramp, which Chromium draws within 3/255 of the model: Tanzania became a single gradient, 602 &rarr; 142 characters (human: 336).</p>
+      </article>
+      <article class="change">
         <h3>Search fixes, shared rules, faster</h3>
         <p>Shapes that touch only at a corner used to count as one region, which no single shape fits; each edge-connected part is now proposed on its own, and Ups &amp; Downs went from 831 to 207 characters (the human solution is 406). A leaf, a square rounded on two opposite corners and turned onto the region's axis, joined the candidates. Alike elements can now share their own tag and rule (<code>&lt;i&gt;</code>, <code>&lt;u&gt;</code>, <code>&lt;s&gt;</code>), which also lets turned copies of a shape share their CSS. Box gains come from a summed-area table, a polygon vertex move only re-tests nearby pixels, and one search now serves two thresholds: the whole benchmark runs in less than half the time (70 to 33 CPU-minutes on the same machine).</p>
       </article>
@@ -310,6 +314,7 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
       <li><b>Refine.</b> Merge two pieces of the same color into one shape when that costs almost nothing, re-fit every shape against its final surroundings, drop shapes that no longer pay for their characters, and round coordinates where that changes no pixels.</li>
       <li><b>Code generation.</b> A shape that is a shifted, uniformly grown or shrunk copy of another becomes a <code>box-shadow</code> of it, when the paint order allows and CSS keeps the shape exact (a spread larger than the corner radius bends the corners). The grouping and the paint order are chosen together by an exact solver. Boxes are sized with unitless <code>padding</code> (allowed in quirks mode), saturated corner radii get short spellings like <code>7em</code>, and properties shared by every element move into one rule in a trailing, unclosed <code>&lt;style&gt;</code>; families of alike elements can take their own tag and rule.</li>
       <li><b>Choose.</b> Eight search settings run per image (six searches, two of which also stop early at a higher threshold); each result is cleaned up for length and scored by characters + wrong pixels &divide; &rho;. The lowest score wins.</li>
+      <li><b>Re-search.</b> The winner is taken apart, one polygon or one color at a time, refilled by the same search, cleaned up again and kept when its score drops.</li>
     </ol>
   </section>
 
@@ -319,7 +324,7 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
       <li>No borders, text or filters yet, and gradients only on the background, so targets built from those come out longer or less exact.</li>
       <li>The search is greedy with local refinement, so it can miss a cleverer decomposition that a golfer would see.</li>
       <li>Colors are reproduced exactly; the code does not trade color accuracy for shorter color names.</li>
-      <li>My rasterizer's antialiasing differs slightly from Chromium's on long diagonal edges, which costs about a point of match on the striped flags.</li>
+      <li>A soft gradient stop only approximates how Chromium antialiases a rotated edge, so the striped flags still carry a few hundred wrong pixels.</li>
     </ul>
   </section>
 </main>

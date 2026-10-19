@@ -1,7 +1,7 @@
 import numpy as np
 
-from cssynth.codegen import bgcolor_attr, color_css, emit, num, px, radius_css
-from cssynth.shapes import Shape
+from cssynth.codegen import bgcolor_attr, color_css, emit, gradient_css, num, px, radius_css
+from cssynth.shapes import Gradient, Shape
 
 
 def test_color_css_picks_shortest_spelling():
@@ -46,3 +46,11 @@ def test_alike_elements_share_a_tag():
     code, _ = emit(pal, 0, shapes)
     assert code.count(radius_css(shapes[2])) == 1
     assert "i{position:fixed" in code or "u{position:fixed" in code or "s{position:fixed" in code
+
+
+def test_soft_gradient_stops_are_placed_exactly():
+    pal = np.array([(0, 0, 0), (255, 0, 0), (0, 0, 128)])
+    hard = Gradient(90.0, ((1, 100.0), (2, 400.0)))
+    soft = Gradient(90.0, ((1, 100.0), (2, 400.0)), (1.0,))
+    assert gradient_css(hard, pal) == "linear-gradient(90deg,red 25%,navy 0)"
+    assert gradient_css(soft, pal) == "linear-gradient(90deg,red 99.5px,navy 100.5px)"

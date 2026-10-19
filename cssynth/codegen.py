@@ -418,23 +418,28 @@ SHAREABLE = ["width", "height", "padding", "background", "border-radius", "left"
 def gradient_css(g: Gradient, palette) -> str:
     L = g.length()
 
-    def pos(e):
+    def pos(e, tol=0.3):
         opts = [px(e)]
         v = round(e / L * 100, 2)
-        if abs(v * L / 100 - e) < 0.3:
+        if abs(v * L / 100 - e) < tol:
             opts.append(num(v) + "%")
         return min(opts, key=len)
 
+    # Color i runs from where boundary i-1's ramp ends to where boundary i's
+    # begins; a hard boundary starts the next color at "0", which clamps to
+    # the previous stop. Soft ends are placed exactly.
     n = len(g.stops)
+    soft = g.soft or (0,) * (n - 1)
     parts = []
     for i, (c, e) in enumerate(g.stops):
-        col = color_css(palette[c])
-        if i == 0:
-            parts.append(f"{col} {pos(e)}")
-        elif i < n - 1:
-            parts.append(f"{col} 0 {pos(e)}")      # 0 clamps to the previous stop
-        else:
-            parts.append(f"{col} 0")
+        p = [color_css(palette[c])]
+        if i > 0:
+            w = soft[i - 1]
+            p.append(pos(g.stops[i - 1][1] + w / 2, 0.01) if w else "0")
+        if i < n - 1:
+            w = soft[i]
+            p.append(pos(e - w / 2, 0.01) if w else pos(e))
+        parts.append(" ".join(p))
     head = "" if abs(g.angle - 180) < 1e-9 else num(g.angle) + "deg,"
     return f"linear-gradient({head}{','.join(parts)})"
 

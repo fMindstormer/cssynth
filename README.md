@@ -43,6 +43,7 @@ pip install .
 cssynth target.png           # prints the code; length and details on stderr
 cssynth -v target.png        # also logs the search
 cssynth --rho 2 target.png   # golf harder (see "Objective")
+cssynth --fast target.png    # skip the re-search: about 2x faster, longer code
 ```
 
 From Python:
@@ -65,6 +66,9 @@ larger values buy.
 
 ## How it works
 
+A longer write-up of the method, with the reasoning behind each part, is in
+[docs/method.md](docs/method.md).
+
 ```mermaid
 flowchart LR
     A[target PNG] --> B[palette]
@@ -73,7 +77,8 @@ flowchart LR
     D --> E[refine]
     E --> F[simplify for length]
     F --> G[code generation]
-    G --> H{lowest J<br>of 9 variants}
+    G --> H{lowest J<br>of 8 variants}
+    H --> I[re-search parts<br>of the best]
 ```
 
 1. **Palette** (`search.extract_palette`): flat colors with at least 40
@@ -84,8 +89,12 @@ flowchart LR
    hard-stop `linear-gradient` (`search.fit_gradient`). Every pixel center is
    projected onto the gradient line for each angle (1° scan, then refined);
    dynamic programming over 1-px bins then chooses band boundaries minimizing
-   wrong pixels + a penalty per stop. Chromium does not antialias hard stops,
-   so the model samples pixel centers only (matches Chromium to 2–3 pixels).
+   wrong pixels + a penalty per stop. Chromium evaluates gradients at pixel
+   centers and does not antialias hard stops, so a target edge drawn by a
+   rotated box leaves a band of wrong pixels; each boundary is then moved to
+   a sub-pixel position and given a short linear ramp (a soft stop, `#a
+   159.5px,#b 160.5px`) where that pays for its characters. Chromium draws
+   these within 3/255 of the model.
 3. **Layered greedy search** (`search.greedy`): repeatedly add the shape that
    fixes the most wrong pixels. Candidates come from connected regions of wrong
    pixels (and, where a region only holds together at corners, from each of its
@@ -143,6 +152,13 @@ flowchart LR
    stopped); each result is simplified and scored by J, and the lowest J
    wins. Outline polygons run as separate variants because the greedy search
    can also take them where boxes and shadows would end up shorter.
+8. **Re-search** (`improve.improve`): the greedy search commits to shapes in
+   the order they first help, so an early polygon can take a region that a
+   shorter primitive would have drawn. The best result is taken apart and
+   refilled: one polygon at a time (refilled without polygons of its color),
+   then every shape of one color (refilled as before, and without polygons).
+   Each refill is refined and simplified, and kept when J drops. `--fast`
+   skips this step.
 
 ## Benchmark
 
@@ -191,6 +207,7 @@ ruff check .
 ```
 cssynth/
   compiler.py   compile_image: run the variants, simplify, keep the lowest J
+  improve.py    re-search: take the best result apart and refill it
   search.py     palette, base layer, greedy shape search, refine
   shapes.py     the Shape model and a rasterizer that predicts Chromium's
   simplify.py   length-aware clean-up moves
@@ -202,19 +219,21 @@ tests/
 ## Open problems
 
 - **Search for structure.** The greedy still adds whatever fixes the most
-  pixels next; length only enters afterwards. Scoring partial programs by
-  their final code length during the search (e.g. beam search over J) is the
-  next step.
+  pixels next, and the re-search only repairs its choices locally: the lotus
+  is still drawn with polygons where a golfer uses three rotated leaves.
+  Scoring partial programs by their final code length during the search
+  (e.g. beam search over J) is the next step.
 - **Reuse.** Turned copies of a shape now share a rule, but mirrored copies of
   a polygon don't (their vertex lists differ), and nothing yet uses
   `::before`/`::after` or `scale:-1` to repeat a shape.
 - **More primitives.** Repeated patterns via `repeating-*-gradient`, gradients
   on boxes (not only the background), borders (only a handful of the human
   solutions use them, for frames and outlined shapes), text.
-- **Antialiasing.** Hard gradient stops and some rotated edges differ from the
-  target's antialiasing by a pixel band, which caps the match on a few flags.
-- **Speed.** A full benchmark run takes about half an hour of CPU time, most
-  of it in the greedy search's hill climbs on rotated shapes and polygons.
+- **Antialiasing.** A soft stop's linear ramp only approximates how Chromium
+  smooths a rotated edge, so striped flags still carry a few hundred wrong
+  pixels, and so do some rotated shapes.
+- **Speed.** A full benchmark run takes about 75 CPU-minutes (about half of
+  it re-search), most of it in hill climbs on rotated shapes and polygons.
 
 ## License
 

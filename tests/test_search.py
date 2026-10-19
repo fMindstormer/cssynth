@@ -1,8 +1,17 @@
 import numpy as np
 from scipy import ndimage
 
-from cssynth.search import _regions, _vertex_delta, area_sums, extract_palette, gain, reduce_polygon, trace_outline
-from cssynth.shapes import Shape, coverage
+from cssynth.search import (
+    _regions,
+    _vertex_delta,
+    area_sums,
+    extract_palette,
+    gain,
+    reduce_polygon,
+    soften,
+    trace_outline,
+)
+from cssynth.shapes import Gradient, Shape, base_rgb, coverage
 
 
 def test_trace_outline_of_concave_region_is_exact():
@@ -77,3 +86,17 @@ def test_vertex_delta_matches_full_gain():
         d = _vertex_delta(old, new, A, B)
         if d is not None:
             assert gain(old, A, B) + d == gain(new, A, B)
+
+
+def test_soften_recovers_a_subpixel_ramp():
+    # a target whose edge lies between pixels and is blended over 1.2px, as an
+    # antialiased turned edge is; a hard stop at the nearest pixel can't match
+    pal = np.array([(20, 160, 70), (250, 200, 30)])
+    img = np.rint(base_rgb(Gradient(150.0, ((0, 230.4), (1, 500.0)), (1.2,)), pal)).astype(np.uint8)
+    hard = Gradient(150.0, ((0, 230.0), (1, 500.0)))
+    soft = soften(hard, img, pal)
+
+    def wrong(g):
+        return int((np.abs(base_rgb(g, pal) - img).max(-1) > 8).sum())
+
+    assert wrong(hard) > 100 and wrong(soft) == 0

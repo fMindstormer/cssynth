@@ -16,7 +16,7 @@ import math
 import numpy as np
 from scipy import ndimage
 
-from .shapes import Gradient, H, Shape, W, _in_polygon, base_labels, coverage, render_labels
+from .shapes import Gradient, H, Shape, W, _in_polygon, base_labels, coverage, gradient_rgb, render_labels
 
 MIN_COLOR_PX = 40
 MIN_GAIN = 25          # pixels a shape must fix to be worth its characters
@@ -144,6 +144,39 @@ def fit_gradient(T, K):
         stops = tuple((c, float(L - i)) for i, j, c in reversed(bands))
         a = 180
     return Gradient(float(a), stops)
+
+
+SOFT_WIDTHS = (0, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 2)
+SOFT_PAYS = 12          # wrong pixels a soft boundary must save (its ~6 characters)
+
+
+def soften(g: Gradient, img: np.ndarray, pal) -> Gradient:
+    """Move each boundary by up to 1.5px in 0.1px steps and give it a ramp,
+    to match the antialiased edges of the target (a gradient line drawn by a
+    rotated box, say) instead of Chromium's hard, unantialiased stop."""
+    P = g.positions()
+    pal = np.asarray(pal, dtype=float)
+    target = img.astype(int)
+    stops, soft = list(g.stops), [0.0] * (len(g.stops) - 1)
+    for i in range(len(soft)):
+        e0 = stops[i][1]
+        near = np.abs(P - e0) < 4            # only these pixels can change
+        pos, tgt = P[near], target[near]
+
+        def wrong(e, w):
+            trial = Gradient(g.angle, tuple(stops[:i] + [(stops[i][0], e)] + stops[i + 1:]),
+                             tuple(soft[:i] + [w] + soft[i + 1:]))
+            got = np.rint(gradient_rgb(trial, pal, pos)).astype(int)
+            return int((np.abs(got - tgt).max(-1) > 8).sum())
+
+        hard = wrong(e0, 0)
+        best = min((wrong(round(e0 + d / 10, 1), w), w, round(e0 + d / 10, 1))
+                   for d in range(-15, 16) for w in SOFT_WIDTHS[1:])
+        if best[0] < hard - SOFT_PAYS:
+            stops[i], soft[i] = (stops[i][0], best[2]), best[1]
+    if not any(soft):
+        return g
+    return Gradient(g.angle, tuple(stops), tuple(soft))
 
 
 # --------------------------------------------------------------------------
@@ -501,15 +534,17 @@ def _regions(region, lab, objs):
 
 
 def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
-           min_gain=MIN_GAIN, per_color=3, bbox_starts=True, outlines=False, also=()):
+           min_gain=MIN_GAIN, per_color=3, bbox_starts=True, outlines=False, also=(),
+           start=(), no_polygons=()):
     """Add shapes one at a time, each at whatever depth in the stack fixes the
     most pixels. Inserting below existing shapes lets the search build rings,
     eyes and other nested figures that no top-only greedy can.
 
     Returns {min_gain: shapes}. also: higher thresholds to report too; a run
     with a higher threshold would mostly retrace this one and stop where no
-    shape fixes that many pixels, so the stack at that point stands in for it."""
-    shapes: list[Shape] = []
+    shape fixes that many pixels, so the stack at that point stands in for it.
+    start: a stack to add to. no_polygons: colors to draw without polygons."""
+    shapes: list[Shape] = list(start)
     out = {}
     for _ in range(max_shapes):
         belows, frees = _layers(T, bg, shapes)
@@ -534,6 +569,8 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
                                                       ys.stop - ys.start, c)))
             for comp, xs, ys in _regions(region, lab, objs):
                 for cand in candidates(c, comp, xs.start, ys.start, outlines):
+                    if cand.poly and c in no_polygons:
+                        continue
                     x0, y0, m = coverage(cand)
                     if m is None:
                         continue
@@ -699,6 +736,7 @@ def decompose(img: np.ndarray, log=None, min_gains=(MIN_GAIN,), per_color=3, bbo
         bg = fit_gradient(T, len(pal))
         if bg is None:
             return None
+        bg = soften(bg, img, pal)
         colors = list(range(len(pal)))
         if log:
             log(f"  gradient base: {bg}")

@@ -1,5 +1,5 @@
 # Full benchmark on Linux, with the same Chromium build the targets were
-# rendered with. Takes about half an hour; run it by hand from the Actions tab.
+# rendered with, plus the rho trade-off table. Run it by hand from the Actions tab.
 name: Benchmark
 
 on:
@@ -22,11 +22,13 @@ jobs:
         working-directory: bench
       - run: python bench/fetch.py
       - run: python bench/run.py
+      - run: python bench/tradeoff.py
       - run: python bench/build_page.py
       - uses: actions/upload-artifact@v7
         with:
           name: benchmark
           path: |
             bench/results.json
+            bench/tradeoff.json
             bench/out/
             bench/cssynth-results.html

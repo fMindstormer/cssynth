@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 
 from .codegen import emit
+from .improve import improve
 from .search import decompose
 from .shapes import render_rgb
 from .simplify import simplify
@@ -29,11 +30,20 @@ VARIANTS = [((25, 80), 3, True, "flat", False), ((25,), 3, False, "flat", False)
 RHO = 0.5
 
 
-def compile_image(path, log=None, variants=VARIANTS, rho=RHO):
+def compile_image(path, log=None, variants=VARIANTS, rho=RHO, research=True):
+    """research: re-search parts of the best result (see improve)."""
     img = Image.open(path).convert("RGB")
     if img.size != (400, 300):
         img = img.resize((400, 300), Image.BOX)
     arr = np.asarray(img)
+
+    def finish(pal, bg, shapes):
+        code, info = emit(pal, bg, shapes)
+        sim = render_rgb(bg, pal, shapes)
+        wrong = int((np.abs(sim.astype(int) - arr.astype(int)).max(2) > 8).sum())
+        J = len(code) + wrong / rho
+        return J, code, {**info, "wrong_px": wrong, "J": round(J, 1)}
+
     runs = []
     for min_gains, per_color, bbox_starts, base, outlines in variants:
         out = decompose(arr, log=log, min_gains=min_gains, per_color=per_color,
@@ -43,12 +53,16 @@ def compile_image(path, log=None, variants=VARIANTS, rho=RHO):
         pal, bg, T, stacks = out
         for min_gain, shapes in stacks.items():
             shapes = simplify(T, bg, pal, shapes, rho=rho, log=log)
-            code, info = emit(pal, bg, shapes)
-            sim = render_rgb(bg, pal, shapes)
-            wrong = int((np.abs(sim.astype(int) - arr.astype(int)).max(2) > 8).sum())
-            J = len(code) + wrong / rho
-            runs.append((J, code, {**info, "wrong_px": wrong, "J": round(J, 1),
-                                   "variant": [min_gain, per_color, bbox_starts, base, outlines]},
-                         (pal, bg, T, shapes)))
-    _, code, info, model = min(runs, key=lambda r: r[0])
-    return code, info, model
+            J, code, info = finish(pal, bg, shapes)
+            variant = [min_gain, per_color, bbox_starts, base, outlines]
+            runs.append((J, code, {**info, "variant": variant}, (pal, bg, T, shapes)))
+    J, code, info, (pal, bg, T, shapes) = min(runs, key=lambda r: r[0])
+    if research:
+        min_gain, per_color, bbox_starts, _, outlines = info["variant"]
+        better = improve(lambda sh: finish(pal, bg, sh)[0], pal, bg, T, shapes, rho, min_gain,
+                         per_color, bbox_starts, outlines, log=log)
+        if better is not shapes:
+            J2, code, info2 = finish(pal, bg, better)
+            info = {**info2, "variant": info["variant"], "researched": round(J - J2, 1)}
+            shapes = better
+    return code, info, (pal, bg, T, shapes)
