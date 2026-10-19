@@ -1,0 +1,15 @@
+__pycache__/
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+
+# downloaded on demand (bench/fetch.py): no license to redistribute
+vendor/
+bench/human/ks-*.png
+
+# benchmark scratch
+bench/node_modules/
+bench/jobs_*.json
+bench/tradeoff/

@@ -1,0 +1,627 @@
+[
+ {
+  "id": "ks-01-simplysquare",
+  "title": "Simply Square",
+  "source": "Kushalshakya/CSSBattle: Battle #1-Pilot Battle/01-SimplySquare.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 151,
+  "human_min_len": 110
+ },
+ {
+  "id": "ks-02-carrom",
+  "title": "Carrom",
+  "source": "Kushalshakya/CSSBattle: Battle #1-Pilot Battle/02-Carrom.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 405,
+  "human_min_len": 313
+ },
+ {
+  "id": "ks-03-pushbutton",
+  "title": "Push Button",
+  "source": "Kushalshakya/CSSBattle: Battle #1-Pilot Battle/03-PushButton.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 738,
+  "human_min_len": 579
+ },
+ {
+  "id": "ks-04-upsndowns",
+  "title": "Upsn Downs",
+  "source": "Kushalshakya/CSSBattle: Battle #1-Pilot Battle/04-UpsnDowns.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 515,
+  "human_min_len": 406
+ },
+ {
+  "id": "ks-05-acidrains",
+  "title": "Acid Rains",
+  "source": "Kushalshakya/CSSBattle: Battle #1-Pilot Battle/05-AcidRains.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 595,
+  "human_min_len": 475
+ },
+ {
+  "id": "ks-06-missingslice",
+  "title": "Missing Slice",
+  "source": "Kushalshakya/CSSBattle: Battle #1-Pilot Battle/06-MissingSlice.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 327,
+  "human_min_len": 261
+ },
+ {
+  "id": "ks-07-leafytrial",
+  "title": "Leafy Trial",
+  "source": "Kushalshakya/CSSBattle: Battle #1-Pilot Battle/07-LeafyTrial.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 725,
+  "human_min_len": 545
+ },
+ {
+  "id": "ks-09-tesseract",
+  "title": "Tesseract",
+  "source": "Kushalshakya/CSSBattle: Battle #1-Pilot Battle/09-Tesseract.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 713,
+  "human_min_len": 567
+ },
+ {
+  "id": "ks-68-bell",
+  "title": "Bell",
+  "source": "Kushalshakya/CSSBattle: Battle #12-Blend/68-Bell.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 523,
+  "human_min_len": 392
+ },
+ {
+  "id": "ks-85-pythagoras",
+  "title": "Pythagoras",
+  "source": "Kushalshakya/CSSBattle: Battle #15-Filter/85-Pythagoras.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 556,
+  "human_min_len": 401
+ },
+ {
+  "id": "ks-113-blacklight",
+  "title": "Black Light",
+  "source": "Kushalshakya/CSSBattle: Battle #19-Spacing/113-BlackLight.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 235,
+  "human_min_len": 179
+ },
+ {
+  "id": "ks-13-totallytriangle",
+  "title": "Totally Triangle",
+  "source": "Kushalshakya/CSSBattle: Battle #2-Visibility/13-TotallyTriangle.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 240,
+  "human_min_len": 185
+ },
+ {
+  "id": "ks-14-webmakerlogo",
+  "title": "Web Maker Logo",
+  "source": "Kushalshakya/CSSBattle: Battle #2-Visibility/14-WebMakerLogo.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 1154,
+  "human_min_len": 912
+ },
+ {
+  "id": "ks-134-wig",
+  "title": "Wig",
+  "source": "Kushalshakya/CSSBattle: Battle #22-Grid/134-Wig.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 346,
+  "human_min_len": 264
+ },
+ {
+  "id": "ks-136-alieneye",
+  "title": "Alien Eye",
+  "source": "Kushalshakya/CSSBattle: Battle #22-Grid/136-AlienEye.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 581,
+  "human_min_len": 408
+ },
+ {
+  "id": "ks-138-lotus",
+  "title": "Lotus",
+  "source": "Kushalshakya/CSSBattle: Battle #22-Grid/138-Lotus.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 609,
+  "human_min_len": 418
+ },
+ {
+  "id": "ks-139-lamb",
+  "title": "Lamb",
+  "source": "Kushalshakya/CSSBattle: Battle #22-Grid/139-Lamb.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 419,
+  "human_min_len": 315
+ },
+ {
+  "id": "ks-143-simplycircle",
+  "title": "Simply Circle",
+  "source": "Kushalshakya/CSSBattle: Battle #24-Offset/143-SimplyCircle.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 169,
+  "human_min_len": 122
+ },
+ {
+  "id": "ks-145-spotlight",
+  "title": "Spotlight",
+  "source": "Kushalshakya/CSSBattle: Battle #24-Offset/145-Spotlight.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 432,
+  "human_min_len": 336
+ },
+ {
+  "id": "ks-146-streaks",
+  "title": "Streaks",
+  "source": "Kushalshakya/CSSBattle: Battle #24-Offset/146-Streaks.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 481,
+  "human_min_len": 348
+ },
+ {
+  "id": "ks-#159-portal",
+  "title": "Portal",
+  "source": "Kushalshakya/CSSBattle: Battle #26-Initial/#159-Portal.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 521,
+  "human_min_len": 379
+ },
+ {
+  "id": "ks-#160-donut",
+  "title": "Donut",
+  "source": "Kushalshakya/CSSBattle: Battle #26-Initial/#160-Donut.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 485,
+  "human_min_len": 360
+ },
+ {
+  "id": "ks-#161-converage",
+  "title": "Converage",
+  "source": "Kushalshakya/CSSBattle: Battle #26-Initial/#161-Converage.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 542,
+  "human_min_len": 383
+ },
+ {
+  "id": "ks-#163-missingpiece",
+  "title": "Missing Piece",
+  "source": "Kushalshakya/CSSBattle: Battle #26-Initial/#163-MissingPiece.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 525,
+  "human_min_len": 402
+ },
+ {
+  "id": "ks-179-tanzania",
+  "title": "Tanzania",
+  "source": "Kushalshakya/CSSBattle: Battle #29-Font/179-Tanzania.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 438,
+  "human_min_len": 336
+ },
+ {
+  "id": "ks-180-kuwait",
+  "title": "Kuwait",
+  "source": "Kushalshakya/CSSBattle: Battle #29-Font/180-Kuwait.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 312,
+  "human_min_len": 253
+ },
+ {
+  "id": "ks-181-iceland",
+  "title": "Iceland",
+  "source": "Kushalshakya/CSSBattle: Battle #29-Font/181-Iceland.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 577,
+  "human_min_len": 441
+ },
+ {
+  "id": "ks-183-brazil",
+  "title": "Brazil",
+  "source": "Kushalshakya/CSSBattle: Battle #29-Font/183-Brazil.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 634,
+  "human_min_len": 477
+ },
+ {
+  "id": "ks-184-india",
+  "title": "India",
+  "source": "Kushalshakya/CSSBattle: Battle #29-Font/184-India.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 824,
+  "human_min_len": 654
+ },
+ {
+  "id": "ks-186-guernsey",
+  "title": "Guernsey",
+  "source": "Kushalshakya/CSSBattle: Battle #29-Font/186-Guernsey.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 613,
+  "human_min_len": 465
+ },
+ {
+  "id": "ks-202-sterringwheel",
+  "title": "Sterring Wheel",
+  "source": "Kushalshakya/CSSBattle: Battle #31-Opacity/202-SterringWheel.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 910,
+  "human_min_len": 677
+ },
+ {
+  "id": "ks-22-cloud",
+  "title": "Cloud",
+  "source": "Kushalshakya/CSSBattle: Battle #4-Display/22-Cloud.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 615,
+  "human_min_len": 444
+ },
+ {
+  "id": "ks-30-horizon",
+  "title": "Horizon",
+  "source": "Kushalshakya/CSSBattle: Battle #5-Inline/30-Horizon.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 367,
+  "human_min_len": 284
+ },
+ {
+  "id": "ks-37-tunnel",
+  "title": "Tunnel",
+  "source": "Kushalshakya/CSSBattle: Battle #7-Backface/37-Tunnel.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 575,
+  "human_min_len": 410
+ },
+ {
+  "id": "ks-46-mountains",
+  "title": "Mountains",
+  "source": "Kushalshakya/CSSBattle: Battle #9-Margin/46-Mountains.css",
+  "license": null,
+  "official_png": null,
+  "human_len": 640,
+  "human_min_len": 475
+ },
+ {
+  "id": "om-20240220",
+  "title": "Daily target 2024-02-20",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/02/20",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"big-square\"></div>\n  <div class=\"medium-square\"></div>\n  <div class=\"small-square\"></div>\n  <div class=\"mini-square-top\"></div>\n  <div class=\"mini-square-bottom\"></div>\n</div>\n<style>\n  body {\n    background-color: #4a1818;\n  }\n  .big-square {\n    position: absolute;\n    top: 50px;\n    left: 100px;\n    width: 200px;\n    height: 200px;\n    background-color: #f16b4a;\n  }\n  .medium-square {\n    position: absolute;\n    top: 90px;\n    left: 140px;\n    width: 120px;\n    height: 120px;\n    background-color: #4a1818;\n  }\n  .small-square {\n    position: absolute;\n    top: 120px;\n    left: 170px;\n    width: 60px;\n    height: 60px;\n    background-color: #f16b4a;\n  }\n  .mini-square-top {\n    position: absolute;\n    top: 50px;\n    left: 180px;\n    width: 40px;\n    height: 40px;\n    background-color: #4a1818;\n  }\n  .mini-square-bottom {\n    position: absolute;\n    bottom: 50px;\n    left: 180px;\n    width: 40px;\n    height: 40px;\n    background-color: #4a1818;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/02/20/screenshots/css-image.png",
+  "human_len": 992,
+  "human_min_len": 740
+ },
+ {
+  "id": "om-20240221",
+  "title": "Daily target 2024-02-21",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/02/21",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"outer\"></div>\n  <div class=\"inner\"></div>\n  <div class=\"vertical-stripe-one\"></div>\n  <div class=\"vertical-stripe-two\"></div>\n  <div class=\"horizontal-stripe\"></div>\n</div>\n<style>\n  body {\n    background-color: #acddf9;\n  }\n  .outer {\n    position: absolute;\n    top: 88px;\n    left: 100px;\n    width: 200px;\n    height: 125px;\n    clip-path: polygon(82.3% 0, 100% 28.3%, 100% 100%, 0 100%, 0 0);\n    background: #0a6b91;\n  }\n  .inner {\n    position: absolute;\n    top: 113px;\n    left: 125px;\n    width: 100px;\n    height: 75px;\n    border-radius: 10px;\n    background: #acddf9;\n  }\n  .vertical-stripe-one {\n    position: absolute;\n    top: 113px;\n    left: 150px;\n    width: 5px;\n    height: 75px;\n    background: #0a6b91;\n  }\n  .vertical-stripe-two {\n    position: absolute;\n    top: 113px;\n    left: 195px;\n    width: 5px;\n    height: 75px;\n    background: #0a6b91;\n  }\n  .horizontal-stripe {\n    position: absolute;\n    top: 148px;\n    left: 125px;\n    width: 100px;\n    height: 5px;\n    background: #0a6b91;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/02/21/screenshots/css-image.png",
+  "human_len": 1047,
+  "human_min_len": 779
+ },
+ {
+  "id": "om-20240222",
+  "title": "Daily target 2024-02-22",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/02/22",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"circle-outer one-outer\"></div>\n  <div class=\"circle-inner one-inner\"></div>\n  <div class=\"circle-outer two-outer\"></div>\n  <div class=\"circle-inner two-inner\"></div>\n  <div class=\"circle-outer three-outer\"></div>\n  <div class=\"circle-inner three-inner\"></div>\n  <div class=\"stripe one\"></div>\n  <div class=\"stripe two\"></div>\n  <div class=\"stripe three\"></div>\n</div>\n<style>\n  body {\n    background-color: #0d2328;\n  }\n  .circle-outer {\n    position: absolute;\n    width: 100px;\n    height: 100px;\n    border-radius: 50%;\n    background: #9ed7f8;\n  }\n  .one-outer {\n    top: 140px;\n    left: 50px;\n  }\n  .two-outer {\n    top: 40px;\n    left: 150px;\n  }\n  .three-outer {\n    top: 140px;\n    right: 50px;\n  }\n  .circle-inner {\n    position: absolute;\n    width: 60px;\n    height: 60px;\n    border-radius: 50%;\n    background: #0d2328;\n  }\n  .one-inner {\n    top: 160px;\n    left: 70px;\n  }\n  .two-inner {\n    top: 60px;\n    left: 170px;\n  }\n  .three-inner {\n    top: 160px;\n    right: 70px;\n  }\n  .stripe {\n    position: absolute;\n    width: 20px;\n    height: 70px;\n    background-color: #9ed7f8;\n  }\n\n  .one {\n    bottom: 0px;\n    left: 90px;\n  }\n  .two {\n    height: 180px;\n    bottom: 0px;\n    left: 190px;\n  }\n  .three {\n    bottom: 0px;\n    right: 90px;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/02/22/screenshots/css-image.png",
+  "human_len": 1290,
+  "human_min_len": 951
+ },
+ {
+  "id": "om-20240224",
+  "title": "Daily target 2024-02-24",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/02/24",
+  "license": "MIT",
+  "human_code": "<div class=\"container\">\n  <div class=\"medium\"></div>\n  <div class=\"medium\"></div>\n  <div class=\"medium\"></div>\n  <div class=\"medium\"></div>\n  <div class=\"medium\"></div>\n  <div class=\"medium\"></div>\n  <div class=\"circle\"></div>\n  <div class=\"circle\"></div>\n  <div class=\"circle\"></div>\n  <div class=\"circle\"></div>\n  <div class=\"circle\"></div>\n  <div class=\"circle\"></div>\n  <div class=\"circle\"></div>\n  <div class=\"circle\"></div>\n  <div class=\"circle\"></div>\n  <div class=\"circle\"></div>\n  <div class=\"space\"></div>\n</div>\n<style>\n  body {\n    background-color: #9ed7f8;\n  }\n  .container {\n    position: absolute;\n    top: 90px;\n    left: 50px;\n    width: 300px;\n    height: 120px;\n    border-radius: 20px;\n    background: #277292;\n  }\n  .medium {\n    position: absolute;\n    width: 40px;\n    height: 20px;\n    border-radius: 10px;\n    background: #ffffff;\n  }\n  .medium:nth-of-type(1) {\n    top: 15px;\n    left: 15px;\n  }\n  .medium:nth-of-type(2) {\n    top: 50px;\n    left: 15px;\n  }\n  .medium:nth-of-type(3) {\n    top: 85px;\n    left: 15px;\n  }\n  .medium:nth-of-type(4) {\n    top: 15px;\n    right: 15px;\n  }\n  .medium:nth-of-type(5) {\n    top: 50px;\n    right: 15px;\n  }\n  .medium:nth-of-type(6) {\n    top: 85px;\n    right: 15px;\n  }\n  .circle {\n    position: absolute;\n    width: 20px;\n    height: 20px;\n    border-radius: 50%;\n    background: #ffffff;\n  }\n  .circle:nth-of-type(7) {\n    top: 15px;\n    left: 70px;\n  }\n  .circle:nth-of-type(8) {\n    top: 15px;\n    left: 105px;\n  }\n  .circle:nth-of-type(9) {\n    top: 15px;\n    right: 70px;\n  }\n  .circle:nth-of-type(10) {\n    top: 15px;\n    right: 105px;\n  }\n  .circle:nth-of-type(11) {\n    top: 15px;\n    right: 140px;\n  }\n  .circle:nth-of-type(12) {\n    top: 50px;\n    right: 140px;\n  }\n  .circle:nth-of-type(13) {\n    top: 50px;\n    right: 105px;\n  }\n  .circle:nth-of-type(14) {\n    top: 50px;\n    right: 70px;\n  }\n  .circle:nth-of-type(15) {\n    top: 50px;\n    left: 105px;\n  }\n  .circle:nth-of-type(16) {\n    top: 50px;\n    left: 70px;\n  }\n  .space {\n    position: absolute;\n    top: 85px;\n    left: 70px;\n    width: 160px;\n    height: 20px;\n    border-radius: 10px;\n    background: #ffffff;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/02/24/screenshots/css-image.png",
+  "human_len": 2163,
+  "human_min_len": 1599
+ },
+ {
+  "id": "om-20240225",
+  "title": "Daily target 2024-02-25",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/02/25",
+  "license": "MIT",
+  "human_code": "<div class=\"container\">\n  <div class=\"square\"></div>\n  <div class=\"stripe\"></div>\n  <div class=\"stripe\"></div>\n  <div class=\"stripe\"></div>\n  <div class=\"stripe\"></div>\n  <div class=\"stripe\"></div>\n  <div class=\"stripe\"></div>\n  <div class=\"stripe\"></div>\n  <div class=\"stripe\"></div>\n</div>\n<style>\n  body {\n    background-color: #fad3e5;\n  }\n  .container {\n    position: absolute;\n    top: 50px;\n    left: 100px;\n    width: 200px;\n    height: 200px;\n    background: #8b0051;\n  }\n  .square {\n    position: absolute;\n    top: 50px;\n    left: 50px;\n    width: 100px;\n    height: 100px;\n    background: #fad3e5;\n  }\n  .stripe {\n    position: absolute;\n    width: 50px;\n    height: 10px;\n    background: #fad3e5;\n  }\n  .stripe:nth-of-type(2) {\n    top: 10px;\n    left: 100px;\n  }\n  .stripe:nth-of-type(3) {\n    top: 30px;\n    left: 100px;\n  }\n  .stripe:nth-of-type(4) {\n    bottom: 10px;\n    right: 100px;\n  }\n  .stripe:nth-of-type(5) {\n    bottom: 30px;\n    right: 100px;\n  }\n  .stripe:nth-of-type(6) {\n    top: 70px;\n    left: -10px;\n    transform: rotate(90deg);\n  }\n  .stripe:nth-of-type(7) {\n    top: 70px;\n    left: 10px;\n    transform: rotate(90deg);\n  }\n  .stripe:nth-of-type(8) {\n    top: 120px;\n    right: 10px;\n    transform: rotate(90deg);\n  }\n  .stripe:nth-of-type(9) {\n    top: 120px;\n    right: -10px;\n    transform: rotate(90deg);\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/02/25/screenshots/css-image.png",
+  "human_len": 1356,
+  "human_min_len": 1008
+ },
+ {
+  "id": "om-20240226",
+  "title": "Daily target 2024-02-26",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/02/26",
+  "license": "MIT",
+  "human_code": "<div class=\"square\">\n  <div class=\"b-circle\">\n    <div class=\"s-circle\"></div>\n  </div>\n  <div class=\"s-circle\"></div>\n  <div class=\"s-circle\"></div>\n  <div class=\"s-circle\"></div>\n  <div class=\"s-circle\"></div>\n</div>\n<style>\n  body {\n    background-color: #feff89;\n  }\n  .square {\n    position: absolute;\n    top: 50px;\n    left: 100px;\n    width: 200px;\n    height: 200px;\n    background: #f59426;\n  }\n  .b-circle {\n    position: absolute;\n    top: 50px;\n    left: 50px;\n    width: 100px;\n    height: 100px;\n    border-radius: 50%;\n    background: #feff89;\n  }\n  .s-circle {\n    position: absolute;\n    width: 30px;\n    height: 30px;\n    border-radius: 50%;\n    background: #8a0a06;\n  }\n  .s-circle:nth-of-type(1) {\n    top: 35px;\n    left: 35px;\n  }\n  .s-circle:nth-of-type(2) {\n    top: 20px;\n    left: 20px;\n  }\n  .s-circle:nth-of-type(3) {\n    top: 20px;\n    right: 20px;\n  }\n  .s-circle:nth-of-type(4) {\n    bottom: 20px;\n    left: 20px;\n  }\n  .s-circle:nth-of-type(5) {\n    bottom: 20px;\n    right: 20px;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/02/26/screenshots/css-image.png",
+  "human_len": 1026,
+  "human_min_len": 754
+ },
+ {
+  "id": "om-20240227",
+  "title": "Daily target 2024-02-27",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/02/27",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"oval\"></div>\n  <div class=\"top-circle\"></div>\n  <div class=\"bottom-circle\"></div>\n</div>\n<style>\n  body {\n    background-color: #2e0040;\n  }\n  .oval {\n    position: absolute;\n    top: 100px;\n    left: 100px;\n    width: 200px;\n    height: 100px;\n    border-radius: 75px;\n    background: #a94ea4;\n  }\n  .top-circle {\n    position: absolute;\n    top: 50px;\n    left: 150px;\n    width: 100px;\n    height: 100px;\n    border-radius: 50%;\n    background: #d3b1d6;\n  }\n  .bottom-circle {\n    position: absolute;\n    bottom: 50px;\n    left: 150px;\n    width: 100px;\n    height: 100px;\n    border-radius: 50%;\n    background: #d3b1d6;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/02/27/screenshots/css-image.png",
+  "human_len": 657,
+  "human_min_len": 481
+ },
+ {
+  "id": "om-20240228",
+  "title": "Daily target 2024-02-28",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/02/28",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"bs lc\"></div>\n  <div class=\"sc\">\n    <div class=\"s s1\"></div>\n    <div class=\"s s2\"></div>\n    <div class=\"s s3\"></div>\n    <div class=\"s s4\"></div>\n  </div>\n</div>\n<div>\n  <div class=\"bs rc\"></div>\n  <div class=\"scb\">\n    <div class=\"s s5\"></div>\n    <div class=\"s s6\"></div>\n    <div class=\"s s7\"></div>\n    <div class=\"s s8\"></div>\n  </div>\n</div>\n<style>\n  body {\n    background: #acddf9;\n  }\n  .lc {\n    position: absolute;\n    top: 0;\n    left: 0;\n  }\n  .bs {\n    width: 140px;\n    height: 210px;\n    background: #0c6da2;\n  }\n  .rc {\n    position: absolute;\n    bottom: 0;\n    right: 0;\n  }\n  .sc {\n    position: absolute;\n    top: 0px;\n    left: 160px;\n    right: 0;\n  }\n  .s {\n    position: absolute;\n    width: 20px;\n    height: 130px;\n    background: #0c6da2;\n  }\n\n  .s1 {\n    top: 0;\n    left: 0px;\n  }\n  .s4 {\n    height: 60px;\n    top: 70;\n    left: 60px;\n  }\n  .s3 {\n    height: 60px;\n    rotate: 90deg;\n    top: 90;\n    right: 200;\n  }\n  .s2 {\n    height: 180px;\n    rotate: 90deg;\n    top: -30px;\n    right: 80;\n  }\n  .scb {\n    position: absolute;\n    bottom: 0px;\n    right: 160px;\n    left: 0;\n    /* background: red;\n    width: 240px;\n    height: 130px; */\n  }\n  .s5 {\n    bottom: 0;\n    right: 0px;\n  }\n  .s6 {\n    height: 180px;\n    rotate: 90deg;\n    bottom: -30px;\n    left: 80;\n  }\n  .s7 {\n    height: 60px;\n    rotate: 90deg;\n    bottom: 90;\n    left: 200;\n  }\n  .s8 {\n    height: 60px;\n    bottom: 70;\n    right: 60px;\n  }</style\n>a",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/02/28/screenshots/css-image.png",
+  "human_len": 1479,
+  "human_min_len": 943
+ },
+ {
+  "id": "om-20240301",
+  "title": "Daily target 2024-03-01",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/01",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"circle\"></div>\n  <div class=\"trapezium-top\"></div>\n  <div class=\"trapezium-bottom\"></div>\n  <div class=\"trapezium-left\"></div>\n  <div class=\"trapezium-right\"></div>\n</div>\n<style>\n  body {\n    background-color: #2bbbf3;\n  }\n  .circle {\n    position: absolute;\n    top: 100px;\n    left: 150px;\n    width: 100px;\n    height: 100px;\n    border-radius: 50%;\n    background: #ffffff;\n  }\n  .trapezium-top {\n    position: absolute;\n    top: 0px;\n    left: 166px;\n    width: 68px;\n    height: 105px;\n    clip-path: polygon(0 0, 100% 0, 63.5% 100%, 36.5% 100%);\n    background: #ffffff;\n  }\n  .trapezium-bottom {\n    position: absolute;\n    bottom: 0px;\n    left: 166px;\n    width: 68px;\n    height: 105px;\n    clip-path: polygon(0 0, 100% 0, 63.5% 100%, 36.5% 100%);\n    background: #ffffff;\n    transform: rotate(180deg);\n  }\n  .trapezium-left {\n    position: absolute;\n    top: 105px;\n    left: 0px;\n    width: 195px;\n    height: 90px;\n    clip-path: polygon(0 0, 100% 50%, 100% 50%, 0% 100%);\n    background: #ffffff;\n  }\n  .trapezium-right {\n    position: absolute;\n    top: 105px;\n    right: 0px;\n    width: 195px;\n    height: 90px;\n    clip-path: polygon(0 0, 100% 50%, 100% 50%, 0% 100%);\n    background: #ffffff;\n    transform: rotate(180deg);\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/01/screenshots/css-image.png",
+  "human_len": 1277,
+  "human_min_len": 971
+ },
+ {
+  "id": "om-20240304",
+  "title": "Daily target 2024-03-04",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/04",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"r a\"></div>\n  <div class=\"r b\"></div>\n  <div class=\"bc\"></div>\n  <div class=\"sc\"></div>\n  <div class=\"s\"></div>\n</div>\n<style>\n  body {\n    background: #3a2a5d;\n  }\n  .s {\n    position: absolute;\n    top: 150px;\n    left: 110px;\n    width: 40px;\n    height: 30px;\n    background: #3a2a5d;\n  }\n  .r {\n    position: absolute;\n    width: 180px;\n    height: 30px;\n    background: #bbb2db;\n  }\n  .a {\n    top: 60px;\n    left: 110px;\n  }\n  .b {\n    top: 120px;\n    left: 110px;\n  }\n  .bc {\n    position: absolute;\n    top: 150px;\n    left: 110px;\n    width: 180px;\n    height: 90px;\n    border-bottom-left-radius: 90px;\n    border-bottom-right-radius: 90px;\n    background: #bbb2db;\n  }\n  .sc {\n    position: absolute;\n    top: 150px;\n    left: 140px;\n    width: 120px;\n    height: 60px;\n    border-bottom-left-radius: 100px;\n    border-bottom-right-radius: 100px;\n    background: #3a2a5d;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/04/screenshots/css-image.png",
+  "human_len": 916,
+  "human_min_len": 656
+ },
+ {
+  "id": "om-20240309",
+  "title": "Daily target 2024-03-09",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/09",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"t b l\"></div>\n  <div class=\"t s l\"></div>\n  <div class=\"t r l\"></div>\n</div>\n<style>\n  body {\n    background: #712b2b;\n  }\n  .t {\n    position: absolute;\n    width: 80px;\n    height: 60px;\n    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);\n    background: #f79091;\n  }\n  .l {\n    left: 160px;\n  }\n  .r {\n    transform: rotate(180deg);\n    bottom: 45px;\n  }\n  .b {\n    transform: scale(2.5);\n    top: 90px;\n    background: #d04a4c;\n  }\n  .s {\n    top: 45px;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/09/screenshots/css-image.png",
+  "human_len": 490,
+  "human_min_len": 350
+ },
+ {
+  "id": "om-20240312",
+  "title": "Daily target 2024-03-12",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/12",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"so sone\"></div>\n  <div class=\"so stwo\"></div>\n  <div class=\"bo one\"></div>\n  <div class=\"bo two\"></div>\n  <div class=\"rect\"></div>\n</div>\n<style>\n  body {\n    background: #085328;\n  }\n  .so {\n    position: absolute;\n    left: 130px;\n    width: 140px;\n    height: 30px;\n    border-radius: 50px;\n    background: #0a9949;\n  }\n  .sone {\n    top: 70px;\n  }\n  .stwo {\n    bottom: 70px;\n  }\n  .bo {\n    position: absolute;\n    left: 110px;\n    width: 180px;\n    height: 30px;\n    border-radius: 50px;\n    background: #49c85b;\n  }\n  .one {\n    top: 50px;\n  }\n  .two {\n    bottom: 50px;\n  }\n  .rect {\n    position: absolute;\n    top: 50px;\n    left: 180px;\n    width: 40px;\n    height: 170px;\n    background: #49c85b;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/12/screenshots/css-image.png",
+  "human_len": 741,
+  "human_min_len": 521
+ },
+ {
+  "id": "om-20240314",
+  "title": "Daily target 2024-03-14",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/14",
+  "license": "MIT",
+  "human_code": "<div class=\"rectangle\">\n  <div class=\"trapezium\"></div>\n  <div class=\"trapezium\"></div>\n</div>\n<style>\n  body {\n    background-color: #7e2926;\n  }\n  .rectangle {\n    position: absolute;\n    top: 0px;\n    right: 125px;\n    width: 150px;\n    height: 300px;\n    background: #feff92;\n  }\n  .trapezium {\n    position: absolute;\n    top: 0px;\n    width: 75px;\n    height: 300px;\n    clip-path: polygon(0 0, 100% 33.3%, 100% 66.6%, 0% 100%);\n  }\n  .trapezium:nth-of-type(1) {\n    left: 0px;\n    background-color: #d2934b;\n  }\n  .trapezium:nth-of-type(2) {\n    right: 0px;\n    transform: rotate(180deg);\n    background-color: #deb365;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/14/screenshots/css-image.png",
+  "human_len": 639,
+  "human_min_len": 485
+ },
+ {
+  "id": "om-20240315",
+  "title": "Daily target 2024-03-15",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/15",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"trapezium\"></div>\n  <div class=\"oval-top\"></div>\n  <div class=\"oval-bottom\"></div>\n</div>\n<style>\n  body {\n    background-color: #ffffcd;\n  }\n  .trapezium {\n    position: absolute;\n    top: 50px;\n    left: 120px;\n    width: 160px;\n    height: 160px;\n    clip-path: polygon(28.5% 0, 71.5% 0%, 100% 100%, 0 100%);\n    background: #e78320;\n  }\n  .oval-top {\n    position: absolute;\n    top: 210px;\n    left: 100px;\n    width: 200px;\n    height: 20px;\n    border-radius: 75px;\n    background: #edaf38;\n  }\n  .oval-bottom {\n    position: absolute;\n    top: 230px;\n    left: 80px;\n    width: 240px;\n    height: 20px;\n    border-radius: 75px;\n    background: #f1d31d;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/15/screenshots/css-image.png",
+  "human_len": 693,
+  "human_min_len": 514
+ },
+ {
+  "id": "om-20240317",
+  "title": "Daily target 2024-03-17",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/17",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"outer-oval\"></div>\n  <div class=\"middle-oval\"></div>\n  <div class=\"inner-oval\"></div>\n  <div class=\"rectangle-top\"></div>\n  <div class=\"rectangle-bottom\"></div>\n</div>\n<style>\n  body {\n    background-color: #d5edfc;\n  }\n  .outer-oval {\n    position: absolute;\n    top: 75px;\n    left: 50px;\n    width: 300px;\n    height: 150px;\n    border-radius: 75px;\n    background: #277292;\n  }\n  .middle-oval {\n    position: absolute;\n    top: 100px;\n    left: 75px;\n    width: 250px;\n    height: 100px;\n    border-radius: 75px;\n    background: #7791b6;\n  }\n  .inner-oval {\n    position: absolute;\n    top: 125px;\n    left: 100px;\n    width: 200px;\n    height: 50px;\n    border-radius: 75px;\n    background: #d5edfc;\n  }\n  .rectangle-top {\n    position: absolute;\n    top: 50px;\n    left: 150px;\n    width: 100px;\n    height: 75px;\n    background: #95b6e4;\n  }\n  .rectangle-bottom {\n    position: absolute;\n    bottom: 50px;\n    left: 150px;\n    width: 100px;\n    height: 75px;\n    background: #95b6e4;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/17/screenshots/css-image.png",
+  "human_len": 1023,
+  "human_min_len": 753
+ },
+ {
+  "id": "om-20240318",
+  "title": "Daily target 2024-03-18",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/18",
+  "license": "MIT",
+  "human_code": "<div class=\"container\">\n  <div class=\"trapezium\"></div>\n  <div class=\"square\"></div>\n  <div class=\"rectangle\"></div>\n</div>\n<style>\n  body {\n    background-color: #c31c1d;\n  }\n  .trapezium {\n    position: absolute;\n    top: 70px;\n    left: 80px;\n    width: 240px;\n    height: 160px;\n    background: #660301;\n    clip-path: polygon(25% 0, 75% 0%, 100% 100%, 0 100%);\n  }\n  .square {\n    position: absolute;\n    top: 150px;\n    left: 180px;\n    width: 40px;\n    height: 40px;\n    background-color: #c31c1d;\n  }\n  .rectangle {\n    position: absolute;\n    top: 190px;\n    left: 140px;\n    width: 120px;\n    height: 40px;\n    background-color: #c31c1d;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/18/screenshots/css-image.png",
+  "human_len": 660,
+  "human_min_len": 493
+ },
+ {
+  "id": "om-20240319",
+  "title": "Daily target 2024-03-19",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/19",
+  "license": "MIT",
+  "human_code": "<body>\n  <div class=\"container\">\n    <div class=\"left-vertical-top-bar\"></div>\n    <div class=\"left-vertical-middle-bar\"></div>\n    <div class=\"left-vertical-bottom-bar\"></div>\n    <div class=\"left-vertical-behind-bar\"></div>\n    <div class=\"left-fat-bar\"></div>\n    <div class=\"left-long-bar\"></div>\n    <div class=\"right-vertical-top-bar\"></div>\n    <div class=\"right-vertical-middle-bar\"></div>\n    <div class=\"right-vertical-bottom-bar\"></div>\n    <div class=\"right-vertical-behind-bar\"></div>\n    <div class=\"right-fat-bar\"></div>\n    <div class=\"right-long-bar\"></div>\n  </div>\n</body>\n<style>\n  body {\n    background-color: #e0dbf0;\n  }\n  .container {\n    position: relative;\n    width: 400px;\n    height: 300px;\n  }\n  .left-vertical-middle-bar {\n    position: absolute;\n    top: 80px;\n    left: 100px;\n    width: 25px;\n    height: 140px;\n    background: #857da1;\n  }\n  .left-vertical-behind-bar {\n    position: absolute;\n    top: 60px;\n    left: 110px;\n    width: 5px;\n    height: 180px;\n    background: #857da1;\n  }\n  .left-vertical-top-bar {\n    position: absolute;\n    top: 60px;\n    left: 100px;\n    width: 25px;\n    height: 10px;\n    background: #857da1;\n  }\n  .left-vertical-bottom-bar {\n    position: absolute;\n    bottom: 60px;\n    left: 100px;\n    width: 25px;\n    height: 10px;\n    background: #857da1;\n  }\n  .right-vertical-middle-bar {\n    position: absolute;\n    top: 80px;\n    right: 100px;\n    width: 25px;\n    height: 140px;\n    background: #857da1;\n  }\n  .right-vertical-behind-bar {\n    position: absolute;\n    top: 60px;\n    right: 110px;\n    width: 5px;\n    height: 180px;\n    background: #857da1;\n  }\n  .right-vertical-top-bar {\n    position: absolute;\n    top: 60px;\n    right: 100px;\n    width: 25px;\n    height: 10px;\n    background: #857da1;\n  }\n  .right-vertical-bottom-bar {\n    position: absolute;\n    bottom: 60px;\n    right: 100px;\n    width: 25px;\n    height: 10px;\n    background: #857da1;\n  }\n  .left-fat-bar {\n    position: absolute;\n    top: 100px;\n    left: 125px;\n    width: 50px;\n    height: 100px;\n    background: #bbb2db;\n  }\n  .right-fat-bar {\n    position: absolute;\n    top: 100px;\n    right: 125px;\n    width: 50px;\n    height: 100px;\n    background: #bbb2db;\n  }\n  .left-long-bar {\n    position: absolute;\n    top: 100px;\n    left: 185px;\n    width: 10px;\n    height: 100px;\n    background: #bbb2db;\n  }\n  .right-long-bar {\n    position: absolute;\n    top: 100px;\n    right: 185px;\n    width: 10px;\n    height: 100px;\n    background: #bbb2db;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/19/screenshots/css-image.png",
+  "human_len": 2508,
+  "human_min_len": 1871
+ },
+ {
+  "id": "om-20240320",
+  "title": "Daily target 2024-03-20",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/20",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"big-semi\"></div>\n  <div class=\"circle\"></div>\n  <div class=\"small-semi\"></div>\n</div>\n<style>\n  body {\n    background-color: #42230c;\n  }\n  .big-semi {\n    position: absolute;\n    top: 70px;\n    left: 75px;\n    width: 250px;\n    height: 160px;\n    border-top-right-radius: 124px;\n    border-top-left-radius: 124px;\n    border-bottom-left-radius: 40px;\n    border-bottom-right-radius: 40px;\n    background: #8b673a;\n  }\n  .circle {\n    position: absolute;\n    top: 90px;\n    left: 160px;\n    width: 80px;\n    height: 80px;\n    border-radius: 50%;\n    background: #42230c;\n  }\n  .small-semi {\n    position: absolute;\n    top: 190px;\n    left: 160px;\n    width: 80px;\n    height: 80px;\n    border-radius: 50%;\n    background: #42230c;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/20/screenshots/css-image.png",
+  "human_len": 764,
+  "human_min_len": 570
+ },
+ {
+  "id": "om-20240321",
+  "title": "Daily target 2024-03-21",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/21",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"top-trapezium\"></div>\n  <div class=\"bottom-trapezium\"></div>\n  <div class=\"rectangle\"></div>\n  <div class=\"rectangle\"></div>\n</div>\n<style>\n  body {\n    background-color: #301e53;\n  }\n  .top-trapezium {\n    position: absolute;\n    top: 75px;\n    left: 50px;\n    width: 300px;\n    height: 40px;\n    clip-path: polygon(0 0, 100% 0, 86.7% 100%, 13.3% 100%);\n    background: #766d94;\n  }\n  .rectangle {\n    position: absolute;\n    top: 125px;\n    width: 70px;\n    height: 50px;\n    background: #a6a0be;\n  }\n  .rectangle:nth-of-type(3) {\n    left: 75px;\n  }\n  .rectangle:nth-of-type(4) {\n    right: 75px;\n  }\n  .bottom-trapezium {\n    position: absolute;\n    top: 125px;\n    left: 155px;\n    width: 90px;\n    height: 100px;\n    clip-path: polygon(0 0, 100% 0%, 100% 55%, 50% 100%, 0 55%);\n    background: #a6a0be;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/21/screenshots/css-image.png",
+  "human_len": 841,
+  "human_min_len": 639
+ },
+ {
+  "id": "om-20240322",
+  "title": "Daily target 2024-03-22",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/22",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"b\"></div>\n  <div class=\"hc r\"></div>\n  <div class=\"hc o\"></div>\n  <div class=\"d x\"></div>\n  <div class=\"d y\"></div>\n  <div class=\"d z\"></div>\n  <div class=\"d t\"></div>\n  <div class=\"d u\"></div>\n  <div class=\"d v\"></div>\n</div>\n<style>\n  body {\n    background: #fbd6c1;\n  }\n  .b {\n    position: absolute;\n    top: 60px;\n    left: 170px;\n    width: 60px;\n    height: 60px;\n    border-radius: 50px;\n    background: #000000;\n  }\n  .hc {\n    position: absolute;\n    width: 75px;\n    height: 150px;\n    border-top-left-radius: 80px;\n    border-bottom-left-radius: 80px;\n  }\n  .r {\n    top: 90px;\n    left: 125px;\n    background: #d62022;\n  }\n  .o {\n    top: 90px;\n    right: 125px;\n    transform: rotate(180deg);\n    background: #f16b4a;\n  }\n\n  .d {\n    position: absolute;\n    width: 20px;\n    height: 20px;\n    border-radius: 50px;\n    background: #000000;\n  }\n  .x {\n    top: 125px;\n    left: 150px;\n  }\n  .y {\n    top: 155px;\n    left: 165px;\n  }\n  .z {\n    top: 185px;\n    left: 165px;\n  }\n  .t {\n    top: 125px;\n    right: 150px;\n  }\n  .u {\n    top: 155px;\n    right: 165px;\n  }\n  .v {\n    top: 185px;\n    right: 165px;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/22/screenshots/css-image.png",
+  "human_len": 1152,
+  "human_min_len": 803
+ },
+ {
+  "id": "om-20240323",
+  "title": "Daily target 2024-03-23",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/23",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"mr\"></div>\n  <div class=\"sr lr\"></div>\n  <div class=\"sr rr\"></div>\n  <div class=\"rs s\"></div>\n  <div class=\"ls s\"></div>\n  <div class=\"brs bs\"></div>\n  <div class=\"bls bs\"></div>\n</div>\n<style>\n  body {\n    background: #5f133f;\n  }\n  .mr {\n    position: absolute;\n    top: 90px;\n    left: 150px;\n    width: 100px;\n    height: 120px;\n    background: #b04183;\n  }\n\n  .sr {\n    position: absolute;\n    top: 110px;\n    width: 50px;\n    height: 80px;\n    background: #b04183;\n  }\n  .lr {\n    left: 80px;\n  }\n\n  .rr {\n    right: 80px;\n  }\n\n  .bs {\n    position: absolute;\n    top: 70px;\n    width: 20px;\n    height: 160px;\n    border-radius: 20px;\n    background: #f7bed9;\n  }\n  .bls {\n    left: 130px;\n  }\n  .brs {\n    right: 130px;\n  }\n  .s {\n    position: absolute;\n    top: 100px;\n    width: 10px;\n    height: 100px;\n    border-radius: 20px;\n    background: #f7bed9;\n  }\n  .ls {\n    left: 70px;\n  }\n  .rs {\n    right: 70px;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/23/screenshots/css-image.png",
+  "human_len": 954,
+  "human_min_len": 659
+ },
+ {
+  "id": "om-20240324",
+  "title": "Daily target 2024-03-24",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/24",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"t\"></div>\n  <div class=\"bc\"></div>\n  <div class=\"sc\"></div>\n  <div class=\"l\"></div>\n</div>\n<style>\n  body {\n    background: #6c1715;\n  }\n  .t {\n    position: absolute;\n    top: 180px;\n    left: 125px;\n    width: 150px;\n    height: 80px;\n    clip-path: polygon(50% 100%, 0 0, 100% 0);\n    background: #c8393a;\n  }\n  .bc {\n    position: absolute;\n    top: 40px;\n    left: 150px;\n    width: 100px;\n    height: 100px;\n    border-radius: 50%;\n    background: #c8393a;\n  }\n  .sc {\n    position: absolute;\n    top: 60px;\n    left: 170px;\n    width: 60px;\n    height: 60px;\n    border-radius: 50%;\n    background: #6c1715;\n  }\n  .l {\n    position: absolute;\n    top: 130px;\n    left: 190px;\n    width: 20px;\n    height: 60px;\n    background: #c8393a;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/24/screenshots/css-image.png",
+  "human_len": 775,
+  "human_min_len": 550
+ },
+ {
+  "id": "om-20240325",
+  "title": "Daily target 2024-03-25",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/25",
+  "license": "MIT",
+  "human_code": "<div class=\"t\">\n  <div class=\"s\"></div>\n  <div class=\"r\"></div>\n</div>\n<div class=\"b\">\n  <div class=\"s\"></div>\n  <div class=\"r\"></div>\n</div>\n<style>\n  body {\n    background: #05476c;\n  }\n  .b {\n    position: absolute;\n    bottom: 100px;\n    right: 80px;\n  }\n  .t {\n    position: absolute;\n    top: 100px;\n    left: 80px;\n  }\n  .s {\n    border-radius: 50px;\n    width: 100px;\n    height: 250px;\n    background: #2bbbf3;\n  }\n  .r {\n    position: absolute;\n    top: 100px;\n    width: 100px;\n    height: 50px;\n    background: #ceedff;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/25/screenshots/css-image.png",
+  "human_len": 544,
+  "human_min_len": 391
+ },
+ {
+  "id": "om-20240326",
+  "title": "Daily target 2024-03-26",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/26",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"s\"></div>\n  <div class=\"e r\"></div>\n  <div class=\"e t\"></div>\n</div>\n<style>\n  body {\n    background: #fcddeb;\n  }\n  .e {\n    position: absolute;\n    left: 130px;\n    width: 140px;\n    height: 90px;\n    clip-path: polygon(100% 0, 100% 22%, 50% 100%, 0 22%, 0 0);\n  }\n  .s {\n    position: absolute;\n    top: 60px;\n    left: 130px;\n    width: 140px;\n    height: 180px;\n    border-top-left-radius: 70px;\n    border-top-right-radius: 70px;\n    clip-path: polygon(\n      100% 0,\n      100% 34%,\n      100% 61.1%,\n      50% 100%,\n      0 61.1%,\n      0 33%,\n      0 0\n    );\n    background: linear-gradient(\n      90deg,\n      #d5007f 35.6%,\n      #f5a9cd 0 64.4%,\n      #d5007f 0\n    );\n  }\n  .t {\n    top: 130px;\n    background: #ef5ca5;\n  }\n  .r {\n    top: 150px;\n    background: #d5007f;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/26/screenshots/css-image.png",
+  "human_len": 818,
+  "human_min_len": 565
+ },
+ {
+  "id": "om-20240327",
+  "title": "Daily target 2024-03-27",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/27",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"r one\"></div>\n  <div class=\"r two\"></div>\n  <div class=\"c c1\"></div>\n  <div class=\"c c2\"></div>\n  <div class=\"c c3\"></div>\n  <div class=\"r thr\"></div>\n</div>\n<style>\n  body {\n    background: #f59426;\n  }\n  .r {\n    position: absolute;\n    top: 135px;\n    left: 125px;\n    width: 150px;\n    height: 30px;\n    background: #ffffff;\n  }\n  .one {\n    rotate: 120deg;\n  }\n  .two {\n    rotate: -120deg;\n  }\n  .c {\n    position: absolute;\n    width: 30px;\n    height: 30px;\n    border-radius: 50%;\n  }\n  .c1 {\n    top: 135px;\n    left: 60px;\n    background: #ffffff;\n  }\n  .c2 {\n    top: 135px;\n    right: 60px;\n    background: #ffffff;\n  }\n  .c3 {\n    top: 135px;\n    left: 185px;\n    scale: 2.66;\n    background: #f59426;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/27/screenshots/css-image.png",
+  "human_len": 748,
+  "human_min_len": 525
+ },
+ {
+  "id": "om-20240328",
+  "title": "Daily target 2024-03-28",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/28",
+  "license": "MIT",
+  "human_code": "<div class=\"w\">\n  <div class=\"tc\">\n    <div class=\"s a\"></div>\n    <div class=\"s b\"></div>\n    <div class=\"s c\"></div>\n    <div class=\"s d\"></div>\n    <div class=\"s e\"></div>\n  </div>\n  <div class=\"bc\">\n    <div class=\"s f\"></div>\n    <div class=\"s g\"></div>\n    <div class=\"s h\"></div>\n    <div class=\"s i\"></div>\n    <div class=\"s j\"></div>\n  </div>\n</div>\n<style>\n  body {\n    background: #611b3f;\n  }\n  .w {\n    position: absolute;\n    top: 60px;\n    left: 55px;\n    width: 290px;\n    height: 180px;\n    border-radius: 40px;\n    background: #be3184;\n  }\n  .s {\n    position: absolute;\n    width: 30px;\n    height: 50px;\n    border-radius: 20px;\n    background: #611b3f;\n  }\n  .tc {\n    position: absolute;\n    top: 30px;\n  }\n  .a {\n    left: 30px;\n  }\n  .b {\n    left: 80px;\n  }\n  .c {\n    left: 130px;\n  }\n  .d {\n    left: 180px;\n  }\n  .e {\n    left: 230px;\n  }\n  .bc {\n    position: absolute;\n    bottom: 80px;\n  }\n  .f {\n    left: 30px;\n  }\n  .g {\n    left: 80px;\n  }\n  .h {\n    left: 130px;\n  }\n  .i {\n    left: 180px;\n  }\n  .j {\n    left: 230px;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/28/screenshots/css-image.png",
+  "human_len": 1067,
+  "human_min_len": 720
+ },
+ {
+  "id": "om-20240329",
+  "title": "Daily target 2024-03-29",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/29",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"c\"></div>\n  <div class=\"p p1\"></div>\n  <div class=\"p p2\"></div>\n  <div class=\"p p3\"></div>\n  <div class=\"p p4\"></div>\n</div>\n<style>\n  body {\n    background: #a6a0be;\n  }\n  .p {\n    position: absolute;\n    width: 185px;\n    height: 135px;\n    background: #504371;\n    clip-path: polygon(100% 0, 100% 43.5%, 59% 100%, 0 100%, 0 0);\n  }\n  .p1 {\n    top: 0;\n    left: 0;\n  }\n  .p2 {\n    top: 0;\n    right: 0;\n    transform: scaleX(-1);\n  }\n  .p3 {\n    bottom: 0;\n    left: 0;\n    transform: scaleY(-1);\n  }\n  .p4 {\n    bottom: 0;\n    right: 0;\n    transform: scaleX(-1) scaleY(-1);\n  }\n  .c {\n    position: absolute;\n    top: 105px;\n    left: 155px;\n    width: 90px;\n    height: 90px;\n    background: #504371;\n    rotate: 45deg;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/29/screenshots/css-image.png",
+  "human_len": 758,
+  "human_min_len": 536
+ },
+ {
+  "id": "om-20240330",
+  "title": "Daily target 2024-03-30",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/30",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"br b1\"></div>\n  <div class=\"br b2\"></div>\n  <div class=\"sr b3\"></div>\n  <div class=\"sr b4\"></div>\n  <div class=\"sr b5\"></div>\n  <div class=\"sr b6\"></div>\n  <div class=\"sr b7\"></div>\n  <div class=\"sr b8\"></div>\n</div>\n<style>\n  body {\n    background: #dbbedf;\n  }\n  .br {\n    position: absolute;\n    width: 80px;\n    height: 90px;\n    background: #81008f;\n  }\n  .b1 {\n    bottom: 0;\n    left: 75;\n  }\n  .b2 {\n    top: 0;\n    right: 75;\n  }\n  .sr {\n    position: absolute;\n    width: 170px;\n    height: 20px;\n    background: #81008f;\n  }\n\n  .b3 {\n    top: 90;\n    left: 75;\n  }\n  .b4 {\n    top: 130;\n    left: 75;\n  }\n  .b5 {\n    top: 170;\n    left: 75;\n  }\n  .b6 {\n    top: 110;\n    right: 75;\n  }\n  .b7 {\n    top: 150;\n    right: 75;\n  }\n  .b8 {\n    top: 190;\n    right: 75;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/30/screenshots/css-image.png",
+  "human_len": 807,
+  "human_min_len": 541
+ },
+ {
+  "id": "om-20240331",
+  "title": "Daily target 2024-03-31",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/03/31",
+  "license": "MIT",
+  "human_code": "<div>\n  <div class=\"s s1\"></div>\n  <div class=\"s s2\"></div>\n  <div class=\"r r1\"></div>\n  <div class=\"r r2\"></div>\n  <div class=\"r r3\"></div>\n  <div class=\"r r4\"></div>\n</div>\n<style>\n  body {\n    background: #512b2a;\n  }\n  .s {\n    position: absolute;\n    top: 125;\n    width: 50;\n    height: 50;\n    background: #ea6b62;\n  }\n  .s1 {\n    left: 45;\n  }\n  .s2 {\n    right: 45;\n  }\n  .r {\n    position: absolute;\n    width: 40;\n    height: 180;\n    background: #ea6b62;\n  }\n  .r1 {\n    top: 60;\n    left: 135;\n  }\n  .r2 {\n    top: 60;\n    right: 135;\n  }\n  .r3 {\n    height: 130;\n    rotate: 90deg;\n    top: 40;\n    right: 180;\n  }\n  .r4 {\n    height: 130;\n    rotate: 90deg;\n    bottom: 40;\n    right: 180;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/03/31/screenshots/css-image.png",
+  "human_len": 717,
+  "human_min_len": 480
+ },
+ {
+  "id": "om-20240401",
+  "title": "Daily target 2024-04-01",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/04/01",
+  "license": "MIT",
+  "human_code": "<style>\n  * {\n    background: #0a6190;\n    + * {\n      background: #eff8fe;\n      margin: 50 55;\n      clip-path: polygon(\n        6.9%40%,\n        24.12%40%,\n        50%0,\n        75.85%40%,\n        93.12%40%,\n        100%50%,\n        93.1%60%,\n        75.85%60%,\n        50%100%,\n        24.12%60%,\n        6.9%60%,\n        0%50%\n      );\n    }\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/04/01/screenshots/css-image.png",
+  "human_len": 359,
+  "human_min_len": 196
+ },
+ {
+  "id": "om-20240402",
+  "title": "Daily target 2024-04-02",
+  "source": "OmPreetham/cssbattle: daily-targets/2024/04/02",
+  "license": "MIT",
+  "human_code": "<div class=\"c c1\"></div>\n<div class=\"c c2\"></div>\n<div class=\"c c3\"></div>\n<div class=\"c c4\"></div>\n<div class=\"c c5\"></div>\n<div class=\"c c6\"></div>\n<div class=\"c c7\"></div>\n<style>\n  body {\n    background: #90d3a6;\n  }\n  .c {\n    position: absolute;\n    width: 210px;\n    height: 30px;\n    border-radius: 30px;\n    background: #194e29;\n  }\n  .c1 {\n    top: 50;\n    left: 95;\n  }\n  .c2 {\n    bottom: 50;\n    left: 95;\n  }\n  .c3 {\n    top: 135;\n    left: -55;\n  }\n  .c4 {\n    top: 135;\n    right: -55;\n  }\n  .c5 {\n    rotate: 90deg;\n    width: 170px;\n    top: 135;\n    right: 55;\n  }\n  .c6 {\n    rotate: 90deg;\n    width: 170px;\n    top: 135;\n    right: 115;\n  }\n  .c7 {\n    rotate: 90deg;\n    width: 170px;\n    top: 135;\n    left: 55;\n  }\n</style>",
+  "official_png": "vendor/OmPreetham_cssbattle/daily-targets/2024/04/02/screenshots/css-image.png",
+  "human_len": 748,
+  "human_min_len": 512
+ }
+]
