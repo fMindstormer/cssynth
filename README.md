@@ -25,10 +25,10 @@ On a benchmark of 66 targets, rendered in Chromium and compared pixel by pixel:
 
 | | |
 |---|---|
-| Shorter than the human solution (minified) | **50 of 66** |
-| Total code length | **27,426** characters (human: 35,532) |
-| Targets at ≥ 99% pixel match | 65 of 66 (lowest 98.98%) |
-| Mean pixel match | 99.72% |
+| Shorter than the human solution (minified) | **51 of 66** |
+| Total code length | **26,739** characters (human: 35,532) |
+| Targets at ≥ 99% pixel match | 65 of 66 (lowest 98.99%) |
+| Mean pixel match | 99.74% |
 
 The human solutions are readable code from two public repositories, minified
 but not golfed. Top CSSBattle players write far shorter code, so these
@@ -177,7 +177,7 @@ slightly from the Linux build: the human solutions themselves match their
 Linux targets by 99.8% on average on macOS (99.1% at worst), which lowers
 match scores by the same amount. The generated code is the same on both. The
 committed results come from the **Benchmark** workflow, which runs everything
-on Linux (about half an hour); the trade-off table in `tradeoff.json` was
+on Linux (about ten minutes); the trade-off table in `tradeoff.json` was
 measured on macOS.
 
 ## Development
