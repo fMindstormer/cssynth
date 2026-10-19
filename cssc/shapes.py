@@ -93,8 +93,7 @@ def coverage(s: Shape, ss: int = 1):
     px_, py_ = s.pos()
     cx, cy = px_ + s.w / 2, py_ + s.h / 2
     if s.poly:
-        X, Y = np.meshgrid(xs, ys)
-        inside = _in_polygon(X, Y, s.poly)
+        inside = _in_polygon(xs, ys, s.poly)
     elif s.rot % 360:
         X, Y = np.meshgrid(xs, ys)
         t = math.radians(-s.rot)
@@ -196,18 +195,26 @@ def render_rgb(bg, palette, shapes: list[Shape], ss: int = 4) -> np.ndarray:
     return np.clip(np.rint(img), 0, 255).astype(np.uint8)
 
 
-def _in_polygon(X, Y, pts) -> np.ndarray:
-    """Even-odd point-in-polygon test, vectorized over sample points."""
-    inside = np.zeros(X.shape, dtype=bool)
-    n = len(pts)
-    for i in range(n):
-        (xa, ya), (xb, yb) = pts[i], pts[(i + 1) % n]
-        if ya == yb:
-            continue
-        crosses = (Y >= min(ya, yb)) & (Y < max(ya, yb))
-        xint = xa + (Y - ya) * (xb - xa) / (yb - ya)
-        inside ^= crosses & (X < xint)
-    return inside
+def _in_polygon(xs, ys, pts) -> np.ndarray:
+    """Even-odd point-in-polygon test on the grid of sorted sample columns xs
+    and rows ys. Each edge crossing a row toggles the samples left of the
+    crossing; counting crossings per row and column is a suffix sum."""
+    P = np.asarray(pts, dtype=float)
+    (xa, ya), (xb, yb) = P.T, np.roll(P, -1, 0).T
+    keep = ya != yb
+    xa, ya, xb, yb = xa[keep], ya[keep], xb[keep], yb[keep]
+    Y = ys[:, None]
+    crosses = (Y >= np.minimum(ya, yb)) & (Y < np.maximum(ya, yb))
+    xint = xa + (Y - ya) * (xb - xa) / (yb - ya)
+    r, e = np.nonzero(crosses)
+    idx = np.searchsorted(xs, xint[r, e], side="left")     # samples with X < xint
+    # sample c is toggled by crossings with idx > c: the row's total minus a
+    # forward running count (uint8 wraps, which keeps the parity)
+    counts = np.zeros((len(ys), len(xs) + 1), dtype=np.uint8)
+    np.add.at(counts, (r, idx), 1)
+    left = np.cumsum(counts[:, :-1], axis=1, dtype=np.uint8)
+    total = np.bincount(r, minlength=len(ys)).astype(np.uint8)[:, None]
+    return ((total - left) & 1).astype(bool)
 
 
 def bg_to_json(bg):

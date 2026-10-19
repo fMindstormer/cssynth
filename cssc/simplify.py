@@ -11,6 +11,8 @@ where rho is how many wrong pixels we accept to save one character. Moves:
   * harmonize two near-equal shapes (same size, or sizes differing by the
     same amount in both directions) so they can become box-shadows of one
     another or share CSS; the changed shape is then re-positioned
+  * drop a polygon vertex (re-fitting the rest), since the search may pick a
+    many-vertex polygon for a few pixels' gain
   * make an odd width or height even, so `padding` can size the box
 
 Each move is kept only if J goes down. Code length is measured by running the
@@ -22,7 +24,7 @@ from __future__ import annotations
 import numpy as np
 
 from .codegen import emit
-from .search import _masks, gain
+from .search import _masks, gain, hill_climb
 from .shapes import H, W, Shape, base_labels, coverage
 
 
@@ -133,6 +135,24 @@ def _nudge(sc: Scorer, shapes, i, s: Shape) -> Shape:
     return best
 
 
+def _refit(sc: Scorer, shapes, i, s: Shape) -> Shape:
+    """Hill-climb shape i against its final surroundings."""
+    below = sc.render(shapes[:i])
+    above = np.zeros((H, W), dtype=bool)
+    for t in shapes[i + 1:]:
+        above |= sc.mask(t)
+    A, B = _masks(sc.T, below, s.color, ~above)
+    return hill_climb(s, A, B, steps=(4, 2, 1))[0]
+
+
+def _fewer_vertices(s: Shape):
+    """s with one polygon vertex removed, for each vertex."""
+    if not s.poly or len(s.poly) <= 3:
+        return
+    for i in range(len(s.poly)):
+        yield Shape.polygon(s.poly[:i] + s.poly[i + 1:], s.color)
+
+
 def simplify(T, bg, palette, shapes, rho=2.0, tol=4, passes=3, log=None):
     sc = Scorer(T, bg, palette, rho)
     cur = list(shapes)
@@ -161,6 +181,21 @@ def simplify(T, bg, palette, shapes, rho=2.0, tol=4, passes=3, log=None):
                             log(f"  harmonize {cur[k]} with {cur[i]}: J {J:.1f} -> {j:.1f}")
                         cur, J, improved = trial, j, True
                         break
+        # drop polygon vertices, one at a time, re-fitting what remains
+        for i in range(len(cur)):
+            while True:
+                best = None
+                for s2 in _fewer_vertices(cur[i]):
+                    trial = cur[:i] + [_refit(sc, cur, i, s2)] + cur[i + 1:]
+                    j = sc.J(trial)
+                    if j < J - 1e-9 and (best is None or j < best[0]):
+                        best = (j, trial)
+                if best is None:
+                    break
+                if log:
+                    log(f"  drop a vertex of {cur[i]}: J {J:.1f} -> {best[0]:.1f}")
+                J, cur = best
+                improved = True
         # even sizes
         for i in range(len(cur)):
             for s2 in _even(cur[i]):

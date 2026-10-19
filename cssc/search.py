@@ -216,9 +216,9 @@ def hill_climb(s: Shape, A, B, steps=(16, 8, 4, 2, 1)) -> tuple[Shape, int]:
 # Candidates
 # --------------------------------------------------------------------------
 
-def candidates(color: int, comp: np.ndarray, x0: int, y0: int):
+def candidates(color: int, comp: np.ndarray, x0: int, y0: int, outlines=False):
     """Shapes to try for one connected region (comp is its bool mask,
-    positioned at x0, y0)."""
+    positioned at x0, y0). outlines: also polygons fitted to its outline."""
     h, w = comp.shape
     x1, y1 = x0 + w, y0 + h
     m = min(w, h)
@@ -256,6 +256,77 @@ def candidates(color: int, comp: np.ndarray, x0: int, y0: int):
         pts = hull_polygon(comp, x0, y0, k)
         if pts is not None:
             yield Shape.polygon(pts, color)
+    # polygons from the region's own outline, which may be concave and have
+    # more vertices than the hull fit (stars, arrows, notched squares)
+    if not outlines:
+        return
+    outline = trace_outline(comp)
+    if outline is not None:
+        for k in CONTOUR_KS:
+            pts = reduce_polygon(outline, k)
+            if pts is not None:
+                yield Shape.polygon([(a + x0, b + y0) for a, b in pts], color)
+
+
+CONTOUR_KS = (4, 5, 6, 8, 10, 12)
+
+
+def trace_outline(comp):
+    """The outer boundary of a region (holes filled) as a list of pixel-corner
+    vertices, clockwise on screen, with collinear points removed."""
+    filled = np.pad(ndimage.binary_fill_holes(comp), 1)
+    if filled.sum() < 3:
+        return None
+    # one directed edge per exposed pixel side, interior on the right
+    nxt = {}
+    ys, xs = np.nonzero(filled)
+    for (dy, dx), (a, b) in (((-1, 0), ((0, 0), (1, 0))), ((0, 1), ((1, 0), (1, 1))),
+                             ((1, 0), ((1, 1), (0, 1))), ((0, -1), ((0, 1), (0, 0)))):
+        sel = ~filled[ys + dy, xs + dx]
+        for x, y in zip(xs[sel] - 1, ys[sel] - 1):
+            nxt.setdefault((x + a[0], y + a[1]), []).append((x + b[0], y + b[1]))
+    # chain edges into loops; keep the one enclosing the most area
+    best, best_area = None, 0
+    while nxt:
+        start = next(iter(nxt))
+        loop, p = [start], start
+        while True:
+            outs = nxt[p]
+            q = outs.pop()
+            if not outs:
+                del nxt[p]
+            if q == start:
+                break
+            loop.append(q)
+            p = q
+            if p not in nxt:        # pinch point already consumed: give up on this loop
+                break
+        if len(loop) < 4:
+            continue
+        P = np.array(loop, dtype=float)
+        area = abs(np.dot(P[:, 0], np.roll(P[:, 1], -1)) - np.dot(P[:, 1], np.roll(P[:, 0], -1))) / 2
+        if area > best_area:
+            best, best_area = loop, area
+    if best is None:
+        return None
+    n = len(best)
+    return [best[i] for i in range(n)
+            if (best[i][0] - best[i - 1][0]) * (best[(i + 1) % n][1] - best[i][1])
+            != (best[i][1] - best[i - 1][1]) * (best[(i + 1) % n][0] - best[i][0])]
+
+
+def reduce_polygon(pts, k):
+    """Visvalingam: repeatedly drop the vertex spanning the smallest triangle
+    with its neighbors, down to k vertices."""
+    P = np.array(pts, dtype=float)
+    if len(P) < k:
+        return None
+    while len(P) > k:
+        a, c = np.roll(P, 1, 0), np.roll(P, -1, 0)
+        area = np.abs((P[:, 0] - a[:, 0]) * (c[:, 1] - a[:, 1])
+                      - (c[:, 0] - a[:, 0]) * (P[:, 1] - a[:, 1]))
+        P = np.delete(P, int(area.argmin()), 0)
+    return [tuple(p) for p in P]
 
 
 def hull_polygon(comp, x0, y0, k):
@@ -316,7 +387,7 @@ def _layers(T, bg, shapes):
 
 
 def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
-           min_gain=MIN_GAIN, per_color=3, bbox_starts=True):
+           min_gain=MIN_GAIN, per_color=3, bbox_starts=True, outlines=False):
     """Add shapes one at a time, each at whatever depth in the stack fixes the
     most pixels. Inserting below existing shapes lets the search build rings,
     eyes and other nested figures that no top-only greedy can."""
@@ -347,7 +418,7 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
                 if (ys.stop - ys.start) * (xs.stop - xs.start) < 16:
                     continue
                 comp = lab[sl] == idx
-                for cand in candidates(c, comp, xs.start, ys.start):
+                for cand in candidates(c, comp, xs.start, ys.start, outlines):
                     x0, y0, m = coverage(cand)
                     if m is None:
                         continue
@@ -495,9 +566,10 @@ def snap(T, bg, shapes, tol=0):
 
 
 def decompose(img: np.ndarray, log=None, min_gain=MIN_GAIN, per_color=3, bbox_starts=True,
-              base="flat"):
+              base="flat", outlines=False):
     """base: "flat" (a background color) or "gradient" (a fitted linear-gradient;
-    returns None when no gradient fits)."""
+    returns None when no gradient fits). outlines: propose polygons fitted to
+    region outlines (see candidates)."""
     pal, T = extract_palette(img)
     if base == "gradient":
         bg = fit_gradient(T, len(pal))
@@ -510,6 +582,6 @@ def decompose(img: np.ndarray, log=None, min_gain=MIN_GAIN, per_color=3, bbox_st
         bg = background(T)
         colors = [c for c in range(len(pal)) if c != bg] + [bg]
     shapes = greedy(T, bg, colors, log=log, min_gain=min_gain, per_color=per_color,
-                    bbox_starts=bbox_starts)
+                    bbox_starts=bbox_starts, outlines=outlines)
     shapes = refine(T, bg, shapes, log=log, min_gain=min_gain)
     return pal, bg, T, shapes
