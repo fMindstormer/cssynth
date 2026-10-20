@@ -49,3 +49,14 @@ def test_leaf_is_one_turned_shape(tmp_path):
     assert len(shapes) == 1 and shapes[0].rot and any(shapes[0].radii)
     assert info["wrong_px"] < 500           # the curved edges' antialiasing, mostly
     assert len(code) < 140
+
+
+def test_parallel_variants_give_the_same_code(tmp_path):
+    img = Image.new("RGB", (400, 300), "#62374e")
+    d = ImageDraw.Draw(img)
+    d.ellipse([100, 50, 199, 149], fill="#fdc57b")
+    d.polygon([(250, 200), (350, 200), (300, 120)], fill="#fdc57b")
+    path = tmp_path / "t.png"
+    img.save(path)
+    serial = compile_image(path, research=False)[0]
+    assert compile_image(path, research=False, jobs=3)[0] == serial

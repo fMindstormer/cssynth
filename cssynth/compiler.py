@@ -1,5 +1,7 @@
 """Compile a target image: run every search variant, simplify, keep the best."""
 
+from concurrent.futures import ProcessPoolExecutor
+
 import numpy as np
 from PIL import Image
 
@@ -30,39 +32,54 @@ VARIANTS = [((25, 80), 3, True, "flat", False), ((25,), 3, False, "flat", False)
 RHO = 0.5
 
 
-def compile_image(path, log=None, variants=VARIANTS, rho=RHO, research=True):
-    """research: re-search parts of the best result (see improve)."""
-    img = Image.open(path).convert("RGB")
+def _finish(arr, rho, pal, bg, shapes):
+    """(J, code, info) of a stack, scored against the target image."""
+    code, info = emit(pal, bg, shapes)
+    sim = render_rgb(bg, pal, shapes)
+    wrong = int((np.abs(sim.astype(int) - arr.astype(int)).max(2) > 8).sum())
+    J = len(code) + wrong / rho
+    return J, code, {**info, "wrong_px": wrong, "J": round(J, 1)}
+
+
+def _run_variant(arr, variant, rho, log=None):
+    """Search, simplify and score one variant: [(J, code, info, model), ...]."""
+    min_gains, per_color, bbox_starts, base, outlines = variant
+    out = decompose(arr, log=log, min_gains=min_gains, per_color=per_color,
+                    bbox_starts=bbox_starts, base=base, outlines=outlines)
+    if out is None:              # no gradient fits this picture
+        return []
+    pal, bg, T, stacks = out
+    runs = []
+    for min_gain, shapes in stacks.items():
+        shapes = simplify(T, bg, pal, shapes, rho=rho, log=log)
+        J, code, info = _finish(arr, rho, pal, bg, shapes)
+        runs.append((J, code, {**info, "variant": [min_gain, per_color, bbox_starts, base, outlines]},
+                     (pal, bg, T, shapes)))
+    return runs
+
+
+def compile_image(image, log=None, variants=VARIANTS, rho=RHO, research=True, jobs=1):
+    """image: a path or a PIL image. research: re-search parts of the best
+    result (see improve). jobs: processes to run the variants in (the
+    result is the same for any number)."""
+    img = (image if isinstance(image, Image.Image) else Image.open(image)).convert("RGB")
     if img.size != (400, 300):
         img = img.resize((400, 300), Image.BOX)
     arr = np.asarray(img)
 
-    def finish(pal, bg, shapes):
-        code, info = emit(pal, bg, shapes)
-        sim = render_rgb(bg, pal, shapes)
-        wrong = int((np.abs(sim.astype(int) - arr.astype(int)).max(2) > 8).sum())
-        J = len(code) + wrong / rho
-        return J, code, {**info, "wrong_px": wrong, "J": round(J, 1)}
-
-    runs = []
-    for min_gains, per_color, bbox_starts, base, outlines in variants:
-        out = decompose(arr, log=log, min_gains=min_gains, per_color=per_color,
-                        bbox_starts=bbox_starts, base=base, outlines=outlines)
-        if out is None:          # no gradient fits this picture
-            continue
-        pal, bg, T, stacks = out
-        for min_gain, shapes in stacks.items():
-            shapes = simplify(T, bg, pal, shapes, rho=rho, log=log)
-            J, code, info = finish(pal, bg, shapes)
-            variant = [min_gain, per_color, bbox_starts, base, outlines]
-            runs.append((J, code, {**info, "variant": variant}, (pal, bg, T, shapes)))
+    if jobs > 1:
+        with ProcessPoolExecutor(min(jobs, len(variants))) as ex:
+            per_variant = list(ex.map(_run_variant, *zip(*[(arr, v, rho) for v in variants])))
+    else:
+        per_variant = [_run_variant(arr, v, rho, log) for v in variants]
+    runs = [run for rs in per_variant for run in rs]
     J, code, info, (pal, bg, T, shapes) = min(runs, key=lambda r: r[0])
     if research:
         min_gain, per_color, bbox_starts, _, outlines = info["variant"]
-        better = improve(lambda sh: finish(pal, bg, sh)[0], pal, bg, T, shapes, rho, min_gain,
-                         per_color, bbox_starts, outlines, log=log)
+        better = improve(lambda sh: _finish(arr, rho, pal, bg, sh)[0], pal, bg, T, shapes, rho,
+                         min_gain, per_color, bbox_starts, outlines, log=log)
         if better is not shapes:
-            J2, code, info2 = finish(pal, bg, better)
+            J2, code, info2 = _finish(arr, rho, pal, bg, better)
             info = {**info2, "variant": info["variant"], "researched": round(J - J2, 1)}
             shapes = better
     return code, info, (pal, bg, T, shapes)
