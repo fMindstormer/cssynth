@@ -194,6 +194,32 @@ Chromium. See the [README](../README.md#results) and the
 [results page](https://fmindstormer.github.io/cssynth/) for every target and
 the generated code.
 
+## What each part buys
+
+Switching off one technique at a time and recompiling all 66 targets
+(scores from cssynth's own rasterizer; the parts overlap, so the rows don't
+add up):
+
+| Switched off | Total J | Characters | Shorter than human |
+|---|---|---|---|
+| nothing (full compiler) | 66,081 | 24,463 | 53 / 66 |
+| Insertion at any depth (shapes go on top) | 72,100 (+9.1%) | 26,456 (+1,993) | 49 / 66 |
+| Re-search of the best result | 70,549 (+6.8%) | 25,975 (+1,512) | 51 / 66 |
+| Polygons traced from outlines | 69,162 (+4.7%) | 27,492 (+3,029) | 49 / 66 |
+| Gradient backgrounds | 68,615 (+3.8%) | 25,017 (+554) | 52 / 66 |
+| Length-aware clean-up | 67,358 (+1.9%) | 26,454 (+1,991) | 50 / 66 |
+| Splitting regions that touch at corners | 67,323 (+1.9%) | 25,215 (+752) | 52 / 66 |
+| Box-shadows | 67,070 (+1.5%) | 25,470 (+1,007) | 53 / 66 |
+| Soft gradient stops | 66,739 (+1.0%) | 24,901 (+438) | 52 / 66 |
+| Per-tag rules (`<i>`, `<u>`, `<s>`) | 66,554 (+0.7%) | 24,964 (+501) | 52 / 66 |
+| Exact (CP-SAT) shadow grouping, greedy kept | 66,196 (+0.2%) | 24,576 (+113) | 53 / 66 |
+| `clip-path` reuse for copies and mirrors | 66,188 (+0.2%) | 24,698 (+235) | 52 / 66 |
+
+The two ideas that shape the search, inserting shapes at any depth and
+re-searching the result, are worth the most; so are outline polygons, which
+replace stacks of slivers. Code-generation tricks are smaller on average,
+but each decides a few targets.
+
 ## What doesn't work yet
 
 - **Search order.** Re-search fixes some greedy mistakes, but a lotus of

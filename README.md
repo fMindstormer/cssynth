@@ -41,6 +41,32 @@ target, output and generated program, are on the
 [results page](https://fmindstormer.github.io/cssynth/) (built from
 `bench/cssynth-results.html`).
 
+### What each part buys
+
+Each row recompiles all 66 targets with one technique switched off
+(`bench/ablation.py`, run by the **Ablation** workflow). Scores come from
+cssynth's own rasterizer rather than Chromium, and the parts overlap, so the
+rows don't add up.
+
+| Switched off | Total J | Characters | Shorter than human |
+|---|---|---|---|
+| nothing (full compiler) | 66,081 | 24,463 | 53 / 66 |
+| Insertion at any depth (shapes go on top) | 72,100 (+9.1%) | 26,456 (+1,993) | 49 / 66 |
+| Re-search of the best result | 70,549 (+6.8%) | 25,975 (+1,512) | 51 / 66 |
+| Polygons traced from outlines | 69,162 (+4.7%) | 27,492 (+3,029) | 49 / 66 |
+| Gradient backgrounds | 68,615 (+3.8%) | 25,017 (+554) | 52 / 66 |
+| Length-aware clean-up | 67,358 (+1.9%) | 26,454 (+1,991) | 50 / 66 |
+| Splitting regions that touch at corners | 67,323 (+1.9%) | 25,215 (+752) | 52 / 66 |
+| Box-shadows | 67,070 (+1.5%) | 25,470 (+1,007) | 53 / 66 |
+| Soft gradient stops | 66,739 (+1.0%) | 24,901 (+438) | 52 / 66 |
+| Per-tag rules (`<i>`, `<u>`, `<s>`) | 66,554 (+0.7%) | 24,964 (+501) | 52 / 66 |
+| Exact (CP-SAT) shadow grouping, greedy kept | 66,196 (+0.2%) | 24,576 (+113) | 53 / 66 |
+| `clip-path` reuse for copies and mirrors | 66,188 (+0.2%) | 24,698 (+235) | 52 / 66 |
+
+Inserting shapes below existing ones, the re-search and outline polygons
+matter most. Exact shadow grouping and `clip-path` reuse are small on
+average but decide a few targets.
+
 ## Usage
 
 ```sh
@@ -237,8 +263,11 @@ tests/
   repeat a shape, or mirrors a rounded box.
 - **More primitives.** Gradients on boxes (not only the background), borders
   (only a handful of the human solutions use them, for frames and outlined
-  shapes), `repeating-*-gradient` (only one benchmark target repeats a band
-  pattern, and its output is already half the human length), text.
+  shapes), text. Two were measured and left out: `repeating-*-gradient` (only
+  one benchmark target repeats a band pattern, and its output is already half
+  the human length) and a `radial-gradient` background for a circle (8
+  targets start with one, but `circle at …` plus soft stops costs about as
+  much as the element; at best 34 characters in total).
 - **Antialiasing.** A soft stop's linear ramp only approximates how Chromium
   smooths a rotated edge, so striped flags still carry a few hundred wrong
   pixels, and so do some rotated shapes.

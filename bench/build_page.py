@@ -18,6 +18,36 @@ def fmt(n):
     return f"{n:,}"
 
 
+ABLATION_NAMES = {
+    "no-research": "Re-search of the best result", "no-cleanup": "Length-aware clean-up",
+    "no-exact-grouping": "Exact shadow grouping (greedy kept)", "no-box-shadows": "Box-shadows",
+    "no-tag-rules": "Per-tag rules (&lt;i&gt;, &lt;u&gt;, &lt;s&gt;)",
+    "no-clip-reuse": "clip-path reuse for copies and mirrors",
+    "top-only": "Insertion at any depth", "no-corner-split": "Splitting regions that touch at corners",
+    "no-outline-polygons": "Polygons traced from outlines", "no-gradient-base": "Gradient backgrounds",
+    "no-soft-stops": "Soft gradient stops",
+}
+
+
+def ablation_table():
+    ap = BENCH / "ablation.json"
+    if not ap.exists():
+        return "<p class=note>Run the Ablation workflow to fill this table.</p>"
+    rows = json.loads(ap.read_text())
+    full = next(r for r in rows if r["config"] == "full")
+    out = ['<div class="scroll"><table class="tbl"><thead><tr><th>Switched off</th>'
+           '<th>Total J</th><th>Characters</th><th>Shorter than human</th></tr></thead><tbody>',
+           f"<tr><td>nothing (full compiler)</td><td>{fmt(full['J'])}</td><td>{fmt(full['chars'])}</td>"
+           f"<td>{full['shorter']} / {full['n']}</td></tr>"]
+    for r in sorted((r for r in rows if r is not full), key=lambda r: -r["J"]):
+        dj = f"{(r['J'] / full['J'] - 1) * 100:+.1f}%".replace("-", "\u2212")
+        dc = f"{r['chars'] - full['chars']:+,}".replace("-", "\u2212")
+        out.append(f"<tr><td>{ABLATION_NAMES[r['config']]}</td><td>{fmt(r['J'])} <span class=muted>({dj})</span></td>"
+                   f"<td>{fmt(r['chars'])} <span class=muted>({dc})</span></td><td>{r['shorter']} / {r['n']}</td></tr>")
+    out.append("</tbody></table></div>")
+    return "".join(out)
+
+
 def tradeoff_table():
     tp = BENCH / "tradeoff.json"
     if not tp.exists():
@@ -106,6 +136,7 @@ def main():
     page = page.replace("{{DATA}}", json.dumps(rows).replace("</", "<\\/"))
     page = page.replace("{{HIGHLIGHTS}}", json.dumps([r["id"] for r in hl]))
     page = page.replace("{{TRADEOFF}}", tradeoff_table())
+    page = page.replace("{{ABLATION}}", ablation_table())
     assert "{{" not in page
     out = BENCH / "cssynth-results.html"
     out.write_text(page)
@@ -298,6 +329,12 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
       </label>
     </div>
     <div class="grid" id="grid"></div>
+  </section>
+
+  <section aria-labelledby="h-abl">
+    <h2 id="h-abl">What each part buys</h2>
+    <p>Each row recompiles all {{n}} targets with one technique switched off. Scores come from the compiler's own rasterizer rather than Chromium, and the parts overlap, so the rows don't add up. Inserting shapes below existing ones and re-searching the result matter most.</p>
+    {{ABLATION}}
   </section>
 
   <section aria-labelledby="h-trade">
