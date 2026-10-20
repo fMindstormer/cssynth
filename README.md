@@ -16,8 +16,10 @@ redraw in as few characters as they can.
 <body bgcolor=c31c1d><b style="position:fixed;inset:70px 80px 70px 80px;background:#660301;clip-path:polygon(25% 0,75% 0,100% 100%,75% 100%,75% 75%,140px 75%,140px 50%,100px 50%,100px 75%,25% 75%,25% 100%,0 100%)">
 ```
 
-214 characters, pixel-perfect. The human solution it was rendered from is 493
-characters even after minifying.
+214 characters, a 99.9% pixel match. The human solution it was rendered from
+is 493 characters even after minifying.
+
+**[See all 66 targets, outputs and generated code on the results page →](https://fmindstormer.github.io/cssynth/)**
 
 ## Results
 
@@ -33,8 +35,9 @@ On a benchmark of 66 targets, rendered in Chromium and compared pixel by pixel:
 The human solutions are readable code from two public repositories, minified
 but not golfed. Top CSSBattle players write far shorter code, so these
 lengths are a baseline, not a leaderboard. The full results, with every
-target, output and generated program, are on the results page
-(`bench/cssynth-results.html`, published through GitHub Pages).
+target, output and generated program, are on the
+[results page](https://fmindstormer.github.io/cssynth/) (built from
+`bench/cssynth-results.html`).
 
 ## Usage
 

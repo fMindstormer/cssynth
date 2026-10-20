@@ -237,7 +237,7 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
     </div>
     <div class="stats" style="margin-top:1rem">
       <div><b>{{v1_ok}} &rarr; {{ok}}</b><span>targets at 99%+ match, first version &rarr; now</span></div>
-      <div><b>{{v1_exact}} &rarr; {{exact}}</b><span>pixel-perfect matches</span></div>
+      <div><b>{{v1_exact}} &rarr; {{exact}}</b><span>targets at a 100% match</span></div>
       <div><b>{{v1_total}} &rarr; {{total}}</b><span>characters across all targets</span></div>
       <div><b>&minus;{{saved_pct}}%</b><span>total code length since the first version</span></div>
     </div>
