@@ -1,0 +1,75 @@
+# Ablation study: recompile all targets with one technique switched off at a
+# time (bench/ablation.py), one job per configuration, then combine the
+# results into bench/ablation.json. Run it by hand from the Actions tab.
+name: Ablation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  targets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - run: pip install -e .
+      - run: npm ci
+        working-directory: bench
+      - run: python bench/fetch.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: targets
+          path: bench/human/ks-*.png
+
+  run:
+    needs: targets
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix:
+        config: [full, no-research, no-cleanup, no-exact-grouping, no-box-shadows, no-tag-rules,
+                 no-clip-reuse, top-only, no-corner-split, no-outline-polygons, no-gradient-base, no-soft-stops]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - run: pip install -e .
+      - uses: actions/download-artifact@v7
+        with:
+          name: targets
+          path: bench/human
+      - run: python bench/ablation.py --config ${{ matrix.config }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ablation-${{ matrix.config }}
+          path: bench/ablation/${{ matrix.config }}.json
+
+  table:
+    needs: run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - run: pip install -e .
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: ablation-*
+          path: bench/ablation
+          merge-multiple: true
+      - run: python bench/ablation.py --table | tee bench/ablation.md
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ablation
+          path: |
+            bench/ablation.json
+            bench/ablation.md
+            bench/ablation/

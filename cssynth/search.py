@@ -20,6 +20,7 @@ from .shapes import Gradient, H, Shape, W, _in_polygon, base_labels, coverage, g
 
 MIN_COLOR_PX = 40
 MIN_GAIN = 25          # pixels a shape must fix to be worth its characters
+INSERT_ANYWHERE = True  # new shapes may go at any depth (False: on top only, for comparison)
 
 
 # --------------------------------------------------------------------------
@@ -556,7 +557,8 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
             region = wrong & (T == c)
             if region.sum() < min_gain:
                 continue
-            AB = [_masks(T, belows[k], c, frees[k]) for k in range(len(belows))]
+            depths = range(len(belows)) if INSERT_ANYWHERE else [len(belows) - 1]
+            AB = [(k, *_masks(T, belows[k], c, frees[k])) for k in depths]
             lab, n = ndimage.label(region, structure=np.ones((3, 3)))
             objs = list(enumerate(ndimage.find_objects(lab), start=1))
             # The plain bounding box of the biggest regions, on top of the
@@ -579,7 +581,7 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
                     # few shapes at many depths don't fill every start
                     g, k = max(((np.count_nonzero(A[y0:y0 + hh, x0:x0 + ww] & m)
                                  - np.count_nonzero(B[y0:y0 + hh, x0:x0 + ww] & m), -k)
-                                for k, (A, B) in enumerate(AB)))
+                                for k, A, B in AB))
                     pool.setdefault(repr(cand), (g, -k, cand))
         if not pool and not forced:
             break
