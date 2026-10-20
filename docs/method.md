@@ -187,16 +187,18 @@ rather than tuned around:
 
 ## Results
 
-See the [README](../README.md#results) and the
-[results page](https://fmindstormer.github.io/cssynth/) for the numbers,
-every target, and the generated code.
+On 66 targets rendered from public human solutions, cssynth's code is
+shorter than the (minified, not golfed) human solution on 53, and 24,463
+characters in total against 35,532, with 65 of 66 at a 99%+ pixel match in
+Chromium. See the [README](../README.md#results) and the
+[results page](https://fmindstormer.github.io/cssynth/) for every target and
+the generated code.
 
 ## What doesn't work yet
 
 - **Search order.** Re-search fixes some greedy mistakes, but a lotus of
   three overlapping leaves is still drawn with polygons where a golfer uses
   three rotated leaves.
-- **More primitives:** `repeating-*-gradient`, gradients on shapes,
-  borders, text.
+- **More primitives:** gradients on shapes, borders, text.
 - **Antialiasing:** a linear ramp only approximates how Chromium smooths a
   rotated edge, so striped flags still carry a few hundred wrong pixels.

@@ -25,10 +25,10 @@ On a benchmark of 66 targets, rendered in Chromium and compared pixel by pixel:
 
 | | |
 |---|---|
-| Shorter than the human solution (minified) | **51 of 66** |
-| Total code length | **26,739** characters (human: 35,532) |
+| Shorter than the human solution (minified) | **53 of 66** |
+| Total code length | **24,463** characters (human: 35,532) |
 | Targets at ≥ 99% pixel match | 65 of 66 (lowest 98.99%) |
-| Mean pixel match | 99.74% |
+| Mean pixel match | 99.76% |
 
 The human solutions are readable code from two public repositories, minified
 but not golfed. Top CSSBattle players write far shorter code, so these
@@ -195,9 +195,9 @@ runs there. Elsewhere, point `CHROME_PATH` at Chrome for Testing 131
 slightly from the Linux build: the human solutions themselves match their
 Linux targets by 99.8% on average on macOS (99.1% at worst), which lowers
 match scores by the same amount. The generated code is the same on both. The
-committed results come from the **Benchmark** workflow, which runs everything
-on Linux (about ten minutes); the trade-off table in `tradeoff.json` was
-measured on macOS.
+committed results and the trade-off table come from the **Benchmark**
+workflow, which runs everything on Linux (about 25 minutes on GitHub's
+runners).
 
 ## Development
 
@@ -229,14 +229,16 @@ tests/
 - **Reuse.** Turned copies of a box share a rule and mirrored copies of a
   polygon share a `clip-path`, but nothing yet uses `::before`/`::after` to
   repeat a shape, or mirrors a rounded box.
-- **More primitives.** Repeated patterns via `repeating-*-gradient`, gradients
-  on boxes (not only the background), borders (only a handful of the human
-  solutions use them, for frames and outlined shapes), text.
+- **More primitives.** Gradients on boxes (not only the background), borders
+  (only a handful of the human solutions use them, for frames and outlined
+  shapes), `repeating-*-gradient` (only one benchmark target repeats a band
+  pattern, and its output is already half the human length), text.
 - **Antialiasing.** A soft stop's linear ramp only approximates how Chromium
   smooths a rotated edge, so striped flags still carry a few hundred wrong
   pixels, and so do some rotated shapes.
-- **Speed.** A full benchmark run takes about 75 CPU-minutes (about half of
-  it re-search), most of it in hill climbs on rotated shapes and polygons.
+- **Speed.** A full benchmark run takes about 100 CPU-minutes on GitHub's
+  runners, about two thirds of it re-search (`--fast` skips it), most of it
+  in hill climbs on rotated shapes and polygons.
 
 ## License
 
