@@ -3,8 +3,8 @@ from scipy import ndimage
 
 from cssynth.search import (
     _regions,
-    _vertex_delta,
     area_sums,
+    char_cost,
     extract_palette,
     gain,
     reduce_polygon,
@@ -72,20 +72,15 @@ def test_regions_split_shapes_touching_at_a_corner():
     assert {(50, 50, 150, 150), (150, 150, 250, 250)} <= boxes
 
 
-def test_vertex_delta_matches_full_gain():
+def test_polygon_gain_matches_coverage():
     rng = np.random.default_rng(2)
     A = rng.random((300, 400)) < 0.3
     B = (rng.random((300, 400)) < 0.3) & ~A
-    for _ in range(300):
-        pts = [tuple(int(v) for v in p) for p in rng.integers(-20, 420, (rng.integers(3, 10), 2))]
-        old = Shape.polygon(pts, 1)
-        i = int(rng.integers(len(pts)))
-        moved = pts.copy()
-        moved[i] = (pts[i][0] + int(rng.integers(-16, 17)), pts[i][1] + int(rng.integers(-16, 17)))
-        new = Shape.polygon(moved, 1)
-        d = _vertex_delta(old, new, A, B)
-        if d is not None:
-            assert gain(old, A, B) + d == gain(new, A, B)
+    sums = area_sums(A, B)
+    for _ in range(1000):          # includes self-crossing and off-canvas polygons
+        pts = [tuple(int(v) for v in p) for p in rng.integers(-40, 440, (rng.integers(3, 12), 2))]
+        s = Shape.polygon(pts, 1)
+        assert gain(s, A, B, sums) == gain(s, A, B)
 
 
 def test_soften_recovers_a_subpixel_ramp():
@@ -100,3 +95,11 @@ def test_soften_recovers_a_subpixel_ramp():
         return int((np.abs(base_rgb(g, pal) - img).max(-1) > 8).sum())
 
     assert wrong(hard) > 100 and wrong(soft) == 0
+
+
+def test_char_cost_of_a_shifted_copy_is_a_shadow_entry():
+    pal = np.array([[255, 255, 255], [200, 30, 30]])
+    a = Shape(40, 40, 60, 60, 1)
+    full = char_cost(a, [], pal)
+    copy = char_cost(Shape(200, 40, 60, 60, 1), [a], pal)
+    assert copy < full // 2

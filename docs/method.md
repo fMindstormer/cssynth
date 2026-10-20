@@ -89,23 +89,41 @@ gain function is the hot loop. Two exact shortcuts:
   lie in disjoint corner blocks and each is evaluated with the same
   floating-point expression as the full rasterizer, giving bit-identical
   results.
-- **Polygon vertex moves** only change pixels near the moved vertex's two
-  edges. The even-odd test of a pixel depends only on the edges, not on
-  which other pixels are sampled, so testing the old and new polygon on that
-  window alone gives the exact change in gain.
+- **Polygons** cover, in each pixel row, the spans between pairs of sorted
+  edge crossings. With running sums along each row, the gain is two lookups
+  per span. The crossings use the same arithmetic and the same "center left
+  of the crossing" test as the rasterizer, so the covered pixels are the
+  same.
 
 Both were checked against the full rasterizer, on 20,000 random boxes and
-hundreds of random polygon moves.
+thousands of random polygon moves.
 
 ### Variants and shared searches
 
 The greedy search has a few knobs: how many pixels a shape must fix
 (`min_gain`), whether bounding boxes are always climbed, flat or gradient
-base, whether outline polygons are proposed. Eight settings run per image
-and the lowest J wins. A run with a higher `min_gain` mostly retraces the
+base, whether outline polygons are proposed, and how each step chooses
+(below). Sixteen settings run per image and the lowest J wins. A run with a higher `min_gain` mostly retraces the
 lower one and stops where nothing fixes enough pixels, so one search reports
 both: on the benchmark this gives exactly the same results as running them
 separately.
+
+### Length in the loop
+
+Picking the shape that fixes the most pixels ignores what it costs to
+write: a five-point polygon and a box that fix about as many pixels look
+the same. In the length-aware mode, each step instead picks the climbed
+shape with the best
+
+    pixels fixed / rho − estimated characters
+
+where the estimate is the shape's own element, or a box-shadow entry when it
+is a shifted copy of a shape already placed (so repeats get cheaper as the
+search goes). Every search runs in both modes. On the benchmark the
+length-aware mode wins on 53 of 66 targets, but the other mode still wins on
+some: a cheap shape now can leave more to draw later. Running both lowered
+the total J by 2.4% and the characters by 670, and cost less CPU than one
+mode had, because the length-aware searches end with fewer shapes.
 
 ### Re-search
 
@@ -115,7 +133,8 @@ everything around it is then fitted to that choice. After the variants, the
 best result goes through a small large-neighborhood search: remove one
 polygon (and forbid polygons of its color), or every shape of one color
 (with or without polygons), refill the gap with the greedy search from the
-remaining stack, refine, simplify, and keep the result if J drops.
+remaining stack (in the winning variant's mode), refine, simplify, and
+keep the result if J drops.
 
 ### Length-aware clean-up
 
@@ -224,7 +243,13 @@ but each decides a few targets.
 
 - **Search order.** Re-search fixes some greedy mistakes, but a lotus of
   three overlapping leaves is still drawn with polygons where a golfer uses
-  three rotated leaves.
+  three rotated leaves, and two circles stacked on an oval become one tall
+  rounded box plus patches (the box fixes more pixels than either circle).
+  Two fixes were tried and dropped: proposing one shape over all of a
+  color's regions (the oval under the circles), and splitting regions at
+  narrow necks (into the two circles). Together they raised the total J by
+  3% and cost 9 targets their lead over the human code: the greedy search
+  takes the big shapes early and then patches around them.
 - **More primitives:** gradients on shapes, borders, text.
 - **Antialiasing:** a linear ramp only approximates how Chromium smooths a
   rotated edge, so striped flags still carry a few hundred wrong pixels.

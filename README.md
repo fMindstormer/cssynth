@@ -23,6 +23,8 @@ is 493 characters even after minifying.
 
 **[Try it on your own picture, in your browser →](https://fmindstormer.github.io/cssynth/demo/)**
 
+**[Read how it works →](https://fmindstormer.github.io/cssynth/blog/)**
+
 ## Results
 
 On a benchmark of 66 targets, rendered in Chromium and compared pixel by pixel:
@@ -108,7 +110,7 @@ flowchart LR
     D --> E[refine]
     E --> F[simplify for length]
     F --> G[code generation]
-    G --> H{lowest J<br>of 8 variants}
+    G --> H{lowest J<br>of 16 variants}
     H --> I[re-search parts<br>of the best]
 ```
 
@@ -127,7 +129,9 @@ flowchart LR
    159.5px,#b 160.5px`) where that pays for its characters. Chromium draws
    these within 3/255 of the model.
 3. **Layered greedy search** (`search.greedy`): repeatedly add the shape that
-   fixes the most wrong pixels. Candidates come from connected regions of wrong
+   fixes the most wrong pixels, or, in the length-aware mode, the one with the
+   best pixels fixed / rho minus its estimated characters (its own element, or
+   a box-shadow entry when it is a shifted copy of a shape already placed). Candidates come from connected regions of wrong
    pixels (and, where a region only holds together at corners, from each of its
    edge-connected parts): boxes, ellipses, boxes with various corner radii, a
    45° diamond, a plain and a rounded bar along the region's principal axis, a
@@ -139,7 +143,8 @@ flowchart LR
    from there a climb peels a compound region (a cross, an I-beam) down to its
    biggest bar. The best starts (each at its best depth) are hill-climbed on
    their edges, radii, rotation or vertices; box gains come from a summed-area
-   table and a polygon vertex move only re-tests the pixels near it. A shape may be inserted **at any depth** in the stack: for each
+   table and polygon gains from per-row sums over the spans each row covers.
+   A shape may be inserted **at any depth** in the stack: for each
    depth the gain is computed against the canvas below it and only the pixels
    that the shapes above leave visible. This is what lets it build rings and
    nested figures.
@@ -181,17 +186,20 @@ flowchart LR
    - a polygon that is a copy or mirror image of another reuses its
      `clip-path` with `scale:-1 1`, `1 -1` or `-1`, so the two can share it
      in a rule (the clean-up snaps near-mirrors to exact ones).
-7. **Choose** (`compiler.VARIANTS`): eight search settings run per image, from
-   six searches (two of them also report where a higher `min_gain` would have
-   stopped); each result is simplified and scored by J, and the lowest J
-   wins. Outline polygons run as separate variants because the greedy search
-   can also take them where boxes and shadows would end up shorter.
+7. **Choose** (`compiler.VARIANTS`): six searches run per image, each in both
+   modes, by pixels and length-aware; two of them also report where a higher
+   `min_gain` would have stopped, so there are 16 results. Each is simplified
+   and scored by J, and the lowest J wins. Outline polygons run as separate
+   variants because the greedy search can also take them where boxes and
+   shadows would end up shorter. The length-aware mode wins on most targets,
+   but not all: it can pick a cheap shape that leaves more for later.
 8. **Re-search** (`improve.improve`): the greedy search commits to shapes in
    the order they first help, so an early polygon can take a region that a
    shorter primitive would have drawn. The best result is taken apart and
    refilled: one polygon at a time (refilled without polygons of its color),
    then every shape of one color (refilled as before, and without polygons).
-   Each refill is refined and simplified, and kept when J drops. `--fast`
+   Refills use the winning variant's mode. Each is refined and simplified,
+   and kept when J drops. `--fast`
    skips this step.
 
 ## Benchmark
@@ -253,11 +261,16 @@ tests/
 
 ## Open problems
 
-- **Search for structure.** The greedy still adds whatever fixes the most
-  pixels next, and the re-search only repairs its choices locally: the lotus
-  is still drawn with polygons where a golfer uses three rotated leaves.
-  Scoring partial programs by their final code length during the search
-  (e.g. beam search over J) is the next step.
+- **Search for structure.** The greedy weighs each shape's length now, but
+  still one shape at a time, and the re-search only repairs its choices
+  locally. Two light circles stacked on an oval (2024-02-27) become one tall
+  rounded box plus patches, because the box fixes more pixels than either
+  circle, and a climb from one circle grows back into the box. The lotus is
+  drawn with polygons where a golfer uses three rotated leaves. Comparing
+  whole programs (two circles plus a cheap shadow against a box plus
+  patches) is the next step. A beam over partial J is not enough on its
+  own: the two-circle branch trails for two steps before it pulls ahead,
+  and the climbs never propose a lone circle to start it.
 - **Reuse.** Turned copies of a box share a rule and mirrored copies of a
   polygon share a `clip-path`, but nothing yet uses `::before`/`::after` to
   repeat a shape, or mirrors a rounded box.

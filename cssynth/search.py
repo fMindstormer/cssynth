@@ -16,7 +16,8 @@ import math
 import numpy as np
 from scipy import ndimage
 
-from .shapes import Gradient, H, Shape, W, _in_polygon, base_labels, coverage, gradient_rgb, render_labels
+from . import codegen
+from .shapes import Gradient, H, Shape, W, base_labels, coverage, gradient_rgb, render_labels
 
 MIN_COLOR_PX = 40
 MIN_GAIN = 25          # pixels a shape must fix to be worth its characters
@@ -187,9 +188,11 @@ def soften(g: Gradient, img: np.ndarray, pal) -> Gradient:
 def gain(s: Shape, A: np.ndarray, B: np.ndarray, sums=None) -> int:
     """Pixels fixed minus pixels broken by painting s on top.
     A: target is s.color and currently wrong.  B: currently right and not s.color.
-    sums: summed-area table of A - B (see area_sums), which makes boxes cheap."""
-    if sums is not None and not s.rot % 360 and not s.ell and not s.poly:
-        return _box_gain(s, A, B, sums)
+    sums: tables of A - B (see area_sums), which make boxes and polygons cheap."""
+    if sums is not None and s.poly:
+        return _poly_gain(s, sums)
+    if sums is not None and not s.rot % 360 and not s.ell:
+        return _box_gain(s, sums)
     x0, y0, m = coverage(s)
     if m is None:
         return -10**9
@@ -198,13 +201,24 @@ def gain(s: Shape, A: np.ndarray, B: np.ndarray, sums=None) -> int:
             - np.count_nonzero(B[y0:y0 + h, x0:x0 + w] & m))
 
 
-def area_sums(A, B) -> np.ndarray:
-    S = np.zeros((A.shape[0] + 1, A.shape[1] + 1), dtype=np.int32)
-    S[1:, 1:] = (A.astype(np.int32) - B).cumsum(0).cumsum(1)
-    return S
+class Sums:
+    """Tables of D = A - B for fast gains: D itself, its summed-area table
+    (area[j, i] = sum over rows < j, columns < i) and its per-row running
+    sums (rows[j, i] = sum of row j over columns < i)."""
+
+    def __init__(self, A, B):
+        self.diff = A.astype(np.int32) - B
+        self.rows = np.zeros((H, W + 1), dtype=np.int32)
+        self.rows[:, 1:] = self.diff.cumsum(1)
+        self.area = np.zeros((H + 1, W + 1), dtype=np.int32)
+        self.area[1:] = self.rows.cumsum(0)
 
 
-def _box_gain(s: Shape, A, B, S) -> int:
+def area_sums(A, B) -> Sums:
+    return Sums(A, B)
+
+
+def _box_gain(s: Shape, S: Sums) -> int:
     """gain() for an unrotated box: the sum over its rectangle from the table,
     minus what its rounded corners cut away. Cuts lie in disjoint corner
     blocks (CSS scales radii so adjacent ones never overlap), and each is
@@ -219,7 +233,8 @@ def _box_gain(s: Shape, A, B, S) -> int:
         return -10**9                       # as gain(): nothing on the canvas
     if i1 <= i0 or j1 <= j0:
         return 0
-    g = int(S[j1, i1] - S[j0, i1] - S[j1, i0] + S[j0, i0])
+    T = S.area
+    g = int(T[j1, i1] - T[j0, i1] - T[j1, i0] + T[j0, i0])
     if not any(s.radii):
         return g
     hw, hh = s.w / 2, s.h / 2
@@ -244,8 +259,35 @@ def _box_gain(s: Shape, A, B, S) -> int:
         cu, cv = sx * (hw - rx), sy * (hh - ry)
         du, dv = (u - cu) / rx, (v - cv) / ry
         cut = ((u - cu) * sx > 0) & ((v - cv) * sy > 0) & (du * du + dv * dv > 1)
-        g -= (np.count_nonzero(A[b0:b1, a0:a1] & cut) - np.count_nonzero(B[b0:b1, a0:a1] & cut))
+        g -= int(S.diff[b0:b1, a0:a1][cut].sum())
     return g
+
+
+_CENTERS = np.arange(W) + 0.5
+
+
+def _poly_gain(s: Shape, S: Sums) -> int:
+    """gain() for a polygon from per-row sums. In each pixel row the polygon
+    covers the spans between pairs of sorted edge crossings, so the gain is a
+    few lookups per row. The crossings use the same arithmetic as
+    shapes._in_polygon and the same "center left of the crossing" test, so
+    the covered pixels, and the result, are identical."""
+    x0, y0, x1, y1 = s.bbox()
+    if x1 <= x0 or y1 <= y0 or s.w <= 0 or s.h <= 0:
+        return -10**9
+    P = np.asarray(s.poly, dtype=float)
+    (xa, ya), (xb, yb) = P.T, np.roll(P, -1, 0).T
+    keep = ya != yb
+    xa, ya, xb, yb = xa[keep], ya[keep], xb[keep], yb[keep]
+    Y = (np.arange(y0, y1) + 0.5)[:, None]
+    crosses = (Y >= np.minimum(ya, yb)) & (Y < np.maximum(ya, yb))
+    xint = np.where(crosses, xa + (Y - ya) * (xb - xa) / (yb - ya), np.inf)
+    if xint.shape[1] % 2:                # pad to whole pairs; spans of two infs are empty
+        xint = np.pad(xint, ((0, 0), (0, 1)), constant_values=np.inf)
+    xint = np.sort(xint, axis=1)
+    # each row crosses an even number of edges; pairs of them bound the spans
+    vals = np.take_along_axis(S.rows[y0:y1], np.searchsorted(_CENTERS, xint, side="left"), axis=1)
+    return int((vals[:, 1::2] - vals[:, 0::2]).sum())
 
 
 def _moves(s: Shape, step: int):
@@ -286,39 +328,14 @@ def _moves(s: Shape, step: int):
                         yield s.copy(radii=tuple(r2))
 
 
-def _vertex_delta(old: Shape, new: Shape, A, B):
-    """gain(new) - gain(old) when the polygons differ in one vertex, or None.
-    Only pixels near the vertex's two edges can change, so both polygons are
-    tested on that window alone (the even-odd test of a pixel does not depend
-    on which other pixels are sampled, so this is exact)."""
-    if not (old.poly and new.poly) or len(old.poly) != len(new.poly) or new.w <= 0 or new.h <= 0:
-        return None
-    diff = [i for i, (p, q) in enumerate(zip(old.poly, new.poly)) if p != q]
-    if len(diff) != 1:
-        return None
-    i, n = diff[0], len(old.poly)
-    pts = [old.poly[i - 1], old.poly[i], new.poly[i], old.poly[(i + 1) % n]]
-    x0 = max(0, min(p[0] for p in pts))
-    x1 = min(W, max(p[0] for p in pts) + 1)
-    y0 = max(0, min(p[1] for p in pts))
-    y1 = min(H, max(p[1] for p in pts) + 1)
-    if x1 <= x0 or y1 <= y0:
-        return 0
-    xs, ys = np.arange(x0, x1) + 0.5, np.arange(y0, y1) + 0.5
-    change = _in_polygon(xs, ys, new.poly).astype(np.int8) - _in_polygon(xs, ys, old.poly)
-    a, b = A[y0:y1, x0:x1], B[y0:y1, x0:x1]
-    return int((change * a).sum() - (change * b).sum())
-
-
 def hill_climb(s: Shape, A, B, steps=(16, 8, 4, 2, 1)) -> tuple[Shape, int]:
     sums = area_sums(A, B)
     seen = {}
 
-    def score(c, parent=None, parent_gain=None):
+    def score(c):
         k = repr(c)
         if k not in seen:
-            d = _vertex_delta(parent, c, A, B) if parent is not None and parent_gain > -10**9 else None
-            seen[k] = parent_gain + d if d is not None else gain(c, A, B, sums)
+            seen[k] = gain(c, A, B, sums)
         return seen[k]
 
     best, bg = s, score(s)
@@ -327,7 +344,7 @@ def hill_climb(s: Shape, A, B, steps=(16, 8, 4, 2, 1)) -> tuple[Shape, int]:
         while improved:
             improved = False
             for cand in _moves(best, step):
-                g = score(cand, best, bg)
+                g = score(cand)
                 if g > bg:
                     best, bg, improved = cand, g, True
     return best, bg
@@ -536,7 +553,7 @@ def _regions(region, lab, objs):
 
 def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
            min_gain=MIN_GAIN, per_color=3, bbox_starts=True, outlines=False, also=(),
-           start=(), no_polygons=()):
+           start=(), no_polygons=(), pal=None, rho=None):
     """Add shapes one at a time, each at whatever depth in the stack fixes the
     most pixels. Inserting below existing shapes lets the search build rings,
     eyes and other nested figures that no top-only greedy can.
@@ -544,7 +561,10 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
     Returns {min_gain: shapes}. also: higher thresholds to report too; a run
     with a higher threshold would mostly retrace this one and stop where no
     shape fixes that many pixels, so the stack at that point stands in for it.
-    start: a stack to add to. no_polygons: colors to draw without polygons."""
+    start: a stack to add to. no_polygons: colors to draw without polygons.
+    pal, rho: when given, each step picks the climbed shape with the best
+    pixels fixed / rho minus its estimated characters (see char_cost), so a
+    cheap shape beats a costly one that fixes about as many pixels."""
     shapes: list[Shape] = list(start)
     out = {}
     for _ in range(max_shapes):
@@ -596,7 +616,7 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
                 starts.append(item)
                 counts[c] = counts.get(c, 0) + 1
         starts += [(None, k, cand) for k, cand in forced]
-        best, best_k, best_g = None, None, min_gain - 1
+        best, best_k, best_g, best_v = None, None, min_gain - 1, -math.inf
         seen = set()
         for g0, k, cand in starts:
             key = (k, repr(cand))
@@ -605,8 +625,11 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
             seen.add(key)
             A, B = _masks(T, belows[k], cand.color, frees[k])
             s, g = hill_climb(cand, A, B)
-            if g > best_g:
-                best, best_k, best_g = s, k, g
+            if g < min_gain:
+                continue
+            v = g if rho is None else g / rho - char_cost(s, shapes, pal)
+            if v > best_v:
+                best, best_k, best_g, best_v = s, k, g, v
         if best is None:
             break
         for g in also:
@@ -617,6 +640,18 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
             log(f"  + at depth {best_k}: {best}  fixes {best_g}px, wrong now {error(T, bg, shapes)}")
     out[min_gain] = shapes
     return {g: out.get(g, shapes) for g in (min_gain, *also)}
+
+
+def char_cost(s: Shape, shapes, pal) -> int:
+    """Characters that adding s would cost, roughly: its own element, or a
+    box-shadow entry when it is a shifted copy of a shape already there."""
+    cost = codegen.element_cost(s, pal)
+    color = codegen.color_css(pal[s.color])
+    for a in shapes:
+        sh = codegen.shadow_of(a, s)
+        if sh is not None:
+            cost = min(cost, len(codegen.shadow_entry(*sh, color)) + 1)
+    return cost
 
 
 def _layer_masks(T, bg, shapes, i):
@@ -726,13 +761,14 @@ def snap(T, bg, shapes, tol=0):
 
 
 def decompose(img: np.ndarray, log=None, min_gains=(MIN_GAIN,), per_color=3, bbox_starts=True,
-              base="flat", outlines=False):
+              base="flat", outlines=False, rho=None):
     """Returns (palette, base layer, labels, {min_gain: shapes}), one stack per
     threshold in min_gains (see greedy), or None.
 
     base: "flat" (a background color) or "gradient" (a fitted linear-gradient;
     returns None when no gradient fits). outlines: propose polygons fitted to
-    region outlines (see candidates)."""
+    region outlines (see candidates). rho: weigh characters while searching
+    (see greedy)."""
     pal, T = extract_palette(img)
     if base == "gradient":
         bg = fit_gradient(T, len(pal))
@@ -747,5 +783,5 @@ def decompose(img: np.ndarray, log=None, min_gains=(MIN_GAIN,), per_color=3, bbo
         colors = [c for c in range(len(pal)) if c != bg] + [bg]
     lo, *also = sorted(min_gains)
     stacks = greedy(T, bg, colors, log=log, min_gain=lo, per_color=per_color,
-                    bbox_starts=bbox_starts, outlines=outlines, also=also)
+                    bbox_starts=bbox_starts, outlines=outlines, also=also, pal=pal, rho=rho)
     return pal, bg, T, {g: refine(T, bg, s, log=log, min_gain=g) for g, s in stacks.items()}

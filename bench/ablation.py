@@ -54,6 +54,7 @@ ABLATIONS = {
                  lambda: setattr(search, "INSERT_ANYWHERE", False)),
     "no-corner-split": ("splitting regions that touch at corners", lambda: setattr(search, "_regions", _regions_8)),
     "no-outline-polygons": ("polygons traced from outlines", None),
+    "no-length-aware": ("length-aware shape choice; by pixels only", None),
     "no-gradient-base": ("gradient backgrounds", None),
     "no-soft-stops": ("soft gradient stops", lambda: setattr(search, "soften", lambda g, img, pal: g)),
 }
@@ -65,6 +66,8 @@ def variants(name):
         v = [x for x in v if not x[4]]
     if name == "no-gradient-base":
         v = [x for x in v if x[3] != "gradient"]
+    if name == "no-length-aware":
+        v = [x for x in v if not x[5]]
     return v
 
 

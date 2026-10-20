@@ -44,8 +44,11 @@ def neighborhoods(shapes):
                    f"color {c} without polygons")
 
 
-def improve(score, pal, bg, T, shapes, rho, min_gain, per_color, bbox_starts, outlines, log=None):
-    """score(shapes) -> J of the finished code. Returns the improved stack."""
+def improve(score, pal, bg, T, shapes, rho, min_gain, per_color, bbox_starts, outlines,
+            by_length=True, log=None):
+    """score(shapes) -> J of the finished code. by_length: refill choosing
+    shapes by length as well as pixels (see search.greedy). Returns the
+    improved stack."""
     best, best_J = shapes, score(shapes)
     tried = set()
     while True:
@@ -56,7 +59,7 @@ def improve(score, pal, bg, T, shapes, rho, min_gain, per_color, bbox_starts, ou
         tried.add(key)
         stack = greedy(T, bg, _colors(pal, bg), min_gain=min_gain, per_color=per_color,
                        bbox_starts=bbox_starts, outlines=outlines, start=kept,
-                       no_polygons=no_polygons)[min_gain]
+                       no_polygons=no_polygons, pal=pal, rho=rho if by_length else None)[min_gain]
         stack = refine(T, bg, stack, min_gain=min_gain)
         if score(stack) > SCREEN * best_J:
             continue

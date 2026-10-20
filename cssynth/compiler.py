@@ -10,18 +10,22 @@ from .shapes import render_rgb
 from .simplify import simplify
 
 # Search settings tried per image: (pixels a shape must fix, starts per
-# color, always climb from bounding boxes, base layer, outline polygons).
+# color, always climb from bounding boxes, base layer, outline polygons,
+# choose shapes by length as well as pixels).
 # Higher thresholds give fewer, cheaper shapes; one search serves several
 # thresholds (see search.greedy). The bounding-box starts find bars inside
 # compound regions but can lead the greedy search down a longer path; a
 # gradient base helps striped pictures; outline polygons fit concave and
 # many-sided figures in one shape, but the greedy search can also take them
 # where boxes and shadows would be shorter, so they run as extra variants.
+# Choosing each shape by pixels fixed / rho minus its characters (see
+# search.greedy) usually gives shorter code, but not always, so both ways run.
 # Every result is simplified and scored by the same objective, and the best
 # one wins.
-VARIANTS = [((25, 80), 3, True, "flat", False), ((25,), 3, False, "flat", False),
-            ((25,), 3, True, "gradient", False), ((80,), 3, False, "gradient", False),
-            ((25, 80), 3, True, "flat", True), ((25,), 3, True, "gradient", True)]
+_SEARCHES = [((25, 80), 3, True, "flat", False), ((25,), 3, False, "flat", False),
+             ((25,), 3, True, "gradient", False), ((80,), 3, False, "gradient", False),
+             ((25, 80), 3, True, "flat", True), ((25,), 3, True, "gradient", True)]
+VARIANTS = [v + (by_length,) for by_length in (True, False) for v in _SEARCHES]
 
 # The objective everything is scored by: characters + wrong pixels / RHO.
 # RHO is how many wrong pixels we accept to save one character. At 0.5 the
@@ -41,9 +45,9 @@ def _finish(arr, rho, pal, bg, shapes):
 
 def _run_variant(arr, variant, rho, log=None):
     """Search, simplify and score one variant: [(J, code, info, model), ...]."""
-    min_gains, per_color, bbox_starts, base, outlines = variant
+    min_gains, per_color, bbox_starts, base, outlines, by_length = variant
     out = decompose(arr, log=log, min_gains=min_gains, per_color=per_color,
-                    bbox_starts=bbox_starts, base=base, outlines=outlines)
+                    bbox_starts=bbox_starts, base=base, outlines=outlines, rho=rho if by_length else None)
     if out is None:              # no gradient fits this picture
         return []
     pal, bg, T, stacks = out
@@ -51,7 +55,7 @@ def _run_variant(arr, variant, rho, log=None):
     for min_gain, shapes in stacks.items():
         shapes = simplify(T, bg, pal, shapes, rho=rho, log=log)
         J, code, info = _finish(arr, rho, pal, bg, shapes)
-        runs.append((J, code, {**info, "variant": [min_gain, per_color, bbox_starts, base, outlines]},
+        runs.append((J, code, {**info, "variant": [min_gain, per_color, bbox_starts, base, outlines, by_length]},
                      (pal, bg, T, shapes)))
     return runs
 
@@ -74,9 +78,9 @@ def compile_image(image, log=None, variants=VARIANTS, rho=RHO, research=True, jo
     runs = [run for rs in per_variant for run in rs]
     J, code, info, (pal, bg, T, shapes) = min(runs, key=lambda r: r[0])
     if research:
-        min_gain, per_color, bbox_starts, _, outlines = info["variant"]
+        min_gain, per_color, bbox_starts, _, outlines, by_length = info["variant"]
         better = improve(lambda sh: _finish(arr, rho, pal, bg, sh)[0], pal, bg, T, shapes, rho,
-                         min_gain, per_color, bbox_starts, outlines, log=log)
+                         min_gain, per_color, bbox_starts, outlines, by_length=by_length, log=log)
         if better is not shapes:
             J2, code, info2 = _finish(arr, rho, pal, bg, better)
             info = {**info2, "variant": info["variant"], "researched": round(J - J2, 1)}
