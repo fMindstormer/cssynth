@@ -31,10 +31,10 @@ On a benchmark of 66 targets, rendered in Chromium and compared pixel by pixel:
 
 | | |
 |---|---|
-| Shorter than the human solution (minified) | **53 of 66** |
-| Total code length | **24,463** characters (human: 35,532) |
+| Shorter than the human solution (minified) | **56 of 66** |
+| Total code length | **23,823** characters (human: 35,532) |
 | Targets at ≥ 99% pixel match | 65 of 66 (lowest 98.99%) |
-| Mean pixel match | 99.76% |
+| Mean pixel match | 99.78% |
 
 The human solutions are readable code from two public repositories, minified
 but not golfed. Top CSSBattle players write far shorter code, so these
@@ -52,21 +52,22 @@ rows don't add up.
 
 | Switched off | Total J | Characters | Shorter than human |
 |---|---|---|---|
-| nothing (full compiler) | 66,081 | 24,463 | 53 / 66 |
-| Insertion at any depth (shapes go on top) | 72,100 (+9.1%) | 26,456 (+1,993) | 49 / 66 |
-| Re-search of the best result | 70,549 (+6.8%) | 25,975 (+1,512) | 51 / 66 |
-| Polygons traced from outlines | 69,162 (+4.7%) | 27,492 (+3,029) | 49 / 66 |
-| Gradient backgrounds | 68,615 (+3.8%) | 25,017 (+554) | 52 / 66 |
-| Length-aware clean-up | 67,358 (+1.9%) | 26,454 (+1,991) | 50 / 66 |
-| Splitting regions that touch at corners | 67,323 (+1.9%) | 25,215 (+752) | 52 / 66 |
-| Box-shadows | 67,070 (+1.5%) | 25,470 (+1,007) | 53 / 66 |
-| Soft gradient stops | 66,739 (+1.0%) | 24,901 (+438) | 52 / 66 |
-| Per-tag rules (`<i>`, `<u>`, `<s>`) | 66,554 (+0.7%) | 24,964 (+501) | 52 / 66 |
-| Exact (CP-SAT) shadow grouping, greedy kept | 66,196 (+0.2%) | 24,576 (+113) | 53 / 66 |
-| `clip-path` reuse for copies and mirrors | 66,188 (+0.2%) | 24,698 (+235) | 52 / 66 |
+| nothing (full compiler) | 64,477 | 23,823 | 56 / 66 |
+| Re-search of the best result | 68,264 (+5.9%) | 24,958 (+1,135) | 55 / 66 |
+| Polygons traced from outlines | 68,102 (+5.6%) | 26,426 (+2,603) | 51 / 66 |
+| Insertion at any depth (shapes go on top) | 67,931 (+5.4%) | 25,079 (+1,256) | 52 / 66 |
+| Gradient backgrounds | 67,100 (+4.1%) | 24,620 (+797) | 54 / 66 |
+| Length-aware shape choice (by pixels only) | 66,097 (+2.5%) | 24,493 (+670) | 53 / 66 |
+| Length-aware clean-up | 65,528 (+1.6%) | 24,954 (+1,131) | 53 / 66 |
+| Box-shadows | 65,314 (+1.3%) | 24,660 (+837) | 56 / 66 |
+| Soft gradient stops | 65,135 (+1.0%) | 24,261 (+438) | 55 / 66 |
+| Splitting regions that touch at corners | 64,883 (+0.6%) | 24,205 (+382) | 55 / 66 |
+| Per-tag rules (`<i>`, `<u>`, `<s>`) | 64,880 (+0.6%) | 24,210 (+387) | 55 / 66 |
+| `clip-path` reuse for copies and mirrors | 64,744 (+0.4%) | 24,098 (+275) | 54 / 66 |
+| Exact (CP-SAT) shadow grouping, greedy kept | 64,601 (+0.2%) | 23,941 (+118) | 56 / 66 |
 
-Inserting shapes below existing ones, the re-search and outline polygons
-matter most. Exact shadow grouping and `clip-path` reuse are small on
+The re-search, outline polygons and inserting shapes below existing ones
+matter most; choosing shapes by length as well as pixels comes next. Exact shadow grouping and `clip-path` reuse are small on
 average but decide a few targets.
 
 ## Usage
@@ -235,7 +236,7 @@ slightly from the Linux build: the human solutions themselves match their
 Linux targets by 99.8% on average on macOS (99.1% at worst), which lowers
 match scores by the same amount. The generated code is the same on both. The
 committed results and the trade-off table come from the **Benchmark**
-workflow, which runs everything on Linux (about 25 minutes on GitHub's
+workflow, which runs everything on Linux (about 35 minutes on GitHub's
 runners).
 
 ## Development
@@ -284,9 +285,10 @@ tests/
 - **Antialiasing.** A soft stop's linear ramp only approximates how Chromium
   smooths a rotated edge, so striped flags still carry a few hundred wrong
   pixels, and so do some rotated shapes.
-- **Speed.** A full benchmark run takes about 100 CPU-minutes on GitHub's
-  runners, about two thirds of it re-search (`--fast` skips it), most of it
-  in hill climbs on rotated shapes and polygons.
+- **Speed.** A full benchmark run takes about 120 CPU-minutes on GitHub's
+  runners, most of it in hill climbs. A small network that picks which starts to climb was tried
+  (docs/method.md): it beats ranking by initial gain, but pruning still
+  cost 1.9% in J for 29% less time, so it is not used.
 
 ## License
 

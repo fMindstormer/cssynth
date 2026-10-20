@@ -122,8 +122,9 @@ is a shifted copy of a shape already placed (so repeats get cheaper as the
 search goes). Every search runs in both modes. On the benchmark the
 length-aware mode wins on 53 of 66 targets, but the other mode still wins on
 some: a cheap shape now can leave more to draw later. Running both lowered
-the total J by 2.4% and the characters by 670, and cost less CPU than one
-mode had, because the length-aware searches end with fewer shapes.
+the total J by 2.5% and the characters by 670. Twice the searches cost
+about the same time as before, because the length-aware searches end with
+fewer shapes.
 
 ### Re-search
 
@@ -207,7 +208,7 @@ rather than tuned around:
 ## Results
 
 On 66 targets rendered from public human solutions, cssynth's code is
-shorter than the (minified, not golfed) human solution on 53, and 24,463
+shorter than the (minified, not golfed) human solution on 56, and 23,823
 characters in total against 35,532, with 65 of 66 at a 99%+ pixel match in
 Chromium. See the [README](../README.md#results) and the
 [results page](https://fmindstormer.github.io/cssynth/) for every target and
@@ -221,23 +222,54 @@ add up):
 
 | Switched off | Total J | Characters | Shorter than human |
 |---|---|---|---|
-| nothing (full compiler) | 66,081 | 24,463 | 53 / 66 |
-| Insertion at any depth (shapes go on top) | 72,100 (+9.1%) | 26,456 (+1,993) | 49 / 66 |
-| Re-search of the best result | 70,549 (+6.8%) | 25,975 (+1,512) | 51 / 66 |
-| Polygons traced from outlines | 69,162 (+4.7%) | 27,492 (+3,029) | 49 / 66 |
-| Gradient backgrounds | 68,615 (+3.8%) | 25,017 (+554) | 52 / 66 |
-| Length-aware clean-up | 67,358 (+1.9%) | 26,454 (+1,991) | 50 / 66 |
-| Splitting regions that touch at corners | 67,323 (+1.9%) | 25,215 (+752) | 52 / 66 |
-| Box-shadows | 67,070 (+1.5%) | 25,470 (+1,007) | 53 / 66 |
-| Soft gradient stops | 66,739 (+1.0%) | 24,901 (+438) | 52 / 66 |
-| Per-tag rules (`<i>`, `<u>`, `<s>`) | 66,554 (+0.7%) | 24,964 (+501) | 52 / 66 |
-| Exact (CP-SAT) shadow grouping, greedy kept | 66,196 (+0.2%) | 24,576 (+113) | 53 / 66 |
-| `clip-path` reuse for copies and mirrors | 66,188 (+0.2%) | 24,698 (+235) | 52 / 66 |
+| nothing (full compiler) | 64,477 | 23,823 | 56 / 66 |
+| Re-search of the best result | 68,264 (+5.9%) | 24,958 (+1,135) | 55 / 66 |
+| Polygons traced from outlines | 68,102 (+5.6%) | 26,426 (+2,603) | 51 / 66 |
+| Insertion at any depth (shapes go on top) | 67,931 (+5.4%) | 25,079 (+1,256) | 52 / 66 |
+| Gradient backgrounds | 67,100 (+4.1%) | 24,620 (+797) | 54 / 66 |
+| Length-aware shape choice (by pixels only) | 66,097 (+2.5%) | 24,493 (+670) | 53 / 66 |
+| Length-aware clean-up | 65,528 (+1.6%) | 24,954 (+1,131) | 53 / 66 |
+| Box-shadows | 65,314 (+1.3%) | 24,660 (+837) | 56 / 66 |
+| Soft gradient stops | 65,135 (+1.0%) | 24,261 (+438) | 55 / 66 |
+| Splitting regions that touch at corners | 64,883 (+0.6%) | 24,205 (+382) | 55 / 66 |
+| Per-tag rules (`<i>`, `<u>`, `<s>`) | 64,880 (+0.6%) | 24,210 (+387) | 55 / 66 |
+| `clip-path` reuse for copies and mirrors | 64,744 (+0.4%) | 24,098 (+275) | 54 / 66 |
+| Exact (CP-SAT) shadow grouping, greedy kept | 64,601 (+0.2%) | 23,941 (+118) | 56 / 66 |
 
 The two ideas that shape the search, inserting shapes at any depth and
 re-searching the result, are worth the most; so are outline polygons, which
 replace stacks of slivers. Code-generation tricks are smaller on average,
 but each decides a few targets.
+
+## Experiment: learned start ranking
+
+Each greedy step hill-climbs about 18 starts, and the climbs are most of the
+search's time. Could a small network pick the few worth climbing? Trained on
+logs from 600 random synthetic scenes (boxes, ellipses, rounded and rotated
+shapes, polygons, shifted copies; none of the benchmark targets), a 21-input
+MLP (32 and 16 hidden units) scores each start from cheap features: its kind,
+initial gain and rank, depth, the step and the color's share of the error.
+On held-out scenes it finds the start the full search would choose more often
+than ranking by initial gain does:
+
+| starts climbed | MLP finds the chosen start | initial gain finds it |
+|---|---|---|
+| 3 | 74% | 66% |
+| 6 | 88% | 80% |
+| 10 | 97% | 96% |
+
+On the 66 benchmark targets, climbing only the top 6:
+
+| | total J | characters | CPU (local) |
+|---|---|---|---|
+| all starts | 64,474 | 23,826 | 76 min |
+| top 6 by the MLP | 65,713 (+1.9%) | 24,495 | 54 min |
+| top 6 by initial gain | 68,005 (+5.5%) | 25,427 | 52 min |
+
+The network recovers about two thirds of what naive pruning loses, but the
+full search still wins, and a missed start early in a greedy run compounds
+(keeping 8 starts happened to score worse than 6, at +3.1%). It is not part of
+the compiler; the time is better spent making each climb cheaper.
 
 ## What doesn't work yet
 

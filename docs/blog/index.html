@@ -58,7 +58,7 @@ figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 0.6rem; }
 .scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); margin-bottom: 1rem; }
 table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
 th, td { padding: 0.5rem 0.75rem; text-align: right; border-bottom: 1px solid var(--rule); white-space: nowrap; font-variant-numeric: tabular-nums; }
-th:first-child, td:first-child { text-align: left; white-space: normal; }
+th:first-child, td:first-child { text-align: left; white-space: normal; min-width: 12rem; }
 thead th { font-weight: 600; font-size: 0.8rem; color: var(--muted); }
 tbody tr:last-child td { border-bottom: 0; }
 .aside { font-size: 0.95rem; color: var(--muted); border-left: 3px solid var(--rule); padding-left: 1rem; }
@@ -101,12 +101,12 @@ footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule
 <pre>{{code:om-20240222}}</pre>
   <figcaption>The last element is a dark disc: a spread shadow (<code>0 0 0 20px</code>) draws the top ring around it, and two more dark shadows punch the holes into the two light discs below.</figcaption>
 </figure>
-<p>Switching insertion at any depth off, so that new shapes always go on top, raises the total J over the benchmark by {{abl:top-only}}, the most of any single part.</p>
+<p>Switching insertion at any depth off, so that new shapes always go on top, raises the total J over the benchmark by {{abl:top-only}}, one of the three largest effects of any single part.</p>
 
 <h2>Putting length into the search</h2>
 <p>A plain greedy search picks the shape that fixes the most pixels. That ignores what it costs to write: a polygon and a rounded box that fix about as many pixels look the same, though one is twice as long. So the search has a second mode, which picks the shape with the best</p>
 <p class="formula">pixels fixed / ρ − estimated characters</p>
-<p>The estimate is the shape's own element, or one <code>box-shadow</code> entry when the shape is a shifted copy of one already placed. Repeats get cheaper as the search goes, so it learns to prefer the copy. Neither mode is always better (a cheap shape now can leave more to draw later), so every search runs both ways and J picks the winner. On the benchmark the length-aware mode wins on {{length_wins}} of {{n}} targets. Running both cut {{length_chars}} characters in total, and it was faster too, because the length-aware searches stop with fewer shapes.</p>
+<p>The estimate is the shape's own element, or one <code>box-shadow</code> entry when the shape is a shifted copy of one already placed. Repeats get cheaper as the search goes, so it learns to prefer the copy. Neither mode is always better (a cheap shape now can leave more to draw later), so every search runs both ways and J picks the winner. On the benchmark the length-aware mode wins on {{length_wins}} of {{n}} targets. Running both cut {{length_chars}} characters in total, and twice the searches take about as long as before, because the length-aware ones stop with fewer shapes.</p>
 
 <h2>Box-shadows as a constraint problem</h2>
 <p>Box-shadows are the golfer's copy-paste: <code>box-shadow:35px 0 #fff,70px 0 #fff</code> repeats a box for a few characters per copy. But a shadow is painted just below its own element, so grouping shapes as shadows of one another changes the paint order, and shapes that overlap with different colors have to keep their order.</p>
@@ -150,7 +150,7 @@ footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule
     <div><img src="img/om-20240227-o.png" alt="cssynth's rendering of the flower" width="400" height="300"><span>cssynth, {{chars:om-20240227}} characters (human: {{human:om-20240227}})</span></div>
   </div>
 <pre>{{code:om-20240227}}</pre>
-  <figcaption>A person draws an oval and two circles. The search sees one tall rounded box that covers both circles at once, fixes more pixels than either circle, and takes it. Then it patches the purple waist the box covered with small polygons.</figcaption>
+  <figcaption>A person draws an oval and two circles. The search sees one tall rounded box that covers both circles at once, fixes more pixels than either circle, and takes it. Then it patches the purple waist the box covered with small slivers.</figcaption>
 </figure>
 <p>Hill climbing makes this hard to fix locally: start from one circle, and the climb grows it back into the tall box, because that fixes more pixels. What would find the human plan is a search that compares whole programs: two circles plus a cheap shadow against one box plus patches. That is the next step, along with gradients on shapes, borders and repeating a shape with <code>::before</code>/<code>::after</code>.</p>
 
