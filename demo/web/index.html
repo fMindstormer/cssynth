@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cssynth demo</title>
+<meta name="description" content="Compile a flat picture into short HTML/CSS for CSSBattle, in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@75..150,500;75..150,800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Two columns: the target and its settings on the left, the compiled code
+   and its live render on the right; one column on phones. */
+:root {
+  --bg: #F1F2F4; --surface: #FFFFFF; --ink: #17181C; --muted: #5D6170;
+  --rule: #D9DBE1; --accent: #62374E; --accent-ink: #FFFFFF; --good: #1F7A4D; --warn: #A2560E;
+  --display: "Anybody", "Avenir Next Condensed", "Arial Narrow", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121317; --surface: #1B1C22; --ink: #E9EAEE; --muted: #9A9EAD;
+    --rule: #2D2F38; --accent: #FDC57B; --accent-ink: #17181C; --good: #5CCB8F; --warn: #F0A55B; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121317; --surface: #1B1C22; --ink: #E9EAEE; --muted: #9A9EAD;
+  --rule: #2D2F38; --accent: #FDC57B; --accent-ink: #17181C; --good: #5CCB8F; --warn: #F0A55B; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 1060px; margin: 0 auto; padding-block: 2.5rem 4rem; display: grid; gap: 2rem; }
+header { display: grid; gap: 0.8rem; }
+.kicker { font: 500 0.78rem/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.kicker a { color: inherit; }
+h1 { margin: 0; font: 800 clamp(2.6rem, 7vw, 4.2rem)/0.95 var(--display); font-stretch: 140%; letter-spacing: -0.02em; }
+p { margin: 0; max-width: 68ch; }
+.lede { font-size: 1.1rem; color: var(--muted); }
+a { color: var(--accent); }
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+@media (max-width: 820px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 1.25rem; display: grid; gap: 1rem; min-width: 0; }
+.card h2 { margin: 0; font: 800 1.15rem/1.2 var(--display); font-stretch: 115%; }
+.frame { position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden; background: var(--rule); }
+.frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.frame iframe { position: absolute; left: 0; top: 0; width: 400px; height: 300px; border: 0; transform-origin: 0 0; background: #fff; }
+.frame .empty { position: absolute; inset: 0; display: grid; place-items: center; padding: 1rem; text-align: center; color: var(--muted); font-size: 0.9rem; }
+.drop { border: 1.5px dashed var(--rule); border-radius: 8px; padding: 0.8rem; display: grid; gap: 0.6rem; }
+.drop.over { border-color: var(--accent); }
+.drop label { display: grid; gap: 0.4rem; justify-items: start; }
+.drop input[type=file] { max-width: 100%; }
+.examples { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.examples button { padding: 0; border: 1px solid var(--rule); border-radius: 4px; background: none; cursor: pointer; line-height: 0; }
+.examples button:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.examples img { width: 80px; height: 60px; border-radius: 3px; }
+.small { font-size: 0.85rem; color: var(--muted); }
+.row { display: flex; flex-wrap: wrap; gap: 0.8rem 1.2rem; align-items: center; }
+label { display: inline-flex; gap: 0.4rem; align-items: center; }
+select, input[type=file] { font: inherit; color: inherit; }
+select { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 0.2rem 0.4rem; }
+.go { font: 600 1rem/1 var(--body); padding: 0.75rem 1.2rem; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.go:disabled { opacity: 0.45; cursor: not-allowed; }
+.status { font: 400 0.85rem/1.4 var(--mono); color: var(--muted); min-height: 1.4em; }
+.status.error { color: var(--warn); }
+.stats b { font: 800 1.6rem/1 var(--display); font-stretch: 120%; font-variant-numeric: tabular-nums; }
+.codebox { position: relative; }
+pre.code { margin: 0; padding: 0.8rem 0.9rem; background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; font: 400 0.78rem/1.5 var(--mono); white-space: pre-wrap; word-break: break-all; overflow-wrap: anywhere; max-height: 18rem; overflow: auto; }
+.copy { position: absolute; top: 0.4rem; right: 0.4rem; font: 500 0.75rem/1 var(--mono); padding: 0.35rem 0.5rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); color: var(--ink); cursor: pointer; }
+footer { font-size: 0.85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="kicker"><a href="../">cssynth</a> · runs in your browser</div>
+    <h1>Try it</h1>
+    <p class="lede">Pick a flat picture and cssynth searches for short HTML/CSS that draws it. Everything runs on your machine with <a href="https://pyodide.org">Pyodide</a>; nothing is uploaded. The browser build skips the exact box-shadow solver, so code can come out a few characters longer than the command-line tool's.</p>
+  </header>
+
+  <div class="cols">
+    <section class="card" aria-labelledby="h-target">
+      <h2 id="h-target">Target</h2>
+      <div class="frame" id="target-frame"><div class="empty">No picture yet</div></div>
+      <div class="drop" id="drop">
+        <label class="small">Your picture (400×300 works best; other sizes are resized)
+          <input type="file" id="file" accept="image/*">
+        </label>
+        <div class="small">or an example from the benchmark (<a href="https://github.com/OmPreetham/cssbattle">OmPreetham/cssbattle</a>, MIT):</div>
+        <div class="examples" id="examples"></div>
+      </div>
+      <div class="row">
+        <label><input type="checkbox" id="research"> Re-search the result (slower, shorter)</label>
+        <label>ρ <select id="rho" aria-label="Wrong pixels accepted per character saved">
+          <option>0.25</option><option selected>0.5</option><option>1</option><option>2</option><option>4</option>
+        </select></label>
+      </div>
+      <div class="row">
+        <button class="go" id="go" disabled>Compile</button>
+        <div class="status" id="status" role="status" aria-live="polite">Starting…</div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-result">
+      <h2 id="h-result">Result</h2>
+      <div class="frame" id="out-frame"><div class="empty">The generated code, rendered by your browser, appears here.</div></div>
+      <div class="stats" id="stats"></div>
+      <div class="codebox" id="codebox" hidden>
+        <pre class="code" id="code"></pre>
+        <button class="copy" id="copy" type="button">Copy</button>
+      </div>
+    </section>
+  </div>
+
+  <footer>ρ is how many wrong pixels cssynth accepts to save one character. <a href="../">Benchmark results</a> · <a href="https://github.com/fMindstormer/cssynth">Source and method</a> · Not affiliated with CSSBattle.</footer>
+</main>
+
+<script>
+const EXAMPLES = [
+  ["om-20240318.png", "A dark red arch with a stepped notch"],
+  ["om-20240225.png", "A maroon frame with stripes around a square hole"],
+  ["om-20240312.png", "A green I-beam"],
+  ["om-20240317.png", "A blue chain link"],
+];
+const $ = (id) => document.getElementById(id);
+const worker = new Worker("worker.js", { type: "module" });
+worker.onerror = (e) => setStatus("Could not start Python in this browser: " + (e.message || "unknown error"), true);
+let ready = false, busy = false, image = null, timer = null;
+
+function setStatus(text, error = false) {
+  $("status").textContent = text;
+  $("status").classList.toggle("error", error);
+}
+function update() { $("go").disabled = !ready || busy || !image; }
+
+function fitFrames() {
+  for (const f of document.querySelectorAll(".frame iframe")) {
+    f.style.transform = `scale(${f.parentElement.clientWidth / 400})`;
+  }
+}
+addEventListener("resize", fitFrames);
+
+async function choose(blob, label) {
+  image = await blob.arrayBuffer();
+  const url = URL.createObjectURL(blob);
+  $("target-frame").innerHTML = "";
+  const img = new Image();
+  img.src = url; img.alt = label;
+  $("target-frame").append(img);
+  if (ready) setStatus("Ready.");
+  update();
+}
+
+for (const [file, alt] of EXAMPLES) {
+  const b = document.createElement("button");
+  b.type = "button"; b.title = alt;
+  b.innerHTML = `<img src="examples/${file}" alt="${alt}">`;
+  b.onclick = async () => choose(await (await fetch(`examples/${file}`)).blob(), alt);
+  $("examples").append(b);
+}
+$("file").onchange = (e) => { const f = e.target.files[0]; if (f) choose(f, f.name); };
+const drop = $("drop");
+drop.ondragover = (e) => { e.preventDefault(); drop.classList.add("over"); };
+drop.ondragleave = () => drop.classList.remove("over");
+drop.ondrop = (e) => {
+  e.preventDefault(); drop.classList.remove("over");
+  const f = e.dataTransfer.files[0]; if (f) choose(f, f.name);
+};
+
+$("go").onclick = () => {
+  busy = true; update();
+  const t0 = performance.now();
+  setStatus("Compiling… 0 s");
+  timer = setInterval(() => setStatus(`Compiling… ${Math.round((performance.now() - t0) / 1000)} s`), 1000);
+  worker.postMessage({ image, research: $("research").checked, rho: parseFloat($("rho").value) });
+};
+
+$("copy").onclick = async () => {
+  try { await navigator.clipboard.writeText($("code").textContent); $("copy").textContent = "Copied"; }
+  catch { $("copy").textContent = "Select and copy"; }
+  setTimeout(() => ($("copy").textContent = "Copy"), 1500);
+};
+
+worker.onmessage = ({ data }) => {
+  if (data.type === "status") setStatus(data.text);
+  else if (data.type === "ready") { ready = true; setStatus(image ? "Ready." : "Ready. Pick a picture."); update(); }
+  else if (data.type === "error") {
+    clearInterval(timer); busy = false; update();
+    setStatus("Something went wrong: " + data.message, true);
+  } else if (data.type === "result") {
+    clearInterval(timer); busy = false; update();
+    setStatus(`Done in ${data.seconds} s.` + (data.note ? " " + data.note : ""));
+    $("stats").innerHTML = `<b>${data.chars}</b> characters · ${data.match.toFixed(2)}% pixel match · ${data.elements} elements, ${data.shadows} box-shadows`;
+    $("code").textContent = data.code;
+    $("codebox").hidden = false;
+    // a data: URL, not srcdoc: srcdoc documents never use quirks mode, and
+    // the code relies on it for unitless lengths
+    const f = document.createElement("iframe");
+    f.title = "The generated code, rendered by your browser";
+    f.src = "data:text/html;charset=utf-8," + encodeURIComponent(data.code);
+    $("out-frame").innerHTML = ""; $("out-frame").append(f);
+    fitFrames();
+  }
+};
+</script>
+</body>
+</html>

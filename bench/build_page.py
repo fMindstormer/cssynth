@@ -226,6 +226,7 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
     <div class="kicker">Prototype · image-to-CSS compiler</div>
     <h1>cssynth</h1>
     <p class="lede">Give it a target image from <b>CSSBattle</b>, the code-golf game where you redraw a 400×300 picture in as few characters of HTML and CSS as you can. It returns the code. Every result below was rendered by Chromium from the generated code and compared pixel by pixel with the target.</p>
+    <p><a href="demo/">Try it on your own picture</a>, in your browser · <a href="https://github.com/fMindstormer/cssynth">Source and method</a></p>
   </header>
 
   <section aria-label="Summary">

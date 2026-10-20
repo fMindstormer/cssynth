@@ -1,7 +1,5 @@
 """Compile a target image: run every search variant, simplify, keep the best."""
 
-from concurrent.futures import ProcessPoolExecutor
-
 import numpy as np
 from PIL import Image
 
@@ -68,6 +66,7 @@ def compile_image(image, log=None, variants=VARIANTS, rho=RHO, research=True, jo
     arr = np.asarray(img)
 
     if jobs > 1:
+        from concurrent.futures import ProcessPoolExecutor  # not in browsers (Pyodide)
         with ProcessPoolExecutor(min(jobs, len(variants))) as ex:
             per_variant = list(ex.map(_run_variant, *zip(*[(arr, v, rho) for v in variants])))
     else:

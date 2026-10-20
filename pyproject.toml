@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cssynth"
-version = "0.3.0"
+version = "0.4.0"
 description = "Compile flat images into short HTML/CSS, for CSSBattle-style code golf"
 readme = "README.md"
 license = "MIT"

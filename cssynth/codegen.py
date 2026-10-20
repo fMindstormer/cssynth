@@ -275,8 +275,12 @@ def make_groups_exact(shapes, palette, edges, time_limit=10.0):
     pair that must stay in order (i below j), t[i] < t[j] unless both are in
     the same group, which rules out cycles between groups, so a valid paint
     order always exists. Within a group the shadow list can follow any order,
-    but a shadow is always drawn below its anchor."""
-    from ortools.sat.python import cp_model
+    but a shadow is always drawn below its anchor. Returns None without
+    OR-Tools (e.g. in a browser), so the greedy grouping is used."""
+    try:
+        from ortools.sat.python import cp_model
+    except ImportError:
+        return None
 
     n = len(shapes)
     m = cp_model.CpModel()

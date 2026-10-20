@@ -21,6 +21,8 @@ is 493 characters even after minifying.
 
 **[See all 66 targets, outputs and generated code on the results page →](https://fmindstormer.github.io/cssynth/)**
 
+**[Try it on your own picture, in your browser →](https://fmindstormer.github.io/cssynth/demo/)**
+
 ## Results
 
 On a benchmark of 66 targets, rendered in Chromium and compared pixel by pixel:
@@ -219,6 +221,7 @@ cssynth/
   simplify.py   length-aware clean-up moves
   codegen.py    golfed HTML/CSS, including the CP-SAT shadow grouping
 bench/          benchmark data, runner and results page
+demo/           the in-browser demo (Pyodide) and a local Gradio app
 tests/
 ```
 

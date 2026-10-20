@@ -1,11 +1,12 @@
-# Publish the committed results page (bench/cssynth-results.html) to GitHub Pages.
-# Enable it once under Settings > Pages > Source: GitHub Actions.
+# Publish the site to GitHub Pages: the committed results page as the index,
+# and the in-browser demo under demo/ with a cssynth wheel built from this
+# commit. Enable it once under Settings > Pages > Source: GitHub Actions.
 name: Pages
 
 on:
   push:
     branches: [main]
-    paths: [bench/cssynth-results.html]
+    paths: [bench/cssynth-results.html, demo/**, cssynth/**, pyproject.toml, .github/workflows/pages.yml]
   workflow_dispatch:
 
 permissions:
@@ -25,7 +26,17 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
-      - run: mkdir site && cp bench/cssynth-results.html site/index.html
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Assemble the site
+        run: |
+          mkdir -p site/demo
+          cp bench/cssynth-results.html site/index.html
+          cp demo/web/* demo/common.py site/demo/
+          cp -r demo/examples site/demo/
+          pip wheel . --no-deps -w site/demo
+          (cd site/demo && ls *.whl > wheel.txt)
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site

@@ -13,3 +13,4 @@ bench/human/ks-*.png
 bench/node_modules/
 bench/jobs_*.json
 bench/tradeoff/
+build/
