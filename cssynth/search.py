@@ -11,6 +11,7 @@ Pipeline:
 
 from __future__ import annotations
 
+import functools
 import math
 
 import numpy as np
@@ -188,11 +189,15 @@ def soften(g: Gradient, img: np.ndarray, pal) -> Gradient:
 def gain(s: Shape, A: np.ndarray, B: np.ndarray, sums=None) -> int:
     """Pixels fixed minus pixels broken by painting s on top.
     A: target is s.color and currently wrong.  B: currently right and not s.color.
-    sums: tables of A - B (see area_sums), which make boxes and polygons cheap."""
-    if sums is not None and s.poly:
-        return _poly_gain(s, sums)
-    if sums is not None and not s.rot % 360 and not s.ell:
-        return _box_gain(s, sums)
+    sums: tables of A - B (see area_sums), which make the gain a few lookups."""
+    if sums is not None:
+        if not (s.rot % 360 or s.ell or s.poly or any(s.radii)):
+            return _rect_gain(s, sums)
+        runs = _runs((s.x, s.y, s.w, s.h, s.radii, s.ell, s.rot, s.poly))
+        if runs is None:
+            return -10**9
+        starts, ends = runs
+        return int(sums.flat[ends].sum() - sums.flat[starts].sum())
     x0, y0, m = coverage(s)
     if m is None:
         return -10**9
@@ -202,14 +207,14 @@ def gain(s: Shape, A: np.ndarray, B: np.ndarray, sums=None) -> int:
 
 
 class Sums:
-    """Tables of D = A - B for fast gains: D itself, its summed-area table
-    (area[j, i] = sum over rows < j, columns < i) and its per-row running
-    sums (rows[j, i] = sum of row j over columns < i)."""
+    """Tables of D = A - B for fast gains: its per-row running sums
+    (rows[j, i] = sum of row j over columns < i; flat is the same, raveled)
+    and its summed-area table (area[j, i] = sum over rows < j, columns < i)."""
 
     def __init__(self, A, B):
-        self.diff = A.astype(np.int32) - B
         self.rows = np.zeros((H, W + 1), dtype=np.int32)
-        self.rows[:, 1:] = self.diff.cumsum(1)
+        np.cumsum(A.astype(np.int32) - B, axis=1, out=self.rows[:, 1:])
+        self.flat = self.rows.ravel()
         self.area = np.zeros((H + 1, W + 1), dtype=np.int32)
         self.area[1:] = self.rows.cumsum(0)
 
@@ -218,11 +223,8 @@ def area_sums(A, B) -> Sums:
     return Sums(A, B)
 
 
-def _box_gain(s: Shape, S: Sums) -> int:
-    """gain() for an unrotated box: the sum over its rectangle from the table,
-    minus what its rounded corners cut away. Cuts lie in disjoint corner
-    blocks (CSS scales radii so adjacent ones never overlap), and each is
-    computed exactly as coverage() does, so the result is identical."""
+def _rect_gain(s: Shape, S: Sums) -> int:
+    """gain() for a plain box: the sum over its rectangle from the table."""
     # pixel i is inside when its center i + 0.5 lies in [x, x + w]
     i0 = max(0, math.ceil(s.x - 0.5))
     i1 = min(W, math.floor(s.x + s.w - 0.5) + 1)
@@ -234,47 +236,92 @@ def _box_gain(s: Shape, S: Sums) -> int:
     if i1 <= i0 or j1 <= j0:
         return 0
     T = S.area
-    g = int(T[j1, i1] - T[j0, i1] - T[j1, i0] + T[j0, i0])
-    if not any(s.radii):
-        return g
-    hw, hh = s.w / 2, s.h / 2
-    cx, cy = s.x + hw, s.y + hh
-    for (rx, ry), (sx, sy) in zip(s.corner_radii(), ((-1, -1), (1, -1), (1, 1), (-1, 1))):
-        if rx <= 0 or ry <= 0:
-            continue
-        # the corner block: pixels whose centers lie beyond the arc's center
-        ccx, ccy = cx + sx * (hw - rx), cy + sy * (hh - ry)
-        if sx < 0:
-            a0, a1 = i0, min(i1, max(i0, math.ceil(ccx - 0.5)))
-        else:
-            a0, a1 = max(i0, min(i1, math.floor(ccx - 0.5) + 1)), i1
-        if sy < 0:
-            b0, b1 = j0, min(j1, max(j0, math.ceil(ccy - 0.5)))
-        else:
-            b0, b1 = max(j0, min(j1, math.floor(ccy - 0.5) + 1)), j1
-        if a1 <= a0 or b1 <= b0:
-            continue
-        u = (np.arange(a0, a1) + 0.5 - cx)[None, :]
-        v = (np.arange(b0, b1) + 0.5 - cy)[:, None]
-        cu, cv = sx * (hw - rx), sy * (hh - ry)
-        du, dv = (u - cu) / rx, (v - cv) / ry
-        cut = ((u - cu) * sx > 0) & ((v - cv) * sy > 0) & (du * du + dv * dv > 1)
-        g -= int(S.diff[b0:b1, a0:a1][cut].sum())
-    return g
+    return int(T[j1, i1] - T[j0, i1] - T[j1, i0] + T[j0, i0])
 
 
-_CENTERS = np.arange(W) + 0.5
-
-
-def _poly_gain(s: Shape, S: Sums) -> int:
-    """gain() for a polygon from per-row sums. In each pixel row the polygon
-    covers the spans between pairs of sorted edge crossings, so the gain is a
-    few lookups per row. The crossings use the same arithmetic as
-    shapes._in_polygon and the same "center left of the crossing" test, so
-    the covered pixels, and the result, are identical."""
+@functools.lru_cache(maxsize=1 << 15)
+def _runs(geometry):
+    """The pixels of a shape (everything but its color) as runs along rows:
+    flat indices into Sums.flat of where each run starts and ends, so a gain
+    is two sums. The pixels are exactly coverage()'s, so gains are identical.
+    Shapes recur across a search (each step re-climbs from much the same
+    starts, against new pixels), so the runs are cached."""
+    s = Shape(*geometry[:4], 0, *geometry[4:])
     x0, y0, x1, y1 = s.bbox()
     if x1 <= x0 or y1 <= y0 or s.w <= 0 or s.h <= 0:
-        return -10**9
+        return None
+    if s.poly:
+        rows, a, b = _poly_runs(s, y0, y1)
+    elif s.rot % 360:
+        rows, a, b = _mask_runs(s)
+    else:
+        rows, a, b = _box_runs(s, x0, y0, x1, y1)
+    keep = a < b
+    flat = rows[keep] * (W + 1)
+    return (flat + a[keep]).astype(np.int32), (flat + b[keep]).astype(np.int32)
+
+
+_CENTERS = np.arange(max(W, H)) + 0.5
+_SIGNS = ((-1, -1), (1, -1), (1, 1), (-1, 1))          # tl, tr, br, bl
+
+
+def _box_runs(s: Shape, x0, y0, x1, y1):
+    """An unrotated box: one run per pixel row, from its left side to its
+    right, shortened by what the rounded corners cut away. A corner's cut in
+    a row is the pixels nearest the box's side (the test in shapes._in_box
+    grows monotonically outward), so a count per row places it. Every test
+    is coverage()'s own arithmetic."""
+    hw, hh = s.w / 2, s.h / 2
+    cx, cy = s.x + hw, s.y + hh
+    cols = x0 + np.flatnonzero(np.abs(_CENTERS[x0:x1] - cx) <= hw)
+    rows = y0 + np.flatnonzero(np.abs(_CENTERS[y0:y1] - cy) <= hh)
+    if not len(cols) or not len(rows):
+        return _CENTERS[:0], _CENTERS[:0], _CENTERS[:0]
+    i0, i1, j0, j1 = cols[0], cols[-1] + 1, rows[0], rows[-1] + 1
+    start, end = np.full(j1 - j0, i0), np.full(j1 - j0, i1)
+    for (rx, ry), (sx, sy) in zip(s.corner_radii(), _SIGNS):
+        if rx <= 0 or ry <= 0:
+            continue
+        cu, cv = sx * (hw - rx), sy * (hh - ry)
+        # the pixels this corner can cut: centers beyond the arc's center,
+        # with a pixel to spare
+        mi, mj = math.floor(cx + cu), math.floor(cy + cv)
+        a0, a1 = (i0, min(i1, mi + 1)) if sx < 0 else (max(i0, mi - 1), i1)
+        b0, b1 = (j0, min(j1, mj + 1)) if sy < 0 else (max(j0, mj - 1), j1)
+        if a1 <= a0 or b1 <= b0:
+            continue
+        ou, ov = a0 + 0.5 - cx - cu, b0 + 0.5 - cy - cv
+        if all((t * 64).is_integer() and abs(t) < 4096 for t in (cx, cy, cu, cv)):
+            # every offset from the arc's center is then exact, so the cut
+            # depends only on them, and a moved or resized box reuses it
+            n = _corner_cut(rx, ry, sx, sy, ou, ov, a1 - a0, b1 - b0)
+        else:
+            u = (np.arange(a0, a1) + 0.5 - cx)[None, :] - cu
+            v = (np.arange(b0, b1) + 0.5 - cy)[:, None] - cv
+            n = _cut(u, v, rx, ry, sx, sy)
+        if sx < 0:
+            start[b0 - j0:b1 - j0] = np.maximum(start[b0 - j0:b1 - j0], a0 + n)
+        else:
+            end[b0 - j0:b1 - j0] = np.minimum(end[b0 - j0:b1 - j0], a1 - n)
+    return np.arange(j0, j1), start, np.maximum(start, end)
+
+
+def _cut(u, v, rx, ry, sx, sy):
+    """Per row, the pixels a corner cuts: u, v are pixel centers' offsets
+    from the arc's center, computed as in shapes._in_box."""
+    du, dv = u / rx, v / ry
+    return ((u * sx > 0) & (v * sy > 0) & (du * du + dv * dv > 1)).sum(1)
+
+
+@functools.lru_cache(maxsize=1 << 14)
+def _corner_cut(rx, ry, sx, sy, ou, ov, nu, nv):
+    return _cut((np.arange(nu) + ou)[None, :], (np.arange(nv) + ov)[:, None], rx, ry, sx, sy)
+
+
+def _poly_runs(s: Shape, y0, y1):
+    """A polygon: in each pixel row it covers the spans between pairs of
+    sorted edge crossings. The crossings use shapes._in_polygon's arithmetic
+    and its "center left of the crossing" test."""
     P = np.asarray(s.poly, dtype=float)
     (xa, ya), (xb, yb) = P.T, np.roll(P, -1, 0).T
     keep = ya != yb
@@ -284,10 +331,25 @@ def _poly_gain(s: Shape, S: Sums) -> int:
     xint = np.where(crosses, xa + (Y - ya) * (xb - xa) / (yb - ya), np.inf)
     if xint.shape[1] % 2:                # pad to whole pairs; spans of two infs are empty
         xint = np.pad(xint, ((0, 0), (0, 1)), constant_values=np.inf)
-    xint = np.sort(xint, axis=1)
-    # each row crosses an even number of edges; pairs of them bound the spans
-    vals = np.take_along_axis(S.rows[y0:y1], np.searchsorted(_CENTERS, xint, side="left"), axis=1)
-    return int((vals[:, 1::2] - vals[:, 0::2]).sum())
+    idx = np.searchsorted(_CENTERS[:W], np.sort(xint, axis=1), side="left")
+    rows = np.repeat(np.arange(y0, y1), idx.shape[1] // 2)
+    return rows, idx[:, 0::2].ravel(), idx[:, 1::2].ravel()
+
+
+def _mask_runs(s: Shape):
+    """A turned box, from coverage(). It is convex, so each row is one run;
+    rows that are not (rounding at a tangent) fall back to scanning."""
+    x0, y0, m = coverage(s)
+    rows = np.flatnonzero(m.any(1))
+    m = m[rows]
+    a = m.argmax(1)
+    b = m.shape[1] - m[:, ::-1].argmax(1)
+    if (m.sum(1) == b - a).all():
+        return rows + y0, a + x0, b + x0
+    edges = np.diff(m.astype(np.int8), axis=1, prepend=0, append=0)
+    r, a = np.nonzero(edges == 1)          # row-major, so starts and ends pair up
+    _, b = np.nonzero(edges == -1)
+    return rows[r] + y0, a + x0, b + x0
 
 
 def _moves(s: Shape, step: int):
@@ -328,12 +390,14 @@ def _moves(s: Shape, step: int):
                         yield s.copy(radii=tuple(r2))
 
 
-def hill_climb(s: Shape, A, B, steps=(16, 8, 4, 2, 1)) -> tuple[Shape, int]:
-    sums = area_sums(A, B)
+def hill_climb(s: Shape, A, B, steps=(16, 8, 4, 2, 1), sums=None) -> tuple[Shape, int]:
+    """sums: area_sums(A, B), when the caller already has it."""
+    if sums is None:
+        sums = area_sums(A, B)
     seen = {}
 
     def score(c):
-        k = repr(c)
+        k = (c.x, c.y, c.w, c.h, c.radii, c.ell, c.rot, c.poly)
         if k not in seen:
             seen[k] = gain(c, A, B, sums)
         return seen[k]
@@ -617,14 +681,17 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
                 counts[c] = counts.get(c, 0) + 1
         starts += [(None, k, cand) for k, cand in forced]
         best, best_k, best_g, best_v = None, None, min_gain - 1, -math.inf
-        seen = set()
+        seen, tables = set(), {}
         for g0, k, cand in starts:
             key = (k, repr(cand))
             if key in seen:
                 continue
             seen.add(key)
-            A, B = _masks(T, belows[k], cand.color, frees[k])
-            s, g = hill_climb(cand, A, B)
+            if (k, cand.color) not in tables:
+                A, B = _masks(T, belows[k], cand.color, frees[k])
+                tables[k, cand.color] = A, B, area_sums(A, B)
+            A, B, sums = tables[k, cand.color]
+            s, g = hill_climb(cand, A, B, sums=sums)
             if g < min_gain:
                 continue
             v = g if rho is None else g / rho - char_cost(s, shapes, pal)
@@ -701,10 +768,13 @@ def merge(T, bg, shapes, min_gain=MIN_GAIN, log=None):
                 best = None
                 for depth in sorted({i, j - 1}):
                     A, B = _masks(T, belows[depth], a.color, frees[depth])
+                    sums = area_sums(A, B)
                     for n_c, cand in enumerate(candidates(a.color, comp, x0, y0)):
-                        if cand.poly or cand.rot or 3 <= n_c <= 8:
+                        if cand.poly:       # only polygons follow
+                            break
+                        if cand.rot or 3 <= n_c <= 8:
                             continue
-                        c2, g = hill_climb(cand, A, B)
+                        c2, g = hill_climb(cand, A, B, sums=sums)
                         if best is None or e_rest - g < best[0]:
                             best = (e_rest - g, rest[:depth] + [c2] + rest[depth:])
                 if best and best[0] - base < min_gain:

@@ -19,6 +19,7 @@ Golf passes:
 
 from __future__ import annotations
 
+import functools
 from collections import Counter
 
 import numpy as np
@@ -127,19 +128,28 @@ def _coord(v, size) -> str:
 
 
 def shape_props(s: Shape, palette) -> list[tuple[str, str]]:
+    p = list(_geometry_props((s.x, s.y, s.w, s.h, s.radii, s.ell, s.rot, s.poly)))
+    p.insert(4, ("background", color_css(palette[s.color])))
+    return p
+
+
+@functools.lru_cache(maxsize=1 << 14)
+def _geometry_props(geometry) -> tuple:
+    """shape_props() but the color, for a shape's (x, y, w, h, radii, ell,
+    rot, poly). The clean-up re-emits the same shapes many times."""
+    s = Shape(*geometry[:4], 0, *geometry[4:])
     x, y = s.pos()           # rotated boxes: the whole-pixel position Chromium uses
-    p = [("left", num(x)), ("top", num(y)), ("width", num(s.w)),
-         ("height", num(s.h)), ("background", color_css(palette[s.color]))]
+    p = [("left", num(x)), ("top", num(y)), ("width", num(s.w)), ("height", num(s.h))]
     if s.poly:
         pts = ",".join(f"{_coord(a - s.x, s.w)} {_coord(b - s.y, s.h)}" for a, b in s.poly)
         p.append(("clip-path", f"polygon({pts})"))
-        return p
+        return tuple(p)
     r = radius_css(s)
     if r:
         p.append(("border-radius", r))
     if s.rot % 360:
         p.append(("rotate", num(s.rot) + "deg"))
-    return p
+    return tuple(p)
 
 
 def decl_len(p, v) -> int:
@@ -479,8 +489,14 @@ def _shared(elements: list[dict]) -> dict:
     return shared
 
 
-def assemble(body_opts, elements: list[dict], tags=None) -> str:
-    """tags: the tag name of each element (default all <b>)."""
+def _inline(elements: list[dict]) -> str:
+    n = len(elements)
+    return "".join(_tag({"position": "fixed", **e}, e, i == n - 1) for i, e in enumerate(elements))
+
+
+def assemble(body_opts, elements: list[dict], tags=None, inline=None) -> str:
+    """tags: the tag name of each element (default all <b>). inline: the
+    elements' _inline(), when the caller already has it."""
     n = len(elements)
     outs = []
     if n == 0:
@@ -489,8 +505,8 @@ def assemble(body_opts, elements: list[dict], tags=None) -> str:
         return min(outs, key=len)
     tags = tags or ["b"] * n
     # Option A: inline everything.
-    inline = "".join(_tag({"position": "fixed", **e}, e, i == n - 1)
-                     for i, e in enumerate(elements))
+    if inline is None:
+        inline = _inline(elements)
     # Option B: one rule per tag with position:fixed and what its elements
     # share. The style element goes last and stays unclosed, and so does its
     # last rule.
@@ -597,8 +613,8 @@ def _code(body_opts, elements) -> str:
     if not elements:
         return assemble(body_opts, [])
     per_element = [min(size_encodings(e), key=lambda d: len(_style(d))) for e in elements]
-    return min((assemble(body_opts, els, tags) for els in (per_element, elements)
-                for tags in tag_options(els)), key=len)
+    return min((assemble(body_opts, els, tags, inline) for els in (per_element, elements)
+                for inline in [_inline(els)] for tags in tag_options(els)), key=len)
 
 
 def emit(palette, bg, shapes, grouping="best", edges=None) -> tuple[str, dict]:

@@ -83,6 +83,19 @@ def test_polygon_gain_matches_coverage():
         assert gain(s, A, B, sums) == gain(s, A, B)
 
 
+def test_turned_and_elliptic_gain_matches_coverage():
+    rng = np.random.default_rng(3)
+    A = rng.random((300, 400)) < 0.3
+    B = (rng.random((300, 400)) < 0.3) & ~A
+    sums = area_sums(A, B)
+    for _ in range(1000):
+        s = Shape(float(rng.integers(-40, 420)) + rng.choice([0, 0.5]), float(rng.integers(-40, 320)),
+                  float(rng.integers(1, 250)), float(rng.integers(1, 200)), 1,
+                  radii=tuple(int(v) * (rng.random() < 0.5) for v in rng.integers(0, 150, 4)),
+                  ell=rng.random() < 0.4, rot=float(rng.integers(-90, 90)) * (rng.random() < 0.6))
+        assert gain(s, A, B, sums) == gain(s, A, B)
+
+
 def test_soften_recovers_a_subpixel_ramp():
     # a target whose edge lies between pixels and is blended over 1.2px, as an
     # antialiased turned edge is; a hard stop at the nearest pixel can't match
