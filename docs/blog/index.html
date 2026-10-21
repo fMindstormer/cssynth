@@ -121,7 +121,7 @@ footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule
 </figure>
 
 <h2>Keeping the model honest</h2>
-<p>The search scores shapes with its own rasterizer, because it evaluates hundreds of thousands of them. Box and polygon gains come from summed-area and per-row tables, checked to give bit-identical answers to the full rasterizer. But the benchmark scores what Chromium actually draws: every output is rendered in headless Chromium and compared with the target, pixel by pixel. Where the two disagreed, the model was fixed rather than tuned around:</p>
+<p>The search scores shapes with its own rasterizer, because it evaluates hundreds of thousands of them. A gain is a few lookups in running sums along pixel rows, over the runs of pixels each shape covers, cached by shape and checked to give bit-identical answers to the full rasterizer. But the benchmark scores what Chromium actually draws: every output is rendered in headless Chromium and compared with the target, pixel by pixel. Where the two disagreed, the model was fixed rather than tuned around:</p>
 <ul>
   <li>Chromium rounds a rotated box's position to whole pixels before rotating it.</li>
   <li>A spread larger than a corner radius bends the shadow's corner, so those shapes never become shadows.</li>

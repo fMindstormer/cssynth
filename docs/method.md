@@ -80,23 +80,34 @@ corner radii, rotate, move polygon vertices, at step sizes 16 down to 1.
 
 ### Making evaluation cheap, exactly
 
-Hill climbing evaluates hundreds of thousands of candidate shapes, so the
-gain function is the hot loop. Two exact shortcuts:
+Hill climbing evaluates over a million candidate shapes on a busy target, so
+the gain function is the hot loop. A gain is a sum of (fixable − breakable)
+over the pixels a shape covers. The search keeps running sums of that along
+each pixel row and describes each shape by the runs of pixels it covers in
+each row, so a gain is two lookups per run. All of it is exact:
 
-- **Boxes** use a summed-area table of (fixable − breakable) pixels, so a
-  plain box costs four lookups. Rounded corners subtract what each corner
-  cuts away; CSS scales radii so adjacent corners never overlap, so the cuts
-  lie in disjoint corner blocks and each is evaluated with the same
-  floating-point expression as the full rasterizer, giving bit-identical
-  results.
-- **Polygons** cover, in each pixel row, the spans between pairs of sorted
-  edge crossings. With running sums along each row, the gain is two lookups
-  per span. The crossings use the same arithmetic and the same "center left
-  of the crossing" test as the rasterizer, so the covered pixels are the
-  same.
+- **Plain boxes** use a summed-area table instead: four lookups.
+- **Rounded boxes** cover one run per row, shortened by what each corner cuts
+  away. Within a row, a corner cuts the pixels nearest the box's side, so a
+  count per row places the cut, and the counts use the rasterizer's own
+  floating-point expression. When the box's center and arc centers are
+  multiples of 1/64 (they nearly always are), every offset from an arc's
+  center is exact, so the counts depend only on those offsets and are
+  cached: a moved or resized box reuses its corners.
+- **Polygons** cover, in each row, the spans between pairs of sorted edge
+  crossings. The crossings use the same arithmetic and the same "center left
+  of the crossing" test as the rasterizer.
+- **Turned boxes** take their runs from the rasterizer's mask.
 
-Both were checked against the full rasterizer, on 20,000 random boxes and
-thousands of random polygon moves.
+Runs are cached by geometry. Each greedy step re-climbs from much the same
+starts against new pixels, so about half of all evaluations hit the cache.
+Code generation caches each shape's CSS for the same reason: the clean-up
+re-emits the same shapes thousands of times. Every shortcut was checked
+against the full rasterizer on 100,000 random shapes, and the compiler's
+output is the same, byte for byte, on all 66 targets, on macOS and on
+Linux. The whole benchmark takes 43 CPU-minutes on an Apple M4 against 75
+before the caches (single-target runs on a GitHub runner: 36–37% less),
+and the in-browser demo compiles its examples about twice as fast.
 
 ### Variants and shared searches
 

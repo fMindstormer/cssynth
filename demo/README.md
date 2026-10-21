@@ -7,7 +7,7 @@ Two ways to try cssynth on a picture without the command line:
   https://fmindstormer.github.io/cssynth/demo/. The Pages workflow builds a
   cssynth wheel from the same commit and serves it next to the page.
   OR-Tools has no browser build, so this version uses the greedy box-shadow
-  grouping, and compiling takes about a minute. Nothing is uploaded.
+  grouping, and compiling takes 10–40 seconds on a laptop. Nothing is uploaded.
 - **Locally with Gradio** (`app.py`): the same interface with the full
   compiler, using all cores:
 

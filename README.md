@@ -143,8 +143,9 @@ flowchart LR
    plain bounding box of each color's largest regions is always climbed too:
    from there a climb peels a compound region (a cross, an I-beam) down to its
    biggest bar. The best starts (each at its best depth) are hill-climbed on
-   their edges, radii, rotation or vertices; box gains come from a summed-area
-   table and polygon gains from per-row sums over the spans each row covers.
+   their edges, radii, rotation or vertices; a gain is a few lookups in
+   running sums along pixel rows, over the runs of pixels a shape covers
+   (cached by shape, and exact: see docs/method.md).
    A shape may be inserted **at any depth** in the stack: for each
    depth the gain is computed against the canvas below it and only the pixels
    that the shapes above leave visible. This is what lets it build rings and
@@ -285,8 +286,10 @@ tests/
 - **Antialiasing.** A soft stop's linear ramp only approximates how Chromium
   smooths a rotated edge, so striped flags still carry a few hundred wrong
   pixels, and so do some rotated shapes.
-- **Speed.** A full benchmark run takes about 120 CPU-minutes on GitHub's
-  runners, most of it in hill climbs. A small network that picks which starts to climb was tried
+- **Speed.** A full benchmark run takes about 43 CPU-minutes on an Apple M4
+  (and about two hours on GitHub's slower runners), most of it in hill
+  climbs. Exact cached gains cut that by about 40% without changing any
+  output. A small network that picks which starts to climb was tried
   (docs/method.md): it beats ranking by initial gain, but pruning still
   cost 1.9% in J for 29% less time, so it is not used.
 
