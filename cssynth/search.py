@@ -627,7 +627,7 @@ def _regions(region, lab, objs):
 
 def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
            min_gain=MIN_GAIN, per_color=3, bbox_starts=True, outlines=False, also=(),
-           start=(), no_polygons=(), pal=None, rho=None):
+           start=(), no_polygons=(), pal=None, rho=None, motifs=True):
     """Add shapes one at a time, each at whatever depth in the stack fixes the
     most pixels. Inserting below existing shapes lets the search build rings,
     eyes and other nested figures that no top-only greedy can.
@@ -638,7 +638,8 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
     start: a stack to add to. no_polygons: colors to draw without polygons.
     pal, rho: when given, each step picks the climbed shape with the best
     pixels fixed / rho minus its estimated characters (see char_cost), so a
-    cheap shape beats a costly one that fixes about as many pixels."""
+    cheap shape beats a costly one that fixes about as many pixels.
+    motifs: also propose motifs of the kinds in MOTIFS (see best_motif)."""
     shapes: list[Shape] = list(start)
     out = {}
     for _ in range(max_shapes):
@@ -714,7 +715,7 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
             if best_g < g and g not in out:
                 out[g] = list(shapes)
         added = [best]
-        if MOTIFS and pal is not None and (MOTIF_GATE is None or MOTIF_GATE(shapes)):
+        if motifs and MOTIFS and pal is not None and (MOTIF_GATE is None or MOTIF_GATE(shapes)):
             motif = best_motif(T, bg, pal, shapes, best, best_k, climbed, tables, min_gain, belows, frees)
             if motif is not None:
                 best_k, added = motif
@@ -958,7 +959,7 @@ def snap(T, bg, shapes, tol=0):
 
 
 def decompose(img: np.ndarray, log=None, min_gains=(MIN_GAIN,), per_color=3, bbox_starts=True,
-              base="flat", outlines=False, rho=None):
+              base="flat", outlines=False, rho=None, motifs=True):
     """Returns (palette, base layer, labels, {min_gain: shapes}), one stack per
     threshold in min_gains (see greedy), or None.
 
@@ -980,5 +981,5 @@ def decompose(img: np.ndarray, log=None, min_gains=(MIN_GAIN,), per_color=3, bbo
         colors = [c for c in range(len(pal)) if c != bg] + [bg]
     lo, *also = sorted(min_gains)
     stacks = greedy(T, bg, colors, log=log, min_gain=lo, per_color=per_color,
-                    bbox_starts=bbox_starts, outlines=outlines, also=also, pal=pal, rho=rho)
+                    bbox_starts=bbox_starts, outlines=outlines, also=also, pal=pal, rho=rho, motifs=motifs)
     return pal, bg, T, {g: refine(T, bg, s, log=log, min_gain=g) for g, s in stacks.items()}

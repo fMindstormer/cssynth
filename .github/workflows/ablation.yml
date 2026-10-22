@@ -35,7 +35,7 @@ jobs:
       matrix:
         config: [full, no-research, no-cleanup, no-exact-grouping, no-box-shadows, no-tag-rules,
                  no-clip-reuse, top-only, no-corner-split, no-outline-polygons, no-length-aware, no-gradient-base,
-                 no-soft-stops]
+                 no-soft-stops, no-motifs]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7

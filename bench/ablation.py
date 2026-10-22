@@ -57,6 +57,7 @@ ABLATIONS = {
     "no-length-aware": ("length-aware shape choice; by pixels only", None),
     "no-gradient-base": ("gradient backgrounds", None),
     "no-soft-stops": ("soft gradient stops", lambda: setattr(search, "soften", lambda g, img, pal: g)),
+    "no-motifs": ("nested-ring motifs", lambda: setattr(search, "MOTIFS", set())),
 }
 
 

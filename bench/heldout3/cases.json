@@ -1,0 +1,242 @@
+[
+ {
+  "id": "mirror-20261221",
+  "family": "mirror",
+  "ref_len": 267
+ },
+ {
+  "id": "mirror-20261222",
+  "family": "mirror",
+  "ref_len": 338
+ },
+ {
+  "id": "mirror-20261223",
+  "family": "mirror",
+  "ref_len": 344
+ },
+ {
+  "id": "mirror-20261224",
+  "family": "mirror",
+  "ref_len": 382
+ },
+ {
+  "id": "mirror-20261225",
+  "family": "mirror",
+  "ref_len": 340
+ },
+ {
+  "id": "mirror-20261226",
+  "family": "mirror",
+  "ref_len": 320
+ },
+ {
+  "id": "mirror-20261227",
+  "family": "mirror",
+  "ref_len": 263
+ },
+ {
+  "id": "mirror-20261228",
+  "family": "mirror",
+  "ref_len": 281
+ },
+ {
+  "id": "repeat-20261221",
+  "family": "repeat",
+  "ref_len": 497
+ },
+ {
+  "id": "repeat-20261222",
+  "family": "repeat",
+  "ref_len": 468
+ },
+ {
+  "id": "repeat-20261223",
+  "family": "repeat",
+  "ref_len": 377
+ },
+ {
+  "id": "repeat-20261224",
+  "family": "repeat",
+  "ref_len": 1025
+ },
+ {
+  "id": "repeat-20261225",
+  "family": "repeat",
+  "ref_len": 694
+ },
+ {
+  "id": "repeat-20261226",
+  "family": "repeat",
+  "ref_len": 265
+ },
+ {
+  "id": "repeat-20261227",
+  "family": "repeat",
+  "ref_len": 575
+ },
+ {
+  "id": "repeat-20261228",
+  "family": "repeat",
+  "ref_len": 597
+ },
+ {
+  "id": "rings-20261221",
+  "family": "rings",
+  "ref_len": 414
+ },
+ {
+  "id": "rings-20261222",
+  "family": "rings",
+  "ref_len": 375
+ },
+ {
+  "id": "rings-20261223",
+  "family": "rings",
+  "ref_len": 484
+ },
+ {
+  "id": "rings-20261224",
+  "family": "rings",
+  "ref_len": 377
+ },
+ {
+  "id": "rings-20261225",
+  "family": "rings",
+  "ref_len": 601
+ },
+ {
+  "id": "rings-20261226",
+  "family": "rings",
+  "ref_len": 602
+ },
+ {
+  "id": "rings-20261227",
+  "family": "rings",
+  "ref_len": 487
+ },
+ {
+  "id": "rings-20261228",
+  "family": "rings",
+  "ref_len": 486
+ },
+ {
+  "id": "petals-20261221",
+  "family": "petals",
+  "ref_len": 537
+ },
+ {
+  "id": "petals-20261222",
+  "family": "petals",
+  "ref_len": 543
+ },
+ {
+  "id": "petals-20261223",
+  "family": "petals",
+  "ref_len": 1070
+ },
+ {
+  "id": "petals-20261224",
+  "family": "petals",
+  "ref_len": 423
+ },
+ {
+  "id": "petals-20261225",
+  "family": "petals",
+  "ref_len": 535
+ },
+ {
+  "id": "petals-20261226",
+  "family": "petals",
+  "ref_len": 552
+ },
+ {
+  "id": "petals-20261227",
+  "family": "petals",
+  "ref_len": 408
+ },
+ {
+  "id": "petals-20261228",
+  "family": "petals",
+  "ref_len": 543
+ },
+ {
+  "id": "stripes-20261221",
+  "family": "stripes",
+  "ref_len": 318
+ },
+ {
+  "id": "stripes-20261222",
+  "family": "stripes",
+  "ref_len": 240
+ },
+ {
+  "id": "stripes-20261223",
+  "family": "stripes",
+  "ref_len": 333
+ },
+ {
+  "id": "stripes-20261224",
+  "family": "stripes",
+  "ref_len": 337
+ },
+ {
+  "id": "stripes-20261225",
+  "family": "stripes",
+  "ref_len": 337
+ },
+ {
+  "id": "stripes-20261226",
+  "family": "stripes",
+  "ref_len": 331
+ },
+ {
+  "id": "stripes-20261227",
+  "family": "stripes",
+  "ref_len": 246
+ },
+ {
+  "id": "stripes-20261228",
+  "family": "stripes",
+  "ref_len": 351
+ },
+ {
+  "id": "scatter-20261221",
+  "family": "scatter",
+  "ref_len": 402
+ },
+ {
+  "id": "scatter-20261222",
+  "family": "scatter",
+  "ref_len": 417
+ },
+ {
+  "id": "scatter-20261223",
+  "family": "scatter",
+  "ref_len": 340
+ },
+ {
+  "id": "scatter-20261224",
+  "family": "scatter",
+  "ref_len": 259
+ },
+ {
+  "id": "scatter-20261225",
+  "family": "scatter",
+  "ref_len": 636
+ },
+ {
+  "id": "scatter-20261226",
+  "family": "scatter",
+  "ref_len": 622
+ },
+ {
+  "id": "scatter-20261227",
+  "family": "scatter",
+  "ref_len": 266
+ },
+ {
+  "id": "scatter-20261228",
+  "family": "scatter",
+  "ref_len": 348
+ }
+]

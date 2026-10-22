@@ -33,7 +33,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BENCH = ROOT / "bench"
 FAMILIES = ("mirror", "repeat", "rings", "petals", "stripes", "scatter")
-HELDOUT_SEEDS = {"heldout": 20261021, "heldout2": 20261121}
+HELDOUT_SEEDS = {"heldout": 20261021, "heldout2": 20261121, "heldout3": 20261221}
 PER_FAMILY = 8
 
 PALETTES = [
@@ -213,7 +213,7 @@ def build(out: Path, seeds, families=FAMILIES):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("split", choices=["heldout", "heldout2", "train"])
+    ap.add_argument("split", choices=["heldout", "heldout2", "heldout3", "train"])
     ap.add_argument("n", nargs="?", type=int, default=PER_FAMILY)
     ap.add_argument("--out")
     args = ap.parse_args()

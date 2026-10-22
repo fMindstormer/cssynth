@@ -23,3 +23,4 @@ bench/eval/
 bench/train/
 bench/learn/
 bench/heldout2/*.png
+bench/heldout3/*.png

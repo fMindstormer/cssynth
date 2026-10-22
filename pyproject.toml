@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cssynth"
-version = "0.5.0"
+version = "0.6.0"
 description = "Compile flat images into short HTML/CSS, for CSSBattle-style code golf"
 readme = "docs/pypi.md"    # the GitHub README uses relative links and a diagram PyPI can't show
 license = "MIT"
