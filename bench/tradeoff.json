@@ -218,8 +218,8 @@
  {
   "id": "ks-05-acidrains",
   "rho": 0.0,
-  "chars": 267,
-  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:140;top:90;height:119;background:#998235;border-radius:60px 0 58px 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;width:120;height:120;background:#f3ac3c",
+  "chars": 266,
+  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:141;top:90;width:119;background:#998235;border-radius:58px 0 60px 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;width:120;height:120;background:#f3ac3c",
   "shapes": 3,
   "png": "bench/tradeoff/ks-05-acidrains__0.0.png",
   "match": 99.91
@@ -227,8 +227,8 @@
  {
   "id": "ks-05-acidrains",
   "rho": 0.25,
-  "chars": 267,
-  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:140;top:90;height:119;background:#998235;border-radius:60px 0 58px 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;width:120;height:120;background:#f3ac3c",
+  "chars": 266,
+  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:141;top:90;width:119;background:#998235;border-radius:58px 0 60px 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;width:120;height:120;background:#f3ac3c",
   "shapes": 3,
   "png": "bench/tradeoff/ks-05-acidrains__0.25.png",
   "match": 99.91
@@ -236,8 +236,8 @@
  {
   "id": "ks-05-acidrains",
   "rho": 0.5,
-  "chars": 267,
-  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:140;top:90;height:119;background:#998235;border-radius:60px 0 58px 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;width:120;height:120;background:#f3ac3c",
+  "chars": 266,
+  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:141;top:90;width:119;background:#998235;border-radius:58px 0 60px 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;width:120;height:120;background:#f3ac3c",
   "shapes": 3,
   "png": "bench/tradeoff/ks-05-acidrains__0.5.png",
   "match": 99.91
@@ -245,8 +245,8 @@
  {
   "id": "ks-05-acidrains",
   "rho": 1.0,
-  "chars": 267,
-  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:140;top:90;height:119;background:#998235;border-radius:60px 0 58px 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;width:120;height:120;background:#f3ac3c",
+  "chars": 266,
+  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:141;top:90;width:119;background:#998235;border-radius:58px 0 60px 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;width:120;height:120;background:#f3ac3c",
   "shapes": 3,
   "png": "bench/tradeoff/ks-05-acidrains__1.0.png",
   "match": 99.91
@@ -255,7 +255,7 @@
   "id": "ks-05-acidrains",
   "rho": 2.0,
   "chars": 245,
-  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:140;top:90;background:#998235;border-radius:50% 0 58px 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;padding:60;background:#f3ac3c",
+  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:140;top:90;background:#998235;border-radius:58px 0 50% 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;padding:60;background:#f3ac3c",
   "shapes": 3,
   "png": "bench/tradeoff/ks-05-acidrains__2.0.png",
   "match": 99.87
@@ -264,7 +264,7 @@
   "id": "ks-05-acidrains",
   "rho": 4.0,
   "chars": 245,
-  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:140;top:90;background:#998235;border-radius:50% 0 58px 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;padding:60;background:#f3ac3c",
+  "code": "<body bgcolor=0b2429><b style=left:200;top:30;border-radius:50%><b style=\"left:140;top:90;background:#998235;border-radius:58px 0 50% 0\"><b style=\"left:80;top:150;border-radius:50% 0 50% 50%\"><style>b{position:fixed;padding:60;background:#f3ac3c",
   "shapes": 3,
   "png": "bench/tradeoff/ks-05-acidrains__4.0.png",
   "match": 99.87
@@ -326,8 +326,8 @@
  {
   "id": "ks-07-leafytrial",
   "rho": 0.0,
-  "chars": 290,
-  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:190;background:#998235;border-radius:99px 0 139px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
+  "chars": 289,
+  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:183;background:#998235;border-radius:99px 0 77px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
   "shapes": 3,
   "png": "bench/tradeoff/ks-07-leafytrial__0.0.png",
   "match": 99.82
@@ -335,8 +335,8 @@
  {
   "id": "ks-07-leafytrial",
   "rho": 0.25,
-  "chars": 290,
-  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:190;background:#998235;border-radius:99px 0 139px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
+  "chars": 289,
+  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:183;background:#998235;border-radius:99px 0 77px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
   "shapes": 3,
   "png": "bench/tradeoff/ks-07-leafytrial__0.25.png",
   "match": 99.82
@@ -344,8 +344,8 @@
  {
   "id": "ks-07-leafytrial",
   "rho": 0.5,
-  "chars": 290,
-  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:190;background:#998235;border-radius:99px 0 139px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
+  "chars": 289,
+  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:183;background:#998235;border-radius:99px 0 77px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
   "shapes": 3,
   "png": "bench/tradeoff/ks-07-leafytrial__0.5.png",
   "match": 99.82
@@ -353,8 +353,8 @@
  {
   "id": "ks-07-leafytrial",
   "rho": 1.0,
-  "chars": 290,
-  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:190;background:#998235;border-radius:99px 0 139px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
+  "chars": 289,
+  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:183;background:#998235;border-radius:99px 0 77px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
   "shapes": 3,
   "png": "bench/tradeoff/ks-07-leafytrial__1.0.png",
   "match": 99.82
@@ -362,8 +362,8 @@
  {
   "id": "ks-07-leafytrial",
   "rho": 2.0,
-  "chars": 290,
-  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:190;background:#998235;border-radius:99px 0 139px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
+  "chars": 289,
+  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:183;background:#998235;border-radius:99px 0 77px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
   "shapes": 3,
   "png": "bench/tradeoff/ks-07-leafytrial__2.0.png",
   "match": 99.82
@@ -371,8 +371,8 @@
  {
   "id": "ks-07-leafytrial",
   "rho": 4.0,
-  "chars": 290,
-  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:190;background:#998235;border-radius:99px 0 139px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
+  "chars": 289,
+  "code": "<body bgcolor=0b2429><b style=\"left:75;width:140;background:#1a4341;border-radius:99px 0 0 0\"><b style=\"left:125;width:183;background:#998235;border-radius:99px 0 77px 0\"><b style=\"left:175;width:150;background:#f3ac3c;border-radius:66% 0 100px 0\"><style>b{position:fixed;height:150;top:75",
   "shapes": 3,
   "png": "bench/tradeoff/ks-07-leafytrial__4.0.png",
   "match": 99.82
@@ -650,29 +650,29 @@
  {
   "id": "ks-14-webmakerlogo",
   "rho": 0.0,
-  "chars": 545,
-  "code": "<body bgcolor=f2f2b6><b style=\"inset:85px 84px 85px 147px;border-radius:50.5px 126.5px 0 19px\"><i style=\"inset:85px 60px 85px 254px;clip-path:polygon(11px 0,86px 100%,66px 100%,0 16px)\"></i><b style=\"left:240;top:90;padding:4 6;border-radius:0 4px 0 5px;rotate:50deg\"></b><b style=\"left:207;top:85;padding:5 11\"><i style=\"inset:85px 190px 85px 60px;clip-path:polygon(0 0,100% 0,50% 100%)\"></i><b style=\"inset:147px 129px 140px 125px;background:#f2f2b6;rotate:-60deg\"><style>b{position:fixed;background:#fd4602}i{position:fixed;background:#ff6d00",
+  "chars": 519,
+  "code": "<body bgcolor=f2f2b6><b style=\"inset:85px 84px 85px 147px;border-radius:50.5px 126.5px 0 19px\"><i style=\"inset:85px 60px 85px 254px;clip-path:polygon(11px 0,86px 100%,66px 100%,0 16px)\"></i><b style=\"left:240;top:90;padding:4 6;rotate:50deg\"></b><b style=\"left:207;top:85;padding:5 11\"><i style=\"inset:85px 190px 85px 60px;clip-path:polygon(0 0,100% 0,50% 100%)\"></i><b style=\"inset:147px 129px 140px 125px;background:#f2f2b6;rotate:-60deg\"><style>b{position:fixed;background:#fd4602}i{position:fixed;background:#ff6d00",
   "shapes": 6,
   "png": "bench/tradeoff/ks-14-webmakerlogo__0.0.png",
-  "match": 99.87
+  "match": 99.86
  },
  {
   "id": "ks-14-webmakerlogo",
   "rho": 0.25,
-  "chars": 545,
-  "code": "<body bgcolor=f2f2b6><b style=\"inset:85px 84px 85px 147px;border-radius:50.5px 126.5px 0 19px\"><i style=\"inset:85px 60px 85px 254px;clip-path:polygon(11px 0,86px 100%,66px 100%,0 16px)\"></i><b style=\"left:240;top:90;padding:4 6;border-radius:0 4px 0 5px;rotate:50deg\"></b><b style=\"left:207;top:85;padding:5 11\"><i style=\"inset:85px 190px 85px 60px;clip-path:polygon(0 0,100% 0,50% 100%)\"></i><b style=\"inset:147px 129px 140px 125px;background:#f2f2b6;rotate:-60deg\"><style>b{position:fixed;background:#fd4602}i{position:fixed;background:#ff6d00",
+  "chars": 519,
+  "code": "<body bgcolor=f2f2b6><b style=\"inset:85px 84px 85px 147px;border-radius:50.5px 126.5px 0 19px\"><i style=\"inset:85px 60px 85px 254px;clip-path:polygon(11px 0,86px 100%,66px 100%,0 16px)\"></i><b style=\"left:240;top:90;padding:4 6;rotate:50deg\"></b><b style=\"left:207;top:85;padding:5 11\"><i style=\"inset:85px 190px 85px 60px;clip-path:polygon(0 0,100% 0,50% 100%)\"></i><b style=\"inset:147px 129px 140px 125px;background:#f2f2b6;rotate:-60deg\"><style>b{position:fixed;background:#fd4602}i{position:fixed;background:#ff6d00",
   "shapes": 6,
   "png": "bench/tradeoff/ks-14-webmakerlogo__0.25.png",
-  "match": 99.87
+  "match": 99.86
  },
  {
   "id": "ks-14-webmakerlogo",
   "rho": 0.5,
-  "chars": 545,
-  "code": "<body bgcolor=f2f2b6><b style=\"inset:85px 84px 85px 147px;border-radius:50.5px 126.5px 0 19px\"><i style=\"inset:85px 60px 85px 254px;clip-path:polygon(11px 0,86px 100%,66px 100%,0 16px)\"></i><b style=\"left:240;top:90;padding:4 6;border-radius:0 4px 0 5px;rotate:50deg\"></b><b style=\"left:207;top:85;padding:5 11\"><i style=\"inset:85px 190px 85px 60px;clip-path:polygon(0 0,100% 0,50% 100%)\"></i><b style=\"inset:147px 129px 140px 125px;background:#f2f2b6;rotate:-60deg\"><style>b{position:fixed;background:#fd4602}i{position:fixed;background:#ff6d00",
+  "chars": 519,
+  "code": "<body bgcolor=f2f2b6><b style=\"inset:85px 84px 85px 147px;border-radius:50.5px 126.5px 0 19px\"><i style=\"inset:85px 60px 85px 254px;clip-path:polygon(11px 0,86px 100%,66px 100%,0 16px)\"></i><b style=\"left:240;top:90;padding:4 6;rotate:50deg\"></b><b style=\"left:207;top:85;padding:5 11\"><i style=\"inset:85px 190px 85px 60px;clip-path:polygon(0 0,100% 0,50% 100%)\"></i><b style=\"inset:147px 129px 140px 125px;background:#f2f2b6;rotate:-60deg\"><style>b{position:fixed;background:#fd4602}i{position:fixed;background:#ff6d00",
   "shapes": 6,
   "png": "bench/tradeoff/ks-14-webmakerlogo__0.5.png",
-  "match": 99.87
+  "match": 99.86
  },
  {
   "id": "ks-14-webmakerlogo",
@@ -974,56 +974,56 @@
  {
   "id": "ks-145-spotlight",
   "rho": 0.0,
-  "chars": 310,
-  "code": "<b style=\"inset:0 150px 248px 190px;border-radius:0 0 12px 0\"><b style=\"inset:150px 0 88px 348px;border-radius:13px 0 0 31px\"><b style=\"inset:48px 48px 101px 202px;background:#d9d9d9;border-radius:50%\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
+  "chars": 281,
+  "code": "<b style=left:190;top:0;padding:30><b style=\"inset:150px 0 88px 348px\"><b style=\"inset:75px 58px 105px 192px;background:#d9d9d9;border-radius:13px 0 76px 74px;rotate:43deg\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
   "shapes": 3,
   "png": "bench/tradeoff/ks-145-spotlight__0.0.png",
-  "match": 99.66
+  "match": 99.72
  },
  {
   "id": "ks-145-spotlight",
   "rho": 0.25,
-  "chars": 310,
-  "code": "<b style=\"inset:0 150px 248px 190px;border-radius:0 0 12px 0\"><b style=\"inset:150px 0 88px 348px;border-radius:13px 0 0 31px\"><b style=\"inset:48px 48px 101px 202px;background:#d9d9d9;border-radius:50%\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
+  "chars": 281,
+  "code": "<b style=left:190;top:0;padding:30><b style=\"inset:150px 0 88px 348px\"><b style=\"inset:75px 58px 105px 192px;background:#d9d9d9;border-radius:13px 0 76px 74px;rotate:43deg\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
   "shapes": 3,
   "png": "bench/tradeoff/ks-145-spotlight__0.25.png",
-  "match": 99.66
+  "match": 99.72
  },
  {
   "id": "ks-145-spotlight",
   "rho": 0.5,
-  "chars": 310,
-  "code": "<b style=\"inset:0 150px 248px 190px;border-radius:0 0 12px 0\"><b style=\"inset:150px 0 88px 348px;border-radius:13px 0 0 31px\"><b style=\"inset:48px 48px 101px 202px;background:#d9d9d9;border-radius:50%\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
+  "chars": 281,
+  "code": "<b style=left:190;top:0;padding:30><b style=\"inset:150px 0 88px 348px\"><b style=\"inset:75px 58px 105px 192px;background:#d9d9d9;border-radius:13px 0 76px 74px;rotate:43deg\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
   "shapes": 3,
   "png": "bench/tradeoff/ks-145-spotlight__0.5.png",
-  "match": 99.66
+  "match": 99.72
  },
  {
   "id": "ks-145-spotlight",
   "rho": 1.0,
-  "chars": 310,
-  "code": "<b style=\"inset:0 150px 248px 190px;border-radius:0 0 12px 0\"><b style=\"inset:150px 0 88px 348px;border-radius:13px 0 0 31px\"><b style=\"inset:48px 48px 101px 202px;background:#d9d9d9;border-radius:50%\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
+  "chars": 281,
+  "code": "<b style=left:190;top:0;padding:30><b style=\"inset:150px 0 88px 348px\"><b style=\"inset:75px 58px 105px 192px;background:#d9d9d9;border-radius:13px 0 76px 74px;rotate:43deg\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
   "shapes": 3,
   "png": "bench/tradeoff/ks-145-spotlight__1.0.png",
-  "match": 99.66
+  "match": 99.72
  },
  {
   "id": "ks-145-spotlight",
   "rho": 2.0,
-  "chars": 310,
-  "code": "<b style=\"inset:0 150px 248px 190px;border-radius:0 0 12px 0\"><b style=\"inset:150px 0 88px 348px;border-radius:13px 0 0 31px\"><b style=\"inset:48px 48px 101px 202px;background:#d9d9d9;border-radius:50%\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
+  "chars": 278,
+  "code": "<b style=left:190;top:0;padding:30><b style=\"inset:150px 0 88px 348px\"><b style=\"inset:75px 58px 105px 192px;background:#d9d9d9;border-radius:0 0 76px 74px;rotate:43deg\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
   "shapes": 3,
   "png": "bench/tradeoff/ks-145-spotlight__2.0.png",
-  "match": 99.66
+  "match": 99.72
  },
  {
   "id": "ks-145-spotlight",
   "rho": 4.0,
-  "chars": 310,
-  "code": "<b style=\"inset:0 150px 248px 190px;border-radius:0 0 12px 0\"><b style=\"inset:150px 0 88px 348px;border-radius:13px 0 0 31px\"><b style=\"inset:48px 48px 101px 202px;background:#d9d9d9;border-radius:50%\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
+  "chars": 278,
+  "code": "<b style=left:190;top:0;padding:30><b style=\"inset:150px 0 88px 348px\"><b style=\"inset:75px 58px 105px 192px;background:#d9d9d9;border-radius:0 0 76px 74px;rotate:43deg\"><style>body{background:linear-gradient(45.25deg,#e3516e 346px,#d9d9d9 0)}b{position:fixed;background:#e3516e",
   "shapes": 3,
   "png": "bench/tradeoff/ks-145-spotlight__4.0.png",
-  "match": 99.66
+  "match": 99.72
  },
  {
   "id": "ks-146-streaks",
@@ -1514,8 +1514,8 @@
  {
   "id": "ks-184-india",
   "rho": 0.0,
-  "chars": 554,
-  "code": "<body bgcolor=3f8627><b style=\"left:0;top:0;width:400;height:100;background:#f19e4b;box-shadow:0 100px #fff\"><b style=\"left:170;width:60;height:60;background:#fff;border-radius:50%;box-shadow:0 0 0 10px #00007b\"><b style=left:190;top:140;width:20;height:20;border-radius:50%><b style=top:158;rotate:-30deg></b><b style=\"top:138;border-radius:6px 0 0 1px;rotate:30deg\"></b><b style=left:207;top:158;rotate:30deg></b><b style=\"left:198;width:4;height:70;border-radius:0 0 4px 0\"><style>b{position:fixed;width:21;height:4;background:#00007b;left:172;top:120",
+  "chars": 500,
+  "code": "<body bgcolor=3f8627><b style=\"left:0;top:0;width:400;height:100;background:#f19e4b;box-shadow:0 100px #fff\"><b style=\"left:170;width:60;height:60;background:#fff;border-radius:50%;box-shadow:0 0 0 10px #00007b\"><b style=left:190;top:140;width:20;height:20;border-radius:50%><b style=top:158;rotate:-30deg></b><b style=top:138;rotate:30deg></b><b style=left:207;top:158;rotate:30deg></b><b style=left:198;width:4;height:70><style>b{position:fixed;width:21;height:4;background:#00007b;left:172;top:120",
   "shapes": 9,
   "png": "bench/tradeoff/ks-184-india__0.0.png",
   "match": 99.8
@@ -1523,8 +1523,8 @@
  {
   "id": "ks-184-india",
   "rho": 0.25,
-  "chars": 554,
-  "code": "<body bgcolor=3f8627><b style=\"left:0;top:0;width:400;height:100;background:#f19e4b;box-shadow:0 100px #fff\"><b style=\"left:170;width:60;height:60;background:#fff;border-radius:50%;box-shadow:0 0 0 10px #00007b\"><b style=left:190;top:140;width:20;height:20;border-radius:50%><b style=top:158;rotate:-30deg></b><b style=\"top:138;border-radius:6px 0 0 1px;rotate:30deg\"></b><b style=left:207;top:158;rotate:30deg></b><b style=\"left:198;width:4;height:70;border-radius:0 0 4px 0\"><style>b{position:fixed;width:21;height:4;background:#00007b;left:172;top:120",
+  "chars": 500,
+  "code": "<body bgcolor=3f8627><b style=\"left:0;top:0;width:400;height:100;background:#f19e4b;box-shadow:0 100px #fff\"><b style=\"left:170;width:60;height:60;background:#fff;border-radius:50%;box-shadow:0 0 0 10px #00007b\"><b style=left:190;top:140;width:20;height:20;border-radius:50%><b style=top:158;rotate:-30deg></b><b style=top:138;rotate:30deg></b><b style=left:207;top:158;rotate:30deg></b><b style=left:198;width:4;height:70><style>b{position:fixed;width:21;height:4;background:#00007b;left:172;top:120",
   "shapes": 9,
   "png": "bench/tradeoff/ks-184-india__0.25.png",
   "match": 99.8
@@ -1532,8 +1532,8 @@
  {
   "id": "ks-184-india",
   "rho": 0.5,
-  "chars": 554,
-  "code": "<body bgcolor=3f8627><b style=\"left:0;top:0;width:400;height:100;background:#f19e4b;box-shadow:0 100px #fff\"><b style=\"left:170;width:60;height:60;background:#fff;border-radius:50%;box-shadow:0 0 0 10px #00007b\"><b style=left:190;top:140;width:20;height:20;border-radius:50%><b style=top:158;rotate:-30deg></b><b style=\"top:138;border-radius:6px 0 0 1px;rotate:30deg\"></b><b style=left:207;top:158;rotate:30deg></b><b style=\"left:198;width:4;height:70;border-radius:0 0 4px 0\"><style>b{position:fixed;width:21;height:4;background:#00007b;left:172;top:120",
+  "chars": 500,
+  "code": "<body bgcolor=3f8627><b style=\"left:0;top:0;width:400;height:100;background:#f19e4b;box-shadow:0 100px #fff\"><b style=\"left:170;width:60;height:60;background:#fff;border-radius:50%;box-shadow:0 0 0 10px #00007b\"><b style=left:190;top:140;width:20;height:20;border-radius:50%><b style=top:158;rotate:-30deg></b><b style=top:138;rotate:30deg></b><b style=left:207;top:158;rotate:30deg></b><b style=left:198;width:4;height:70><style>b{position:fixed;width:21;height:4;background:#00007b;left:172;top:120",
   "shapes": 9,
   "png": "bench/tradeoff/ks-184-india__0.5.png",
   "match": 99.8
@@ -1541,17 +1541,17 @@
  {
   "id": "ks-184-india",
   "rho": 1.0,
-  "chars": 475,
-  "code": "<body bgcolor=3f8627><b style=\"inset:0 0 200px 0;background:#f19e4b;box-shadow:0 100px #fff\"><b style=\"left:170;top:120;padding:30;background:#fff;border-radius:50%;box-shadow:0 0 0 10px #00007b\"><b style=left:190;top:140;padding:10;border-radius:50%><b style=\"inset:158px 207px 138px 172px;rotate:-30deg\"></b><b style=\"inset:158px 172px 138px 207px;rotate:30deg\"></b><b style=\"left:198;top:120;padding:35 2;border-radius:0 0 4px 0\"><style>b{position:fixed;background:#00007b",
-  "shapes": 8,
+  "chars": 500,
+  "code": "<body bgcolor=3f8627><b style=\"left:0;top:0;width:400;height:100;background:#f19e4b;box-shadow:0 100px #fff\"><b style=\"left:170;width:60;height:60;background:#fff;border-radius:50%;box-shadow:0 0 0 10px #00007b\"><b style=left:190;top:140;width:20;height:20;border-radius:50%><b style=top:158;rotate:-30deg></b><b style=top:138;rotate:30deg></b><b style=left:207;top:158;rotate:30deg></b><b style=left:198;width:4;height:70><style>b{position:fixed;width:21;height:4;background:#00007b;left:172;top:120",
+  "shapes": 9,
   "png": "bench/tradeoff/ks-184-india__1.0.png",
-  "match": 99.75
+  "match": 99.8
  },
  {
   "id": "ks-184-india",
   "rho": 2.0,
-  "chars": 358,
-  "code": "<body bgcolor=3f8627><b style=\"inset:0 0 200px 0;background:#f19e4b;box-shadow:0 100px #fff\"><b style=\"left:170;top:120;padding:30;background:#fff;border-radius:50%;box-shadow:0 0 0 10px #00007b\"><b style=left:190;top:140;padding:10;border-radius:50%><b style=\"left:198;top:120;padding:35 2;border-radius:0 0 4px 0\"><style>b{position:fixed;background:#00007b",
+  "chars": 334,
+  "code": "<body bgcolor=3f8627><b style=\"inset:0 0 200px 0;background:#f19e4b;box-shadow:0 100px #fff\"><b style=\"left:170;top:120;padding:30;background:#fff;border-radius:50%;box-shadow:0 0 0 10px #00007b\"><b style=left:190;top:140;padding:10;border-radius:50%><b style=\"left:198;top:120;padding:35 2\"><style>b{position:fixed;background:#00007b",
   "shapes": 6,
   "png": "bench/tradeoff/ks-184-india__2.0.png",
   "match": 99.65
@@ -1568,56 +1568,56 @@
  {
   "id": "ks-186-guernsey",
   "rho": 0.0,
-  "chars": 719,
-  "code": "<b style=\"left:85;top:132;padding:18 7;background:#f9dd16;border-radius:0 23px 23px 0\"><i style=\"inset:130px 80px 160px 300px;clip-path:polygon(5% 10px,75% 0,75% 10px)\"></i><i style=\"inset:160px 80px 130px 300px;clip-path:polygon(0 0,75% 0,75% 10px)\"></i><b style=\"inset:140px 315px 140px 0;box-shadow:315px 0 #e8112d\"><b style=\"inset:0 160px 190px 160px;box-shadow:0 190px #e8112d\"><i style=\"inset:35px 180px 160px 180px\"></i><i style=\"inset:160px 180px 35px 180px;scale:-1\"><style>body{background:linear-gradient(#fff 110px,#e8112d 0 140px,#f9dd16 0 160px,#e8112d 0 190px,#fff 0)}b{position:fixed;background:#e8112d}i{position:fixed;background:#f9dd16;clip-path:polygon(0 0,40px 0,75% 15px,75% 100%,25% 100%,25% 16px)",
+  "chars": 617,
+  "code": "<body bgcolor=#fff><u style=\"inset:0 160px 0 160px\"><b style=\"left:182;top:35;padding:8 10;border-radius:0 0 0 2em\"><b style=\"inset:251px 182px 35px 182px;border-radius:23.5px 23.5px 0 0\"><b style=\"left:210;top:35;padding:10 5;clip-path:polygon(10px 0,0 0,0 75%)\"></b><u style=\"inset:110px 0 110px 0\"><b style=\"left:85;top:132;padding:18 7;border-radius:0 20px 20px 0\"><b style=\"inset:140px 99px 140px 95px\"><b style=\"inset:130px 85px 130px 285px;clip-path:polygon(30px 1px,30px 40px,-1px 19px)\"></b><b style=\"inset:35px 190px 35px 190px\"><style>b{position:fixed;background:#f9dd16}u{position:fixed;background:#e8112d",
   "shapes": 9,
   "png": "bench/tradeoff/ks-186-guernsey__0.0.png",
-  "match": 99.48
+  "match": 99.42
  },
  {
   "id": "ks-186-guernsey",
   "rho": 0.25,
-  "chars": 719,
-  "code": "<b style=\"left:85;top:132;padding:18 7;background:#f9dd16;border-radius:0 23px 23px 0\"><i style=\"inset:130px 80px 160px 300px;clip-path:polygon(5% 10px,75% 0,75% 10px)\"></i><i style=\"inset:160px 80px 130px 300px;clip-path:polygon(0 0,75% 0,75% 10px)\"></i><b style=\"inset:140px 315px 140px 0;box-shadow:315px 0 #e8112d\"><b style=\"inset:0 160px 190px 160px;box-shadow:0 190px #e8112d\"><i style=\"inset:35px 180px 160px 180px\"></i><i style=\"inset:160px 180px 35px 180px;scale:-1\"><style>body{background:linear-gradient(#fff 110px,#e8112d 0 140px,#f9dd16 0 160px,#e8112d 0 190px,#fff 0)}b{position:fixed;background:#e8112d}i{position:fixed;background:#f9dd16;clip-path:polygon(0 0,40px 0,75% 15px,75% 100%,25% 100%,25% 16px)",
+  "chars": 617,
+  "code": "<body bgcolor=#fff><u style=\"inset:0 160px 0 160px\"><b style=\"left:182;top:35;padding:8 10;border-radius:0 0 0 2em\"><b style=\"inset:251px 182px 35px 182px;border-radius:23.5px 23.5px 0 0\"><b style=\"left:210;top:35;padding:10 5;clip-path:polygon(10px 0,0 0,0 75%)\"></b><u style=\"inset:110px 0 110px 0\"><b style=\"left:85;top:132;padding:18 7;border-radius:0 20px 20px 0\"><b style=\"inset:140px 99px 140px 95px\"><b style=\"inset:130px 85px 130px 285px;clip-path:polygon(30px 1px,30px 40px,-1px 19px)\"></b><b style=\"inset:35px 190px 35px 190px\"><style>b{position:fixed;background:#f9dd16}u{position:fixed;background:#e8112d",
   "shapes": 9,
   "png": "bench/tradeoff/ks-186-guernsey__0.25.png",
-  "match": 99.48
+  "match": 99.42
  },
  {
   "id": "ks-186-guernsey",
   "rho": 0.5,
-  "chars": 719,
-  "code": "<b style=\"left:85;top:132;padding:18 7;background:#f9dd16;border-radius:0 23px 23px 0\"><i style=\"inset:130px 80px 160px 300px;clip-path:polygon(5% 10px,75% 0,75% 10px)\"></i><i style=\"inset:160px 80px 130px 300px;clip-path:polygon(0 0,75% 0,75% 10px)\"></i><b style=\"inset:140px 315px 140px 0;box-shadow:315px 0 #e8112d\"><b style=\"inset:0 160px 190px 160px;box-shadow:0 190px #e8112d\"><i style=\"inset:35px 180px 160px 180px\"></i><i style=\"inset:160px 180px 35px 180px;scale:-1\"><style>body{background:linear-gradient(#fff 110px,#e8112d 0 140px,#f9dd16 0 160px,#e8112d 0 190px,#fff 0)}b{position:fixed;background:#e8112d}i{position:fixed;background:#f9dd16;clip-path:polygon(0 0,40px 0,75% 15px,75% 100%,25% 100%,25% 16px)",
+  "chars": 617,
+  "code": "<body bgcolor=#fff><u style=\"inset:0 160px 0 160px\"><b style=\"left:182;top:35;padding:8 10;border-radius:0 0 0 2em\"><b style=\"inset:251px 182px 35px 182px;border-radius:23.5px 23.5px 0 0\"><b style=\"left:210;top:35;padding:10 5;clip-path:polygon(10px 0,0 0,0 75%)\"></b><u style=\"inset:110px 0 110px 0\"><b style=\"left:85;top:132;padding:18 7;border-radius:0 20px 20px 0\"><b style=\"inset:140px 99px 140px 95px\"><b style=\"inset:130px 85px 130px 285px;clip-path:polygon(30px 1px,30px 40px,-1px 19px)\"></b><b style=\"inset:35px 190px 35px 190px\"><style>b{position:fixed;background:#f9dd16}u{position:fixed;background:#e8112d",
   "shapes": 9,
   "png": "bench/tradeoff/ks-186-guernsey__0.5.png",
-  "match": 99.48
+  "match": 99.42
  },
  {
   "id": "ks-186-guernsey",
   "rho": 1.0,
-  "chars": 551,
-  "code": "<b style=\"left:85;top:132;padding:18 7;background:#f9dd16;border-radius:0 23px 23px 0\"><b style=\"inset:140px 315px 140px 0;box-shadow:315px 0 #e8112d\"><b style=\"inset:0 160px 190px 160px;box-shadow:0 190px #e8112d\"><u style=\"inset:35px 180px 160px 180px\"></u><u style=\"inset:160px 180px 35px 180px;scale:-1\"><style>body{background:linear-gradient(#fff 110px,#e8112d 0 140px,#f9dd16 0 160px,#e8112d 0 190px,#fff 0)}b{position:fixed;background:#e8112d}u{position:fixed;background:#f9dd16;clip-path:polygon(0 0,40px 0,75% 15px,75% 100%,25% 100%,25% 16px)",
-  "shapes": 7,
+  "chars": 537,
+  "code": "<body bgcolor=#fff><u style=\"inset:0 160px 0 160px\"><b style=\"left:182;top:35;padding:8 10;border-radius:0 0 0 2em\"><b style=\"inset:251px 182px 35px 182px;border-radius:23.5px 23.5px 0 0\"><u style=\"inset:110px 0 110px 0\"><b style=\"left:85;top:132;padding:18 7;border-radius:0 20px 20px 0\"><b style=\"inset:140px 99px 140px 95px\"><b style=\"inset:130px 85px 130px 285px;clip-path:polygon(30px 1px,30px 40px,-1px 19px)\"></b><b style=\"inset:35px 190px 35px 190px\"><style>b{position:fixed;background:#f9dd16}u{position:fixed;background:#e8112d",
+  "shapes": 8,
   "png": "bench/tradeoff/ks-186-guernsey__1.0.png",
   "match": 99.38
  },
  {
   "id": "ks-186-guernsey",
   "rho": 2.0,
-  "chars": 461,
-  "code": "<b style=left:315;width:86><b style=left:0;width:85><b style=\"left:160;top:0;width:80;height:110;box-shadow:0 190px #e8112d\"><i style=top:35></i><i style=top:160;scale:-1><style>body{background:linear-gradient(#fff 110px,#e8112d 0 140px,#f9dd16 0 160px,#e8112d 0 190px,#fff 0)}b{position:fixed;height:20;background:#e8112d;top:140}i{position:fixed;width:40;height:105;background:#f9dd16;left:180;clip-path:polygon(0 0,40px 0,75% 15px,75% 100%,25% 100%,25% 16px)",
+  "chars": 401,
+  "code": "<body bgcolor=#fff><u style=\"inset:0 160px 0 160px\"><u style=\"inset:110px 0 110px 0\"><b style=\"left:85;top:132;padding:18 7;border-radius:0 20px 20px 0\"><b style=\"inset:140px 99px 140px 95px\"><b style=\"inset:130px 85px 130px 285px;clip-path:polygon(30px 1px,30px 40px,-1px 19px)\"></b><b style=\"inset:35px 190px 35px 190px\"><style>b{position:fixed;background:#f9dd16}u{position:fixed;background:#e8112d",
   "shapes": 6,
   "png": "bench/tradeoff/ks-186-guernsey__2.0.png",
-  "match": 99.29
+  "match": 99.25
  },
  {
   "id": "ks-186-guernsey",
   "rho": 4.0,
-  "chars": 461,
-  "code": "<b style=left:315;width:86><b style=left:0;width:85><b style=\"left:160;top:0;width:80;height:110;box-shadow:0 190px #e8112d\"><i style=top:35></i><i style=top:160;scale:-1><style>body{background:linear-gradient(#fff 110px,#e8112d 0 140px,#f9dd16 0 160px,#e8112d 0 190px,#fff 0)}b{position:fixed;height:20;background:#e8112d;top:140}i{position:fixed;width:40;height:105;background:#f9dd16;left:180;clip-path:polygon(0 0,40px 0,75% 15px,75% 100%,25% 100%,25% 16px)",
+  "chars": 373,
+  "code": "<body bgcolor=#fff><u style=\"inset:0 160px 0 160px\"><u style=\"inset:110px 0 110px 0\"><b style=\"left:85;top:132;padding:18 7\"><b style=\"inset:140px 99px 140px 95px\"><b style=\"inset:130px 85px 130px 285px;clip-path:polygon(30px 1px,30px 40px,-1px 19px)\"></b><b style=\"inset:35px 190px 35px 190px\"><style>b{position:fixed;background:#f9dd16}u{position:fixed;background:#e8112d",
   "shapes": 6,
   "png": "bench/tradeoff/ks-186-guernsey__4.0.png",
-  "match": 99.29
+  "match": 99.21
  },
  {
   "id": "ks-202-sterringwheel",
@@ -1784,56 +1784,56 @@
  {
   "id": "ks-37-tunnel",
   "rho": 0.0,
-  "chars": 298,
-  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=\"inset:58px 108px 58px 109px;background:#6592cf;clip-path:polygon(100% 39px,144px 100%,3px 146px,0 142px,38px 0)\"></b><b style=\"inset:113px 162px 112px 163px;border-radius:2px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
+  "chars": 226,
+  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=left:125;top:75;padding:75;background:#6592cf;rotate:195deg></b><b style=\"inset:113px 162px 112px 163px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
   "shapes": 3,
   "png": "bench/tradeoff/ks-37-tunnel__0.0.png",
-  "match": 99.77
+  "match": 100.0
  },
  {
   "id": "ks-37-tunnel",
   "rho": 0.25,
-  "chars": 298,
-  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=\"inset:58px 108px 58px 109px;background:#6592cf;clip-path:polygon(100% 39px,144px 100%,3px 146px,0 142px,38px 0)\"></b><b style=\"inset:113px 162px 112px 163px;border-radius:2px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
+  "chars": 226,
+  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=left:125;top:75;padding:75;background:#6592cf;rotate:195deg></b><b style=\"inset:113px 162px 112px 163px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
   "shapes": 3,
   "png": "bench/tradeoff/ks-37-tunnel__0.25.png",
-  "match": 99.77
+  "match": 100.0
  },
  {
   "id": "ks-37-tunnel",
   "rho": 0.5,
-  "chars": 298,
-  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=\"inset:58px 108px 58px 109px;background:#6592cf;clip-path:polygon(100% 39px,144px 100%,3px 146px,0 142px,38px 0)\"></b><b style=\"inset:113px 162px 112px 163px;border-radius:2px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
+  "chars": 226,
+  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=left:125;top:75;padding:75;background:#6592cf;rotate:195deg></b><b style=\"inset:113px 162px 112px 163px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
   "shapes": 3,
   "png": "bench/tradeoff/ks-37-tunnel__0.5.png",
-  "match": 99.77
+  "match": 100.0
  },
  {
   "id": "ks-37-tunnel",
   "rho": 1.0,
-  "chars": 287,
-  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=\"left:108;top:58;padding:92;background:#6592cf;clip-path:polygon(100% 39px,145px 100%,0 145px,39px 0)\"></b><b style=\"inset:113px 162px 112px 163px;border-radius:2px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
+  "chars": 226,
+  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=left:125;top:75;padding:75;background:#6592cf;rotate:195deg></b><b style=\"inset:113px 162px 112px 163px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
   "shapes": 3,
   "png": "bench/tradeoff/ks-37-tunnel__1.0.png",
-  "match": 99.71
+  "match": 100.0
  },
  {
   "id": "ks-37-tunnel",
   "rho": 2.0,
-  "chars": 287,
-  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=\"left:108;top:58;padding:92;background:#6592cf;clip-path:polygon(100% 39px,145px 100%,0 145px,39px 0)\"></b><b style=\"inset:113px 162px 112px 163px;border-radius:2px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
+  "chars": 226,
+  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=left:125;top:75;padding:75;background:#6592cf;rotate:195deg></b><b style=\"inset:113px 162px 112px 163px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
   "shapes": 3,
   "png": "bench/tradeoff/ks-37-tunnel__2.0.png",
-  "match": 99.71
+  "match": 100.0
  },
  {
   "id": "ks-37-tunnel",
   "rho": 4.0,
-  "chars": 287,
-  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=\"left:108;top:58;padding:92;background:#6592cf;clip-path:polygon(100% 39px,145px 100%,0 145px,39px 0)\"></b><b style=\"inset:113px 162px 112px 163px;border-radius:2px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
+  "chars": 226,
+  "code": "<body bgcolor=6592cf><b style=left:75;top:25;padding:125><b style=left:125;top:75;padding:75;background:#6592cf;rotate:195deg></b><b style=\"inset:113px 162px 112px 163px;rotate:30deg\"><style>b{position:fixed;background:#243d83",
   "shapes": 3,
   "png": "bench/tradeoff/ks-37-tunnel__4.0.png",
-  "match": 99.71
+  "match": 100.0
  },
  {
   "id": "ks-46-mountains",
@@ -1946,8 +1946,8 @@
  {
   "id": "om-20240221",
   "rho": 0.0,
-  "chars": 368,
-  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px;border-radius:2px\"><style>b{position:fixed;background:#0a6b91",
+  "chars": 350,
+  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px\"><style>b{position:fixed;background:#0a6b91",
   "shapes": 5,
   "png": "bench/tradeoff/om-20240221__0.0.png",
   "match": 99.94
@@ -1955,8 +1955,8 @@
  {
   "id": "om-20240221",
   "rho": 0.25,
-  "chars": 368,
-  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px;border-radius:2px\"><style>b{position:fixed;background:#0a6b91",
+  "chars": 350,
+  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px\"><style>b{position:fixed;background:#0a6b91",
   "shapes": 5,
   "png": "bench/tradeoff/om-20240221__0.25.png",
   "match": 99.94
@@ -1964,8 +1964,8 @@
  {
   "id": "om-20240221",
   "rho": 0.5,
-  "chars": 368,
-  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px;border-radius:2px\"><style>b{position:fixed;background:#0a6b91",
+  "chars": 350,
+  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px\"><style>b{position:fixed;background:#0a6b91",
   "shapes": 5,
   "png": "bench/tradeoff/om-20240221__0.5.png",
   "match": 99.94
@@ -1973,8 +1973,8 @@
  {
   "id": "om-20240221",
   "rho": 1.0,
-  "chars": 368,
-  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px;border-radius:2px\"><style>b{position:fixed;background:#0a6b91",
+  "chars": 350,
+  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px\"><style>b{position:fixed;background:#0a6b91",
   "shapes": 5,
   "png": "bench/tradeoff/om-20240221__1.0.png",
   "match": 99.94
@@ -1982,8 +1982,8 @@
  {
   "id": "om-20240221",
   "rho": 2.0,
-  "chars": 368,
-  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px;border-radius:2px\"><style>b{position:fixed;background:#0a6b91",
+  "chars": 350,
+  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px\"><style>b{position:fixed;background:#0a6b91",
   "shapes": 5,
   "png": "bench/tradeoff/om-20240221__2.0.png",
   "match": 99.94
@@ -1991,8 +1991,8 @@
  {
   "id": "om-20240221",
   "rho": 4.0,
-  "chars": 368,
-  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px;border-radius:2px\"><style>b{position:fixed;background:#0a6b91",
+  "chars": 350,
+  "code": "<body bgcolor=acddf9><b style=\"inset:88px 100px 87px 100px;clip-path:polygon(0 100%,0 0,165px 0,100% 28%,100% 100%)\"></b><b style=\"inset:113px 175px 112px 125px;background:#acddf9;border-radius:10px\"><b style=\"inset:110px 245px 110px 150px;box-shadow:45px 0 #0a6b91\"><b style=\"inset:148px 174px 147px 124px\"><style>b{position:fixed;background:#0a6b91",
   "shapes": 5,
   "png": "bench/tradeoff/om-20240221__4.0.png",
   "match": 99.94
@@ -2000,110 +2000,110 @@
  {
   "id": "om-20240222",
   "rho": 0.0,
-  "chars": 393,
-  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:51;top:141;padding:49;border-radius:46px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
+  "chars": 391,
+  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=left:51;top:141;padding:49;border-radius:46px><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,100px 100px 0 20px #9ed7f8,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
   "shapes": 9,
   "png": "bench/tradeoff/om-20240222__0.0.png",
-  "match": 99.45
+  "match": 99.73
  },
  {
   "id": "om-20240222",
   "rho": 0.25,
-  "chars": 393,
-  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:51;top:141;padding:49;border-radius:46px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
+  "chars": 391,
+  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=left:51;top:141;padding:49;border-radius:46px><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,100px 100px 0 20px #9ed7f8,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
   "shapes": 9,
   "png": "bench/tradeoff/om-20240222__0.25.png",
-  "match": 99.45
+  "match": 99.73
  },
  {
   "id": "om-20240222",
   "rho": 0.5,
-  "chars": 393,
-  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:51;top:141;padding:49;border-radius:46px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
+  "chars": 391,
+  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=left:51;top:141;padding:49;border-radius:46px><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,100px 100px 0 20px #9ed7f8,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
   "shapes": 9,
   "png": "bench/tradeoff/om-20240222__0.5.png",
-  "match": 99.45
+  "match": 99.73
  },
  {
   "id": "om-20240222",
   "rho": 1.0,
-  "chars": 393,
-  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:51;top:141;padding:49;border-radius:46px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
+  "chars": 391,
+  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=left:51;top:141;padding:49;border-radius:46px><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,100px 100px 0 20px #9ed7f8,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
   "shapes": 9,
   "png": "bench/tradeoff/om-20240222__1.0.png",
-  "match": 99.45
+  "match": 99.73
  },
  {
   "id": "om-20240222",
   "rho": 2.0,
-  "chars": 393,
-  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:51;top:141;padding:49;border-radius:46px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
+  "chars": 391,
+  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=left:51;top:141;padding:49;border-radius:46px><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,100px 100px 0 20px #9ed7f8,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
   "shapes": 9,
   "png": "bench/tradeoff/om-20240222__2.0.png",
-  "match": 99.45
+  "match": 99.73
  },
  {
   "id": "om-20240222",
   "rho": 4.0,
-  "chars": 393,
-  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:51;top:141;padding:49;border-radius:46px;box-shadow:200px 0 #9ed7f8\"><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
+  "chars": 391,
+  "code": "<body bgcolor=0d2328><b style=\"inset:139px 190px 0 190px\"><b style=\"inset:239px 290px 0 90px;box-shadow:200px 0 #9ed7f8\"><b style=left:51;top:141;padding:49;border-radius:46px><b style=\"left:170;top:60;padding:30;background:#0d2328;border-radius:50%;box-shadow:100px 100px #0d2328,100px 100px 0 20px #9ed7f8,-100px 100px #0d2328,0 0 0 20px #9ed7f8\"><style>b{position:fixed;background:#9ed7f8",
   "shapes": 9,
   "png": "bench/tradeoff/om-20240222__4.0.png",
-  "match": 99.45
+  "match": 99.73
  },
  {
   "id": "om-20240224",
   "rho": 0.0,
-  "chars": 533,
-  "code": "<body bgcolor=9ed7f8><b style=\"inset:90px 50px 90px 50px;background:#277292;border-radius:20px\"><b style=\"left:191;top:106;padding:9;border-radius:7px 7px 8px 8px;box-shadow:-70px 0 #fff,-35px 0 #fff,35px 0 #fff,70px 0 #fff,-70px 35px #fff,-35px 35px #fff,0 35px #fff,35px 35px #fff,70px 35px #fff\"><b style=\"inset:105px 296px 175px 65px;box-shadow:230px 0 #fff,0 35px #fff,230px 35px #fff,0 70px #fff,230px 70px #fff\"><b style=\"inset:175px 121px 105px 120px\"><style>b{position:fixed;background:#fff;border-radius:14px 10px 10px 14px",
+  "chars": 496,
+  "code": "<body bgcolor=9ed7f8><b style=left:50;top:90;width:300;height:120;background:#277292;border-radius:20px><b style=\"width:20;border-radius:50%;box-shadow:35px 0 #fff,70px 0 #fff,105px 0 #fff,140px 0 #fff,0 35px #fff,35px 35px #fff,70px 35px #fff,105px 35px #fff,140px 35px #fff\"><b style=\"left:65;width:40;box-shadow:0 35px #fff,0 70px #fff,230px 0 #fff,230px 35px #fff,230px 70px #fff\"><b style=top:175;width:160><style>b{position:fixed;height:20;background:#fff;border-radius:1em;left:120;top:105",
   "shapes": 18,
   "png": "bench/tradeoff/om-20240224__0.0.png",
-  "match": 98.99
+  "match": 100.0
  },
  {
   "id": "om-20240224",
   "rho": 0.25,
-  "chars": 533,
-  "code": "<body bgcolor=9ed7f8><b style=\"inset:90px 50px 90px 50px;background:#277292;border-radius:20px\"><b style=\"left:191;top:106;padding:9;border-radius:7px 7px 8px 8px;box-shadow:-70px 0 #fff,-35px 0 #fff,35px 0 #fff,70px 0 #fff,-70px 35px #fff,-35px 35px #fff,0 35px #fff,35px 35px #fff,70px 35px #fff\"><b style=\"inset:105px 296px 175px 65px;box-shadow:230px 0 #fff,0 35px #fff,230px 35px #fff,0 70px #fff,230px 70px #fff\"><b style=\"inset:175px 121px 105px 120px\"><style>b{position:fixed;background:#fff;border-radius:14px 10px 10px 14px",
+  "chars": 496,
+  "code": "<body bgcolor=9ed7f8><b style=left:50;top:90;width:300;height:120;background:#277292;border-radius:20px><b style=\"width:20;border-radius:50%;box-shadow:35px 0 #fff,70px 0 #fff,105px 0 #fff,140px 0 #fff,0 35px #fff,35px 35px #fff,70px 35px #fff,105px 35px #fff,140px 35px #fff\"><b style=\"left:65;width:40;box-shadow:0 35px #fff,0 70px #fff,230px 0 #fff,230px 35px #fff,230px 70px #fff\"><b style=top:175;width:160><style>b{position:fixed;height:20;background:#fff;border-radius:1em;left:120;top:105",
   "shapes": 18,
   "png": "bench/tradeoff/om-20240224__0.25.png",
-  "match": 98.99
+  "match": 100.0
  },
  {
   "id": "om-20240224",
   "rho": 0.5,
-  "chars": 533,
-  "code": "<body bgcolor=9ed7f8><b style=\"inset:90px 50px 90px 50px;background:#277292;border-radius:20px\"><b style=\"left:191;top:106;padding:9;border-radius:7px 7px 8px 8px;box-shadow:-70px 0 #fff,-35px 0 #fff,35px 0 #fff,70px 0 #fff,-70px 35px #fff,-35px 35px #fff,0 35px #fff,35px 35px #fff,70px 35px #fff\"><b style=\"inset:105px 296px 175px 65px;box-shadow:230px 0 #fff,0 35px #fff,230px 35px #fff,0 70px #fff,230px 70px #fff\"><b style=\"inset:175px 121px 105px 120px\"><style>b{position:fixed;background:#fff;border-radius:14px 10px 10px 14px",
+  "chars": 496,
+  "code": "<body bgcolor=9ed7f8><b style=left:50;top:90;width:300;height:120;background:#277292;border-radius:20px><b style=\"width:20;border-radius:50%;box-shadow:35px 0 #fff,70px 0 #fff,105px 0 #fff,140px 0 #fff,0 35px #fff,35px 35px #fff,70px 35px #fff,105px 35px #fff,140px 35px #fff\"><b style=\"left:65;width:40;box-shadow:0 35px #fff,0 70px #fff,230px 0 #fff,230px 35px #fff,230px 70px #fff\"><b style=top:175;width:160><style>b{position:fixed;height:20;background:#fff;border-radius:1em;left:120;top:105",
   "shapes": 18,
   "png": "bench/tradeoff/om-20240224__0.5.png",
-  "match": 98.99
+  "match": 100.0
  },
  {
   "id": "om-20240224",
   "rho": 1.0,
-  "chars": 533,
-  "code": "<body bgcolor=9ed7f8><b style=\"inset:90px 50px 90px 50px;background:#277292;border-radius:20px\"><b style=\"left:191;top:106;padding:9;border-radius:7px 7px 8px 8px;box-shadow:-70px 0 #fff,-35px 0 #fff,35px 0 #fff,70px 0 #fff,-70px 35px #fff,-35px 35px #fff,0 35px #fff,35px 35px #fff,70px 35px #fff\"><b style=\"inset:105px 296px 175px 65px;box-shadow:230px 0 #fff,0 35px #fff,230px 35px #fff,0 70px #fff,230px 70px #fff\"><b style=\"inset:175px 121px 105px 120px\"><style>b{position:fixed;background:#fff;border-radius:14px 10px 10px 14px",
+  "chars": 496,
+  "code": "<body bgcolor=9ed7f8><b style=left:50;top:90;width:300;height:120;background:#277292;border-radius:20px><b style=\"width:20;border-radius:50%;box-shadow:35px 0 #fff,70px 0 #fff,105px 0 #fff,140px 0 #fff,0 35px #fff,35px 35px #fff,70px 35px #fff,105px 35px #fff,140px 35px #fff\"><b style=\"left:65;width:40;box-shadow:0 35px #fff,0 70px #fff,230px 0 #fff,230px 35px #fff,230px 70px #fff\"><b style=top:175;width:160><style>b{position:fixed;height:20;background:#fff;border-radius:1em;left:120;top:105",
   "shapes": 18,
   "png": "bench/tradeoff/om-20240224__1.0.png",
-  "match": 98.99
+  "match": 100.0
  },
  {
   "id": "om-20240224",
   "rho": 2.0,
-  "chars": 533,
-  "code": "<body bgcolor=9ed7f8><b style=\"inset:90px 50px 90px 50px;background:#277292;border-radius:20px\"><b style=\"left:191;top:106;padding:9;border-radius:7px 7px 8px 8px;box-shadow:-70px 0 #fff,-35px 0 #fff,35px 0 #fff,70px 0 #fff,-70px 35px #fff,-35px 35px #fff,0 35px #fff,35px 35px #fff,70px 35px #fff\"><b style=\"inset:105px 296px 175px 65px;box-shadow:230px 0 #fff,0 35px #fff,230px 35px #fff,0 70px #fff,230px 70px #fff\"><b style=\"inset:175px 121px 105px 120px\"><style>b{position:fixed;background:#fff;border-radius:14px 10px 10px 14px",
+  "chars": 496,
+  "code": "<body bgcolor=9ed7f8><b style=left:50;top:90;width:300;height:120;background:#277292;border-radius:20px><b style=\"width:20;border-radius:50%;box-shadow:35px 0 #fff,70px 0 #fff,105px 0 #fff,140px 0 #fff,0 35px #fff,35px 35px #fff,70px 35px #fff,105px 35px #fff,140px 35px #fff\"><b style=\"left:65;width:40;box-shadow:0 35px #fff,0 70px #fff,230px 0 #fff,230px 35px #fff,230px 70px #fff\"><b style=top:175;width:160><style>b{position:fixed;height:20;background:#fff;border-radius:1em;left:120;top:105",
   "shapes": 18,
   "png": "bench/tradeoff/om-20240224__2.0.png",
-  "match": 98.99
+  "match": 100.0
  },
  {
   "id": "om-20240224",
   "rho": 4.0,
-  "chars": 533,
-  "code": "<body bgcolor=9ed7f8><b style=\"inset:90px 50px 90px 50px;background:#277292;border-radius:20px\"><b style=\"left:191;top:106;padding:9;border-radius:7px 7px 8px 8px;box-shadow:-70px 0 #fff,-35px 0 #fff,35px 0 #fff,70px 0 #fff,-70px 35px #fff,-35px 35px #fff,0 35px #fff,35px 35px #fff,70px 35px #fff\"><b style=\"inset:105px 296px 175px 65px;box-shadow:230px 0 #fff,0 35px #fff,230px 35px #fff,0 70px #fff,230px 70px #fff\"><b style=\"inset:175px 121px 105px 120px\"><style>b{position:fixed;background:#fff;border-radius:14px 10px 10px 14px",
+  "chars": 496,
+  "code": "<body bgcolor=9ed7f8><b style=left:50;top:90;width:300;height:120;background:#277292;border-radius:20px><b style=\"width:20;border-radius:50%;box-shadow:35px 0 #fff,70px 0 #fff,105px 0 #fff,140px 0 #fff,0 35px #fff,35px 35px #fff,70px 35px #fff,105px 35px #fff,140px 35px #fff\"><b style=\"left:65;width:40;box-shadow:0 35px #fff,0 70px #fff,230px 0 #fff,230px 35px #fff,230px 70px #fff\"><b style=top:175;width:160><style>b{position:fixed;height:20;background:#fff;border-radius:1em;left:120;top:105",
   "shapes": 18,
   "png": "bench/tradeoff/om-20240224__4.0.png",
-  "match": 98.99
+  "match": 100.0
  },
  {
   "id": "om-20240225",
@@ -2270,8 +2270,8 @@
  {
   "id": "om-20240228",
   "rho": 0.0,
-  "chars": 568,
-  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 190px 0 -30px;border-radius:2em;box-shadow:230px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
+  "chars": 546,
+  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 200px 0 0;box-shadow:200px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240228__0.0.png",
   "match": 100.0
@@ -2279,8 +2279,8 @@
  {
   "id": "om-20240228",
   "rho": 0.25,
-  "chars": 568,
-  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 190px 0 -30px;border-radius:2em;box-shadow:230px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
+  "chars": 546,
+  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 200px 0 0;box-shadow:200px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240228__0.25.png",
   "match": 100.0
@@ -2288,8 +2288,8 @@
  {
   "id": "om-20240228",
   "rho": 0.5,
-  "chars": 568,
-  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 190px 0 -30px;border-radius:2em;box-shadow:230px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
+  "chars": 546,
+  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 200px 0 0;box-shadow:200px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240228__0.5.png",
   "match": 100.0
@@ -2297,8 +2297,8 @@
  {
   "id": "om-20240228",
   "rho": 1.0,
-  "chars": 568,
-  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 190px 0 -30px;border-radius:2em;box-shadow:230px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
+  "chars": 546,
+  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 200px 0 0;box-shadow:200px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240228__1.0.png",
   "match": 100.0
@@ -2306,8 +2306,8 @@
  {
   "id": "om-20240228",
   "rho": 2.0,
-  "chars": 568,
-  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 190px 0 -30px;border-radius:2em;box-shadow:230px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
+  "chars": 546,
+  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 200px 0 0;box-shadow:200px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240228__2.0.png",
   "match": 100.0
@@ -2315,8 +2315,8 @@
  {
   "id": "om-20240228",
   "rho": 4.0,
-  "chars": 568,
-  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 190px 0 -30px;border-radius:2em;box-shadow:230px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
+  "chars": 546,
+  "code": "<b style=\"left:240;top:50;padding:10;box-shadow:-100px 180px #0c6da2\"><i style=\"inset:130px 220px 130px 160px;box-shadow:60px 0 #acddf9\"><b style=\"inset:110px 180px 170px 180px;box-shadow:0 60px #0c6da2\"><i style=\"inset:210px 260px 70px 0;box-shadow:260px -140px #acddf9\"><i style=\"inset:250px 200px 0 0;box-shadow:200px -250px #acddf9\"><style>body{background:linear-gradient(90deg,#0c6da2 35%,#acddf9 0 40%,#0c6da2 0 45%,#acddf9 0 55%,#0c6da2 0 60%,#acddf9 0 65%,#0c6da2 0)}b{position:fixed;background:#0c6da2}i{position:fixed;background:#acddf9",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240228__4.0.png",
   "match": 100.0
@@ -2324,56 +2324,56 @@
  {
   "id": "om-20240301",
   "rho": 0.0,
-  "chars": 961,
-  "code": "<i style=\"clip-path:polygon(0 0,99% 0,91% 15px,90% 21px,26% 6px,12% 3px)\"></i><i style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></i><i style=top:160></i><i style=left:240;scale:-1></i><u></u><u style=left:344;top:150></u><u style=left:344;rotate:-13deg></u><u style=top:150;rotate:-13deg></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:100;height:21;background:#2bbbf3;left:61;top:119;clip-path:polygon(90% 0,93% 10px,99% 21px,0 21px,64% 6px,67% 6px,75% 3px,78% 3px)}u{position:fixed;width:91;height:42;background:#fff;border-radius:7px 3px 7px 7px;left:-35;top:108;rotate:13deg",
+  "chars": 935,
+  "code": "<i></i><i style=left:344;top:150></i><i style=left:344;rotate:-13deg></i><i style=top:150;rotate:-13deg></i><u style=\"clip-path:polygon(1% 0,100% 0,92% 15px,91% 21px,27% 6px,13% 3px)\"></u><u style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></u><u style=top:160></u><u style=left:240;scale:-1></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:91;height:42;background:#fff;left:-35;top:108;rotate:13deg}u{position:fixed;width:100;height:21;background:#2bbbf3;left:60;top:119;clip-path:polygon(91% 0,94% 10px,100% 21px,1% 21px,65% 6px,68% 6px,76% 3px,79% 3px)",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240301__0.0.png",
-  "match": 99.08
+  "match": 99.26
  },
  {
   "id": "om-20240301",
   "rho": 0.25,
-  "chars": 961,
-  "code": "<i style=\"clip-path:polygon(0 0,99% 0,91% 15px,90% 21px,26% 6px,12% 3px)\"></i><i style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></i><i style=top:160></i><i style=left:240;scale:-1></i><u></u><u style=left:344;top:150></u><u style=left:344;rotate:-13deg></u><u style=top:150;rotate:-13deg></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:100;height:21;background:#2bbbf3;left:61;top:119;clip-path:polygon(90% 0,93% 10px,99% 21px,0 21px,64% 6px,67% 6px,75% 3px,78% 3px)}u{position:fixed;width:91;height:42;background:#fff;border-radius:7px 3px 7px 7px;left:-35;top:108;rotate:13deg",
+  "chars": 935,
+  "code": "<i></i><i style=left:344;top:150></i><i style=left:344;rotate:-13deg></i><i style=top:150;rotate:-13deg></i><u style=\"clip-path:polygon(1% 0,100% 0,92% 15px,91% 21px,27% 6px,13% 3px)\"></u><u style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></u><u style=top:160></u><u style=left:240;scale:-1></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:91;height:42;background:#fff;left:-35;top:108;rotate:13deg}u{position:fixed;width:100;height:21;background:#2bbbf3;left:60;top:119;clip-path:polygon(91% 0,94% 10px,100% 21px,1% 21px,65% 6px,68% 6px,76% 3px,79% 3px)",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240301__0.25.png",
-  "match": 99.08
+  "match": 99.26
  },
  {
   "id": "om-20240301",
   "rho": 0.5,
-  "chars": 961,
-  "code": "<i style=\"clip-path:polygon(0 0,99% 0,91% 15px,90% 21px,26% 6px,12% 3px)\"></i><i style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></i><i style=top:160></i><i style=left:240;scale:-1></i><u></u><u style=left:344;top:150></u><u style=left:344;rotate:-13deg></u><u style=top:150;rotate:-13deg></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:100;height:21;background:#2bbbf3;left:61;top:119;clip-path:polygon(90% 0,93% 10px,99% 21px,0 21px,64% 6px,67% 6px,75% 3px,78% 3px)}u{position:fixed;width:91;height:42;background:#fff;border-radius:7px 3px 7px 7px;left:-35;top:108;rotate:13deg",
+  "chars": 935,
+  "code": "<i></i><i style=left:344;top:150></i><i style=left:344;rotate:-13deg></i><i style=top:150;rotate:-13deg></i><u style=\"clip-path:polygon(1% 0,100% 0,92% 15px,91% 21px,27% 6px,13% 3px)\"></u><u style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></u><u style=top:160></u><u style=left:240;scale:-1></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:91;height:42;background:#fff;left:-35;top:108;rotate:13deg}u{position:fixed;width:100;height:21;background:#2bbbf3;left:60;top:119;clip-path:polygon(91% 0,94% 10px,100% 21px,1% 21px,65% 6px,68% 6px,76% 3px,79% 3px)",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240301__0.5.png",
-  "match": 99.08
+  "match": 99.26
  },
  {
   "id": "om-20240301",
   "rho": 1.0,
-  "chars": 961,
-  "code": "<i style=\"clip-path:polygon(0 0,99% 0,91% 15px,90% 21px,26% 6px,12% 3px)\"></i><i style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></i><i style=top:160></i><i style=left:240;scale:-1></i><u></u><u style=left:344;top:150></u><u style=left:344;rotate:-13deg></u><u style=top:150;rotate:-13deg></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:100;height:21;background:#2bbbf3;left:61;top:119;clip-path:polygon(90% 0,93% 10px,99% 21px,0 21px,64% 6px,67% 6px,75% 3px,78% 3px)}u{position:fixed;width:91;height:42;background:#fff;border-radius:7px 3px 7px 7px;left:-35;top:108;rotate:13deg",
+  "chars": 935,
+  "code": "<i></i><i style=left:344;top:150></i><i style=left:344;rotate:-13deg></i><i style=top:150;rotate:-13deg></i><u style=\"clip-path:polygon(1% 0,100% 0,92% 15px,91% 21px,27% 6px,13% 3px)\"></u><u style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></u><u style=top:160></u><u style=left:240;scale:-1></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:91;height:42;background:#fff;left:-35;top:108;rotate:13deg}u{position:fixed;width:100;height:21;background:#2bbbf3;left:60;top:119;clip-path:polygon(91% 0,94% 10px,100% 21px,1% 21px,65% 6px,68% 6px,76% 3px,79% 3px)",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240301__1.0.png",
-  "match": 99.08
+  "match": 99.26
  },
  {
   "id": "om-20240301",
   "rho": 2.0,
-  "chars": 961,
-  "code": "<i style=\"clip-path:polygon(0 0,99% 0,91% 15px,90% 21px,26% 6px,12% 3px)\"></i><i style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></i><i style=top:160></i><i style=left:240;scale:-1></i><u></u><u style=left:344;top:150></u><u style=left:344;rotate:-13deg></u><u style=top:150;rotate:-13deg></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:100;height:21;background:#2bbbf3;left:61;top:119;clip-path:polygon(90% 0,93% 10px,99% 21px,0 21px,64% 6px,67% 6px,75% 3px,78% 3px)}u{position:fixed;width:91;height:42;background:#fff;border-radius:7px 3px 7px 7px;left:-35;top:108;rotate:13deg",
+  "chars": 935,
+  "code": "<i></i><i style=left:344;top:150></i><i style=left:344;rotate:-13deg></i><i style=top:150;rotate:-13deg></i><u style=\"clip-path:polygon(1% 0,100% 0,92% 15px,91% 21px,27% 6px,13% 3px)\"></u><u style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></u><u style=top:160></u><u style=left:240;scale:-1></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:91;height:42;background:#fff;left:-35;top:108;rotate:13deg}u{position:fixed;width:100;height:21;background:#2bbbf3;left:60;top:119;clip-path:polygon(91% 0,94% 10px,100% 21px,1% 21px,65% 6px,68% 6px,76% 3px,79% 3px)",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240301__2.0.png",
-  "match": 99.08
+  "match": 99.26
  },
  {
   "id": "om-20240301",
   "rho": 4.0,
-  "chars": 961,
-  "code": "<i style=\"clip-path:polygon(0 0,99% 0,91% 15px,90% 21px,26% 6px,12% 3px)\"></i><i style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></i><i style=top:160></i><i style=left:240;scale:-1></i><u></u><u style=left:344;top:150></u><u style=left:344;rotate:-13deg></u><u style=top:150;rotate:-13deg></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:100;height:21;background:#2bbbf3;left:61;top:119;clip-path:polygon(90% 0,93% 10px,99% 21px,0 21px,64% 6px,67% 6px,75% 3px,78% 3px)}u{position:fixed;width:91;height:42;background:#fff;border-radius:7px 3px 7px 7px;left:-35;top:108;rotate:13deg",
+  "chars": 935,
+  "code": "<i></i><i style=left:344;top:150></i><i style=left:344;rotate:-13deg></i><i style=top:150;rotate:-13deg></i><u style=\"clip-path:polygon(1% 0,100% 0,92% 15px,91% 21px,27% 6px,13% 3px)\"></u><u style=\"left:240;top:160;clip-path:polygon(9% 0,73% 15px,100% 21px,0 21px,8% 5px)\"></u><u style=top:160></u><u style=left:240;scale:-1></u><b style=\"top:180;clip-path:polygon(1px 1px,79px 1px,71px 10px,50px 19px,74px 100%,6px 100%,30px 19px,9px 10px)\"></b><b style=\"top:0;clip-path:polygon(6px 0,74px 0,50px 101px,71px 110px,79px 119px,1px 119px,9px 110px,30px 101px)\"><style>body{background:linear-gradient(#2bbbf3 119px,#fff 0 181px,#2bbbf3 0)}b{position:fixed;width:80;height:120;background:#fff;left:160}i{position:fixed;width:91;height:42;background:#fff;left:-35;top:108;rotate:13deg}u{position:fixed;width:100;height:21;background:#2bbbf3;left:60;top:119;clip-path:polygon(91% 0,94% 10px,100% 21px,1% 21px,65% 6px,68% 6px,76% 3px,79% 3px)",
   "shapes": 10,
   "png": "bench/tradeoff/om-20240301__4.0.png",
-  "match": 99.08
+  "match": 99.26
  },
  {
   "id": "om-20240304",
@@ -2513,8 +2513,8 @@
  {
   "id": "om-20240312",
   "rho": 1.0,
-  "chars": 532,
-  "code": "<body bgcolor=085328><i style=\"border-radius:0 15px 2px 0\"><i style=\"left:130;border-radius:15px 0 0 2px\"><i style=\"top:80;border-radius:0 2px 15px 0\"><i style=\"left:130;top:80;border-radius:2px 0 0 15px\"><b style=\"left:204;width:86;border-radius:1em;box-shadow:0 170px #49c85b\"><b style=\"left:110;width:70;border-radius:15px 0 0 15px;box-shadow:0 170px #49c85b\"><b style=left:180;width:40;height:200><style>b{position:fixed;height:30;background:#49c85b;top:50}i{position:fixed;width:50;height:20;background:#0a9949;left:220;top:200",
+  "chars": 524,
+  "code": "<body bgcolor=085328><i style=\"border-radius:0 15px 0 0\"><i style=\"left:130;border-radius:15px 0 0 0\"><i style=\"top:80;border-radius:0 0 15px 0\"><i style=\"left:130;top:80;border-radius:0 0 0 15px\"><b style=\"left:204;width:86;border-radius:1em;box-shadow:0 170px #49c85b\"><b style=\"left:110;width:70;border-radius:15px 0 0 15px;box-shadow:0 170px #49c85b\"><b style=left:180;width:40;height:200><style>b{position:fixed;height:30;background:#49c85b;top:50}i{position:fixed;width:50;height:20;background:#0a9949;left:220;top:200",
   "shapes": 9,
   "png": "bench/tradeoff/om-20240312__1.0.png",
   "match": 99.94
@@ -2522,20 +2522,20 @@
  {
   "id": "om-20240312",
   "rho": 2.0,
-  "chars": 532,
-  "code": "<body bgcolor=085328><i style=\"border-radius:0 15px 2px 0\"><i style=\"left:130;border-radius:15px 0 0 2px\"><i style=\"top:80;border-radius:0 2px 15px 0\"><i style=\"left:130;top:80;border-radius:2px 0 0 15px\"><b style=\"left:204;width:86;border-radius:1em;box-shadow:0 170px #49c85b\"><b style=\"left:110;width:70;border-radius:15px 0 0 15px;box-shadow:0 170px #49c85b\"><b style=left:180;width:40;height:200><style>b{position:fixed;height:30;background:#49c85b;top:50}i{position:fixed;width:50;height:20;background:#0a9949;left:220;top:200",
+  "chars": 491,
+  "code": "<body bgcolor=085328><i><i style=\"left:130;border-radius:15px 0 0 0\"><i style=\"top:80;border-radius:0 0 15px 0\"><i style=\"left:130;top:80;border-radius:0 0 0 15px\"><b style=\"left:204;width:86;border-radius:1em;box-shadow:0 170px #49c85b\"><b style=\"left:110;width:70;border-radius:15px 0 0 15px;box-shadow:0 170px #49c85b\"><b style=left:180;width:40;height:200><style>b{position:fixed;height:30;background:#49c85b;top:50}i{position:fixed;width:50;height:20;background:#0a9949;left:220;top:200",
   "shapes": 9,
   "png": "bench/tradeoff/om-20240312__2.0.png",
-  "match": 99.94
+  "match": 99.9
  },
  {
   "id": "om-20240312",
   "rho": 4.0,
-  "chars": 532,
-  "code": "<body bgcolor=085328><i style=\"border-radius:0 15px 2px 0\"><i style=\"left:130;border-radius:15px 0 0 2px\"><i style=\"top:80;border-radius:0 2px 15px 0\"><i style=\"left:130;top:80;border-radius:2px 0 0 15px\"><b style=\"left:204;width:86;border-radius:1em;box-shadow:0 170px #49c85b\"><b style=\"left:110;width:70;border-radius:15px 0 0 15px;box-shadow:0 170px #49c85b\"><b style=left:180;width:40;height:200><style>b{position:fixed;height:30;background:#49c85b;top:50}i{position:fixed;width:50;height:20;background:#0a9949;left:220;top:200",
+  "chars": 402,
+  "code": "<body bgcolor=085328><b style=\"inset:80px 220px 200px 130px;background:#0a9949;box-shadow:90px 0 #0a9949,0 120px #0a9949,90px 120px #0a9949\"><b style=\"inset:50px 110px 220px 204px;border-radius:1em;box-shadow:0 170px #49c85b\"><b style=\"inset:50px 220px 220px 110px;border-radius:15px 0 0 15px;box-shadow:0 170px #49c85b\"><b style=\"inset:50px 180px 50px 180px\"><style>b{position:fixed;background:#49c85b",
   "shapes": 9,
   "png": "bench/tradeoff/om-20240312__4.0.png",
-  "match": 99.94
+  "match": 99.77
  },
  {
   "id": "om-20240314",
@@ -2864,56 +2864,56 @@
  {
   "id": "om-20240321",
   "rho": 0.0,
-  "chars": 436,
-  "code": "<body bgcolor=301e53><b style=\"inset:125px 75px 125px 255px\"><b style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,124px 101%,76px 50%,0 50%)\"></b><b style=\"inset:125px 191px 67px 145px;background:#301e53;clip-path:polygon(0 0,10px 0,10px 56px,64px 100%,0 58px)\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"><style>b{position:fixed;background:#a6a0be",
-  "shapes": 4,
+  "chars": 453,
+  "code": "<body bgcolor=301e53><i style=\"inset:125px 75px 125px 255px\"><i style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,125px 100%,69px 50%,0 50%)\"></i><b style=\"inset:199px 199px 86px 141px;rotate:44deg\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"></b><b style=\"inset:120px 245px 80px 145px\"><style>b{position:fixed;background:#301e53}i{position:fixed;background:#a6a0be",
+  "shapes": 5,
   "png": "bench/tradeoff/om-20240321__0.0.png",
-  "match": 99.88
+  "match": 99.86
  },
  {
   "id": "om-20240321",
   "rho": 0.25,
-  "chars": 436,
-  "code": "<body bgcolor=301e53><b style=\"inset:125px 75px 125px 255px\"><b style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,124px 101%,76px 50%,0 50%)\"></b><b style=\"inset:125px 191px 67px 145px;background:#301e53;clip-path:polygon(0 0,10px 0,10px 56px,64px 100%,0 58px)\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"><style>b{position:fixed;background:#a6a0be",
-  "shapes": 4,
+  "chars": 453,
+  "code": "<body bgcolor=301e53><i style=\"inset:125px 75px 125px 255px\"><i style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,125px 100%,69px 50%,0 50%)\"></i><b style=\"inset:199px 199px 86px 141px;rotate:44deg\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"></b><b style=\"inset:120px 245px 80px 145px\"><style>b{position:fixed;background:#301e53}i{position:fixed;background:#a6a0be",
+  "shapes": 5,
   "png": "bench/tradeoff/om-20240321__0.25.png",
-  "match": 99.88
+  "match": 99.86
  },
  {
   "id": "om-20240321",
   "rho": 0.5,
-  "chars": 436,
-  "code": "<body bgcolor=301e53><b style=\"inset:125px 75px 125px 255px\"><b style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,124px 101%,76px 50%,0 50%)\"></b><b style=\"inset:125px 191px 67px 145px;background:#301e53;clip-path:polygon(0 0,10px 0,10px 56px,64px 100%,0 58px)\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"><style>b{position:fixed;background:#a6a0be",
-  "shapes": 4,
+  "chars": 453,
+  "code": "<body bgcolor=301e53><i style=\"inset:125px 75px 125px 255px\"><i style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,125px 100%,69px 50%,0 50%)\"></i><b style=\"inset:199px 199px 86px 141px;rotate:44deg\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"></b><b style=\"inset:120px 245px 80px 145px\"><style>b{position:fixed;background:#301e53}i{position:fixed;background:#a6a0be",
+  "shapes": 5,
   "png": "bench/tradeoff/om-20240321__0.5.png",
-  "match": 99.88
+  "match": 99.86
  },
  {
   "id": "om-20240321",
   "rho": 1.0,
-  "chars": 436,
-  "code": "<body bgcolor=301e53><b style=\"inset:125px 75px 125px 255px\"><b style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,124px 101%,76px 50%,0 50%)\"></b><b style=\"inset:125px 191px 67px 145px;background:#301e53;clip-path:polygon(0 0,10px 0,10px 56px,64px 100%,0 58px)\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"><style>b{position:fixed;background:#a6a0be",
-  "shapes": 4,
+  "chars": 453,
+  "code": "<body bgcolor=301e53><i style=\"inset:125px 75px 125px 255px\"><i style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,125px 100%,69px 50%,0 50%)\"></i><b style=\"inset:199px 199px 86px 141px;rotate:44deg\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"></b><b style=\"inset:120px 245px 80px 145px\"><style>b{position:fixed;background:#301e53}i{position:fixed;background:#a6a0be",
+  "shapes": 5,
   "png": "bench/tradeoff/om-20240321__1.0.png",
-  "match": 99.88
+  "match": 99.86
  },
  {
   "id": "om-20240321",
   "rho": 2.0,
-  "chars": 427,
-  "code": "<body bgcolor=301e53><b style=\"inset:125px 75px 125px 255px\"><b style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,124px 101%,76px 50%,0 50%)\"></b><b style=\"left:145;top:125;padding:29 5;background:#301e53;clip-path:polygon(0 0,10px 0,10px 56px,0 58px)\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"><style>b{position:fixed;background:#a6a0be",
+  "chars": 379,
+  "code": "<body bgcolor=301e53><b style=\"inset:125px 75px 125px 255px\"><b style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,125px 100%,69px 50%,0 50%)\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"></b><b style=\"inset:120px 245px 80px 145px;background:#301e53\"><style>b{position:fixed;background:#a6a0be",
   "shapes": 4,
   "png": "bench/tradeoff/om-20240321__2.0.png",
-  "match": 99.85
+  "match": 99.78
  },
  {
   "id": "om-20240321",
   "rho": 4.0,
-  "chars": 427,
-  "code": "<body bgcolor=301e53><b style=\"inset:125px 75px 125px 255px\"><b style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,124px 101%,76px 50%,0 50%)\"></b><b style=\"left:145;top:125;padding:29 5;background:#301e53;clip-path:polygon(0 0,10px 0,10px 56px,0 58px)\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"><style>b{position:fixed;background:#a6a0be",
+  "chars": 379,
+  "code": "<body bgcolor=301e53><b style=\"inset:125px 75px 125px 255px\"><b style=\"inset:125px 155px 75px 75px;clip-path:polygon(0 0,100% 0,100% 55%,125px 100%,69px 50%,0 50%)\"></b><b style=\"inset:75px 50px 185px 50px;background:#766d94;clip-path:polygon(0 0,100% 0,87% 40px,13% 40px)\"></b><b style=\"inset:120px 245px 80px 145px;background:#301e53\"><style>b{position:fixed;background:#a6a0be",
   "shapes": 4,
   "png": "bench/tradeoff/om-20240321__4.0.png",
-  "match": 99.85
+  "match": 99.78
  },
  {
   "id": "om-20240322",
@@ -3026,8 +3026,8 @@
  {
   "id": "om-20240324",
   "rho": 0.0,
-  "chars": 445,
-  "code": "<body bgcolor=6c1715><i style=\"inset:180px 120px 100px 240px;clip-path:polygon(1px 0,35px 0,19px 85%)\"></i><i style=\"inset:85px 140px 35px 125px;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></i><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px;border-radius:8px 0 0 0\"><style>b{position:fixed;background:#6c1715}i{position:fixed;background:#c8393a",
+  "chars": 421,
+  "code": "<body bgcolor=6c1715><i style=\"inset:180px 120px 100px 240px;clip-path:polygon(1px 0,35px 0,19px 85%)\"></i><i style=\"inset:85px 140px 35px 125px;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></i><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px\"><style>b{position:fixed;background:#6c1715}i{position:fixed;background:#c8393a",
   "shapes": 5,
   "png": "bench/tradeoff/om-20240324__0.0.png",
   "match": 99.93
@@ -3035,8 +3035,8 @@
  {
   "id": "om-20240324",
   "rho": 0.25,
-  "chars": 445,
-  "code": "<body bgcolor=6c1715><i style=\"inset:180px 120px 100px 240px;clip-path:polygon(1px 0,35px 0,19px 85%)\"></i><i style=\"inset:85px 140px 35px 125px;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></i><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px;border-radius:8px 0 0 0\"><style>b{position:fixed;background:#6c1715}i{position:fixed;background:#c8393a",
+  "chars": 421,
+  "code": "<body bgcolor=6c1715><i style=\"inset:180px 120px 100px 240px;clip-path:polygon(1px 0,35px 0,19px 85%)\"></i><i style=\"inset:85px 140px 35px 125px;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></i><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px\"><style>b{position:fixed;background:#6c1715}i{position:fixed;background:#c8393a",
   "shapes": 5,
   "png": "bench/tradeoff/om-20240324__0.25.png",
   "match": 99.93
@@ -3044,8 +3044,8 @@
  {
   "id": "om-20240324",
   "rho": 0.5,
-  "chars": 445,
-  "code": "<body bgcolor=6c1715><i style=\"inset:180px 120px 100px 240px;clip-path:polygon(1px 0,35px 0,19px 85%)\"></i><i style=\"inset:85px 140px 35px 125px;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></i><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px;border-radius:8px 0 0 0\"><style>b{position:fixed;background:#6c1715}i{position:fixed;background:#c8393a",
+  "chars": 421,
+  "code": "<body bgcolor=6c1715><i style=\"inset:180px 120px 100px 240px;clip-path:polygon(1px 0,35px 0,19px 85%)\"></i><i style=\"inset:85px 140px 35px 125px;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></i><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px\"><style>b{position:fixed;background:#6c1715}i{position:fixed;background:#c8393a",
   "shapes": 5,
   "png": "bench/tradeoff/om-20240324__0.5.png",
   "match": 99.93
@@ -3053,8 +3053,8 @@
  {
   "id": "om-20240324",
   "rho": 1.0,
-  "chars": 445,
-  "code": "<body bgcolor=6c1715><i style=\"inset:180px 120px 100px 240px;clip-path:polygon(1px 0,35px 0,19px 85%)\"></i><i style=\"inset:85px 140px 35px 125px;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></i><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px;border-radius:8px 0 0 0\"><style>b{position:fixed;background:#6c1715}i{position:fixed;background:#c8393a",
+  "chars": 421,
+  "code": "<body bgcolor=6c1715><i style=\"inset:180px 120px 100px 240px;clip-path:polygon(1px 0,35px 0,19px 85%)\"></i><i style=\"inset:85px 140px 35px 125px;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></i><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px\"><style>b{position:fixed;background:#6c1715}i{position:fixed;background:#c8393a",
   "shapes": 5,
   "png": "bench/tradeoff/om-20240324__1.0.png",
   "match": 99.93
@@ -3062,8 +3062,8 @@
  {
   "id": "om-20240324",
   "rho": 2.0,
-  "chars": 445,
-  "code": "<body bgcolor=6c1715><i style=\"inset:180px 120px 100px 240px;clip-path:polygon(1px 0,35px 0,19px 85%)\"></i><i style=\"inset:85px 140px 35px 125px;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></i><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px;border-radius:8px 0 0 0\"><style>b{position:fixed;background:#6c1715}i{position:fixed;background:#c8393a",
+  "chars": 421,
+  "code": "<body bgcolor=6c1715><i style=\"inset:180px 120px 100px 240px;clip-path:polygon(1px 0,35px 0,19px 85%)\"></i><i style=\"inset:85px 140px 35px 125px;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></i><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px\"><style>b{position:fixed;background:#6c1715}i{position:fixed;background:#c8393a",
   "shapes": 5,
   "png": "bench/tradeoff/om-20240324__2.0.png",
   "match": 99.93
@@ -3071,8 +3071,8 @@
  {
   "id": "om-20240324",
   "rho": 4.0,
-  "chars": 342,
-  "code": "<body bgcolor=6c1715><b style=\"inset:85px 140px 35px 125px;background:#c8393a;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></b><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px;border-radius:8px 0 0 0\"><style>b{position:fixed;background:#6c1715",
+  "chars": 318,
+  "code": "<body bgcolor=6c1715><b style=\"inset:85px 140px 35px 125px;background:#c8393a;clip-path:polygon(0 95px,65px 95px,65px 0,134px 112px,75px 175px)\"></b><b style=\"left:170;top:60;padding:30;border-radius:50%;box-shadow:0 0 0 20px #c8393a\"><b style=\"inset:136px 150px 120px 210px\"><style>b{position:fixed;background:#6c1715",
   "shapes": 4,
   "png": "bench/tradeoff/om-20240324__4.0.png",
   "match": 99.73
@@ -3080,54 +3080,54 @@
  {
   "id": "om-20240325",
   "rho": 0.0,
-  "chars": 282,
-  "code": "<body bgcolor=05476c><b style=\"inset:-44px 80px 100px 220px;border-radius:50px 0 50px 50px\"><b style=\"inset:250px 220px 0 80px;box-shadow:140px -200px #ceedff,0 -50px #ceedff\"><b style=\"left:80;top:100;padding:50;border-radius:50% 50% 0 0\"><style>b{position:fixed;background:#2bbbf3",
-  "shapes": 5,
+  "chars": 275,
+  "code": "<body bgcolor=05476c><b style=\"left:220;top:-44;border-radius:0 0 50px 50px\"><b style=\"top:100;border-radius:50px 50px 0 0\"><b style=\"top:200;height:50;background:#ceedff;box-shadow:140px -150px #ceedff\"><style>b{position:fixed;width:100;height:244;background:#2bbbf3;left:80",
+  "shapes": 4,
   "png": "bench/tradeoff/om-20240325__0.0.png",
   "match": 99.86
  },
  {
   "id": "om-20240325",
   "rho": 0.25,
-  "chars": 282,
-  "code": "<body bgcolor=05476c><b style=\"inset:-44px 80px 100px 220px;border-radius:50px 0 50px 50px\"><b style=\"inset:250px 220px 0 80px;box-shadow:140px -200px #ceedff,0 -50px #ceedff\"><b style=\"left:80;top:100;padding:50;border-radius:50% 50% 0 0\"><style>b{position:fixed;background:#2bbbf3",
-  "shapes": 5,
+  "chars": 275,
+  "code": "<body bgcolor=05476c><b style=\"left:220;top:-44;border-radius:0 0 50px 50px\"><b style=\"top:100;border-radius:50px 50px 0 0\"><b style=\"top:200;height:50;background:#ceedff;box-shadow:140px -150px #ceedff\"><style>b{position:fixed;width:100;height:244;background:#2bbbf3;left:80",
+  "shapes": 4,
   "png": "bench/tradeoff/om-20240325__0.25.png",
   "match": 99.86
  },
  {
   "id": "om-20240325",
   "rho": 0.5,
-  "chars": 282,
-  "code": "<body bgcolor=05476c><b style=\"inset:-44px 80px 100px 220px;border-radius:50px 0 50px 50px\"><b style=\"inset:250px 220px 0 80px;box-shadow:140px -200px #ceedff,0 -50px #ceedff\"><b style=\"left:80;top:100;padding:50;border-radius:50% 50% 0 0\"><style>b{position:fixed;background:#2bbbf3",
-  "shapes": 5,
+  "chars": 275,
+  "code": "<body bgcolor=05476c><b style=\"left:220;top:-44;border-radius:0 0 50px 50px\"><b style=\"top:100;border-radius:50px 50px 0 0\"><b style=\"top:200;height:50;background:#ceedff;box-shadow:140px -150px #ceedff\"><style>b{position:fixed;width:100;height:244;background:#2bbbf3;left:80",
+  "shapes": 4,
   "png": "bench/tradeoff/om-20240325__0.5.png",
   "match": 99.86
  },
  {
   "id": "om-20240325",
   "rho": 1.0,
-  "chars": 282,
-  "code": "<body bgcolor=05476c><b style=\"inset:-44px 80px 100px 220px;border-radius:50px 0 50px 50px\"><b style=\"inset:250px 220px 0 80px;box-shadow:140px -200px #ceedff,0 -50px #ceedff\"><b style=\"left:80;top:100;padding:50;border-radius:50% 50% 0 0\"><style>b{position:fixed;background:#2bbbf3",
-  "shapes": 5,
+  "chars": 275,
+  "code": "<body bgcolor=05476c><b style=\"left:220;top:-44;border-radius:0 0 50px 50px\"><b style=\"top:100;border-radius:50px 50px 0 0\"><b style=\"top:200;height:50;background:#ceedff;box-shadow:140px -150px #ceedff\"><style>b{position:fixed;width:100;height:244;background:#2bbbf3;left:80",
+  "shapes": 4,
   "png": "bench/tradeoff/om-20240325__1.0.png",
   "match": 99.86
  },
  {
   "id": "om-20240325",
   "rho": 2.0,
-  "chars": 282,
-  "code": "<body bgcolor=05476c><b style=\"inset:-44px 80px 100px 220px;border-radius:50px 0 50px 50px\"><b style=\"inset:250px 220px 0 80px;box-shadow:140px -200px #ceedff,0 -50px #ceedff\"><b style=\"left:80;top:100;padding:50;border-radius:50% 50% 0 0\"><style>b{position:fixed;background:#2bbbf3",
-  "shapes": 5,
+  "chars": 275,
+  "code": "<body bgcolor=05476c><b style=\"left:220;top:-44;border-radius:0 0 50px 50px\"><b style=\"top:100;border-radius:50px 50px 0 0\"><b style=\"top:200;height:50;background:#ceedff;box-shadow:140px -150px #ceedff\"><style>b{position:fixed;width:100;height:244;background:#2bbbf3;left:80",
+  "shapes": 4,
   "png": "bench/tradeoff/om-20240325__2.0.png",
   "match": 99.86
  },
  {
   "id": "om-20240325",
   "rho": 4.0,
-  "chars": 282,
-  "code": "<body bgcolor=05476c><b style=\"inset:-44px 80px 100px 220px;border-radius:50px 0 50px 50px\"><b style=\"inset:250px 220px 0 80px;box-shadow:140px -200px #ceedff,0 -50px #ceedff\"><b style=\"left:80;top:100;padding:50;border-radius:50% 50% 0 0\"><style>b{position:fixed;background:#2bbbf3",
-  "shapes": 5,
+  "chars": 275,
+  "code": "<body bgcolor=05476c><b style=\"left:220;top:-44;border-radius:0 0 50px 50px\"><b style=\"top:100;border-radius:50px 50px 0 0\"><b style=\"top:200;height:50;background:#ceedff;box-shadow:140px -150px #ceedff\"><style>b{position:fixed;width:100;height:244;background:#2bbbf3;left:80",
+  "shapes": 4,
   "png": "bench/tradeoff/om-20240325__4.0.png",
   "match": 99.86
  },
@@ -3242,62 +3242,62 @@
  {
   "id": "om-20240328",
   "rho": 0.0,
-  "chars": 375,
-  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 161px 85px;background:#611b3f;border-radius:17px 17px 16px 16px;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
+  "chars": 359,
+  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 160px 85px;background:#611b3f;border-radius:1em;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
   "shapes": 11,
   "png": "bench/tradeoff/om-20240328__0.0.png",
-  "match": 99.43
+  "match": 100.0
  },
  {
   "id": "om-20240328",
   "rho": 0.25,
-  "chars": 375,
-  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 161px 85px;background:#611b3f;border-radius:17px 17px 16px 16px;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
+  "chars": 359,
+  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 160px 85px;background:#611b3f;border-radius:1em;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
   "shapes": 11,
   "png": "bench/tradeoff/om-20240328__0.25.png",
-  "match": 99.43
+  "match": 100.0
  },
  {
   "id": "om-20240328",
   "rho": 0.5,
-  "chars": 375,
-  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 161px 85px;background:#611b3f;border-radius:17px 17px 16px 16px;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
+  "chars": 359,
+  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 160px 85px;background:#611b3f;border-radius:1em;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
   "shapes": 11,
   "png": "bench/tradeoff/om-20240328__0.5.png",
-  "match": 99.43
+  "match": 100.0
  },
  {
   "id": "om-20240328",
   "rho": 1.0,
-  "chars": 375,
-  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 161px 85px;background:#611b3f;border-radius:17px 17px 16px 16px;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
+  "chars": 359,
+  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 160px 85px;background:#611b3f;border-radius:1em;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
   "shapes": 11,
   "png": "bench/tradeoff/om-20240328__1.0.png",
-  "match": 99.43
+  "match": 100.0
  },
  {
   "id": "om-20240328",
   "rho": 2.0,
-  "chars": 375,
-  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 161px 85px;background:#611b3f;border-radius:17px 17px 16px 16px;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
+  "chars": 359,
+  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 160px 85px;background:#611b3f;border-radius:1em;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
   "shapes": 11,
   "png": "bench/tradeoff/om-20240328__2.0.png",
-  "match": 99.43
+  "match": 100.0
  },
  {
   "id": "om-20240328",
   "rho": 4.0,
-  "chars": 375,
-  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 161px 85px;background:#611b3f;border-radius:17px 17px 16px 16px;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
+  "chars": 359,
+  "code": "<body bgcolor=611b3f><b style=\"inset:60px 55px 60px 55px;background:#be3184;border-radius:40px\"><b style=\"inset:90px 285px 160px 85px;background:#611b3f;border-radius:1em;box-shadow:50px 0 #611b3f,100px 0 #611b3f,150px 0 #611b3f,200px 0 #611b3f,0 70px #611b3f,50px 70px #611b3f,100px 70px #611b3f,150px 70px #611b3f,200px 70px #611b3f\"><style>b{position:fixed",
   "shapes": 11,
   "png": "bench/tradeoff/om-20240328__4.0.png",
-  "match": 99.43
+  "match": 100.0
  },
  {
   "id": "om-20240329",
   "rho": 0.0,
-  "chars": 375,
-  "code": "<body bgcolor=504371><b style=\"left:125;top:75;padding:75;border-radius:14% 0 25px 0;rotate:135deg\"></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 280px 135px -20px;border-radius:1em\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
+  "chars": 324,
+  "code": "<body bgcolor=504371><b style=left:125;top:75;padding:75;rotate:135deg></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 270px 135px 0\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
   "shapes": 6,
   "png": "bench/tradeoff/om-20240329__0.0.png",
   "match": 99.9
@@ -3305,8 +3305,8 @@
  {
   "id": "om-20240329",
   "rho": 0.25,
-  "chars": 375,
-  "code": "<body bgcolor=504371><b style=\"left:125;top:75;padding:75;border-radius:14% 0 25px 0;rotate:135deg\"></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 280px 135px -20px;border-radius:1em\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
+  "chars": 324,
+  "code": "<body bgcolor=504371><b style=left:125;top:75;padding:75;rotate:135deg></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 270px 135px 0\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
   "shapes": 6,
   "png": "bench/tradeoff/om-20240329__0.25.png",
   "match": 99.9
@@ -3314,8 +3314,8 @@
  {
   "id": "om-20240329",
   "rho": 0.5,
-  "chars": 375,
-  "code": "<body bgcolor=504371><b style=\"left:125;top:75;padding:75;border-radius:14% 0 25px 0;rotate:135deg\"></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 280px 135px -20px;border-radius:1em\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
+  "chars": 324,
+  "code": "<body bgcolor=504371><b style=left:125;top:75;padding:75;rotate:135deg></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 270px 135px 0\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
   "shapes": 6,
   "png": "bench/tradeoff/om-20240329__0.5.png",
   "match": 99.9
@@ -3323,8 +3323,8 @@
  {
   "id": "om-20240329",
   "rho": 1.0,
-  "chars": 375,
-  "code": "<body bgcolor=504371><b style=\"left:125;top:75;padding:75;border-radius:14% 0 25px 0;rotate:135deg\"></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 280px 135px -20px;border-radius:1em\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
+  "chars": 324,
+  "code": "<body bgcolor=504371><b style=left:125;top:75;padding:75;rotate:135deg></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 270px 135px 0\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
   "shapes": 6,
   "png": "bench/tradeoff/om-20240329__1.0.png",
   "match": 99.9
@@ -3332,8 +3332,8 @@
  {
   "id": "om-20240329",
   "rho": 2.0,
-  "chars": 375,
-  "code": "<body bgcolor=504371><b style=\"left:125;top:75;padding:75;border-radius:14% 0 25px 0;rotate:135deg\"></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 280px 135px -20px;border-radius:1em\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
+  "chars": 324,
+  "code": "<body bgcolor=504371><b style=left:125;top:75;padding:75;rotate:135deg></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 270px 135px 0\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
   "shapes": 6,
   "png": "bench/tradeoff/om-20240329__2.0.png",
   "match": 99.9
@@ -3341,8 +3341,8 @@
  {
   "id": "om-20240329",
   "rho": 4.0,
-  "chars": 375,
-  "code": "<body bgcolor=504371><b style=\"left:125;top:75;padding:75;border-radius:14% 0 25px 0;rotate:135deg\"></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 280px 135px -20px;border-radius:1em\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
+  "chars": 324,
+  "code": "<body bgcolor=504371><b style=left:125;top:75;padding:75;rotate:135deg></b><b style=\"inset:0 185px 240px 185px;box-shadow:0 240px #a6a0be\"><b style=\"inset:135px 270px 135px 0\"><b style=\"inset:135px 0 135px 290px\"><b style=left:155;top:105;padding:45;background:#504371;rotate:45deg><style>b{position:fixed;background:#a6a0be",
   "shapes": 6,
   "png": "bench/tradeoff/om-20240329__4.0.png",
   "match": 99.9
@@ -3350,8 +3350,8 @@
  {
   "id": "om-20240330",
   "rho": 0.0,
-  "chars": 651,
-  "code": "<body bgcolor=dbbedf><i style=\"top:130;width:21;box-shadow:62px 153px 0 -3px #81008f\"><i style=left:245;top:0;width:30><i style=left:279;top:150;width:46><i style=left:236;top:190;width:89><i style=\"top:-40;width:250;height:399;clip-path:polygon(0 100%,0 186px,100% 0,100% 169px)\"></i><b style=\"top:90;box-shadow:-170px 100px #dbbedf,-170px 60px #dbbedf,0 40px #dbbedf,-170px 0 #81008f\"><b style=left:151;top:20;width:94;height:70><b style=top:170;width:35><b style=left:155;top:210;height:80><b style=left:97;top:110;width:58><style>b{position:fixed;width:80;height:20;background:#dbbedf;left:245}i{position:fixed;height:20;background:#81008f;left:75",
+  "chars": 628,
+  "code": "<body bgcolor=dbbedf><b style=\"inset:0 130px 290px 245px;box-shadow:-113px 293px #81008f\"><b style=\"inset:130px 300px 70px 75px\"><b style=\"inset:54px 75px 130px 298px\"><b style=\"inset:-4px 75px -6px 75px;border-radius:282px 0 293px 0\"><b style=\"inset:90px 272px 190px 75px;box-shadow:170px 80px #dbbedf,197px 100px #81008f\"><u style=\"inset:7px 155px 210px 125px\"><u style=\"inset:210px 125px -10px 155px\"><u style=\"inset:90px 75px 190px 245px;box-shadow:-170px 100px #dbbedf,-170px 60px #dbbedf,0 40px #dbbedf\"><u style=\"inset:110px 245px 170px 97px\"><style>b{position:fixed;background:#81008f}u{position:fixed;background:#dbbedf",
   "shapes": 15,
   "png": "bench/tradeoff/om-20240330__0.0.png",
   "match": 99.99
@@ -3359,8 +3359,8 @@
  {
   "id": "om-20240330",
   "rho": 0.25,
-  "chars": 651,
-  "code": "<body bgcolor=dbbedf><i style=\"top:130;width:21;box-shadow:62px 153px 0 -3px #81008f\"><i style=left:245;top:0;width:30><i style=left:279;top:150;width:46><i style=left:236;top:190;width:89><i style=\"top:-40;width:250;height:399;clip-path:polygon(0 100%,0 186px,100% 0,100% 169px)\"></i><b style=\"top:90;box-shadow:-170px 100px #dbbedf,-170px 60px #dbbedf,0 40px #dbbedf,-170px 0 #81008f\"><b style=left:151;top:20;width:94;height:70><b style=top:170;width:35><b style=left:155;top:210;height:80><b style=left:97;top:110;width:58><style>b{position:fixed;width:80;height:20;background:#dbbedf;left:245}i{position:fixed;height:20;background:#81008f;left:75",
+  "chars": 628,
+  "code": "<body bgcolor=dbbedf><b style=\"inset:0 130px 290px 245px;box-shadow:-113px 293px #81008f\"><b style=\"inset:130px 300px 70px 75px\"><b style=\"inset:54px 75px 130px 298px\"><b style=\"inset:-4px 75px -6px 75px;border-radius:282px 0 293px 0\"><b style=\"inset:90px 272px 190px 75px;box-shadow:170px 80px #dbbedf,197px 100px #81008f\"><u style=\"inset:7px 155px 210px 125px\"><u style=\"inset:210px 125px -10px 155px\"><u style=\"inset:90px 75px 190px 245px;box-shadow:-170px 100px #dbbedf,-170px 60px #dbbedf,0 40px #dbbedf\"><u style=\"inset:110px 245px 170px 97px\"><style>b{position:fixed;background:#81008f}u{position:fixed;background:#dbbedf",
   "shapes": 15,
   "png": "bench/tradeoff/om-20240330__0.25.png",
   "match": 99.99
@@ -3368,8 +3368,8 @@
  {
   "id": "om-20240330",
   "rho": 0.5,
-  "chars": 651,
-  "code": "<body bgcolor=dbbedf><i style=\"top:130;width:21;box-shadow:62px 153px 0 -3px #81008f\"><i style=left:245;top:0;width:30><i style=left:279;top:150;width:46><i style=left:236;top:190;width:89><i style=\"top:-40;width:250;height:399;clip-path:polygon(0 100%,0 186px,100% 0,100% 169px)\"></i><b style=\"top:90;box-shadow:-170px 100px #dbbedf,-170px 60px #dbbedf,0 40px #dbbedf,-170px 0 #81008f\"><b style=left:151;top:20;width:94;height:70><b style=top:170;width:35><b style=left:155;top:210;height:80><b style=left:97;top:110;width:58><style>b{position:fixed;width:80;height:20;background:#dbbedf;left:245}i{position:fixed;height:20;background:#81008f;left:75",
+  "chars": 628,
+  "code": "<body bgcolor=dbbedf><b style=\"inset:0 130px 290px 245px;box-shadow:-113px 293px #81008f\"><b style=\"inset:130px 300px 70px 75px\"><b style=\"inset:54px 75px 130px 298px\"><b style=\"inset:-4px 75px -6px 75px;border-radius:282px 0 293px 0\"><b style=\"inset:90px 272px 190px 75px;box-shadow:170px 80px #dbbedf,197px 100px #81008f\"><u style=\"inset:7px 155px 210px 125px\"><u style=\"inset:210px 125px -10px 155px\"><u style=\"inset:90px 75px 190px 245px;box-shadow:-170px 100px #dbbedf,-170px 60px #dbbedf,0 40px #dbbedf\"><u style=\"inset:110px 245px 170px 97px\"><style>b{position:fixed;background:#81008f}u{position:fixed;background:#dbbedf",
   "shapes": 15,
   "png": "bench/tradeoff/om-20240330__0.5.png",
   "match": 99.99
@@ -3377,8 +3377,8 @@
  {
   "id": "om-20240330",
   "rho": 1.0,
-  "chars": 651,
-  "code": "<body bgcolor=dbbedf><i style=\"top:130;width:21;box-shadow:62px 153px 0 -3px #81008f\"><i style=left:245;top:0;width:30><i style=left:279;top:150;width:46><i style=left:236;top:190;width:89><i style=\"top:-40;width:250;height:399;clip-path:polygon(0 100%,0 186px,100% 0,100% 169px)\"></i><b style=\"top:90;box-shadow:-170px 100px #dbbedf,-170px 60px #dbbedf,0 40px #dbbedf,-170px 0 #81008f\"><b style=left:151;top:20;width:94;height:70><b style=top:170;width:35><b style=left:155;top:210;height:80><b style=left:97;top:110;width:58><style>b{position:fixed;width:80;height:20;background:#dbbedf;left:245}i{position:fixed;height:20;background:#81008f;left:75",
+  "chars": 628,
+  "code": "<body bgcolor=dbbedf><b style=\"inset:0 130px 290px 245px;box-shadow:-113px 293px #81008f\"><b style=\"inset:130px 300px 70px 75px\"><b style=\"inset:54px 75px 130px 298px\"><b style=\"inset:-4px 75px -6px 75px;border-radius:282px 0 293px 0\"><b style=\"inset:90px 272px 190px 75px;box-shadow:170px 80px #dbbedf,197px 100px #81008f\"><u style=\"inset:7px 155px 210px 125px\"><u style=\"inset:210px 125px -10px 155px\"><u style=\"inset:90px 75px 190px 245px;box-shadow:-170px 100px #dbbedf,-170px 60px #dbbedf,0 40px #dbbedf\"><u style=\"inset:110px 245px 170px 97px\"><style>b{position:fixed;background:#81008f}u{position:fixed;background:#dbbedf",
   "shapes": 15,
   "png": "bench/tradeoff/om-20240330__1.0.png",
   "match": 99.99
@@ -3386,8 +3386,8 @@
  {
   "id": "om-20240330",
   "rho": 2.0,
-  "chars": 651,
-  "code": "<body bgcolor=dbbedf><i style=\"top:130;width:21;box-shadow:62px 153px 0 -3px #81008f\"><i style=left:245;top:0;width:30><i style=left:279;top:150;width:46><i style=left:236;top:190;width:89><i style=\"top:-40;width:250;height:399;clip-path:polygon(0 100%,0 186px,100% 0,100% 169px)\"></i><b style=\"top:90;box-shadow:-170px 100px #dbbedf,-170px 60px #dbbedf,0 40px #dbbedf,-170px 0 #81008f\"><b style=left:151;top:20;width:94;height:70><b style=top:170;width:35><b style=left:155;top:210;height:80><b style=left:97;top:110;width:58><style>b{position:fixed;width:80;height:20;background:#dbbedf;left:245}i{position:fixed;height:20;background:#81008f;left:75",
+  "chars": 626,
+  "code": "<body bgcolor=dbbedf><b style=\"inset:0 130px 290px 245px;box-shadow:-113px 293px #81008f\"><b style=\"inset:130px 300px 70px 75px\"><b style=\"inset:54px 75px 130px 298px\"><b style=\"inset:-4px 75px -6px 75px;border-radius:282px 0 293px 0\"><b style=\"inset:90px 272px 190px 75px;box-shadow:170px 80px #dbbedf,197px 100px #81008f\"><u style=\"inset:110px 245px 170px 97px;box-shadow:59px -71px 0 31px #dbbedf\"><u style=\"inset:210px 125px -10px 155px\"><u style=\"inset:150px 245px 130px 75px;box-shadow:170px -60px #dbbedf,0 40px #dbbedf,170px -20px #dbbedf\"><style>b{position:fixed;background:#81008f}u{position:fixed;background:#dbbedf",
   "shapes": 15,
   "png": "bench/tradeoff/om-20240330__2.0.png",
   "match": 99.99
@@ -3395,11 +3395,11 @@
  {
   "id": "om-20240330",
   "rho": 4.0,
-  "chars": 612,
-  "code": "<body bgcolor=dbbedf><i style=top:130;width:21><i style=left:245;top:0;width:30><i style=left:279;top:150;width:46><i style=left:236;top:190;width:89><i style=\"top:-40;width:250;height:399;clip-path:polygon(0 100%,0 186px,100% 0,100% 169px)\"></i><b style=\"top:90;box-shadow:-170px 100px #dbbedf,-170px 60px #dbbedf,0 40px #dbbedf,-170px 0 #81008f\"><b style=left:151;top:20;width:94;height:70><b style=top:170;width:35><b style=left:155;top:210;height:80><b style=left:97;top:110;width:58><style>b{position:fixed;width:80;height:20;background:#dbbedf;left:245}i{position:fixed;height:20;background:#81008f;left:75",
-  "shapes": 14,
+  "chars": 557,
+  "code": "<body bgcolor=dbbedf><b style=\"inset:130px 300px 70px 75px\"><b style=\"inset:54px 75px 130px 298px\"><b style=\"inset:-4px 75px -6px 75px;border-radius:282px 0 293px 0\"><b style=\"inset:90px 272px 190px 75px;box-shadow:170px 80px #dbbedf,197px 100px #81008f\"><u style=\"inset:8px 155px 210px 125px;box-shadow:-59px 71px 0 -31px #dbbedf\"><u style=\"inset:210px 125px -10px 155px\"><u style=\"inset:90px 75px 190px 245px;box-shadow:-170px 100px #dbbedf,-170px 60px #dbbedf,0 40px #dbbedf\"><style>b{position:fixed;background:#81008f}u{position:fixed;background:#dbbedf",
+  "shapes": 13,
   "png": "bench/tradeoff/om-20240330__4.0.png",
-  "match": 99.89
+  "match": 99.83
  },
  {
   "id": "om-20240331",

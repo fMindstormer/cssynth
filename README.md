@@ -32,9 +32,9 @@ On a benchmark of 66 targets, rendered in Chromium and compared pixel by pixel:
 | | |
 |---|---|
 | Shorter than the human solution (minified) | **56 of 66** |
-| Total code length | **23,823** characters (human: 35,532) |
-| Targets at ≥ 99% pixel match | 65 of 66 (lowest 98.99%) |
-| Mean pixel match | 99.78% |
+| Total code length | **23,329** characters (human: 35,532) |
+| Targets at ≥ 99% pixel match | **66 of 66** (lowest 99.21%) |
+| Mean pixel match | 99.82% |
 
 The human solutions are readable code from two public repositories, minified
 but not golfed. Top CSSBattle players write far shorter code, so these
@@ -52,22 +52,24 @@ rows don't add up.
 
 | Switched off | Total J | Characters | Shorter than human |
 |---|---|---|---|
-| nothing (full compiler) | 64,477 | 23,823 | 56 / 66 |
-| Re-search of the best result | 68,264 (+5.9%) | 24,958 (+1,135) | 55 / 66 |
-| Polygons traced from outlines | 68,102 (+5.6%) | 26,426 (+2,603) | 51 / 66 |
-| Insertion at any depth (shapes go on top) | 67,931 (+5.4%) | 25,079 (+1,256) | 52 / 66 |
-| Gradient backgrounds | 67,100 (+4.1%) | 24,620 (+797) | 54 / 66 |
-| Length-aware shape choice (by pixels only) | 66,097 (+2.5%) | 24,493 (+670) | 53 / 66 |
-| Length-aware clean-up | 65,528 (+1.6%) | 24,954 (+1,131) | 53 / 66 |
-| Box-shadows | 65,314 (+1.3%) | 24,660 (+837) | 56 / 66 |
-| Soft gradient stops | 65,135 (+1.0%) | 24,261 (+438) | 55 / 66 |
-| Splitting regions that touch at corners | 64,883 (+0.6%) | 24,205 (+382) | 55 / 66 |
-| Per-tag rules (`<i>`, `<u>`, `<s>`) | 64,880 (+0.6%) | 24,210 (+387) | 55 / 66 |
-| `clip-path` reuse for copies and mirrors | 64,744 (+0.4%) | 24,098 (+275) | 54 / 66 |
-| Exact (CP-SAT) shadow grouping, greedy kept | 64,601 (+0.2%) | 23,941 (+118) | 56 / 66 |
+| nothing (full compiler) | 60,441 | 23,329 | 56 / 66 |
+| Insertion at any depth (shapes go on top) | 64,637 (+6.9%) | 24,887 (+1,558) | 54 / 66 |
+| Polygons traced from outlines | 64,449 (+6.6%) | 25,791 (+2,462) | 52 / 66 |
+| Re-search of the best result | 64,444 (+6.6%) | 24,652 (+1,323) | 55 / 66 |
+| Gradient backgrounds | 63,265 (+4.7%) | 24,077 (+748) | 54 / 66 |
+| Length-aware shape choice (by pixels only) | 62,921 (+4.1%) | 24,017 (+688) | 54 / 66 |
+| Length-aware clean-up | 61,982 (+2.5%) | 24,914 (+1,585) | 52 / 66 |
+| Splitting regions that touch at corners | 61,705 (+2.1%) | 24,005 (+676) | 55 / 66 |
+| Nested-ring motifs | 61,309 (+1.4%) | 23,495 (+166) | 56 / 66 |
+| Box-shadows | 61,258 (+1.4%) | 24,150 (+821) | 56 / 66 |
+| Soft gradient stops | 61,106 (+1.1%) | 23,680 (+351) | 55 / 66 |
+| Per-tag rules (`<i>`, `<u>`, `<s>`) | 60,807 (+0.6%) | 23,583 (+254) | 55 / 66 |
+| `clip-path` reuse for copies and mirrors | 60,708 (+0.4%) | 23,544 (+215) | 55 / 66 |
+| Exact (CP-SAT) shadow grouping, greedy kept | 60,554 (+0.2%) | 23,442 (+113) | 56 / 66 |
 
-The re-search, outline polygons and inserting shapes below existing ones
-matter most; choosing shapes by length as well as pixels comes next. Exact shadow grouping and `clip-path` reuse are small on
+Inserting shapes below existing ones, outline polygons and the re-search
+matter most; gradient backgrounds and choosing shapes by length as well as
+pixels come next. Exact shadow grouping and `clip-path` reuse are small on
 average but decide a few targets.
 
 ### Beyond the development set
@@ -78,15 +80,19 @@ test it elsewhere (details in [docs/method.md](docs/method.md#beyond-the-develop
 **Held-out structural families.** 48 targets generated from six structures:
 mirrored shapes, repeats, concentric rings, petals, stripes and unrelated
 shapes. They are compiled once per version, never inspected, and scored in
-Chromium. All three methods below got about the same CPU time
-(`bench/evaluate.py`). The baseline climbs 40% more starts to match the
-cost of the motif search:
+Chromium (`bench/evaluate.py`). The second baseline climbs 40% more starts,
+to spend at least the CPU time the motif search does:
 
-| | solved (≥ 99%) | characters, on the 34 all solve | CPU |
+| | solved (≥ 99%) | characters, on the 40 all solve | CPU |
 |---|---|---|---|
-| v0.5.0 | 34 / 48 | 9,994 | 3,029 s |
-| v0.5.0, 14 starts per step | 34 / 48 | 9,912 | 3,614 s |
-| with nested-ring motifs | **37 / 48** | **9,876** | 3,405 s |
+| v0.5.0 | 40 / 48 | 11,944 | 2,634 s |
+| v0.5.0, 14 starts per step | 41 / 48 | **11,240** | 3,177 s |
+| with nested-ring motifs | **43 / 48** | 11,627 | **2,311 s** |
+
+The motifs solve the most with the least time. The extra starts buy shorter
+code on targets with no rings, where motifs don't apply. (This is the third
+held-out set; the earlier two were spent on earlier versions, see
+[docs/method.md](docs/method.md#motifs).)
 
 **Known optima.** On 40 tiny targets (up to four grid-aligned boxes and
 ellipses), an exact solver finds the shortest program that cssynth's own

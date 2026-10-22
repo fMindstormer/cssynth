@@ -131,9 +131,9 @@ shape with the best
 where the estimate is the shape's own element, or a box-shadow entry when it
 is a shifted copy of a shape already placed (so repeats get cheaper as the
 search goes). Every search runs in both modes. On the benchmark the
-length-aware mode wins on 53 of 66 targets, but the other mode still wins on
-some: a cheap shape now can leave more to draw later. Running both lowered
-the total J by 2.5% and the characters by 670. Twice the searches cost
+length-aware mode wins on 50 of 66 targets, but the other mode still wins on
+some: a cheap shape now can leave more to draw later. Running both lowers
+the total J by 4.1% and the characters by 688. Twice the searches cost
 about the same time as before, because the length-aware searches end with
 fewer shapes.
 
@@ -219,8 +219,8 @@ rather than tuned around:
 ## Results
 
 On 66 targets rendered from public human solutions, cssynth's code is
-shorter than the (minified, not golfed) human solution on 56, and 23,823
-characters in total against 35,532, with 65 of 66 at a 99%+ pixel match in
+shorter than the (minified, not golfed) human solution on 56, and 23,329
+characters in total against 35,532, with all 66 at a 99%+ pixel match in
 Chromium. See the [README](../README.md#results) and the
 [results page](https://fmindstormer.github.io/cssynth/) for every target and
 the generated code.
@@ -233,19 +233,20 @@ add up):
 
 | Switched off | Total J | Characters | Shorter than human |
 |---|---|---|---|
-| nothing (full compiler) | 64,477 | 23,823 | 56 / 66 |
-| Re-search of the best result | 68,264 (+5.9%) | 24,958 (+1,135) | 55 / 66 |
-| Polygons traced from outlines | 68,102 (+5.6%) | 26,426 (+2,603) | 51 / 66 |
-| Insertion at any depth (shapes go on top) | 67,931 (+5.4%) | 25,079 (+1,256) | 52 / 66 |
-| Gradient backgrounds | 67,100 (+4.1%) | 24,620 (+797) | 54 / 66 |
-| Length-aware shape choice (by pixels only) | 66,097 (+2.5%) | 24,493 (+670) | 53 / 66 |
-| Length-aware clean-up | 65,528 (+1.6%) | 24,954 (+1,131) | 53 / 66 |
-| Box-shadows | 65,314 (+1.3%) | 24,660 (+837) | 56 / 66 |
-| Soft gradient stops | 65,135 (+1.0%) | 24,261 (+438) | 55 / 66 |
-| Splitting regions that touch at corners | 64,883 (+0.6%) | 24,205 (+382) | 55 / 66 |
-| Per-tag rules (`<i>`, `<u>`, `<s>`) | 64,880 (+0.6%) | 24,210 (+387) | 55 / 66 |
-| `clip-path` reuse for copies and mirrors | 64,744 (+0.4%) | 24,098 (+275) | 54 / 66 |
-| Exact (CP-SAT) shadow grouping, greedy kept | 64,601 (+0.2%) | 23,941 (+118) | 56 / 66 |
+| nothing (full compiler) | 60,441 | 23,329 | 56 / 66 |
+| Insertion at any depth (shapes go on top) | 64,637 (+6.9%) | 24,887 (+1,558) | 54 / 66 |
+| Polygons traced from outlines | 64,449 (+6.6%) | 25,791 (+2,462) | 52 / 66 |
+| Re-search of the best result | 64,444 (+6.6%) | 24,652 (+1,323) | 55 / 66 |
+| Gradient backgrounds | 63,265 (+4.7%) | 24,077 (+748) | 54 / 66 |
+| Length-aware shape choice (by pixels only) | 62,921 (+4.1%) | 24,017 (+688) | 54 / 66 |
+| Length-aware clean-up | 61,982 (+2.5%) | 24,914 (+1,585) | 52 / 66 |
+| Splitting regions that touch at corners | 61,705 (+2.1%) | 24,005 (+676) | 55 / 66 |
+| Nested-ring motifs | 61,309 (+1.4%) | 23,495 (+166) | 56 / 66 |
+| Box-shadows | 61,258 (+1.4%) | 24,150 (+821) | 56 / 66 |
+| Soft gradient stops | 61,106 (+1.1%) | 23,680 (+351) | 55 / 66 |
+| Per-tag rules (`<i>`, `<u>`, `<s>`) | 60,807 (+0.6%) | 23,583 (+254) | 55 / 66 |
+| `clip-path` reuse for copies and mirrors | 60,708 (+0.4%) | 23,544 (+215) | 55 / 66 |
+| Exact (CP-SAT) shadow grouping, greedy kept | 60,554 (+0.2%) | 23,442 (+113) | 56 / 66 |
 
 The two ideas that shape the search, inserting shapes at any depth and
 re-searching the result, are worth the most; so are outline polygons, which
@@ -296,10 +297,11 @@ from six structures: a shape and its mirror image (*mirror*), copies at a
 constant offset (*repeat*), concentric circles or squares (*rings*), leaves
 turned about a center (*petals*), bands with an emblem (*stripes*), and
 unrelated layered shapes as a control (*scatter*). A development split
-(seeds 0–7) was used to diagnose failures. A held-out split of 8 per family,
-from fixed seeds, is committed as programs (`bench/heldout/`). It was compiled
-once before any of the work below and once after it, and its pictures were
-never looked at. The targets are rendered where they are scored.
+(seeds 0–7) was used to diagnose failures. Three held-out sets of 8 per
+family, from fixed seeds, are committed as programs (`bench/heldout*/`).
+Each was compiled once per version under test and spent on one version (see
+[Motifs](#motifs)); their pictures were never looked at. The targets are
+rendered where they are scored.
 
 **Tiny targets with known optima** (`bench/tiny.py`). Random stacks of up to
 four boxes or ellipses on a 10 px grid, one color each. An exact solver lists
@@ -359,25 +361,44 @@ Smaller fixes found along the way:
   into two colors);
 - the clean-up tries squaring rounded corners.
 
-**Compared at equal compute.** Each method below ran alone, sequentially,
-and the baseline gets a larger budget: 14 starts climbed per step instead of
-10, which costs about what the motifs do. Lengths are on the targets all
-three solve.
+**Only in half the variants.** A nest that wins its step can still leave a
+worse result: on two development targets it did, adding up to 400
+characters. The compiler already runs 12 search variants and keeps the best
+finished result, so motifs are proposed only in the six that choose shapes by
+pixels alone. A step-wise mistake there can't beat a good result from the
+other six, and the motif search costs half as much.
 
-| | dev split (48) | the 66 dev targets (macOS Chromium) | held-out families, second set (48) |
+**Compared at equal compute.** Each method below ran alone, one after
+another. The baseline gets a larger budget: 14 starts climbed per step
+instead of 10, which costs at least what the motifs do. Lengths are on the
+targets all three solve.
+
+| | dev split of the families (48) | the 66 dev targets (macOS Chromium) | third held-out set (48) |
 |---|---|---|---|
-| v0.5.0 | 40 solved, 11,011 ch, 2,036 s | 64 solved, 22,530 ch, 1,963 s | 34 solved, 9,994 ch, 3,029 s |
-| v0.5.0, 14 starts | 41 solved, 11,276 ch, 2,269 s | 64 solved, 22,722 ch, 2,448 s | 34 solved, 9,912 ch, 3,614 s |
-| nested rings + fixes | **43** solved, **10,576** ch, 2,344 s | **65** solved, **22,423** ch, 2,577 s | **37** solved, **9,876** ch, 3,405 s |
+| v0.5.0 | 40 solved, 11,011 ch, 2,036 s | 64 solved, 22,900 ch, 1,963 s | 40 solved, 11,944 ch, 2,634 s |
+| v0.5.0, 14 starts | 41 solved, 11,276 ch, 2,269 s | 64 solved, 23,092 ch, 2,448 s | 41 solved, **11,240** ch, 3,177 s |
+| motifs + fixes (default) | **43** solved, **10,576** ch, **1,807** s | **66** solved, **22,445** ch, 2,210 s | **43** solved, 11,627 ch, **2,311** s |
 
-**The held-out sets, honestly.** The first held-out set was spent on the
-first version (nests in frames too, and a wider tolerance at edges, since
-dropped). Compared with v0.5.0 it solved one more target, but wrote 5% more
-characters on the targets both solved and took 57% more CPU time. The
-regressions were diagnosed on the development split, not on the held-out
-pictures. A second held-out set, from new seeds, was then compiled once with
-the revised version: the third column above. The extra targets solved are
-rings and a repeat; petals stay at 2 of 8 under every method.
+On the held-out set the default solves the most targets, with the least CPU
+time. But on the 40 targets all three solve, the baseline with more starts
+writes 3.4% less code. Its extra climbs pay off on scatter and petals, where
+motifs don't apply.
+
+**The held-out sets, honestly.** Each held-out set is compiled once per
+version, and its pictures are never looked at. The first was spent on the
+first version, which also nested frames with several windows and used a
+wider tolerance at edges. Compared with v0.5.0 it solved one more target, but
+wrote 5% more characters on the targets both solved and took 57% more CPU
+time. The regressions were then diagnosed on the development split.
+
+The second set was spent on the revised version, with nests in every
+variant: 37 solved against 34 for v0.5.0 (and 34 with more starts), 9,876
+characters against 9,994 (and 9,912), and 3,405 s against 3,029 s (and
+3,614 s).
+
+On the 66 development targets that version still lost 400 characters on two
+of them, so motifs moved to half the variants (above). The third set was
+spent on that, which is the shipped version.
 
 **Rendering, again.** Chromium's edge on a turned straight side matches box
 filtering. On curved sides (rounded corners, leaves) the ramp has tails out

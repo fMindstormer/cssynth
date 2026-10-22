@@ -7,8 +7,8 @@ redraw in as few characters as they can.
 ![cssynth's 214-character output for a CSSBattle-style target: a dark red arch on red](https://raw.githubusercontent.com/fMindstormer/cssynth/main/bench/out/om-20240318.png)
 
 On a benchmark of 66 targets rendered in Chromium, cssynth's code is shorter
-than the (minified, not golfed) human solution on 56, at a 99%+ pixel match
-on 65.
+than the (minified, not golfed) human solution on 56, with all 66 at a 99%+
+pixel match.
 
 ```sh
 pip install cssynth

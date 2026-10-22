@@ -26,6 +26,7 @@ ABLATION_NAMES = {
     "top-only": "Insertion at any depth", "no-corner-split": "Splitting regions that touch at corners",
     "no-outline-polygons": "Polygons traced from outlines", "no-gradient-base": "Gradient backgrounds",
     "no-soft-stops": "Soft gradient stops", "no-length-aware": "Length-aware shape choice",
+    "no-motifs": "Nested-ring motifs",
 }
 
 
