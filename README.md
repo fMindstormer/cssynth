@@ -89,8 +89,12 @@ to spend at least the CPU time the motif search does:
 | v0.5.0, 14 starts per step | 41 / 48 | **11,240** | 3,177 s |
 | with nested-ring motifs | **43 / 48** | 11,627 | **2,311 s** |
 
-The motifs solve the most with the least time. The extra starts buy shorter
-code on targets with no rings, where motifs don't apply. (This is the third
+The motifs solve the most with the least time. The baseline with more starts
+writes 3.4% less code on the targets all three solve, but that rests on three
+scatter and petals targets: it is shorter on 6 and longer on 7, and the 95%
+bootstrap interval runs from 2.1% shorter to 9.6% longer. Giving the default
+more starts makes its code longer, not shorter (+6.5% on the development
+split). (This is the third
 held-out set; the earlier two were spent on earlier versions, see
 [docs/method.md](docs/method.md#motifs).)
 

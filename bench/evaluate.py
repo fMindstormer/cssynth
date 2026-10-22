@@ -59,6 +59,14 @@ def _base_more(path):
     return compiler.compile_image(path)
 
 
+def _full_more(n):
+    """The default compiler climbing n starts per step instead of 10."""
+    def run(path):
+        search.TOP_STARTS = n
+        return compiler.compile_image(path)
+    return run
+
+
 def _fixes(path):
     """Everything but motifs."""
     search.MOTIFS = set()
@@ -87,7 +95,8 @@ def _learned(path):
 _policy = None
 
 # name: path -> (code, info, model)
-METHODS = {"full": _full, "fast": _fast, "base": _base, "base-more": _base_more, "fixes": _fixes,
+METHODS = {"full": _full, "fast": _fast, "base": _base, "base-more": _base_more,
+           **{f"full-{n}": _full_more(n) for n in (16, 20)}, "fixes": _fixes,
            "nest": _motifs(["nest"]), "nest-sym": _motifs(["nest", "symmetric"]),
            "all-motifs": _motifs(["nest", "symmetric", "seeded"]),
            "nest-allcolors": _motifs(["nest"], same_color=-1), "learned": _learned}
@@ -141,8 +150,10 @@ def main():
     with Pool(args.jobs) as p:
         res = p.map(work, [(args.method, t) for t in tg], chunksize=1)
 
+    out = Path(args.out or BENCH / "eval" / f"{args.set}-{args.method}.json")
     out_dir = BENCH / "eval" / f"{args.set}-{args.method}"
     out_dir.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(res, indent=1))       # kept if rendering fails
     jobs = [{"html": r["code"], "out": str(out_dir / f"{r['id']}.png")} for r in res]
     (out_dir / "jobs.json").write_text(json.dumps(jobs))
     subprocess.run(["node", str(BENCH / "render.js"), str(out_dir / "jobs.json")], check=True, cwd=BENCH)
@@ -151,7 +162,6 @@ def main():
         tgt = np.asarray(Image.open(paths[r["id"]]).convert("RGB"))
         got = np.asarray(Image.open(out_dir / f"{r['id']}.png").convert("RGB"))
         r["match"] = round(match(got, tgt), 2)
-    out = Path(args.out or BENCH / "eval" / f"{args.set}-{args.method}.json")
     out.write_text(json.dumps(res, indent=1))
     summarize({args.method: res})
 

@@ -381,8 +381,20 @@ targets all three solve.
 
 On the held-out set the default solves the most targets, with the least CPU
 time. But on the 40 targets all three solve, the baseline with more starts
-writes 3.4% less code. Its extra climbs pay off on scatter and petals, where
-motifs don't apply.
+writes 3.4% less code. That gap is not clearly real. The default is shorter
+on 6 of those targets and longer on 7, three scatter and petals targets carry
+most of the difference, and a bootstrap over targets puts the 95% interval at
+2.1% shorter to 9.6% longer. On the development split the default is the
+shorter one by 6.1% (interval 15.8% shorter to 3.1% longer).
+
+Nor is the default's saved time worth spending on more starts. On the
+development split, 16 or 20 starts per step solve one or two more targets,
+but on the 43 that the default also solves the code is 6.5% and 6.8% longer
+(intervals +0.6% to +17%). At 16 starts no target gets shorter. More starts
+let a step win by more, and, as the learned proposals showed, a step that wins
+by more can still lead somewhere worse. More starts didn't shorten v0.5.0's
+code either: 2.4% longer on the development split and 0.8% longer on the 66
+targets. So there is no new version to spend a fourth held-out set on.
 
 **The held-out sets, honestly.** Each held-out set is compiled once per
 version, and its pictures are never looked at. The first was spent on the
