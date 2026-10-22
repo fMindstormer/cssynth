@@ -16,3 +16,9 @@ bench/tradeoff/
 build/
 bench/ablation/
 bench/ablation.md
+
+# rendered where they are scored (bench/evaluate.py), and evaluation runs
+bench/heldout/*.png
+bench/eval/
+bench/train/
+bench/learn/

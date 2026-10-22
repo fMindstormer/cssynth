@@ -30,6 +30,7 @@ from .search import _masks, gain, hill_climb
 from .shapes import H, Shape, W, base_labels, coverage
 
 REFIT_DROPS = 2
+PLAINER = True          # try square corners in the clean-up (see _plainer)
 
 
 class Scorer:
@@ -186,6 +187,17 @@ def _fewer_vertices(s: Shape):
         yield Shape.polygon(s.poly[:i] + s.poly[i + 1:], s.color)
 
 
+def _plainer(s: Shape):
+    """s with square corners, then with each rounded corner squared."""
+    if s.poly or s.ell or not any(s.radii):
+        return
+    yield s.copy(radii=(0, 0, 0, 0))
+    if sum(r > 0 for r in s.radii) > 1:
+        for i, r in enumerate(s.radii):
+            if r:
+                yield s.copy(radii=s.radii[:i] + (0,) + s.radii[i + 1:])
+
+
 def simplify(T, bg, palette, shapes, rho=2.0, tol=4, passes=3, log=None):
     sc = Scorer(T, bg, palette, rho)
     cur = list(shapes)
@@ -237,6 +249,17 @@ def simplify(T, bg, palette, shapes, rho=2.0, tol=4, passes=3, log=None):
                 trial = cur[:i] + [s2] + cur[i + 1:]
                 j = sc.J(trial)
                 if j < J - 1e-9:
+                    cur, J, improved = trial, j, True
+                    break
+        # plainer corners: a small radius can fix a few pixels for more
+        # characters than they are worth
+        for i in range(len(cur) if PLAINER else 0):
+            for s2 in _plainer(cur[i]):
+                trial = cur[:i] + [s2] + cur[i + 1:]
+                j = sc.J(trial)
+                if j < J - 1e-9:
+                    if log:
+                        log(f"  plainer corners for {cur[i]}: J {J:.1f} -> {j:.1f}")
                     cur, J, improved = trial, j, True
                     break
         if not improved:

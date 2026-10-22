@@ -17,10 +17,11 @@ import math
 import numpy as np
 from scipy import ndimage
 
-from . import codegen
+from . import codegen, motifs
 from .shapes import Gradient, H, Shape, W, base_labels, coverage, gradient_rgb, render_labels
 
 MIN_COLOR_PX = 40
+SAME_COLOR = 4          # max channel difference within which two colors are one
 MIN_GAIN = 25          # pixels a shape must fix to be worth its characters
 INSERT_ANYWHERE = True  # new shapes may go at any depth (False: on top only, for comparison)
 
@@ -40,6 +41,10 @@ def extract_palette(img: np.ndarray):
         if n < MIN_COLOR_PX:
             break
         c = np.array([(k >> 16) & 255, (k >> 8) & 255, k & 255], dtype=float)
+        # A color a shade off another is the same fill (browsers paint turned
+        # elements a level or two off); within tolerance either draws both.
+        if main and np.abs(np.array(main) - c).max(1).min() <= SAME_COLOR:
+            continue
         # A color between two others is antialiasing only if it forms thin
         # lines; a solid region of it is a real (often semi-transparent) fill.
         if _is_blend(c, main) and ndimage.binary_erosion(keys2d == k).sum() < MIN_COLOR_PX:
@@ -377,6 +382,10 @@ def _moves(s: Shape, step: int):
         # grow/shrink about the center keeps rotated shapes centered
         for dw in (-step, step):
             yield s.copy(x=s.x - dw / 2, y=s.y - dw / 2, w=s.w + dw, h=s.h + dw)
+            if SCALE_MOVES and any(s.radii):
+                # and its corners with it, which keeps a leaf a leaf
+                yield s.copy(x=s.x - dw / 2, y=s.y - dw / 2, w=s.w + dw, h=s.h + dw,
+                             radii=tuple(max(0, r + dw) if r else 0 for r in s.radii))
         for da in (-1, 1) if step <= 2 else ():
             yield s.copy(rot=s.rot + da)
     if not s.ell:
@@ -681,7 +690,7 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
                 counts[c] = counts.get(c, 0) + 1
         starts += [(None, k, cand) for k, cand in forced]
         best, best_k, best_g, best_v = None, None, min_gain - 1, -math.inf
-        seen, tables = set(), {}
+        seen, tables, climbed = set(), {}, []
         for g0, k, cand in starts:
             key = (k, repr(cand))
             if key in seen:
@@ -695,6 +704,7 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
             if g < min_gain:
                 continue
             v = g if rho is None else g / rho - char_cost(s, shapes, pal)
+            climbed.append((v, s, k))
             if v > best_v:
                 best, best_k, best_g, best_v = s, k, g, v
         if best is None:
@@ -702,11 +712,127 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
         for g in also:
             if best_g < g and g not in out:
                 out[g] = list(shapes)
-        shapes.insert(best_k, best)
+        added = [best]
+        if MOTIFS and pal is not None and (MOTIF_GATE is None or MOTIF_GATE(shapes)):
+            motif = best_motif(T, bg, pal, shapes, best, best_k, climbed, tables, min_gain, belows, frees)
+            if motif is not None:
+                best_k, added = motif
+        shapes[best_k:best_k] = added
         if log:
-            log(f"  + at depth {best_k}: {best}  fixes {best_g}px, wrong now {error(T, bg, shapes)}")
+            log(f"  + at depth {best_k}: {added}  fixes {best_g}px, wrong now {error(T, bg, shapes)}")
     out[min_gain] = shapes
     return {g: out.get(g, shapes) for g in (min_gain, *also)}
+
+
+SCALE_MOVES = True     # turned shapes also grow with their corners (see _moves)
+# Motif kinds to propose (see motifs.py) as well as single shapes: "seeded"
+# (mirrors, copies and turns of the best climbed shapes), "symmetric" (a
+# symmetric region's piece, climbed, with its images) and "nest" (a ring
+# drawn as filled shapes inside each other).
+MOTIFS = {"nest"}
+MOTIF_SEEDS = 3        # climbed shapes that seed motifs, best first
+MOTIF_SCORED = 4       # compositions per step scored by their emitted code
+MOTIF_RHO = 0.5        # wrong pixels per character when scoring a step
+
+
+def structured(T, belows, frees, k, min_gain):
+    """Motifs read off the picture, at depth k: for each color region still
+    wrong that has a symmetry (motifs.symmetries), candidates fitted to one
+    piece of it, climbed on that piece, and composed with their images.
+    [(pixels fixed, depth, shapes, kind)]."""
+    out = []
+    wrong = belows[k] != T
+    for c in np.unique(T[wrong]):
+        region = wrong & (T == c)
+        if region.sum() < 2 * min_gain:
+            continue
+        A, B = _masks(T, belows[k], c, frees[k])
+        sums = area_sums(A, B)
+        for kind, params, piece in motifs.symmetries(region) if "symmetric" in MOTIFS else ():
+            Ap = A & piece
+            sums_p = area_sums(Ap, B)
+            ys, xs = np.nonzero(piece)
+            comp = piece[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
+            best = None
+            for cand in candidates(int(c), comp, int(xs.min()), int(ys.min())):
+                s, g = hill_climb(cand, Ap, B, sums=sums_p)
+                if best is None or g > best[1]:
+                    best = (s, g)
+            if best is None or best[1] < min_gain:
+                continue
+            s = best[0]
+            copies = motifs.compose(kind, params, s)
+            gains = [gain(t, A, B, sums) for t in copies]
+            if min(gains) >= min_gain:
+                out.append((gain(s, A, B, sums) + sum(gains), k, [s] + copies, "symmetric-" + kind))
+        layers = motifs.nest(T, region) if "nest" in MOTIFS else []
+        if layers:
+            stack = [fit_mask(c2, m) for c2, m in layers]
+            if all(stack):
+                canvas = belows[k].copy()
+                for t in stack:
+                    x0, y0, m = coverage(t)
+                    if m is not None:
+                        canvas[y0:y0 + m.shape[0], x0:x0 + m.shape[1]][m] = t.color
+                before = belows[k] == T
+                net = int(((canvas == T) & ~before).sum() - ((canvas != T) & before).sum())
+                if net >= min_gain:
+                    out.append((net, k, stack, "nest"))
+    return out
+
+
+def fit_mask(c, mask):
+    """The candidate shape that, climbed, best covers mask and nothing else."""
+    ys, xs = np.nonzero(mask)
+    if len(xs) < 16:
+        return None
+    outside = ~mask
+    sums = area_sums(mask, outside)
+    best = None
+    for cand in candidates(c, mask[ys.min():ys.max() + 1, xs.min():xs.max() + 1], int(xs.min()), int(ys.min())):
+        s, g = hill_climb(cand, mask, outside, sums=sums)
+        if best is None or g > best[1]:
+            best = (s, g)
+    return best[0]
+
+
+def best_motif(T, bg, pal, shapes, best, best_k, climbed, tables, min_gain, belows, frees):
+    """(depth, shapes to insert) for a motif that beats adding `best` alone,
+    or None. Seeds are the best climbed shapes; each composition keeps the
+    copies that fix at least min_gain pixels where the seed goes. The most
+    promising compositions, by pixels fixed, are scored by what the step
+    leaves: emitted characters plus wrong pixels / MOTIF_RHO."""
+    proposals = []
+    for _, s, k in sorted(climbed, key=lambda t: -t[0])[:MOTIF_SEEDS if "seeded" in MOTIFS else 0]:
+        A, B, sums = tables[k, s.color]
+        for kind, comp in motifs.compositions(T, s):
+            keep = [t for t in comp if gain(t, A, B, sums) >= min_gain]
+            if not keep or (kind == "turns" and len(keep) < len(comp)):
+                continue
+            total = gain(s, A, B, sums) + sum(gain(t, A, B, sums) for t in keep)
+            proposals.append((total, k, [s] + keep, "seeded-" + kind))
+    proposals += structured(T, belows, frees, len(shapes), min_gain)
+    if not proposals:
+        return None
+
+    def J(stack):
+        return len(codegen.emit(pal, bg, stack, grouping="greedy")[0]) + error(T, bg, stack) / MOTIF_RHO
+
+    base = J(shapes[:best_k] + [best] + shapes[best_k:])
+    scored = [(J(shapes[:k] + add + shapes[k:]), k, add, kind, total)
+              for total, k, add, kind in sorted(proposals, key=lambda t: -t[0])[:MOTIF_SCORED]]
+    if MOTIF_POLICY is not None:
+        return MOTIF_POLICY(T, shapes, best, base, scored)
+    j, k, add, _, _ = min(scored, key=lambda t: t[0])
+    return (k, add) if j < base - 1e-9 else None
+
+
+# A hook for experiments (bench/proposals.py): called with (T, shapes, best,
+# J of adding best, [(J, depth, shapes, kind, pixels fixed)]) instead of the
+# rule above, and returns (depth, shapes) or None. MOTIF_GATE(shapes), if
+# set, says whether to look for motifs at all at this step.
+MOTIF_POLICY = None
+MOTIF_GATE = None
 
 
 def char_cost(s: Shape, shapes, pal) -> int:
