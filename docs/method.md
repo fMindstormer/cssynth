@@ -282,6 +282,154 @@ full search still wins, and a missed start early in a greedy run compounds
 (keeping 8 starts happened to score worse than 6, at +3.1%). It is not part of
 the compiler; the time is better spent making each climb cheaper.
 
+## Beyond the development set
+
+The 66 targets above are the development set: every technique here was
+tuned on them, so they can't show how well the compiler generalizes. Three
+more benchmarks do. They are scored by `bench/evaluate.py`, which renders
+every output in Chromium, counts a target as solved at a 99%+ pixel match,
+compares lengths only on the targets every method solves, and records CPU
+time (process time, so running in parallel doesn't inflate it).
+
+**Structural families** (`bench/families.py`). Short CSS programs generated
+from six structures: a shape and its mirror image (*mirror*), copies at a
+constant offset (*repeat*), concentric circles or squares (*rings*), leaves
+turned about a center (*petals*), bands with an emblem (*stripes*), and
+unrelated layered shapes as a control (*scatter*). A development split
+(seeds 0–7) was used to diagnose failures. A held-out split of 8 per family,
+from fixed seeds, is committed as programs (`bench/heldout/`). It was compiled
+once before any of the work below and once after it, and its pictures were
+never looked at. The targets are rendered where they are scored.
+
+**Tiny targets with known optima** (`bench/tiny.py`). Random stacks of up to
+four boxes or ellipses on a 10 px grid, one color each. An exact solver lists
+every stack in that space that draws the same pixels. It works from the top
+down: a shape must cover all pixels of its color and may cover others only
+where shapes above hide them. It then takes the shortest code cssynth's own
+emitter writes for any of them. Optimum and output come from the same
+emitter, so the gap measures the search alone. On 40 targets, before the
+changes below, cssynth exactly reproduced 35 and was optimal on 30 of those.
+Three of the five gaps were exactly the length of a `border-radius` of 1–4 px
+that changed no pixel, which the clean-up never tried to remove. Now it does,
+and cssynth is optimal on 33 of 35 (mean gap +2.3 characters, from +5.0). The
+two left, 40 characters over each, are a shape split in two and a wrong
+stacking order.
+
+## Motifs
+
+A motif is several shapes proposed as one step of the greedy search and
+scored, like the alternatives, by what the step leaves: emitted characters
+plus wrong pixels / ρ (`cssynth/motifs.py`, `search.best_motif`).
+
+**Nested rings** are the one that pays. Three concentric circles need a
+filled disc first, and that disc on its own breaks every correct pixel inside
+it, so a search adding one shape at a time never places it. Every rings
+target in the development split failed for this reason, ending in hundreds of
+characters of slivers at 98%. The nest motif fills a ring-shaped region's
+holes, fits a shape to the filled region, recurses into the hole with the
+color that lines it, and offers the whole stack at once. The emitter then
+often writes it as one element with spread box-shadows:
+`<b style="…padding:80;border-radius:50%;box-shadow:0 0 0 15px #1a4341,0 0 0 30px #f3ac3c">`.
+
+A nest is proposed only when the region has exactly one hole. The first
+version also nested frames with several windows, fitting one shape over all
+the windows; the step rule accepted it and nothing later recovered.
+
+Mirror images, shifted copies and turns were tried too. They were seeded
+either from the best climbed shapes, or from a region's detected symmetry (a
+half or a sector fitted, climbed and composed). Copies add nothing over
+box-shadow grouping, which already finds them. Mirrors and turns rescue some
+petals targets but make others longer and cost 2.5× the CPU time, so they
+are off by default (`search.MOTIFS`). Development split, first version, runs
+in pairs (so CPU times are only comparable within the table), on the 40
+targets all four methods solve:
+
+| | solved (≥99%) | characters | CPU |
+|---|---|---|---|
+| v0.5.0 | 40 / 48 | 11,011 | 3,018 s |
+| nested rings | 43 / 48 | 10,936 | 4,242 s |
+| nested rings + symmetric pieces | 45 / 48 | 11,611 | 7,428 s |
+| the same, accepted by the learned filter (below) | 43 / 48 | 11,715 | 8,259 s |
+
+Smaller fixes found along the way:
+- a turned shape can now grow together with its corner radii, so a leaf stays
+  a leaf while it climbs;
+- colors one or two levels apart are merged into one palette entry (Chromium
+  paints a turned element a shade off its unturned twin, which split leaves
+  into two colors);
+- the clean-up tries squaring rounded corners.
+
+**Compared at equal compute.** Each method below ran alone, sequentially,
+and the baseline gets a larger budget: 14 starts climbed per step instead of
+10, which costs about what the motifs do. Lengths are on the targets all
+three solve.
+
+| | dev split (48) | the 66 dev targets (macOS Chromium) | held-out families, second set (48) |
+|---|---|---|---|
+| v0.5.0 | 40 solved, 11,011 ch, 2,036 s | 64 solved, 22,530 ch, 1,963 s | 34 solved, 9,994 ch, 3,029 s |
+| v0.5.0, 14 starts | 41 solved, 11,276 ch, 2,269 s | 64 solved, 22,722 ch, 2,448 s | 34 solved, 9,912 ch, 3,614 s |
+| nested rings + fixes | **43** solved, **10,576** ch, 2,344 s | **65** solved, **22,423** ch, 2,577 s | **37** solved, **9,876** ch, 3,405 s |
+
+**The held-out sets, honestly.** The first held-out set was spent on the
+first version (nests in frames too, and a wider tolerance at edges, since
+dropped). Compared with v0.5.0 it solved one more target, but wrote 5% more
+characters on the targets both solved and took 57% more CPU time. The
+regressions were diagnosed on the development split, not on the held-out
+pictures. A second held-out set, from new seeds, was then compiled once with
+the revised version: the third column above. The extra targets solved are
+rings and a repeat; petals stay at 2 of 8 under every method.
+
+**Rendering, again.** Chromium's edge on a turned straight side matches box
+filtering. On curved sides (rounded corners, leaves) the ramp has tails out
+to ±1.25 px, about twice as wide. Measured on calibration renders of turned
+squares and rounded squares at 0–90°, the per-pixel spread around any fitted
+profile is about 7%, more than the 3% tolerance allows at high contrast. A
+fitted profile per edge type halved the errors on a square at 45° but
+tripled them on an unturned rounded square, so it was not adopted. A wider
+tolerance within a pixel of the model's edges was tried in the objective and
+dropped: outputs got longer, and no more targets were solved.
+
+## Experiment: learned motif proposals
+
+The step rule takes a motif when it lowers J right after the step, which is
+myopic. To label proposals by their outcome instead, `bench/proposals.py`
+generates 90 scenes from the families (fresh seeds, 15 per family). It runs
+the search once with every motif declined. For each step that offered
+motifs, it reruns the search accepting one of them there and nothing
+elsewhere. A proposal is good if the final J, after refining and the
+clean-up, is lower.
+
+Of 989 proposals, 140 (14%) lowered the final J. The step rule and the
+outcome often disagree: a proposal that cut the step's J by 35,000 on a
+stripes scene left the final J 345 higher. By kind, nested rings helped 40%
+of the time and turns about a detected center 22%, with large average gains.
+Seeded mirrors helped 21% and hurt 34%. Seeded copies never changed the
+outcome.
+
+A gradient-boosted classifier on 15 features of the proposal and the step
+(its kind, size, pixels fixed, the step's J change, the stack's size, the
+palette's size) was tested leave one family out, which asks whether what it
+learns transfers to an unseen structure:
+
+| held-out family | proposals | good | learned: accuracy | step rule: accuracy | learned: precision | step rule: precision |
+|---|---|---|---|---|---|---|
+| mirror | 111 | 3 | 0.96 | 0.69 | – | 0.03 |
+| petals | 256 | 94 | 0.65 | 0.58 | 0.60 | 0.44 |
+| repeat | 207 | 0 | 0.87 | 0.46 | – | 0.00 |
+| rings | 204 | 22 | 0.86 | 0.77 | – | 0.25 |
+| scatter | 112 | 21 | 0.80 | 0.80 | 0.40 | 0.43 |
+| stripes | 99 | 0 | 0.98 | 0.96 | – | 0.00 |
+
+Its accuracy is mostly that of saying no. When a family is held out, it
+almost never accepts a proposal there (– means it accepted none), so it does
+not transfer to an unseen structure. On rings, the step rule finds the good
+nests, and the filter, which has seen nests only in the other families,
+rejects them. Used in the compiler (trained on all six families), it solved
+fewer development-split targets than the step rule, at the same CPU time
+(first table above). The filter is not used. What would help is the oracle itself:
+labels showed a few proposals with very large effects, so a policy has to
+get rare cases right, not the average.
+
 ## What doesn't work yet
 
 - **Search order.** Re-search fixes some greedy mistakes, but a lotus of

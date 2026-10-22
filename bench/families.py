@@ -2,6 +2,7 @@
 """Generated targets in structural families, for testing generalization.
 
     python bench/families.py heldout      # bench/heldout/: cases.json, <id>.html, <id>.png
+    python bench/families.py heldout2     # a second held-out set (bench/heldout2/)
     python bench/families.py train N      # N per family to a scratch directory (see --out)
 
 Each target is drawn by a short CSS program built from one family's
@@ -16,8 +17,10 @@ structure:
   scatter  unrelated shapes in layers (the control: no shared structure)
 
 The program's length is a reference, like the human solutions' length on
-the development set: no attempt is made to golf it. The held-out set is
-made once from fixed seeds and is not used while developing the compiler.
+the development set: no attempt is made to golf it. The held-out sets are
+made from fixed seeds and are not used while developing the compiler; each
+is compiled once per version under test. The first was spent on the first
+version of the motif work (docs/method.md), the second on the revised one.
 """
 
 import argparse
@@ -30,7 +33,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BENCH = ROOT / "bench"
 FAMILIES = ("mirror", "repeat", "rings", "petals", "stripes", "scatter")
-HELDOUT_SEED = 20261021
+HELDOUT_SEEDS = {"heldout": 20261021, "heldout2": 20261121}
 PER_FAMILY = 8
 
 PALETTES = [
@@ -210,13 +213,13 @@ def build(out: Path, seeds, families=FAMILIES):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("split", choices=["heldout", "train"])
+    ap.add_argument("split", choices=["heldout", "heldout2", "train"])
     ap.add_argument("n", nargs="?", type=int, default=PER_FAMILY)
     ap.add_argument("--out")
     args = ap.parse_args()
-    if args.split == "heldout":
-        seeds = [HELDOUT_SEED + i for i in range(PER_FAMILY)]
-        out = Path(args.out or BENCH / "heldout")
+    if args.split in HELDOUT_SEEDS:
+        seeds = [HELDOUT_SEEDS[args.split] + i for i in range(PER_FAMILY)]
+        out = Path(args.out or BENCH / args.split)
     else:
         seeds = list(range(args.n))      # never overlaps the held-out seeds
         out = Path(args.out or BENCH / "train")

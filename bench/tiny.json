@@ -1,0 +1,746 @@
+[
+ {
+  "seed": 7000,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "ellipse",
+   "ellipse"
+  ],
+  "stacks": 3,
+  "optimal": 234,
+  "optimal_code": "<body bgcolor=1a4341><b style=\"inset:80px 230px 30px 10px;background:#e3516e\"><b style=\"inset:70px 240px 80px 70px;background:#62374e\"><b style=\"inset:10px 50px 180px 140px;background:#c55b3d\"><style>b{position:fixed;border-radius:50%",
+  "reference": 234,
+  "cssynth": 234,
+  "cssynth_code": "<body bgcolor=1a4341><b style=\"inset:80px 230px 30px 10px;background:#e3516e\"><b style=\"inset:70px 240px 80px 70px;background:#62374e\"><b style=\"inset:10px 50px 180px 140px;background:#c55b3d\"><style>b{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 234.0,
+  "solve_s": 0.4,
+  "compile_s": 16.9
+ },
+ {
+  "seed": 7001,
+  "shapes": 1,
+  "kinds": [
+   "box"
+  ],
+  "stacks": 1,
+  "optimal": 94,
+  "optimal_code": "<body bgcolor=6592cf><b style=\"position:fixed;inset:110px 120px 50px 40px;background:#e3516e\">",
+  "reference": 94,
+  "cssynth": 94,
+  "cssynth_code": "<body bgcolor=6592cf><b style=\"position:fixed;inset:110px 120px 50px 40px;background:#e3516e\">",
+  "cssynth_wrong": 0,
+  "J_cssynth": 94.0,
+  "solve_s": 0.3,
+  "compile_s": 3.3
+ },
+ {
+  "seed": 7002,
+  "shapes": 4,
+  "kinds": [
+   "ellipse",
+   "ellipse",
+   "ellipse",
+   "box"
+  ],
+  "stacks": 4,
+  "optimal": 313,
+  "optimal_code": "<body bgcolor=e8e7ce><i style=\"inset:50px 90px 60px 180px;background:#998235\"><i style=\"inset:130px 140px 60px 120px;background:#fdc57b\"><b style=\"inset:20px 100px 120px 160px;background:#f7d716\"><i style=\"inset:260px 180px 10px 170px;background:#1a4341\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "reference": 313,
+  "cssynth": 313,
+  "cssynth_code": "<body bgcolor=e8e7ce><i style=\"inset:260px 180px 10px 170px;background:#1a4341\"><i style=\"inset:50px 90px 60px 180px;background:#998235\"><i style=\"inset:130px 140px 60px 120px;background:#fdc57b\"><b style=\"inset:20px 100px 120px 160px;background:#f7d716\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 313.0,
+  "solve_s": 0.5,
+  "compile_s": 37.6
+ },
+ {
+  "seed": 7003,
+  "shapes": 4,
+  "kinds": [
+   "ellipse",
+   "ellipse",
+   "ellipse",
+   "ellipse"
+  ],
+  "stacks": 8,
+  "optimal": 292,
+  "optimal_code": "<body bgcolor=998235><b style=\"inset:140px 10px 80px 300px;background:#293462\"><b style=\"inset:180px 110px 0 40px;background:#f7d716\"><b style=\"inset:120px 120px 110px 150px;background:#fdc57b\"><b style=\"inset:210px 90px 30px 80px;background:#6592cf\"><style>b{position:fixed;border-radius:50%",
+  "reference": 292,
+  "cssynth": 292,
+  "cssynth_code": "<body bgcolor=998235><b style=\"inset:140px 10px 80px 300px;background:#293462\"><b style=\"inset:180px 110px 0 40px;background:#f7d716\"><b style=\"inset:120px 120px 110px 150px;background:#fdc57b\"><b style=\"inset:210px 90px 30px 80px;background:#6592cf\"><style>b{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 292.0,
+  "solve_s": 0.5,
+  "compile_s": 14.4
+ },
+ {
+  "seed": 7004,
+  "shapes": 2,
+  "kinds": [
+   "box",
+   "box"
+  ],
+  "stacks": 1,
+  "optimal": 157,
+  "optimal_code": "<body bgcolor=c55b3d><b style=left:220;top:20;padding:45;background:#998235><b style=\"inset:70px 150px 110px 10px;background:#62374e\"><style>b{position:fixed",
+  "reference": 157,
+  "cssynth": 157,
+  "cssynth_code": "<body bgcolor=c55b3d><b style=left:220;top:20;padding:45;background:#998235><b style=\"inset:70px 150px 110px 10px;background:#62374e\"><style>b{position:fixed",
+  "cssynth_wrong": 0,
+  "J_cssynth": 157.0,
+  "solve_s": 0.3,
+  "compile_s": 5.5
+ },
+ {
+  "seed": 7005,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "ellipse",
+   "ellipse"
+  ],
+  "stacks": 6,
+  "optimal": 217,
+  "optimal_code": "<body bgcolor=e8e7ce><b style=\"inset:30px 250px 100px 10px;background:#1a4341;box-shadow:105px 85px 0 -55px #fdc57b\"><b style=\"inset:40px 110px 180px 170px;background:#6592cf\"><style>b{position:fixed;border-radius:50%",
+  "reference": 217,
+  "cssynth": 217,
+  "cssynth_code": "<body bgcolor=e8e7ce><b style=\"inset:30px 250px 100px 10px;background:#1a4341;box-shadow:105px 85px 0 -55px #fdc57b\"><b style=\"inset:40px 110px 180px 170px;background:#6592cf\"><style>b{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 217.0,
+  "solve_s": 0.4,
+  "compile_s": 10.5
+ },
+ {
+  "seed": 7006,
+  "shapes": 4,
+  "kinds": [
+   "box",
+   "box",
+   "ellipse",
+   "box"
+  ],
+  "stacks": 8,
+  "optimal": 286,
+  "optimal_code": "<body bgcolor=1a4341><b style=\"inset:10px 80px 120px 90px;background:#e8e7ce\"><b style=\"inset:80px 50px 0 260px;background:#998235\"><b style=\"inset:20px 200px 220px 0;background:#f3ac3c;border-radius:50%\"><b style=\"inset:220px 190px 50px 60px;background:#fdc57b\"><style>b{position:fixed",
+  "reference": 286,
+  "cssynth": 286,
+  "cssynth_code": "<body bgcolor=1a4341><b style=\"inset:220px 190px 50px 60px;background:#fdc57b\"><b style=\"inset:10px 80px 120px 90px;background:#e8e7ce\"><b style=\"inset:20px 200px 220px 0;background:#f3ac3c;border-radius:50%\"><b style=\"inset:80px 50px 0 260px;background:#998235\"><style>b{position:fixed",
+  "cssynth_wrong": 0,
+  "J_cssynth": 286.0,
+  "solve_s": 0.5,
+  "compile_s": 13.8
+ },
+ {
+  "seed": 7007,
+  "shapes": 4,
+  "kinds": [
+   "box",
+   "box",
+   "ellipse",
+   "box"
+  ],
+  "stacks": 2,
+  "optimal": 285,
+  "optimal_code": "<body bgcolor=e8e7ce><b style=\"inset:70px 220px 10px 40px;background:#e3516e\"><b style=\"inset:140px 140px 80px 80px;background:#fdc57b\"><b style=\"inset:110px 170px 0 180px;background:#998235\"><b style=\"inset:180px 230px 0 0;background:#6592cf;border-radius:50%\"><style>b{position:fixed",
+  "reference": 285,
+  "cssynth": 325,
+  "cssynth_code": "<body bgcolor=e8e7ce><b style=\"inset:140px 140px 80px 230px\"><b style=\"inset:110px 170px 0 180px;background:#998235\"><b style=\"inset:70px 220px 10px 40px;background:#e3516e\"><b style=\"inset:140px 220px 80px 80px\"><b style=\"inset:180px 230px 0 0;background:#6592cf;border-radius:50%\"><style>b{position:fixed;background:#fdc57b",
+  "cssynth_wrong": 0,
+  "J_cssynth": 325.0,
+  "solve_s": 0.4,
+  "compile_s": 36.7
+ },
+ {
+  "seed": 7008,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "ellipse",
+   "box"
+  ],
+  "stacks": 2,
+  "optimal": 254,
+  "optimal_code": "<body bgcolor=6592cf><i style=\"inset:200px 170px 60px 150px;background:#e8e7ce\"><i style=\"inset:20px 130px 110px 30px;background:#fdc57b\"><b style=\"inset:90px 170px 80px 120px;background:#b5e0ba\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "reference": 254,
+  "cssynth": 254,
+  "cssynth_code": "<body bgcolor=6592cf><i style=\"inset:200px 170px 60px 150px;background:#e8e7ce\"><i style=\"inset:20px 130px 110px 30px;background:#fdc57b\"><b style=\"inset:90px 170px 80px 120px;background:#b5e0ba\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 254.0,
+  "solve_s": 0.4,
+  "compile_s": 10.8
+ },
+ {
+  "seed": 7009,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "box",
+   "ellipse"
+  ],
+  "stacks": 1,
+  "optimal": 253,
+  "optimal_code": "<body bgcolor=293462><i style=\"inset:100px 120px 40px 250px;background:#6592cf\"><b style=left:220;top:100;padding:35;background:#c55b3d><i style=\"inset:100px 130px 30px 190px;background:#fdc57b\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "reference": 253,
+  "cssynth": 257,
+  "cssynth_code": "<body bgcolor=293462><i style=\"inset:100px 120px 40px 250px;background:#6592cf\"><b style=\"inset:100px 110px 130px 218px;background:#c55b3d\"><i style=\"inset:100px 130px 30px 190px;background:#fdc57b\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "cssynth_wrong": 7,
+  "J_cssynth": 271.0,
+  "solve_s": 0.0,
+  "compile_s": 9.0
+ },
+ {
+  "seed": 7010,
+  "shapes": 1,
+  "kinds": [
+   "ellipse"
+  ],
+  "stacks": 1,
+  "optimal": 109,
+  "optimal_code": "<body bgcolor=c55b3d><b style=\"position:fixed;inset:170px 210px 0 20px;background:#e3516e;border-radius:50%\">",
+  "reference": 109,
+  "cssynth": 109,
+  "cssynth_code": "<body bgcolor=c55b3d><b style=\"position:fixed;inset:170px 210px 0 20px;background:#e3516e;border-radius:50%\">",
+  "cssynth_wrong": 0,
+  "J_cssynth": 109.0,
+  "solve_s": 0.0,
+  "compile_s": 14.4
+ },
+ {
+  "seed": 7011,
+  "shapes": 3,
+  "kinds": [
+   "box",
+   "box",
+   "ellipse"
+  ],
+  "stacks": 6,
+  "optimal": 229,
+  "optimal_code": "<body bgcolor=b5e0ba><b style=\"inset:210px 90px 60px 250px;background:#f3ac3c;border-radius:50%\"><b style=\"inset:50px 170px 50px 0;background:#c55b3d\"><b style=\"inset:0 50px 110px 260px;background:#62374e\"><style>b{position:fixed",
+  "reference": 229,
+  "cssynth": 229,
+  "cssynth_code": "<body bgcolor=b5e0ba><b style=\"inset:210px 90px 60px 250px;background:#f3ac3c;border-radius:50%\"><b style=\"inset:0 50px 110px 260px;background:#62374e\"><b style=\"inset:50px 170px 50px 0;background:#c55b3d\"><style>b{position:fixed",
+  "cssynth_wrong": 0,
+  "J_cssynth": 229.0,
+  "solve_s": 0.1,
+  "compile_s": 7.9
+ },
+ {
+  "seed": 7012,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "ellipse",
+   "box"
+  ],
+  "stacks": 2,
+  "optimal": 250,
+  "optimal_code": "<body bgcolor=62374e><b style=\"inset:20px 70px 60px 230px;background:#b5e0ba;border-radius:50%\"><b style=left:50;top:10;padding:110;background:#c55b3d;border-radius:50%><b style=\"inset:30px 100px 90px 190px;background:#f3ac3c\"><style>b{position:fixed",
+  "reference": 250,
+  "cssynth": 250,
+  "cssynth_code": "<body bgcolor=62374e><b style=\"inset:20px 70px 60px 230px;background:#b5e0ba;border-radius:50%\"><b style=left:50;top:10;padding:110;background:#c55b3d;border-radius:50%><b style=\"inset:30px 100px 90px 190px;background:#f3ac3c\"><style>b{position:fixed",
+  "cssynth_wrong": 0,
+  "J_cssynth": 250.0,
+  "solve_s": 0.0,
+  "compile_s": 34.5
+ },
+ {
+  "seed": 7013,
+  "shapes": 1,
+  "kinds": [
+   "box"
+  ],
+  "stacks": 1,
+  "optimal": 88,
+  "optimal_code": "<body bgcolor=293462><b style=\"position:fixed;inset:0 340px 210px 0;background:#c55b3d\">",
+  "reference": 88,
+  "cssynth": 88,
+  "cssynth_code": "<body bgcolor=293462><b style=\"position:fixed;inset:0 340px 210px 0;background:#c55b3d\">",
+  "cssynth_wrong": 0,
+  "J_cssynth": 88.0,
+  "solve_s": 0.0,
+  "compile_s": 6.6
+ },
+ {
+  "seed": 7014,
+  "shapes": 1,
+  "kinds": [
+   "ellipse"
+  ],
+  "stacks": 1,
+  "optimal": 113,
+  "optimal_code": "<body bgcolor=1a4341><b style=\"position:fixed;inset:30px 120px 150px 170px;background:#62374e;border-radius:50%\">",
+  "reference": 113,
+  "cssynth": 113,
+  "cssynth_code": "<body bgcolor=1a4341><b style=\"position:fixed;inset:30px 120px 150px 170px;background:#62374e;border-radius:50%\">",
+  "cssynth_wrong": 0,
+  "J_cssynth": 113.0,
+  "solve_s": 0.0,
+  "compile_s": 3.9
+ },
+ {
+  "seed": 7015,
+  "shapes": 2,
+  "kinds": [
+   "box",
+   "box"
+  ],
+  "stacks": 1,
+  "optimal": 158,
+  "optimal_code": "<body bgcolor=6592cf><b style=\"inset:170px 110px 0 180px;background:#f3ac3c\"><b style=\"inset:10px 140px 70px 210px;background:#c55b3d\"><style>b{position:fixed",
+  "reference": 158,
+  "cssynth": 158,
+  "cssynth_code": "<body bgcolor=6592cf><b style=\"inset:170px 110px 0 180px;background:#f3ac3c\"><b style=\"inset:10px 140px 70px 210px;background:#c55b3d\"><style>b{position:fixed",
+  "cssynth_wrong": 0,
+  "J_cssynth": 158.0,
+  "solve_s": 0.0,
+  "compile_s": 4.6
+ },
+ {
+  "seed": 7016,
+  "shapes": 1,
+  "kinds": [
+   "box"
+  ],
+  "stacks": 1,
+  "optimal": 90,
+  "optimal_code": "<body bgcolor=998235><b style=\"position:fixed;inset:50px 0 80px 220px;background:#f3ac3c\">",
+  "reference": 90,
+  "cssynth": 90,
+  "cssynth_code": "<body bgcolor=998235><b style=\"position:fixed;inset:50px 0 80px 220px;background:#f3ac3c\">",
+  "cssynth_wrong": 0,
+  "J_cssynth": 90.0,
+  "solve_s": 0.0,
+  "compile_s": 8.8
+ },
+ {
+  "seed": 7017,
+  "shapes": 4,
+  "kinds": [
+   "ellipse",
+   "ellipse",
+   "box",
+   "box"
+  ],
+  "stacks": 59,
+  "optimal": 290,
+  "optimal_code": "<body bgcolor=f7d716><i style=\"inset:100px 210px 130px 40px;background:#f3ac3c\"><i style=\"inset:0 50px 100px 160px;background:#6592cf\"><b style=\"inset:60px 120px 20px 100px;background:#293462;box-shadow:-100px 50px 0 -50px #c55b3d\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "reference": 309,
+  "cssynth": 309,
+  "cssynth_code": "<body bgcolor=f7d716><i style=\"inset:101px 219px 131px 40px;background:#f3ac3c\"><b style=\"inset:160px 300px 20px 50px;background:#c55b3d\"><i style=\"inset:0 50px 100px 160px;background:#6592cf\"><b style=\"inset:60px 120px 20px 100px;background:#293462\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "cssynth_wrong": 16,
+  "J_cssynth": 341.0,
+  "solve_s": 0.7,
+  "compile_s": 42.3
+ },
+ {
+  "seed": 7018,
+  "shapes": 2,
+  "kinds": [
+   "ellipse",
+   "ellipse"
+  ],
+  "stacks": 1,
+  "optimal": 177,
+  "optimal_code": "<body bgcolor=998235><b style=\"inset:210px 260px 20px 20px;background:#293462\"><b style=\"inset:70px 240px 10px 40px;background:#62374e\"><style>b{position:fixed;border-radius:50%",
+  "reference": 177,
+  "cssynth": 177,
+  "cssynth_code": "<body bgcolor=998235><b style=\"inset:211px 270px 21px 20px;background:#293462\"><b style=\"inset:70px 240px 10px 40px;background:#62374e\"><style>b{position:fixed;border-radius:50%",
+  "cssynth_wrong": 12,
+  "J_cssynth": 201.0,
+  "solve_s": 0.0,
+  "compile_s": 27.9
+ },
+ {
+  "seed": 7019,
+  "shapes": 1,
+  "kinds": [
+   "ellipse"
+  ],
+  "stacks": 1,
+  "optimal": 112,
+  "optimal_code": "<body bgcolor=fdc57b><b style=\"position:fixed;inset:20px 20px 150px 160px;background:#b5e0ba;border-radius:50%\">",
+  "reference": 112,
+  "cssynth": 112,
+  "cssynth_code": "<body bgcolor=fdc57b><b style=\"position:fixed;inset:20px 20px 150px 160px;background:#b5e0ba;border-radius:50%\">",
+  "cssynth_wrong": 0,
+  "J_cssynth": 112.0,
+  "solve_s": 0.0,
+  "compile_s": 16.0
+ },
+ {
+  "seed": 7020,
+  "shapes": 1,
+  "kinds": [
+   "ellipse"
+  ],
+  "stacks": 1,
+  "optimal": 113,
+  "optimal_code": "<body bgcolor=1a4341><b style=\"position:fixed;inset:180px 120px 70px 130px;background:#f3ac3c;border-radius:50%\">",
+  "reference": 113,
+  "cssynth": 113,
+  "cssynth_code": "<body bgcolor=1a4341><b style=\"position:fixed;inset:180px 120px 70px 130px;background:#f3ac3c;border-radius:50%\">",
+  "cssynth_wrong": 0,
+  "J_cssynth": 113.0,
+  "solve_s": 0.0,
+  "compile_s": 3.6
+ },
+ {
+  "seed": 7021,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "box",
+   "ellipse"
+  ],
+  "stacks": 1,
+  "optimal": 252,
+  "optimal_code": "<body bgcolor=e3516e><i style=\"inset:40px 60px 200px 220px;background:#c55b3d\"><b style=\"inset:60px 40px 50px 130px;background:#998235\"><i style=\"inset:70px 150px 170px 40px;background:#e8e7ce\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "reference": 252,
+  "cssynth": 252,
+  "cssynth_code": "<body bgcolor=e3516e><i style=\"inset:40px 64px 211px 224px;background:#c55b3d\"><b style=\"inset:60px 40px 50px 130px;background:#998235\"><i style=\"inset:70px 150px 170px 40px;background:#e8e7ce\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "cssynth_wrong": 16,
+  "J_cssynth": 284.0,
+  "solve_s": 0.0,
+  "compile_s": 9.7
+ },
+ {
+  "seed": 7022,
+  "shapes": 1,
+  "kinds": [
+   "box"
+  ],
+  "stacks": 1,
+  "optimal": 95,
+  "optimal_code": "<body bgcolor=fdc57b><b style=\"position:fixed;inset:140px 150px 120px 20px;background:#c55b3d\">",
+  "reference": 95,
+  "cssynth": 95,
+  "cssynth_code": "<body bgcolor=fdc57b><b style=\"position:fixed;inset:140px 150px 120px 20px;background:#c55b3d\">",
+  "cssynth_wrong": 0,
+  "J_cssynth": 95.0,
+  "solve_s": 0.0,
+  "compile_s": 3.4
+ },
+ {
+  "seed": 7023,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "box",
+   "box"
+  ],
+  "stacks": 19,
+  "optimal": 234,
+  "optimal_code": "<body bgcolor=e8e7ce><b style=\"inset:160px 130px 70px 90px;background:#293462;border-radius:50%\"><b style=\"inset:130px 110px 0 210px;background:#1a4341\"><b style=\"inset:230px 190px 40px 90px;background:#c55b3d\"><style>b{position:fixed",
+  "reference": 234,
+  "cssynth": 234,
+  "cssynth_code": "<body bgcolor=e8e7ce><b style=\"inset:230px 188px 40px 90px;background:#c55b3d\"><b style=\"inset:160px 130px 70px 90px;background:#293462;border-radius:50%\"><b style=\"inset:130px 110px 0 210px;background:#1a4341\"><style>b{position:fixed",
+  "cssynth_wrong": 0,
+  "J_cssynth": 234.0,
+  "solve_s": 0.1,
+  "compile_s": 5.3
+ },
+ {
+  "seed": 7024,
+  "shapes": 2,
+  "kinds": [
+   "ellipse",
+   "box"
+  ],
+  "stacks": 2,
+  "optimal": 175,
+  "optimal_code": "<body bgcolor=c55b3d><b style=\"inset:10px 220px 110px 90px;background:#6592cf\"><b style=\"inset:0 340px 100px 30px;background:#e3516e;border-radius:50%\"><style>b{position:fixed",
+  "reference": 175,
+  "cssynth": 175,
+  "cssynth_code": "<body bgcolor=c55b3d><b style=\"inset:0 340px 100px 30px;background:#e3516e;border-radius:50%\"><b style=\"inset:10px 220px 110px 90px;background:#6592cf\"><style>b{position:fixed",
+  "cssynth_wrong": 0,
+  "J_cssynth": 175.0,
+  "solve_s": 0.0,
+  "compile_s": 13.3
+ },
+ {
+  "seed": 7025,
+  "shapes": 4,
+  "kinds": [
+   "ellipse",
+   "box",
+   "box",
+   "ellipse"
+  ],
+  "stacks": 8,
+  "optimal": 311,
+  "optimal_code": "<body bgcolor=f3ac3c><b style=\"inset:0 250px 210px 100px;background:#c55b3d\"><b style=\"inset:60px 120px 100px 200px;background:#998235\"><i style=\"inset:80px 60px 190px 120px;background:#e3516e\"><i style=\"inset:130px 200px 80px 150px;background:#6592cf\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "reference": 311,
+  "cssynth": 311,
+  "cssynth_code": "<body bgcolor=f3ac3c><i style=\"inset:130px 200px 80px 150px;background:#6592cf\"><b style=\"inset:0 250px 210px 100px;background:#c55b3d\"><b style=\"inset:60px 120px 100px 200px;background:#998235\"><i style=\"inset:80px 60px 190px 120px;background:#e3516e\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 311.0,
+  "solve_s": 0.2,
+  "compile_s": 8.2
+ },
+ {
+  "seed": 7026,
+  "shapes": 4,
+  "kinds": [
+   "box",
+   "box",
+   "ellipse",
+   "box"
+  ],
+  "stacks": 6,
+  "optimal": 295,
+  "optimal_code": "<body bgcolor=b5e0ba><b style=\"inset:150px 120px 40px 60px;background:#6592cf\"><b style=\"inset:190px 20px 70px 190px;background:#e8e7ce\"><b style=\"inset:20px 150px 160px 110px;background:#e3516e\"><b style=\"inset:80px 130px 190px 50px;background:#c55b3d;border-radius:50%\"><style>b{position:fixed",
+  "reference": 295,
+  "cssynth": 295,
+  "cssynth_code": "<body bgcolor=b5e0ba><b style=\"inset:20px 150px 160px 110px;background:#e3516e\"><b style=\"inset:80px 130px 190px 50px;background:#c55b3d;border-radius:50%\"><b style=\"inset:150px 120px 40px 60px;background:#6592cf\"><b style=\"inset:190px 20px 70px 190px;background:#e8e7ce\"><style>b{position:fixed",
+  "cssynth_wrong": 0,
+  "J_cssynth": 295.0,
+  "solve_s": 0.1,
+  "compile_s": 6.5
+ },
+ {
+  "seed": 7027,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "ellipse",
+   "ellipse"
+  ],
+  "stacks": 1,
+  "optimal": 237,
+  "optimal_code": "<body bgcolor=e8e7ce><b style=\"inset:20px 250px 210px 50px;background:#6592cf\"><b style=\"inset:30px 210px 240px 130px;background:#1a4341\"><b style=\"inset:20px 260px 160px 70px;background:#293462\"><style>b{position:fixed;border-radius:50%",
+  "reference": 237,
+  "cssynth": 237,
+  "cssynth_code": "<body bgcolor=e8e7ce><b style=\"inset:20px 250px 210px 50px;background:#6592cf\"><b style=\"inset:30px 210px 240px 130px;background:#1a4341\"><b style=\"inset:20px 260px 160px 70px;background:#293462\"><style>b{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 237.0,
+  "solve_s": 0.0,
+  "compile_s": 8.2
+ },
+ {
+  "seed": 7028,
+  "shapes": 4,
+  "kinds": [
+   "ellipse",
+   "box",
+   "box",
+   "ellipse"
+  ],
+  "stacks": 6,
+  "optimal": 309,
+  "optimal_code": "<body bgcolor=293462><i style=\"inset:20px 80px 200px 120px;background:#f3ac3c\"><i style=\"inset:0 70px 260px 220px;background:#6592cf\"><b style=\"inset:210px 110px 60px 150px;background:#e3516e\"><b style=\"inset:150px 170px 80px 20px;background:#62374e\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "reference": 309,
+  "cssynth": 309,
+  "cssynth_code": "<body bgcolor=293462><b style=\"inset:210px 110px 60px 150px;background:#e3516e\"><i style=\"inset:20px 80px 200px 120px;background:#f3ac3c\"><i style=\"inset:0 70px 260px 220px;background:#6592cf\"><b style=\"inset:150px 170px 80px 20px;background:#62374e\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 309.0,
+  "solve_s": 0.2,
+  "compile_s": 9.0
+ },
+ {
+  "seed": 7029,
+  "shapes": 3,
+  "kinds": [
+   "box",
+   "ellipse",
+   "box"
+  ],
+  "stacks": 2,
+  "optimal": 239,
+  "optimal_code": "<body bgcolor=293462><b style=\"inset:30px 160px 60px 160px;background:#e8e7ce\"><b style=\"inset:120px 110px 140px 220px;background:#1a4341\"><b style=\"inset:30px 170px 220px 110px;background:#c55b3d;border-radius:50%\"><style>b{position:fixed",
+  "reference": 239,
+  "cssynth": 239,
+  "cssynth_code": "<body bgcolor=293462><b style=\"inset:30px 160px 60px 160px;background:#e8e7ce\"><b style=\"inset:120px 110px 140px 220px;background:#1a4341\"><b style=\"inset:30px 170px 220px 110px;background:#c55b3d;border-radius:50%\"><style>b{position:fixed",
+  "cssynth_wrong": 0,
+  "J_cssynth": 239.0,
+  "solve_s": 0.0,
+  "compile_s": 7.3
+ },
+ {
+  "seed": 7030,
+  "shapes": 2,
+  "kinds": [
+   "ellipse",
+   "ellipse"
+  ],
+  "stacks": 2,
+  "optimal": 174,
+  "optimal_code": "<body bgcolor=e3516e><b style=\"inset:260px 110px 0 70px;background:#b5e0ba\"><b style=\"inset:50px 270px 80px 30px;background:#1a4341\"><style>b{position:fixed;border-radius:50%",
+  "reference": 174,
+  "cssynth": 174,
+  "cssynth_code": "<body bgcolor=e3516e><b style=\"inset:260px 110px 0 70px;background:#b5e0ba\"><b style=\"inset:50px 270px 80px 30px;background:#1a4341\"><style>b{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 174.0,
+  "solve_s": 0.0,
+  "compile_s": 8.0
+ },
+ {
+  "seed": 7031,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "box",
+   "ellipse"
+  ],
+  "stacks": 1,
+  "optimal": 249,
+  "optimal_code": "<body bgcolor=1a4341><i style=\"inset:80px 100px 0 250px;background:#998235\"><b style=\"inset:70px 90px 20px 120px;background:#6592cf\"><i style=\"inset:260px 150px 10px 10px;background:#293462\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "reference": 249,
+  "cssynth": 250,
+  "cssynth_code": "<body bgcolor=1a4341><i style=\"inset:242px 111px 0 261px;background:#998235\"><b style=\"inset:70px 90px 20px 120px;background:#6592cf\"><i style=\"inset:260px 150px 10px 10px;background:#293462\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "cssynth_wrong": 16,
+  "J_cssynth": 282.0,
+  "solve_s": 0.0,
+  "compile_s": 9.8
+ },
+ {
+  "seed": 7032,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "ellipse",
+   "ellipse"
+  ],
+  "stacks": 2,
+  "optimal": 234,
+  "optimal_code": "<body bgcolor=e8e7ce><b style=left:120;top:20;padding:105;background:#62374e><b style=\"inset:90px 260px 160px 80px;background:#998235\"><b style=\"inset:60px 30px 190px 200px;background:#e3516e\"><style>b{position:fixed;border-radius:50%",
+  "reference": 234,
+  "cssynth": 234,
+  "cssynth_code": "<body bgcolor=e8e7ce><b style=left:120;top:20;padding:105;background:#62374e><b style=\"inset:90px 260px 160px 80px;background:#998235\"><b style=\"inset:60px 30px 190px 200px;background:#e3516e\"><style>b{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 234.0,
+  "solve_s": 0.0,
+  "compile_s": 36.6
+ },
+ {
+  "seed": 7033,
+  "shapes": 2,
+  "kinds": [
+   "box",
+   "box"
+  ],
+  "stacks": 1,
+  "optimal": 155,
+  "optimal_code": "<body bgcolor=1a4341><b style=\"inset:40px 180px 90px 0;background:#6592cf\"><b style=\"inset:50px 50px 80px 150px;background:#b5e0ba\"><style>b{position:fixed",
+  "reference": 155,
+  "cssynth": 155,
+  "cssynth_code": "<body bgcolor=1a4341><b style=\"inset:40px 180px 90px 0;background:#6592cf\"><b style=\"inset:50px 50px 80px 150px;background:#b5e0ba\"><style>b{position:fixed",
+  "cssynth_wrong": 0,
+  "J_cssynth": 155.0,
+  "solve_s": 0.0,
+  "compile_s": 15.8
+ },
+ {
+  "seed": 7034,
+  "shapes": 4,
+  "kinds": [
+   "box",
+   "ellipse",
+   "ellipse",
+   "ellipse"
+  ],
+  "stacks": 5,
+  "optimal": 312,
+  "optimal_code": "<body bgcolor=c55b3d><i style=\"inset:20px 270px 70px 100px;background:#998235\"><b style=\"inset:90px 230px 50px 140px;background:#293462\"><i style=\"inset:120px 240px 80px 30px;background:#6592cf\"><i style=\"inset:90px 170px 180px 160px;background:#b5e0ba\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "reference": 312,
+  "cssynth": 312,
+  "cssynth_code": "<body bgcolor=c55b3d><i style=\"inset:20px 270px 70px 100px;background:#998235\"><b style=\"inset:90px 230px 50px 140px;background:#293462\"><i style=\"inset:90px 170px 180px 160px;background:#b5e0ba\"><i style=\"inset:120px 240px 80px 30px;background:#6592cf\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 312.0,
+  "solve_s": 0.2,
+  "compile_s": 8.2
+ },
+ {
+  "seed": 7035,
+  "shapes": 4,
+  "kinds": [
+   "ellipse",
+   "box",
+   "ellipse",
+   "ellipse"
+  ],
+  "stacks": 2,
+  "optimal": 310,
+  "optimal_code": "<body bgcolor=b5e0ba><i style=\"inset:110px 230px 60px 60px;background:#fdc57b\"><i style=\"inset:90px 50px 40px 120px;background:#998235\"><b style=\"inset:30px 300px 110px 70px;background:#293462\"><i style=\"inset:50px 200px 110px 50px;background:#6592cf\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "reference": 310,
+  "cssynth": 350,
+  "cssynth_code": "<body bgcolor=b5e0ba><i style=\"inset:30px 300px 228px 70px\"><b style=\"inset:110px 230px 60px 60px;background:#fdc57b\"><i style=\"inset:168px 300px 110px 70px\"><b style=\"inset:90px 50px 40px 120px;background:#998235\"><b style=\"inset:50px 200px 110px 50px;background:#6592cf\"><style>b{position:fixed;border-radius:50%}i{position:fixed;background:#293462",
+  "cssynth_wrong": 0,
+  "J_cssynth": 350.0,
+  "solve_s": 0.1,
+  "compile_s": 16.7
+ },
+ {
+  "seed": 7036,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "box",
+   "ellipse"
+  ],
+  "stacks": 3,
+  "optimal": 251,
+  "optimal_code": "<body bgcolor=293462><i style=\"inset:80px 20px 70px 320px;background:#c55b3d\"><i style=\"inset:50px 260px 40px 60px;background:#e8e7ce\"><b style=\"inset:50px 170px 80px 100px;background:#f7d716\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "reference": 251,
+  "cssynth": 251,
+  "cssynth_code": "<body bgcolor=293462><i style=\"inset:80px 20px 70px 320px;background:#c55b3d\"><i style=\"inset:50px 260px 40px 60px;background:#e8e7ce\"><b style=\"inset:50px 170px 80px 100px;background:#f7d716\"><style>b{position:fixed}i{position:fixed;border-radius:50%",
+  "cssynth_wrong": 0,
+  "J_cssynth": 251.0,
+  "solve_s": 0.0,
+  "compile_s": 17.6
+ },
+ {
+  "seed": 7037,
+  "shapes": 1,
+  "kinds": [
+   "ellipse"
+  ],
+  "stacks": 1,
+  "optimal": 112,
+  "optimal_code": "<body bgcolor=e8e7ce><b style=\"position:fixed;inset:150px 180px 40px 30px;background:#b5e0ba;border-radius:50%\">",
+  "reference": 112,
+  "cssynth": 112,
+  "cssynth_code": "<body bgcolor=e8e7ce><b style=\"position:fixed;inset:150px 180px 40px 30px;background:#b5e0ba;border-radius:50%\">",
+  "cssynth_wrong": 0,
+  "J_cssynth": 112.0,
+  "solve_s": 0.0,
+  "compile_s": 7.3
+ },
+ {
+  "seed": 7038,
+  "shapes": 3,
+  "kinds": [
+   "ellipse",
+   "box",
+   "box"
+  ],
+  "stacks": 2,
+  "optimal": 236,
+  "optimal_code": "<body bgcolor=1a4341><b style=\"inset:10px 150px 70px 150px;background:#e3516e;border-radius:50%\"><b style=\"inset:80px 40px 170px 220px;background:#293462\"><b style=\"inset:10px 190px 100px 80px;background:#c55b3d\"><style>b{position:fixed",
+  "reference": 236,
+  "cssynth": 236,
+  "cssynth_code": "<body bgcolor=1a4341><b style=\"inset:10px 150px 70px 150px;background:#e3516e;border-radius:50%\"><b style=\"inset:80px 40px 170px 220px;background:#293462\"><b style=\"inset:10px 190px 100px 80px;background:#c55b3d\"><style>b{position:fixed",
+  "cssynth_wrong": 0,
+  "J_cssynth": 236.0,
+  "solve_s": 0.0,
+  "compile_s": 21.0
+ },
+ {
+  "seed": 7039,
+  "shapes": 1,
+  "kinds": [
+   "box"
+  ],
+  "stacks": 1,
+  "optimal": 94,
+  "optimal_code": "<body bgcolor=62374e><b style=\"position:fixed;inset:10px 290px 120px 70px;background:#fdc57b\">",
+  "reference": 94,
+  "cssynth": 94,
+  "cssynth_code": "<body bgcolor=62374e><b style=\"position:fixed;inset:10px 290px 120px 70px;background:#fdc57b\">",
+  "cssynth_wrong": 0,
+  "J_cssynth": 94.0,
+  "solve_s": 0.0,
+  "compile_s": 2.9
+ }
+]

@@ -16,6 +16,7 @@ it). Methods are compared on the targets all of them solve.
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 import time
@@ -28,6 +29,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "bench"))
 from cssynth import compiler, search, simplify  # noqa: E402
 
 BENCH = ROOT / "bench"
@@ -49,6 +51,14 @@ def _base(path):
     return compiler.compile_image(path)
 
 
+def _base_more(path):
+    """base climbing 14 starts per step instead of 10: about the CPU time
+    of the default compiler, for comparisons at equal compute."""
+    search.MOTIFS, search.SCALE_MOVES, simplify.PLAINER = set(), False, False
+    search.SAME_COLOR, search.TOP_STARTS = -1, 14
+    return compiler.compile_image(path)
+
+
 def _fixes(path):
     """Everything but motifs."""
     search.MOTIFS = set()
@@ -62,11 +72,25 @@ def _motifs(kinds, same_color=search.SAME_COLOR):
     return run
 
 
+def _learned(path):
+    """Nest and symmetric motifs, accepted by the filter trained in
+    proposals.py (its model file in $PROPOSAL_MODEL) instead of by the step
+    rule."""
+    import proposals
+    global _policy
+    if _policy is None:
+        _policy = proposals.learned_policy(os.environ["PROPOSAL_MODEL"])
+    search.MOTIFS, search.MOTIF_POLICY = {"nest", "symmetric"}, _policy
+    return compiler.compile_image(path)
+
+
+_policy = None
+
 # name: path -> (code, info, model)
-METHODS = {"full": _full, "fast": _fast, "base": _base, "fixes": _fixes,
+METHODS = {"full": _full, "fast": _fast, "base": _base, "base-more": _base_more, "fixes": _fixes,
            "nest": _motifs(["nest"]), "nest-sym": _motifs(["nest", "symmetric"]),
            "all-motifs": _motifs(["nest", "symmetric", "seeded"]),
-           "nest-allcolors": _motifs(["nest"], same_color=-1)}
+           "nest-allcolors": _motifs(["nest"], same_color=-1), "learned": _learned}
 
 
 def targets(name):

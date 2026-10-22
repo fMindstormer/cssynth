@@ -70,6 +70,33 @@ The re-search, outline polygons and inserting shapes below existing ones
 matter most; choosing shapes by length as well as pixels comes next. Exact shadow grouping and `clip-path` reuse are small on
 average but decide a few targets.
 
+### Beyond the development set
+
+The 66 targets are where the compiler was developed, so two more benchmarks
+test it elsewhere (details in [docs/method.md](docs/method.md#beyond-the-development-set)).
+
+**Held-out structural families.** 48 targets generated from six structures:
+mirrored shapes, repeats, concentric rings, petals, stripes and unrelated
+shapes. They are compiled once per version, never inspected, and scored in
+Chromium. All three methods below got about the same CPU time
+(`bench/evaluate.py`). The baseline climbs 40% more starts to match the
+cost of the motif search:
+
+| | solved (≥ 99%) | characters, on the 34 all solve | CPU |
+|---|---|---|---|
+| v0.5.0 | 34 / 48 | 9,994 | 3,029 s |
+| v0.5.0, 14 starts per step | 34 / 48 | 9,912 | 3,614 s |
+| with nested-ring motifs | **37 / 48** | **9,876** | 3,405 s |
+
+**Known optima.** On 40 tiny targets (up to four grid-aligned boxes and
+ellipses), an exact solver finds the shortest program that cssynth's own
+emitter can write. cssynth reproduces 35 exactly and is optimal on 33 of
+them (30 before this round); the other two are 40 characters over.
+
+Petals (leaves turned about a center) remain the weak family: Chromium
+antialiases turned and curved edges differently from cssynth's model, so the
+right program looks wrong to the search.
+
 ## Usage
 
 ```sh
@@ -228,6 +255,12 @@ python bench/run.py                 # compile all, render in Chromium, score
 python bench/reemit.py              # re-run only code generation on saved shapes
 python bench/tradeoff.py            # characters vs match for several rho
 python bench/build_page.py          # results page -> bench/cssynth-results.html
+
+python bench/evaluate.py --set heldout2 --method full    # held-out families, scored in Chromium
+python bench/evaluate.py --set heldout2 --compare base full
+python bench/tiny.py                # tiny targets against their known optima
+python bench/families.py train 8    # a development split of the families
+python bench/proposals.py data --out props.pkl   # outcome-labeled motif proposals
 ```
 
 The targets were rendered with `@sparticuz/chromium` 131 on Linux, which only
@@ -263,9 +296,13 @@ tests/
 
 ## Open problems
 
-- **Search for structure.** The greedy weighs each shape's length now, but
-  still one shape at a time, and the re-search only repairs its choices
-  locally. Two light circles stacked on an oval (2024-02-27) become one tall
+- **Search for structure.** The greedy weighs each shape's length now, and
+  proposes nested rings as one step (a filled disc on its own breaks the
+  pixels inside it, so one shape at a time never starts a ring). Mirrors and
+  turns as motifs rescued some petals but lengthened other targets. A filter
+  learned from outcome-labeled proposals didn't transfer to structures it
+  hadn't seen (docs/method.md). Otherwise the search still goes one shape at
+  a time, and the re-search only repairs its choices locally. Two light circles stacked on an oval (2024-02-27) become one tall
   rounded box plus patches, because the box fixes more pixels than either
   circle, and a climb from one circle grows back into the box. The lotus is
   drawn with polygons where a golfer uses three rotated leaves. Comparing
@@ -285,7 +322,11 @@ tests/
   much as the element; at best 34 characters in total).
 - **Antialiasing.** A soft stop's linear ramp only approximates how Chromium
   smooths a rotated edge, so striped flags still carry a few hundred wrong
-  pixels, and so do some rotated shapes.
+  pixels, and so do some rotated shapes. On curved edges Chromium's ramp is
+  about twice as wide as box filtering, and uneven (measured in
+  `docs/method.md`). The exact program for two turned leaves scores 599
+  wrong pixels in the model, which is why petals are the weakest held-out
+  family.
 - **Speed.** A full benchmark run takes about 43 CPU-minutes on an Apple M4
   (and about two hours on GitHub's slower runners), most of it in hill
   climbs. Exact cached gains cut that by about 40% without changing any

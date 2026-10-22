@@ -24,6 +24,7 @@ MIN_COLOR_PX = 40
 SAME_COLOR = 4          # max channel difference within which two colors are one
 MIN_GAIN = 25          # pixels a shape must fix to be worth its characters
 INSERT_ANYWHERE = True  # new shapes may go at any depth (False: on top only, for comparison)
+TOP_STARTS = 10         # starts climbed per step, best first (plus a few per color)
 
 
 # --------------------------------------------------------------------------
@@ -685,7 +686,7 @@ def greedy(T: np.ndarray, bg: int, colors, max_shapes=40, log=None,
         starts, counts = [], {}
         for item in pool:
             c = item[2].color
-            if len(starts) < 10 or counts.get(c, 0) < per_color:
+            if len(starts) < TOP_STARTS or counts.get(c, 0) < per_color:
                 starts.append(item)
                 counts[c] = counts.get(c, 0) + 1
         starts += [(None, k, cand) for k, cand in forced]

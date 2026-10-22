@@ -159,11 +159,15 @@ def nest(T: np.ndarray, region: np.ndarray, depth: int = 4):
     mask)]. A filled disc of the ring's color, then the hole drawn the same
     way in the color that lines it, and so on inward. Each layer on its own
     breaks the pixels inside it, so a search adding one shape at a time
-    never starts it; as one motif it can pay. [] if the region has no hole."""
+    never starts it; as one motif it can pay. [] unless the region has
+    exactly one hole."""
     layers = []
     c = int(np.bincount(T[region]).argmax())
     filled = ndimage.binary_fill_holes(region)
-    while depth and filled.sum() and (filled & ~region).sum() >= NEST_HOLE * filled.sum():
+    # one hole, as in a ring; a frame with several windows is drawn fine one
+    # shape at a time, and one shape fitted over all its windows is not
+    while (depth and filled.sum() and (filled & ~region).sum() >= NEST_HOLE * filled.sum()
+           and ndimage.label(filled & ~region)[1] == 1):
         layers.append((c, filled))
         hole = filled & ~region
         # the color lining the hole: what its outermost pixels show
