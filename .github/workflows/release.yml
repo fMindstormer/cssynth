@@ -1,13 +1,13 @@
-# Publish to PyPI when a version tag (v0.4.0, ...) is pushed. Uses trusted
-# publishing: PyPI trusts this workflow, so no token is stored. One-time setup
-# on pypi.org: Account > Publishing > add a pending publisher for project
-# "cssynth", owner fMindstormer, repository cssynth, workflow release.yml,
-# environment pypi.
+# Publish to PyPI, by hand only: Actions > Release > Run workflow, choosing
+# a version tag (v0.6.0, ...) as the ref. Version tags and GitHub releases
+# don't publish anything by themselves. Uses trusted publishing: PyPI trusts
+# this workflow, so no token is stored. One-time setup on pypi.org: Account >
+# Publishing > add a pending publisher for project "cssynth", owner
+# fMindstormer, repository cssynth, workflow release.yml, environment pypi.
 name: Release
 
 on:
-  push:
-    tags: ["v*"]
+  workflow_dispatch:
 
 jobs:
   build:
