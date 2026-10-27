@@ -24,3 +24,6 @@ bench/train/
 bench/learn/
 bench/heldout2/*.png
 bench/heldout3/*.png
+
+# the demo site, assembled locally (demo/README.md)
+demo/site/

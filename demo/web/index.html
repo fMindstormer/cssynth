@@ -50,28 +50,46 @@ a { color: var(--accent); }
 .frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .frame iframe { position: absolute; left: 0; top: 0; width: 400px; height: 300px; border: 0; transform-origin: 0 0; background: #fff; }
 .frame .empty { position: absolute; inset: 0; display: grid; place-items: center; padding: 1rem; text-align: center; color: var(--muted); font-size: 0.9rem; }
+.caption { display: grid; gap: 0.3rem; margin-top: -0.5rem; }
+.badge { justify-self: start; font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.04em; text-transform: uppercase; padding: 0.3rem 0.5rem; border-radius: 4px; border: 1px solid var(--rule); color: var(--muted); }
+.badge.saved { border-color: var(--accent); color: var(--accent); }
+.badge.fresh { border-color: var(--good); color: var(--good); }
+.notes { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.notes li { font: 500 0.78rem/1.2 var(--mono); padding: 0.3rem 0.5rem; border-radius: 4px; background: var(--bg); border: 1px solid var(--warn); color: var(--warn); }
+.linkish { font: inherit; padding: 0; border: 0; background: none; color: var(--accent); text-decoration: underline; cursor: pointer; justify-self: start; }
 .drop { border: 1.5px dashed var(--rule); border-radius: 8px; padding: 0.8rem; display: grid; gap: 0.6rem; }
 .drop.over { border-color: var(--accent); }
+.drop.locked { opacity: 0.5; }
 .drop label { display: grid; gap: 0.4rem; justify-items: start; }
 .drop input[type=file] { max-width: 100%; }
-.examples { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.examples button { padding: 0; border: 1px solid var(--rule); border-radius: 4px; background: none; cursor: pointer; line-height: 0; }
+.examples { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.examples button { padding: 0; border: 1px solid var(--rule); border-radius: 4px; background: none; color: var(--ink); cursor: pointer; display: grid; gap: 0.2rem; justify-items: start; text-align: left; }
+.examples button:disabled { cursor: not-allowed; }
+.examples button[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.examples button span { font: 500 0.7rem/1.2 var(--mono); padding: 0 0.3rem 0.3rem; color: var(--muted); }
 .examples button:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.examples img { width: 80px; height: 60px; border-radius: 3px; }
+.examples img { display: block; width: 96px; height: 72px; border-radius: 3px 3px 0 0; }
 .small { font-size: 0.85rem; color: var(--muted); }
 .row { display: flex; flex-wrap: wrap; gap: 0.8rem 1.2rem; align-items: center; }
 label { display: inline-flex; gap: 0.4rem; align-items: center; }
 select, input[type=file] { font: inherit; color: inherit; }
 select { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 0.2rem 0.4rem; }
-.go { font: 600 1rem/1 var(--body); padding: 0.75rem 1.2rem; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.go, .stop, .retry { font: 600 1rem/1 var(--body); padding: 0.75rem 1.2rem; border-radius: 8px; cursor: pointer; }
+.go { border: 0; background: var(--accent); color: var(--accent-ink); }
 .go:disabled { opacity: 0.45; cursor: not-allowed; }
-.status { font: 400 0.85rem/1.4 var(--mono); color: var(--muted); min-height: 1.4em; }
+.stop, .retry { border: 1px solid var(--rule); background: var(--surface); color: var(--ink); }
+.status { font: 400 0.85rem/1.4 var(--mono); color: var(--muted); min-height: 1.4em; flex: 1 1 14rem; }
 .status.error { color: var(--warn); }
-.stats b { font: 800 1.6rem/1 var(--display); font-stretch: 120%; font-variant-numeric: tabular-nums; }
-.codebox { position: relative; }
+.stats { display: grid; gap: 0.5rem; }
+.stats .big b { font: 800 1.6rem/1 var(--display); font-stretch: 120%; font-variant-numeric: tabular-nums; }
+.measure { display: grid; gap: 0.15rem; padding: 0.6rem 0.75rem; border-left: 3px solid var(--rule); background: var(--bg); border-radius: 0 6px 6px 0; }
+.measure b { font-variant-numeric: tabular-nums; }
+.codebox { display: grid; gap: 0.5rem; }
+.tools { display: flex; gap: 0.5rem; justify-content: flex-end; }
+.tools button { font: 500 0.75rem/1 var(--mono); padding: 0.4rem 0.6rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); color: var(--ink); cursor: pointer; }
 pre.code { margin: 0; padding: 0.8rem 0.9rem; background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; font: 400 0.78rem/1.5 var(--mono); white-space: pre-wrap; word-break: break-all; overflow-wrap: anywhere; max-height: 18rem; overflow: auto; }
-.copy { position: absolute; top: 0.4rem; right: 0.4rem; font: 500 0.75rem/1 var(--mono); padding: 0.35rem 0.5rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); color: var(--ink); cursor: pointer; }
 footer { font-size: 0.85rem; color: var(--muted); }
+[hidden] { display: none !important; }
 </style>
 </head>
 <body>
@@ -79,39 +97,52 @@ footer { font-size: 0.85rem; color: var(--muted); }
   <header>
     <div class="kicker"><a href="../">cssynth</a> · runs in your browser</div>
     <h1>Try it</h1>
-    <p class="lede">Pick a flat picture and cssynth searches for short HTML/CSS that draws it. Everything runs on your machine with <a href="https://pyodide.org">Pyodide</a>; nothing is uploaded. The browser build skips the exact box-shadow solver, so code can come out a few characters longer than the command-line tool's.</p>
+    <p class="lede">Pick a flat picture and cssynth searches for short HTML/CSS that draws it. Everything runs on your machine with <a href="https://pyodide.org">Pyodide</a>; nothing is uploaded. OR-Tools has no browser build, so this version groups box-shadows greedily instead of with the exact solver, and code can come out a few characters longer than the command-line tool's.</p>
   </header>
 
   <div class="cols">
     <section class="card" aria-labelledby="h-target">
       <h2 id="h-target">Target</h2>
       <div class="frame" id="target-frame"><div class="empty">No picture yet</div></div>
+      <div class="caption">
+        <div class="small" id="target-caption"></div>
+        <ul class="notes" id="target-notes" aria-label="What was done to the picture before compiling"></ul>
+        <button class="linkish small" id="toggle-original" type="button" hidden>Show the original upload</button>
+      </div>
       <div class="drop" id="drop">
         <label class="small">Your picture (400×300 works best; other sizes are resized)
           <input type="file" id="file" accept="image/*">
         </label>
-        <div class="small">or an example from the benchmark (<a href="https://github.com/OmPreetham/cssbattle">OmPreetham/cssbattle</a>, MIT):</div>
+        <div class="small">Saved results, shown instantly (targets from <a href="https://github.com/OmPreetham/cssbattle">OmPreetham/cssbattle</a>, MIT):</div>
+        <div class="examples" id="saved"></div>
+        <div class="small">More targets to compile:</div>
         <div class="examples" id="examples"></div>
       </div>
       <div class="row">
-        <label><input type="checkbox" id="research"> Re-search the result (slower, shorter)</label>
-        <label>ρ <select id="rho" aria-label="Wrong pixels accepted per character saved">
+        <label><input type="checkbox" id="research" class="setting"> Re-search the result (slower, shorter)</label>
+        <label>ρ <select id="rho" class="setting" aria-label="Wrong pixels accepted per character saved">
           <option>0.25</option><option selected>0.5</option><option>1</option><option>2</option><option>4</option>
         </select></label>
       </div>
       <div class="row">
-        <button class="go" id="go" disabled>Compile</button>
-        <div class="status" id="status" role="status" aria-live="polite">Starting…</div>
+        <button class="go" id="go" type="button" disabled>Compile</button>
+        <button class="stop" id="cancel" type="button" hidden>Cancel</button>
+        <button class="retry" id="retry" type="button" hidden>Retry</button>
+        <div class="status" id="status" role="status" aria-live="polite">Starting Python…</div>
       </div>
     </section>
 
     <section class="card" aria-labelledby="h-result">
       <h2 id="h-result">Result</h2>
+      <div class="badge" id="badge" hidden></div>
       <div class="frame" id="out-frame"><div class="empty">The generated code, rendered by your browser, appears here.</div></div>
-      <div class="stats" id="stats"></div>
+      <div class="stats" id="stats" hidden></div>
       <div class="codebox" id="codebox" hidden>
+        <div class="tools">
+          <button id="copy" type="button">Copy</button>
+          <button id="download" type="button">Download HTML</button>
+        </div>
         <pre class="code" id="code"></pre>
-        <button class="copy" id="copy" type="button">Copy</button>
       </div>
     </section>
   </div>
@@ -120,92 +151,318 @@ footer { font-size: 0.85rem; color: var(--muted); }
 </main>
 
 <script>
-const EXAMPLES = [
-  ["om-20240318.png", "A dark red arch with a stepped notch"],
+// State. Each target the visitor picks gets a new selection id, each compile
+// a new run id; a result is shown only if it answers the current run for the
+// current selection. Inputs and settings are locked while a run is going, so
+// nothing can change under it; a new pick clears the result card.
+const MORE = [
   ["om-20240225.png", "A maroon frame with stripes around a square hole"],
   ["om-20240312.png", "A green I-beam"],
   ["om-20240317.png", "A blue chain link"],
 ];
 const $ = (id) => document.getElementById(id);
-const worker = new Worker("worker.js", { type: "module" });
-worker.onerror = (e) => setStatus("Could not start Python in this browser: " + (e.message || "unknown error"), true);
-let ready = false, busy = false, image = null, timer = null;
+let worker = null, ready = false, run = null, timer = null;
+let selection = null;     // {id, label, slug, bytes, url, saved}
+let shown = null;         // what the result card shows: {kind: "saved" | "fresh", r, settings}
+let saved = null;         // examples/saved.json
+let retryAction = null, nextId = 0;
 
 function setStatus(text, error = false) {
   $("status").textContent = text;
   $("status").classList.toggle("error", error);
 }
-function update() { $("go").disabled = !ready || busy || !image; }
+function stopTimer() { clearInterval(timer); timer = null; }
+
+function update() {
+  const busy = run !== null;
+  $("go").disabled = !ready || busy || !selection;
+  $("go").hidden = busy;
+  $("cancel").hidden = !busy;
+  $("go").textContent = shown && selection && shown.selection === selection.id ? "Compile again" : "Compile";
+  for (const el of document.querySelectorAll("#file, .setting, .examples button")) el.disabled = busy;
+  $("drop").classList.toggle("locked", busy);
+}
+
+function showRetry(action) {
+  retryAction = action;
+  $("retry").hidden = !action;
+}
+
+// ---- the worker ----
+
+function startWorker(text) {
+  ready = false;
+  const w = new Worker("worker.js", { type: "module" });
+  worker = w;
+  setStatus(text);
+  w.onmessage = ({ data }) => { if (w === worker) handle(data); };
+  w.onerror = (e) => {
+    if (w !== worker) return;
+    e.preventDefault();
+    fail("Python stopped in this browser: " + (e.message || "unknown error"), "restart");
+  };
+  update();
+}
+
+function restart(text = "Restarting Python (cached, usually a few seconds)…") {
+  worker?.terminate();
+  showRetry(null);
+  startWorker(text);
+}
+
+let afterReady = null;    // a run to start once a restarted worker is ready (Retry after a crash)
+
+function fail(message, retry) {
+  // a failed run or a dead worker: stop the clock, unlock the inputs, offer
+  // Retry. retry: "restart" (a new worker, then the failed run again),
+  // "compile" (the same run again; the worker still works) or null
+  stopTimer();
+  const failed = run;
+  run = null;
+  if (failed) showResult(failed.before);
+  setStatus(message, true);
+  if (retry === "restart") {
+    ready = false;                      // the worker is gone
+    showRetry(() => {
+      afterReady = failed && failed.selection === selection?.id ? compile : null;
+      restart("Loading Python again…");
+    });
+  } else showRetry(retry === "compile" ? compile : null);
+  update();
+}
+
+function handle(data) {
+  if (data.type === "status") setStatus(data.text);
+  else if (data.type === "ready") {
+    ready = true;
+    setStatus(selection ? "Ready." : "Ready. Pick a picture.");
+    update();
+    const next = afterReady; afterReady = null;
+    if (next && selection) next();
+  } else if (data.type === "fatal") {
+    worker.terminate();
+    ready = false;
+    fail("Python couldn't load: " + data.message, "restart");
+  } else if (!run || data.id !== run.id || run.selection !== selection?.id) {
+    // an answer to a run that was cancelled or replaced: never show it
+  } else if (data.type === "error") {
+    fail("Compiling failed: " + data.message, "compile");
+  } else if (data.type === "result") {
+    if (data.input_error) {
+      fail(data.input_error, null);
+      return;
+    }
+    stopTimer();
+    const r = run; run = null;
+    setStatus(`Done in ${data.seconds} s.`);
+    showTarget(data.target, "Compiled target: exactly the picture cssynth compiled.", data.notes,
+               data.notes.length ? selection.url : null);
+    showResult({ kind: "fresh", r: data, settings: r.settings, selection: r.selection, slug: selection.slug });
+  }
+}
+
+// ---- picking a target ----
+
+async function choose(blob, label, slug) {
+  if (run) return;
+  const url = URL.createObjectURL(blob);
+  const img = new Image();
+  img.src = url;
+  try { await img.decode(); }
+  catch {
+    URL.revokeObjectURL(url);
+    setStatus("This file isn't a picture your browser can read. Choose another.", true);
+    return;
+  }
+  selection = { id: ++nextId, label, slug, bytes: await blob.arrayBuffer(), url };
+  const notes = img.naturalWidth === 400 && img.naturalHeight === 300 ? []
+    : [`Will be resized to 400×300 (it is ${img.naturalWidth}×${img.naturalHeight})`];
+  showTarget(url, "Your picture, not compiled yet. Pictures with many colors are reduced to eight before compiling.", notes, null);
+  showResult(null);
+  showRetry(null);
+  markPressed(null);
+  if (ready) setStatus("Ready.");
+  update();
+}
+
+async function chooseSaved(ex, button) {
+  if (run) return;
+  const blob = await (await fetch(`examples/${ex.file}`)).blob();
+  selection = { id: ++nextId, label: ex.label, slug: ex.file.replace(".png", ""), bytes: await blob.arrayBuffer(),
+                url: URL.createObjectURL(blob) };
+  showTarget(ex.target, "Saved example target: exactly the picture cssynth compiled.", ex.notes, null);
+  showResult({ kind: "saved", r: ex, settings: ex.settings, selection: selection.id, slug: selection.slug });
+  showRetry(null);
+  markPressed(button);
+  if (ready) setStatus("Ready. This is a saved result; Compile again computes it in your browser.");
+  update();
+}
+
+function markPressed(button) {
+  for (const b of document.querySelectorAll(".examples button")) b.setAttribute("aria-pressed", String(b === button));
+}
+
+let original = null;   // {compiled, url}: the toggle between the compiled target and the upload
+function showTarget(src, caption, notes, originalUrl) {
+  const frame = $("target-frame");
+  frame.innerHTML = "";
+  const img = new Image();
+  img.src = src; img.alt = selection ? selection.label : "";
+  frame.append(img);
+  $("target-caption").textContent = caption;
+  $("target-notes").innerHTML = "";
+  for (const n of notes || []) {
+    const li = document.createElement("li");
+    li.textContent = n;
+    $("target-notes").append(li);
+  }
+  original = originalUrl ? { compiled: src, url: originalUrl, caption, showing: false } : null;
+  $("toggle-original").hidden = !originalUrl;
+  $("toggle-original").textContent = "Show the original upload";
+}
+$("toggle-original").onclick = () => {
+  if (!original) return;
+  original.showing = !original.showing;
+  $("target-frame").querySelector("img").src = original.showing ? original.url : original.compiled;
+  $("target-caption").textContent = original.showing
+    ? "The original upload, before the changes listed below. cssynth compiled the adjusted picture."
+    : original.caption;
+  $("toggle-original").textContent = original.showing ? "Show the compiled target" : "Show the original upload";
+};
+
+// ---- the result card ----
 
 function fitFrames() {
   for (const f of document.querySelectorAll(".frame iframe")) {
     f.style.transform = `scale(${f.parentElement.clientWidth / 400})`;
   }
 }
-addEventListener("resize", fitFrames);
+new ResizeObserver(fitFrames).observe($("out-frame"));
 
-async function choose(blob, label) {
-  image = await blob.arrayBuffer();
-  const url = URL.createObjectURL(blob);
-  $("target-frame").innerHTML = "";
-  const img = new Image();
-  img.src = url; img.alt = label;
-  $("target-frame").append(img);
-  if (ready) setStatus("Ready.");
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+function showResult(x) {
+  shown = x && x.kind !== "pending" ? x : null;
+  const frame = $("out-frame");
+  frame.innerHTML = "";
+  $("badge").hidden = $("stats").hidden = $("codebox").hidden = !shown;
+  if (!shown) {
+    $("badge").textContent = "";
+    const d = document.createElement("div");
+    d.className = "empty";
+    d.textContent = x?.kind === "pending" ? "Compiling in your browser…" : "The generated code, rendered by your browser, appears here.";
+    frame.append(d);
+    update();
+    return;
+  }
+  const { r, settings } = shown;
+  const how = `ρ ${settings.rho}, re-search ${settings.research ? "on" : "off"}`;
+  $("badge").className = "badge " + shown.kind;
+  $("badge").textContent = shown.kind === "saved"
+    ? `Saved result · ${r.compiler} · computed ahead of time with cssynth ${saved.cssynth} · ${how}`
+    : `Fresh result · ${r.compiler} · computed in this browser just now · ${how}`;
+  // a data: URL, not srcdoc: srcdoc documents never use quirks mode, and
+  // the code relies on it for unitless lengths
+  const f = document.createElement("iframe");
+  f.title = "The generated code, rendered by your browser";
+  f.src = "data:text/html;charset=utf-8," + encodeURIComponent(r.code);
+  frame.append(f);
+  fitFrames();
+  const n = (k, word) => `${k} ${word}${k === 1 ? "" : "s"}`;
+  let html = `<div class="big"><b>${r.chars}</b> characters · ${n(r.elements, "element")}, ${n(r.shadows, "box-shadow")}</div>`;
+  if (shown.kind === "saved") html += `<div class="small">${esc(r.kind)}: ${esc(r.what)}</div>`;
+  html += `<div class="measure"><span>Estimated match — internal renderer: <b>${r.estimated_match.toFixed(2)}%</b></span>
+    <span class="small">cssynth's own rasterizer (its search model) compared with the compiled target. It is not a measurement of the browser preview above; benchmark scores come from Chromium renders.</span></div>`;
+  if (shown.kind === "saved") {
+    html += `<div class="measure"><span>Measured on a Chromium render: <b>${r.chromium_match.toFixed(2)}%</b></span>
+      <span class="small">The same code rendered ahead of time in ${esc(saved.chromium)} and compared pixel by pixel with the target.</span></div>`;
+  }
+  $("stats").innerHTML = html;
+  $("code").textContent = r.code;
   update();
 }
 
-for (const [file, alt] of EXAMPLES) {
-  const b = document.createElement("button");
-  b.type = "button"; b.title = alt;
-  b.innerHTML = `<img src="examples/${file}" alt="${alt}">`;
-  b.onclick = async () => choose(await (await fetch(`examples/${file}`)).blob(), alt);
-  $("examples").append(b);
-}
-$("file").onchange = (e) => { const f = e.target.files[0]; if (f) choose(f, f.name); };
-const drop = $("drop");
-drop.ondragover = (e) => { e.preventDefault(); drop.classList.add("over"); };
-drop.ondragleave = () => drop.classList.remove("over");
-drop.ondrop = (e) => {
-  e.preventDefault(); drop.classList.remove("over");
-  const f = e.dataTransfer.files[0]; if (f) choose(f, f.name);
-};
+// ---- actions ----
 
-$("go").onclick = () => {
-  busy = true; update();
+function compile() {
+  if (!ready || run || !selection) return;
+  const settings = { research: $("research").checked, rho: parseFloat($("rho").value) };
+  run = { id: ++nextId, selection: selection.id, settings, before: shown };
+  showRetry(null);
+  showResult({ kind: "pending" });
   const t0 = performance.now();
   setStatus("Compiling… 0 s");
   timer = setInterval(() => setStatus(`Compiling… ${Math.round((performance.now() - t0) / 1000)} s`), 1000);
-  worker.postMessage({ image, research: $("research").checked, rho: parseFloat($("rho").value) });
-};
+  worker.postMessage({ id: run.id, image: selection.bytes, research: settings.research, rho: settings.rho });
+  update();
+}
+
+function cancel() {
+  if (!run) return;
+  // the worker is inside one synchronous Python call: only terminating it stops it
+  stopTimer();
+  const before = run.before;
+  run = null;
+  afterReady = null;
+  showResult(before);
+  restart("Cancelled. Restarting Python (cached, usually a few seconds)…");
+}
+
+$("go").onclick = compile;
+$("cancel").onclick = cancel;
+$("retry").onclick = () => { const a = retryAction; showRetry(null); a?.(); };
 
 $("copy").onclick = async () => {
-  try { await navigator.clipboard.writeText($("code").textContent); $("copy").textContent = "Copied"; }
+  try { await navigator.clipboard.writeText(shown.r.code); $("copy").textContent = "Copied"; }
   catch { $("copy").textContent = "Select and copy"; }
   setTimeout(() => ($("copy").textContent = "Copy"), 1500);
 };
-
-worker.onmessage = ({ data }) => {
-  if (data.type === "status") setStatus(data.text);
-  else if (data.type === "ready") { ready = true; setStatus(image ? "Ready." : "Ready. Pick a picture."); update(); }
-  else if (data.type === "error") {
-    clearInterval(timer); busy = false; update();
-    setStatus("Something went wrong: " + data.message, true);
-  } else if (data.type === "result") {
-    clearInterval(timer); busy = false; update();
-    setStatus(`Done in ${data.seconds} s.` + (data.note ? " " + data.note : ""));
-    $("stats").innerHTML = `<b>${data.chars}</b> characters · ${data.match.toFixed(2)}% pixel match · ${data.elements} elements, ${data.shadows} box-shadows`;
-    $("code").textContent = data.code;
-    $("codebox").hidden = false;
-    // a data: URL, not srcdoc: srcdoc documents never use quirks mode, and
-    // the code relies on it for unitless lengths
-    const f = document.createElement("iframe");
-    f.title = "The generated code, rendered by your browser";
-    f.src = "data:text/html;charset=utf-8," + encodeURIComponent(data.code);
-    $("out-frame").innerHTML = ""; $("out-frame").append(f);
-    fitFrames();
-  }
+$("download").onclick = () => {
+  // the exact generated document: no doctype added, so it opens in quirks
+  // mode like CSSBattle's frame (the code relies on it for unitless lengths)
+  const url = URL.createObjectURL(new Blob([shown.r.code], { type: "text/html" }));
+  const a = document.createElement("a");
+  a.href = url; a.download = `cssynth-${shown.slug || "result"}.html`;
+  document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 };
+
+for (const [file, alt] of MORE) {
+  const b = document.createElement("button");
+  b.type = "button"; b.title = alt;
+  b.innerHTML = `<img src="examples/${file}" alt="${alt}">`;
+  b.onclick = async () => { await choose(await (await fetch(`examples/${file}`)).blob(), alt, file.replace(".png", "")); markPressed(b); };
+  $("examples").append(b);
+}
+$("file").onchange = (e) => {
+  const f = e.target.files[0];
+  if (f) choose(f, f.name, f.name.replace(/\.[^.]*$/, "").replace(/[^\w-]+/g, "-"));
+  e.target.value = "";
+};
+const drop = $("drop");
+drop.ondragover = (e) => { e.preventDefault(); if (!run) drop.classList.add("over"); };
+drop.ondragleave = () => drop.classList.remove("over");
+drop.ondrop = (e) => {
+  e.preventDefault(); drop.classList.remove("over");
+  if (run) return;                      // inputs are locked while compiling
+  const f = e.dataTransfer.files[0];
+  if (f) choose(f, f.name, f.name.replace(/\.[^.]*$/, "").replace(/[^\w-]+/g, "-"));
+};
+
+// the saved results first, so there is something to see before Python loads
+fetch("examples/saved.json").then((r) => r.json()).then((s) => {
+  saved = s;
+  s.examples.forEach((ex, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.title = ex.label;
+    b.innerHTML = `<img src="examples/${ex.file}" alt="${esc(ex.label)}"><span>${esc(ex.kind)}</span>`;
+    b.onclick = () => chooseSaved(ex, b);
+    $("saved").append(b);
+    if (i === 0 && !selection) chooseSaved(ex, b);
+  });
+  update();
+}).catch(() => {});
+startWorker("Starting Python…");
 </script>
 </body>
 </html>

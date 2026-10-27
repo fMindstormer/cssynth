@@ -19,6 +19,13 @@ redraw in as few characters as they can.
 214 characters, a 99.9% pixel match. The human solution it was rendered from
 is 493 characters even after minifying.
 
+<img src="docs/demo.gif" width="640" alt="The in-browser demo: a saved result shows at once; then a green I-beam is picked, compiled in the browser into 532 characters, downloaded as HTML, and the downloaded file, opened on its own at 400×300, matches the target">
+
+The [in-browser demo](https://fmindstormer.github.io/cssynth/demo/): pick a
+target, compile, read the code, download it and open the file on its own.
+The waits for Python to load and for the compile are cut from the recording;
+the captions give their real length (`demo/record.js` made it).
+
 **[See all 66 targets, outputs and generated code on the results page →](https://fmindstormer.github.io/cssynth/)**
 
 **[Try it on your own picture, in your browser →](https://fmindstormer.github.io/cssynth/demo/)**
@@ -27,7 +34,9 @@ is 493 characters even after minifying.
 
 ## Results
 
-On a benchmark of 66 targets, rendered in Chromium and compared pixel by pixel:
+On the 66 targets of the development set (the ones the compiler was developed
+on; held-out results are [below](#beyond-the-development-set)), rendered in
+Chromium and compared pixel by pixel:
 
 | | |
 |---|---|
