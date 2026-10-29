@@ -26,6 +26,7 @@ async function launchOptions() {
   const browser = await puppeteer.launch({ ...(await launchOptions()), headless: true });
   const page = await browser.newPage();
   await page.setViewport({ width: 400, height: 300, deviceScaleFactor: 1 });
+  if (process.env.NO_JS) await page.setJavaScriptEnabled(false);   // untrusted code (llm.py)
   await page.setRequestInterception(true);
   page.on('request', r => (r.url().startsWith('data:') ? r.continue() : r.abort()));
   let done = 0;
