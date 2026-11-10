@@ -141,12 +141,12 @@ fewer shapes.
 
 The greedy search commits to shapes in the order they first help. An early
 polygon can take a region that a shorter primitive would have drawn, and
-everything around it is then fitted to that choice. After the variants, the
-best result goes through a small large-neighborhood search: remove one
-polygon (and forbid polygons of its color), or every shape of one color
-(with or without polygons), refill the gap with the greedy search from the
-remaining stack (in the winning variant's mode), refine, simplify, and
-keep the result if J drops.
+everything around it is then fitted to that choice. After the variants,
+each of the three best results goes through a small large-neighborhood
+search: remove one polygon (and forbid polygons of its color), or every
+shape of one color (with or without polygons), refill the gap with the
+greedy search from the remaining stack (in that result's variant mode),
+refine, simplify, and keep the result if J drops.
 
 A third neighborhood redraws a color whose region falls into parts. The
 region is thinned by its distance to the edge until it comes apart; each
@@ -179,9 +179,9 @@ development targets (the oval, the cloud, 2024-03-30) become shorter than
 the human code.
 
 Re-searching only the best result can miss a better program: a result that
-starts a little worse sometimes re-searches to a much better one. With
-`research=3`, the three best distinct results are re-searched (in parallel
-when there are several processes) and the best wins:
+starts a little worse sometimes re-searches to a much better one. So the
+three best distinct results are re-searched (in parallel when there are
+several processes) and the best wins (`research=3`, the default):
 
 | Split | Re-search the best | The 2 best | The 3 best | Re-search CPU (3 best) |
 |---|---|---|---|---|
@@ -192,8 +192,8 @@ The whole compile takes 1.5 to 2 times the CPU, but little more wall time
 on 8 cores (the lotus: 16.9 s against 17.8 s). The lotus drops to 291
 characters (human: 418), from the second-best result. The winners come
 from many different variants, so re-searching one fixed extra variant
-wouldn't do the same. It isn't the default yet. (The training figures here
-include the shorter `inset`, which the table above doesn't.)
+wouldn't do the same. (The training figures here include the shorter
+`inset`, which the table above doesn't.)
 
 Measured in Chromium on Linux (the Benchmark workflow), against 0.6.0. J
 here counts Chromium's wrong pixels; these runs predate a fix that keeps a

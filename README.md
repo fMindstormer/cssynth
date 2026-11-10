@@ -124,7 +124,7 @@ cssynth target.png           # prints the code; length and details on stderr
 cssynth -v target.png        # also logs the search
 cssynth --rho 2 target.png   # golf harder (see "Objective")
 cssynth --fast target.png    # skip the re-search: about 2x faster, longer code
-cssynth --research 3 target.png  # re-search the 3 best results: about 2% lower J, more CPU
+cssynth --research 1 target.png  # re-search only the best result: less CPU, longer code
 ```
 
 From Python:
@@ -159,7 +159,7 @@ flowchart LR
     E --> F[simplify for length]
     F --> G[code generation]
     G --> H{lowest J<br>of 16 variants}
-    H --> I[re-search parts<br>of the best]
+    H --> I[re-search parts<br>of the 3 best]
 ```
 
 1. **Palette** (`search.extract_palette`): flat colors with at least 40
@@ -244,14 +244,16 @@ flowchart LR
    but not all: it can pick a cheap shape that leaves more for later.
 8. **Re-search** (`improve.improve`): the greedy search commits to shapes in
    the order they first help, so an early polygon can take a region that a
-   shorter primitive would have drawn. The best result is taken apart and
-   refilled: one polygon at a time (refilled without polygons of its color),
+   shorter primitive would have drawn. Each of the 3 best results (distinct
+   programs, in parallel) is taken apart and refilled: one polygon at a
+   time (refilled without polygons of its color),
    then every shape of one color (refilled as before, and without polygons),
    then every shape of a color whose region falls into parts, one shape per
    part (two circles stacked on an oval). Refills use the winning variant's
-   mode. Each is refined and simplified, and kept when J drops. `--fast`
-   skips this step; `--research 3` runs it on the 3 best results, in
-   parallel, and keeps the best.
+   mode. Each is refined and simplified, and kept when J drops; the best
+   finished program wins, which isn't always the one that started best.
+   `--fast` skips this step; `--research 1` runs it on the best result
+   only.
 
 ## Benchmark
 
@@ -306,7 +308,7 @@ ruff check .
 ```
 cssynth/
   compiler.py   compile_image: run the variants, simplify, keep the lowest J
-  improve.py    re-search: take the best result apart and refill it
+  improve.py    re-search: take the best results apart and refill them
   search.py     palette, base layer, greedy shape search, refine
   shapes.py     the Shape model and a rasterizer that predicts Chromium's
   simplify.py   length-aware clean-up moves

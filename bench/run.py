@@ -24,7 +24,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from cssynth.compiler import compile_image  # noqa: E402
+from cssynth.compiler import RESEARCH, compile_image  # noqa: E402
 from cssynth.shapes import bg_to_json, render_rgb  # noqa: E402
 
 BENCH = ROOT / "bench"
@@ -35,7 +35,7 @@ def match(a, b, tol=8):
     return float((np.abs(a.astype(int) - b.astype(int)).max(2) <= tol).mean() * 100)
 
 
-def work(case, research=1):
+def work(case, research=RESEARCH):
     t = time.time()
     target = BENCH / "human" / f"{case['id']}.png"
     code, info, (pal, bg, T, shapes) = compile_image(target, research=research)
@@ -53,7 +53,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only")
     ap.add_argument("--jobs", type=int, default=os.cpu_count())
-    ap.add_argument("--research", type=int, default=1, help="re-search the N best results (see compile_image)")
+    ap.add_argument("--research", type=int, default=RESEARCH,
+                    help="re-search the N best results (see compile_image; default %(default)s)")
     args = ap.parse_args()
     cases = json.loads((BENCH / "cases.json").read_text())
     if args.only:

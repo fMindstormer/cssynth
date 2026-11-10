@@ -35,6 +35,12 @@ VARIANTS = [v + (by_length, not by_length) for by_length in (True, False) for v 
 # harder (see bench/tradeoff.py).
 RHO = 0.5
 
+# How many of the best distinct results the re-search starts from (see
+# compile_image). On the benchmark, 3 instead of 1 lowered J by 3.7% in
+# Chromium for 1.5 to 2 times the CPU; with several processes they run in
+# parallel, so the wall time grows less.
+RESEARCH = 3
+
 
 def _finish(arr, rho, pal, bg, shapes):
     """(J, code, info) of a stack, scored against the target image."""
@@ -75,12 +81,13 @@ def _research(arr, rho, run, log=None):
     return J2, code, {**info2, "variant": info["variant"], "researched": round(J - J2, 1)}, (pal, bg, T, better)
 
 
-def compile_image(image, log=None, variants=VARIANTS, rho=RHO, research=1, jobs=1):
+def compile_image(image, log=None, variants=VARIANTS, rho=RHO, research=RESEARCH, jobs=1):
     """image: a path or a PIL image. research: how many of the best distinct
-    results to re-search (see improve; 0 or False: none); the best one after
-    re-searching wins. A result that isn't the best can re-search to a better
-    one, so more costs CPU and can only lower J. jobs: processes to run the
-    variants and re-searches in (the result is the same for any number)."""
+    results to re-search (see improve; 0 or False: none, True: 1); the best
+    one after re-searching wins. A result that isn't the best can re-search
+    to a better one, so more costs CPU and can only lower J. jobs: processes
+    to run the variants and re-searches in (the result is the same for any
+    number)."""
     img = (image if isinstance(image, Image.Image) else Image.open(image)).convert("RGB")
     if img.size != (400, 300):
         img = img.resize((400, 300), Image.BOX)

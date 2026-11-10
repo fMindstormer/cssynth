@@ -70,5 +70,5 @@ def test_parallel_variants_give_the_same_code(tmp_path):
 def test_researching_more_results_never_scores_worse(tmp_path):
     path = disc_and_triangle(tmp_path)
     code, info, _ = compile_image(path, research=3, jobs=3)
-    assert info["J"] <= compile_image(path)[1]["J"]
+    assert info["J"] <= compile_image(path, research=1)[1]["J"]
     assert compile_image(path, research=3)[0] == code

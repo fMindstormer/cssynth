@@ -82,7 +82,7 @@ def work(args):
     name, case = args
     t = time.time()
     code, info, _ = compiler.compile_image(BENCH / "human" / f"{case['id']}.png", variants=variants(name),
-                                           research=name != "no-research")
+                                           research=0 if name == "no-research" else compiler.RESEARCH)
     return {"id": case["id"], "chars": len(code), "wrong_px": info["wrong_px"], "J": info["J"],
             "human_min_len": case["human_min_len"], "seconds": round(time.time() - t, 1)}
 
