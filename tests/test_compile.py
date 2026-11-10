@@ -51,12 +51,24 @@ def test_leaf_is_one_turned_shape(tmp_path):
     assert len(code) < 140
 
 
-def test_parallel_variants_give_the_same_code(tmp_path):
+def disc_and_triangle(tmp_path):
     img = Image.new("RGB", (400, 300), "#62374e")
     d = ImageDraw.Draw(img)
     d.ellipse([100, 50, 199, 149], fill="#fdc57b")
     d.polygon([(250, 200), (350, 200), (300, 120)], fill="#fdc57b")
     path = tmp_path / "t.png"
     img.save(path)
+    return path
+
+
+def test_parallel_variants_give_the_same_code(tmp_path):
+    path = disc_and_triangle(tmp_path)
     serial = compile_image(path, research=False)[0]
     assert compile_image(path, research=False, jobs=3)[0] == serial
+
+
+def test_researching_more_results_never_scores_worse(tmp_path):
+    path = disc_and_triangle(tmp_path)
+    code, info, _ = compile_image(path, research=3, jobs=3)
+    assert info["J"] <= compile_image(path)[1]["J"]
+    assert compile_image(path, research=3)[0] == code

@@ -124,6 +124,7 @@ cssynth target.png           # prints the code; length and details on stderr
 cssynth -v target.png        # also logs the search
 cssynth --rho 2 target.png   # golf harder (see "Objective")
 cssynth --fast target.png    # skip the re-search: about 2x faster, longer code
+cssynth --research 3 target.png  # re-search the 3 best results: about 2% lower J, more CPU
 ```
 
 From Python:
@@ -245,10 +246,12 @@ flowchart LR
    the order they first help, so an early polygon can take a region that a
    shorter primitive would have drawn. The best result is taken apart and
    refilled: one polygon at a time (refilled without polygons of its color),
-   then every shape of one color (refilled as before, and without polygons).
-   Refills use the winning variant's mode. Each is refined and simplified,
-   and kept when J drops. `--fast`
-   skips this step.
+   then every shape of one color (refilled as before, and without polygons),
+   then every shape of a color whose region falls into parts, one shape per
+   part (two circles stacked on an oval). Refills use the winning variant's
+   mode. Each is refined and simplified, and kept when J drops. `--fast`
+   skips this step; `--research 3` runs it on the 3 best results, in
+   parallel, and keeps the best.
 
 ## Benchmark
 

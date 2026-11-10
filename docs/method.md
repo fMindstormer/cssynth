@@ -179,6 +179,24 @@ development targets (the oval, the cloud, 2024-03-30) become shorter than
 the human code, counting characters only; the match has yet to be checked
 in Chromium.
 
+Re-searching only the best result can miss a better program: a result that
+starts a little worse sometimes re-searches to a much better one. With
+`research=3`, the three best distinct results are re-searched (in parallel
+when there are several processes) and the best wins:
+
+| Split | Re-search the best | The 2 best | The 3 best | Re-search CPU (3 best) |
+|---|---|---|---|---|
+| Development (66) | 57,305 | 56,623 (−1.2%) | 55,994 (−2.3%) | 3.5× |
+| Training (48) | 70,284 | 70,222 (−0.1%) | 68,534 (−2.5%) | 5.8× |
+
+The whole compile takes 1.5 to 2 times the CPU, but little more wall time
+on 8 cores (the lotus: 16.9 s against 17.8 s). The lotus drops to 291
+characters (human: 418), from the second-best result. The winners come
+from many different variants, so re-searching one fixed extra variant
+wouldn't do the same. It isn't the default yet, since the published numbers
+are the default's, measured in Chromium. (The training figures here include
+the shorter `inset`, which the table above doesn't.)
+
 ### Length-aware clean-up
 
 The search maximizes pixels fixed; the clean-up minimizes J. Its moves:

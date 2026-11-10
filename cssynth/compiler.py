@@ -63,30 +63,51 @@ def _run_variant(arr, variant, rho, log=None):
     return runs
 
 
-def compile_image(image, log=None, variants=VARIANTS, rho=RHO, research=True, jobs=1):
-    """image: a path or a PIL image. research: re-search parts of the best
-    result (see improve). jobs: processes to run the variants in (the
-    result is the same for any number)."""
+def _research(arr, rho, run, log=None):
+    """Re-search one result (see improve); the result, improved or not."""
+    J, code, info, (pal, bg, T, shapes) = run
+    min_gain, per_color, bbox_starts, _, outlines, by_length, motifs = info["variant"]
+    better = improve(lambda sh: _finish(arr, rho, pal, bg, sh)[0], pal, bg, T, shapes, rho,
+                     min_gain, per_color, bbox_starts, outlines, by_length=by_length, motifs=motifs, log=log)
+    if better is shapes:
+        return run
+    J2, code, info2 = _finish(arr, rho, pal, bg, better)
+    return J2, code, {**info2, "variant": info["variant"], "researched": round(J - J2, 1)}, (pal, bg, T, better)
+
+
+def compile_image(image, log=None, variants=VARIANTS, rho=RHO, research=1, jobs=1):
+    """image: a path or a PIL image. research: how many of the best distinct
+    results to re-search (see improve; 0 or False: none); the best one after
+    re-searching wins. A result that isn't the best can re-search to a better
+    one, so more costs CPU and can only lower J. jobs: processes to run the
+    variants and re-searches in (the result is the same for any number)."""
     img = (image if isinstance(image, Image.Image) else Image.open(image)).convert("RGB")
     if img.size != (400, 300):
         img = img.resize((400, 300), Image.BOX)
     arr = np.asarray(img)
 
+    ex = None
     if jobs > 1:
         from concurrent.futures import ProcessPoolExecutor  # not in browsers (Pyodide)
-        with ProcessPoolExecutor(min(jobs, len(variants))) as ex:
-            per_variant = list(ex.map(_run_variant, *zip(*[(arr, v, rho) for v in variants])))
-    else:
-        per_variant = [_run_variant(arr, v, rho, log) for v in variants]
-    runs = [run for rs in per_variant for run in rs]
-    J, code, info, (pal, bg, T, shapes) = min(runs, key=lambda r: r[0])
-    if research:
-        min_gain, per_color, bbox_starts, _, outlines, by_length, motifs = info["variant"]
-        better = improve(lambda sh: _finish(arr, rho, pal, bg, sh)[0], pal, bg, T, shapes, rho,
-                         min_gain, per_color, bbox_starts, outlines, by_length=by_length, motifs=motifs,
-                         log=log)
-        if better is not shapes:
-            J2, code, info2 = _finish(arr, rho, pal, bg, better)
-            info = {**info2, "variant": info["variant"], "researched": round(J - J2, 1)}
-            shapes = better
-    return code, info, (pal, bg, T, shapes)
+        ex = ProcessPoolExecutor(min(jobs, len(variants)))
+
+    def each(f, args):           # in the pool, or here with the log
+        return list(ex.map(f, *zip(*args))) if ex and len(args) > 1 else [f(*a, log) for a in args]
+
+    try:
+        runs = sorted((run for rs in each(_run_variant, [(arr, v, rho) for v in variants]) for run in rs),
+                      key=lambda r: r[0])
+        picked, seen = [], set()
+        for run in runs:
+            if len(picked) >= int(research):
+                break
+            if run[1] not in seen:
+                seen.add(run[1])
+                picked.append(run)
+        if picked:
+            runs = each(_research, [(arr, rho, run) for run in picked])
+    finally:
+        if ex:
+            ex.shutdown()
+    J, code, info, model = min(runs, key=lambda r: r[0])
+    return code, info, model

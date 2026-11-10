@@ -16,8 +16,11 @@ def main():
                     help="processes for the search variants (default: all cores)")
     ap.add_argument("--fast", action="store_true",
                     help="skip re-searching parts of the result (several times faster, a little longer code)")
+    ap.add_argument("--research", type=int, default=1, metavar="N",
+                    help="re-search the N best results, not only the best (default %(default)s; 3 lowered the "
+                         "benchmark's J by about 2%% for 1.5 to 2 times the CPU)")
     args = ap.parse_args()
-    code, info, _ = compile_image(args.image, rho=args.rho, research=not args.fast, jobs=args.jobs,
+    code, info, _ = compile_image(args.image, rho=args.rho, research=0 if args.fast else args.research, jobs=args.jobs,
                                   log=(lambda m: print(m, file=sys.stderr)) if args.v else None)
     print(code)
     print(f"{len(code)} chars, {info}", file=sys.stderr)

@@ -73,6 +73,11 @@ def _no_parts(path):
     return compiler.compile_image(path)
 
 
+def _top3(path):
+    """The default compiler, re-searching the 3 best results."""
+    return compiler.compile_image(path, research=3)
+
+
 def _fixes(path):
     """Everything but motifs."""
     search.MOTIFS = set()
@@ -102,7 +107,7 @@ _policy = None
 
 # name: path -> (code, info, model)
 METHODS = {"full": _full, "fast": _fast, "base": _base, "base-more": _base_more,
-           **{f"full-{n}": _full_more(n) for n in (16, 20)}, "fixes": _fixes, "no-parts": _no_parts,
+           **{f"full-{n}": _full_more(n) for n in (16, 20)}, "fixes": _fixes, "no-parts": _no_parts, "top3": _top3,
            "nest": _motifs(["nest"]), "nest-sym": _motifs(["nest", "symmetric"]),
            "all-motifs": _motifs(["nest", "symmetric", "seeded"]),
            "nest-allcolors": _motifs(["nest"], same_color=-1), "learned": _learned}
