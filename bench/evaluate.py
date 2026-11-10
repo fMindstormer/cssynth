@@ -30,7 +30,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "bench"))
-from cssynth import compiler, search, simplify  # noqa: E402
+from cssynth import compiler, improve, search, simplify  # noqa: E402
 
 BENCH = ROOT / "bench"
 FIDELITY = 99.0
@@ -67,6 +67,12 @@ def _full_more(n):
     return run
 
 
+def _no_parts(path):
+    """The default compiler without re-searching colors in parts (v0.6.0)."""
+    improve.PARTS = False
+    return compiler.compile_image(path)
+
+
 def _fixes(path):
     """Everything but motifs."""
     search.MOTIFS = set()
@@ -96,7 +102,7 @@ _policy = None
 
 # name: path -> (code, info, model)
 METHODS = {"full": _full, "fast": _fast, "base": _base, "base-more": _base_more,
-           **{f"full-{n}": _full_more(n) for n in (16, 20)}, "fixes": _fixes,
+           **{f"full-{n}": _full_more(n) for n in (16, 20)}, "fixes": _fixes, "no-parts": _no_parts,
            "nest": _motifs(["nest"]), "nest-sym": _motifs(["nest", "symmetric"]),
            "all-motifs": _motifs(["nest", "symmetric", "seeded"]),
            "nest-allcolors": _motifs(["nest"], same_color=-1), "learned": _learned}

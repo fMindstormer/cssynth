@@ -3,15 +3,18 @@ from scipy import ndimage
 
 from cssynth.search import (
     _regions,
+    add_parts,
     area_sums,
     char_cost,
+    error,
     extract_palette,
     gain,
+    parts,
     reduce_polygon,
     soften,
     trace_outline,
 )
-from cssynth.shapes import Gradient, Shape, base_rgb, coverage
+from cssynth.shapes import Gradient, Shape, base_rgb, coverage, render_labels
 
 
 def test_trace_outline_of_concave_region_is_exact():
@@ -116,3 +119,44 @@ def test_char_cost_of_a_shifted_copy_is_a_shadow_entry():
     full = char_cost(a, [], pal)
     copy = char_cost(Shape(200, 40, 60, 60, 1), [a], pal)
     assert copy < full // 2
+
+
+def _disc(cx, cy, r):
+    yy, xx = np.mgrid[:300, :400] + 0.5
+    return (xx - cx) ** 2 + (yy - cy) ** 2 <= r * r
+
+
+def test_parts_split_touching_discs():
+    region = _disc(200, 100, 50) | _disc(200, 200, 50)
+    ps = parts(region)
+    assert len(ps) == 2
+    for p, disc in zip(sorted(ps, key=lambda m: np.nonzero(m)[0].mean()), (_disc(200, 100, 50), _disc(200, 200, 50))):
+        assert (p & ~disc).sum() == 0 and (disc & ~p).sum() < 0.03 * disc.sum()
+
+
+def test_parts_leave_a_bar_without_a_core_to_the_search():
+    bar = np.zeros((300, 400), dtype=bool)
+    bar[165:215, 150:300] = True
+    region = _disc(150, 165, 50) | _disc(230, 135, 50) | bar        # a cloud
+    ps = parts(region)
+    assert len(ps) == 2
+    left = (region & ~np.logical_or(*ps)).sum()
+    assert left > 0.5 * bar[:, 280:].sum()              # the bar's far end is in no part
+    assert np.logical_or(*parts(region, whole=True)).sum() == region.sum()
+
+
+def test_parts_of_one_shape_are_none():
+    bar = np.zeros((300, 400), dtype=bool)
+    bar[100:150, 50:350] = True
+    assert parts(_disc(200, 150, 80)) == [] and parts(bar) == []
+
+
+def test_add_parts_draws_each_disc_on_its_own():
+    # two circles stacked on a stadium: one shape over both circles fixes
+    # more pixels than either, so the greedy search takes it and patches
+    stadium = Shape(100, 100, 200, 100, 1, radii=(50,) * 4)
+    circles = [Shape(150, 50, 100, 100, 2, ell=True), Shape(150, 150, 100, 100, 2, ell=True)]
+    T = render_labels(0, [stadium] + circles)
+    shapes = add_parts(T, 0, [stadium], 2, parts(T == 2))
+    assert len(shapes) == 3 and error(T, 0, shapes) < 100
+    assert sorted((s.x, s.y, s.w, s.h) for s in shapes[1:]) == [(150, 50, 100, 100), (150, 150, 100, 100)]

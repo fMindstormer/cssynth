@@ -321,14 +321,15 @@ tests/
   turns as motifs rescued some petals but lengthened other targets. A filter
   learned from outcome-labeled proposals didn't transfer to structures it
   hadn't seen (docs/method.md). Otherwise the search still goes one shape at
-  a time, and the re-search only repairs its choices locally. Two light circles stacked on an oval (2024-02-27) become one tall
-  rounded box plus patches, because the box fixes more pixels than either
-  circle, and a climb from one circle grows back into the box. The lotus is
-  drawn with polygons where a golfer uses three rotated leaves. Comparing
-  whole programs (two circles plus a cheap shadow against a box plus
-  patches) is the next step. A beam over partial J is not enough on its
-  own: the two-circle branch trails for two steps before it pulls ahead,
-  and the climbs never propose a lone circle to start it.
+  a time. The re-search now compares whole programs in one case: a color
+  whose region falls into parts (two circles stacked on an oval, a cloud of
+  discs) is redrawn with one shape per part, finished, and kept if the
+  finished program scores better. On cssynth's own scores this lowered the
+  development total by 4.6% and made no target worse (docs/method.md); it
+  hasn't been measured in Chromium yet. Choices that don't show up as parts
+  of one color still go one step at a time, and a beam over partial J
+  doesn't fix that: on 2024-02-27 the two-circle branch trails for two
+  steps before it pulls ahead.
 - **Reuse.** Turned copies of a box share a rule and mirrored copies of a
   polygon share a `clip-path`, but nothing yet uses `::before`/`::after` to
   repeat a shape, or mirrors a rounded box.

@@ -148,6 +148,37 @@ polygon (and forbid polygons of its color), or every shape of one color
 remaining stack (in the winning variant's mode), refine, simplify, and
 keep the result if J drops.
 
+A third neighborhood redraws a color whose region falls into parts. The
+region is thinned by its distance to the edge until it comes apart; each
+piece whose core rises at least 3 px above that level is a part (the level
+with the most such cores wins). Two circles stacked on an oval give two
+parts; a cloud gives one per disc. Each part is either what discs of the
+split radius cover inside it (clean circles) or every pixel nearest its core
+(which keeps a leaf's tips), and both are tried. One shape is climbed per
+part, at its best depth, scored only against that part so that a disc
+can't grow over its neighbor; then the usual greedy refill takes over. The
+greedy search never makes this choice on its own: the shape over the whole
+region fixes more pixels at that step than any one part, and a climb from
+one circle grows back into it. Here the choice is judged on the finished
+program instead. Putting the same splits into the greedy search as
+candidates had raised the total J by 3% (see "What doesn't work yet").
+
+Scored with cssynth's own rasterizer, which needs no browser (the variants
+were run once per target, then re-searched both ways):
+
+| Split | Total J without parts | With parts | Characters | Targets better / worse | Re-search CPU |
+|---|---|---|---|---|---|
+| Development (66) | 60,046 | 57,305 (−4.6%) | 22,894 → 21,901 | 9 / 0 | +21% |
+| Training (48) | 72,966 | 70,491 (−3.4%) | 15,348 → 15,181 | 4 / 0 | +33% |
+
+The whole compile takes 5–8% more CPU. The two circles on the oval
+(2024-02-27) go from 695 characters to 200 (human: 481): a rounded box, a
+circle and its `box-shadow` copy. The cloud goes from 512 to 380, and the
+lotus from 551 to 484 (human: 418) with fewer wrong pixels. Three
+development targets (the oval, the cloud, 2024-03-30) become shorter than
+the human code, counting characters only; the match has yet to be checked
+in Chromium.
+
 ### Length-aware clean-up
 
 The search maximizes pixels fixed; the clean-up minimizes J. Its moves:
@@ -465,15 +496,14 @@ get rare cases right, not the average.
 
 ## What doesn't work yet
 
-- **Search order.** Re-search fixes some greedy mistakes, but a lotus of
-  three overlapping leaves is still drawn with polygons where a golfer uses
-  three rotated leaves, and two circles stacked on an oval become one tall
-  rounded box plus patches (the box fixes more pixels than either circle).
-  Two fixes were tried and dropped: proposing one shape over all of a
-  color's regions (the oval under the circles), and splitting regions at
-  narrow necks (into the two circles). Together they raised the total J by
-  3% and cost 9 targets their lead over the human code: the greedy search
-  takes the big shapes early and then patches around them.
+- **Search order.** Inside the greedy search, two fixes were tried and
+  dropped: proposing one shape over all of a color's regions (the oval
+  under the circles), and splitting regions at narrow necks (into the two
+  circles). Together they raised the total J by 3% and cost 9 targets their
+  lead over the human code: the greedy search takes the big shapes early
+  and then patches around them. The same splits now run in the re-search
+  (above), where the finished program decides. The lotus is still 66
+  characters longer than the human code, which uses three rotated leaves.
 - **More primitives:** gradients on shapes, borders, text.
 - **Antialiasing:** a linear ramp only approximates how Chromium smooths a
   rotated edge, so striped flags still carry a few hundred wrong pixels.

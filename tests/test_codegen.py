@@ -1,6 +1,6 @@
 import numpy as np
 
-from cssynth.codegen import bgcolor_attr, color_css, emit, gradient_css, num, px, radius_css, reused_clip
+from cssynth.codegen import bgcolor_attr, color_css, emit, gradient_css, num, px, radius_css, reused_clip, sides
 from cssynth.shapes import Gradient, Shape
 
 
@@ -66,3 +66,11 @@ def test_mirrored_polygon_reuses_the_clip_path():
         assert code.count("polygon(") == 1 and f"scale:{scale}" in code
     assert reused_clip(a, a.moved(5, 5)) == ""
     assert reused_clip(a, Shape.polygon([(10, 10), (60, 10), (41, 50), (20, 30)], 1)) is None
+
+
+def test_sides_drop_what_css_repeats():
+    assert sides(100, 100, 100, 100) == "100px"
+    assert sides(50, 100, 50, 100) == "50px 100px"
+    assert sides(50, 100, 70, 100) == "50px 100px 70px"
+    assert sides(50, 100, 50, 0) == "50px 100px 50px 0"
+    assert sides(0, 0, 0, 0) == "0"

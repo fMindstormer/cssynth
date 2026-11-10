@@ -403,8 +403,22 @@ def size_encodings(e: dict) -> list[dict]:
     x, y = float(e["left"]), float(e["top"])
     right, bottom = W - x - w, H - y - h
     d = {k: v for k, v in e.items() if k not in ("left", "top", "width", "height")}
-    out.append({"inset": " ".join(px(v) for v in (y, right, bottom, x)), **d})
+    out.append({"inset": sides(y, right, bottom, x), **d})
     return out
+
+
+def sides(top, right, bottom, left) -> str:
+    """Four lengths in CSS's shorthand order, dropping the ones it repeats:
+    a missing left is the right, a missing bottom the top, a missing right
+    the top."""
+    v = [top, right, bottom, left]
+    if left == right:
+        v.pop()
+        if bottom == top:
+            v.pop()
+            if right == top:
+                v.pop()
+    return " ".join(px(a) for a in v)
 
 
 def _insert_after(d: dict, key: str, item) -> dict:

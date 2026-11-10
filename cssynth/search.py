@@ -569,6 +569,85 @@ def hull_polygon(comp, x0, y0, k):
     return poly if len(poly) == k else None
 
 
+PART_RISE = 3.0         # px a part's core must rise above the level where it splits off
+MIN_PART = 200          # pixels in a part
+
+
+def parts(region: np.ndarray, whole=False) -> list[np.ndarray]:
+    """The parts of a region that overlapping or touching shapes drew (two
+    circles stacked, a cloud of discs), as masks; [] when it doesn't split.
+    The region is thinned, by distance to its edge, until it falls apart;
+    each core counts if it rises PART_RISE above the level t where it split
+    off (so a bar's ragged ridge doesn't), and the lowest level with the most
+    cores is used. A part is what discs of radius t centered in its core
+    cover (the region opened at t, split between the cores), so a thinner
+    piece with no core of its own, like the bar under a cloud's discs, is
+    left to the search. whole: every pixel goes to the core nearest it
+    instead, which keeps thin ends (a leaf's tips) with their part."""
+    ys, xs = np.nonzero(region)
+    if len(xs) < 2 * MIN_PART:
+        return []
+    sl = (slice(ys.min(), ys.max() + 1), slice(xs.min(), xs.max() + 1))
+    r = np.pad(region[sl], 1)
+    D = ndimage.distance_transform_edt(r)
+    best = None
+    for t in np.arange(1.0, D.max()):
+        lab, n = ndimage.label(D > t)
+        if n < 2:
+            continue
+        idx = np.arange(1, n + 1)
+        keep = idx[ndimage.maximum(D, lab, idx) - t >= PART_RISE]
+        if len(keep) >= 2 and (best is None or len(keep) > len(best[0])):
+            best = keep, lab, t
+    if best is None:
+        return []
+    keep, lab, t = best
+    dist, (iy, ix) = ndimage.distance_transform_edt(~np.isin(lab, keep), return_indices=True)
+    owner = np.where(whole | (dist <= t), lab[iy, ix], 0)
+    out = []
+    for i in keep:
+        m = (r & (owner == i))[1:-1, 1:-1]
+        if m.sum() >= MIN_PART:
+            full = np.zeros_like(region)
+            full[sl] = m
+            out.append(full)
+    return out if len(out) >= 2 else []
+
+
+def add_parts(T, bg, shapes, c, masks, min_gain=MIN_GAIN):
+    """shapes with one shape of color c added per part mask, largest first,
+    each climbed on its own part's pixels only (so a disc stays a disc instead
+    of growing over its neighbors), at the depth where it fixes the most."""
+    shapes = list(shapes)
+    for p in sorted(masks, key=lambda m: -int(m.sum())):
+        belows, frees = _layers(T, bg, shapes)
+        ys, xs = np.nonzero(p)
+        x0, y0 = int(xs.min()), int(ys.min())
+        comp = p[y0:ys.max() + 1, x0:xs.max() + 1]
+        tables = []
+        for k in range(len(belows)):
+            A, B = _masks(T, belows[k], c, frees[k])
+            tables.append((k, A & p, B))
+        pool = []
+        for cand in candidates(c, comp, x0, y0):
+            cx, cy, m = coverage(cand)
+            if m is None:
+                continue
+            hh, ww = m.shape
+            g, k = max((np.count_nonzero(A[cy:cy + hh, cx:cx + ww] & m)
+                        - np.count_nonzero(B[cy:cy + hh, cx:cx + ww] & m), -k) for k, A, B in tables)
+            pool.append((g, -k, cand))
+        best = None
+        for _, k, cand in sorted(pool, key=lambda t: -t[0])[:TOP_STARTS]:
+            _, A, B = tables[k]
+            s, g = hill_climb(cand, A, B, sums=area_sums(A, B))
+            if best is None or g > best[0]:
+                best = (g, k, s)
+        if best is not None and best[0] >= min_gain:
+            shapes.insert(best[1], best[2])
+    return shapes
+
+
 def _masks(T, C, c, free=None):
     A = (T == c) & (C != c)
     B = (C == T) & (T != c)
