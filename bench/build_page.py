@@ -282,6 +282,10 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
     <h2 id="h-new">What changed since the first version</h2>
     <div class="changes">
       <article class="change">
+        <h3>Comparing whole programs</h3>
+        <p>The greedy search takes the shape that fixes the most pixels now, so two circles stacked on an oval became one tall box plus patches. The re-search now also splits a color's region where its distance to the edge comes apart, draws one shape per part, and keeps the finished program when its score is lower: that target went from 706 to 200 characters (human: 481). It also re-searches the three best results instead of only the best, because one that starts a little worse can end much better: the sunburst went from 935 to 460 characters. Over the benchmark, 60 targets come out shorter than the human code instead of 56, with 2,154 fewer characters.</p>
+      </article>
+      <article class="change">
         <h3>Re-search and soft gradient stops</h3>
         <p>The greedy search commits to shapes in the order they first help. The best result is now taken apart and refilled, one polygon or one color at a time, and kept when the score drops; Pythagoras went from 330 to 240 characters. Chromium doesn't antialias hard gradient stops, so a flag whose bands were drawn with rotated boxes used to leave a band of wrong pixels along every edge. Each stop is now fitted to a sub-pixel position with a short ramp, which Chromium draws within 3/255 of the model: Tanzania became a single gradient, 602 &rarr; 142 characters (human: 336). A polygon that mirrors another now reuses its <code>clip-path</code> with <code>scale:-1 1</code>.</p>
       </article>
@@ -353,8 +357,8 @@ ul.limits { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-wid
       <li><b>Layered search.</b> Repeatedly add the shape that fixes the most wrong pixels: a box with any corner radii, an ellipse, a rotated bar or leaf, or a polygon clipped with <code>clip-path</code>, fitted to the region's convex hull or traced from its outline, concave or not. A new shape can go at any depth in the stack, not just on top. That is how rings, eyes and other nested figures get built.</li>
       <li><b>Refine.</b> Merge two pieces of the same color into one shape when that costs almost nothing, re-fit every shape against its final surroundings, drop shapes that no longer pay for their characters, and round coordinates where that changes no pixels.</li>
       <li><b>Code generation.</b> A shape that is a shifted, uniformly grown or shrunk copy of another becomes a <code>box-shadow</code> of it, when the paint order allows and CSS keeps the shape exact (a spread larger than the corner radius bends the corners). The grouping and the paint order are chosen together by an exact solver. Boxes are sized with unitless <code>padding</code> (allowed in quirks mode), saturated corner radii get short spellings like <code>7em</code>, and properties shared by every element move into one rule in a trailing, unclosed <code>&lt;style&gt;</code>; families of alike elements can take their own tag and rule.</li>
-      <li><b>Choose.</b> Eight search settings run per image (six searches, two of which also stop early at a higher threshold); each result is cleaned up for length and scored by characters + wrong pixels &divide; &rho;. The lowest score wins.</li>
-      <li><b>Re-search.</b> The winner is taken apart, one polygon or one color at a time, refilled by the same search, cleaned up again and kept when its score drops.</li>
+      <li><b>Choose.</b> Twelve search settings run per image (six searches, each choosing shapes by pixels alone or by length as well; two of the searches also stop early at a higher threshold); each result is cleaned up for length and scored by characters + wrong pixels &divide; &rho;.</li>
+      <li><b>Re-search.</b> The three best results are each taken apart, one polygon or one color at a time, or a color redrawn with one shape per part, refilled by the same search, cleaned up again and kept when the score drops. The lowest score wins.</li>
     </ol>
   </section>
 
