@@ -92,23 +92,25 @@ test it elsewhere (details in [docs/method.md](docs/method.md#beyond-the-develop
 **Held-out structural families.** 48 targets generated from six structures:
 mirrored shapes, repeats, concentric rings, petals, stripes and unrelated
 shapes. They are compiled once per version, never inspected, and scored in
-Chromium (`bench/evaluate.py`). The second baseline climbs 40% more starts,
-to spend at least the CPU time the motif search does:
+Chromium (`bench/evaluate.py`, run by the **Held-out** workflow). The fourth
+set was spent on 0.7.0, all three methods on one runner. The second baseline
+climbs 48 starts per step instead of 10, to spend at least the CPU time
+0.7.0 does:
 
-| | solved (≥ 99%) | characters, on the 40 all solve | CPU |
+| | solved (≥ 99%) | characters, on the 43 all solve | CPU |
 |---|---|---|---|
-| v0.5.0 | 40 / 48 | 11,944 | 2,634 s |
-| v0.5.0, 14 starts per step | 41 / 48 | **11,240** | 3,177 s |
-| with nested-ring motifs | **43 / 48** | 11,627 | **2,311 s** |
+| 0.6.0's search | 43 / 48 | 16,722 | **4,667 s** |
+| 0.6.0's search, 48 starts per step | 43 / 48 | 16,728 | 9,143 s |
+| 0.7.0 | 43 / 48 | **14,696** | 8,141 s |
 
-The motifs solve the most with the least time. The baseline with more starts
-writes 3.4% less code on the targets all three solve, but that rests on three
-scatter and petals targets: it is shorter on 6 and longer on 7, and the 95%
-bootstrap interval runs from 2.1% shorter to 9.6% longer. Giving the default
-more starts makes its code longer, not shorter (+6.5% on the development
-split). (This is the third
-held-out set; the earlier two were spent on earlier versions, see
-[docs/method.md](docs/method.md#motifs).)
+0.7.0 writes 12.1% less code on the targets all three solve: shorter than
+0.6.0's search on 9 of them and longer on 3, with a 95% bootstrap interval
+from 22.7% to 1.4% shorter. Rings (2,564 to 1,528 characters) and petals
+(4,333 to 3,292) gain the most; scatter is 70 characters longer. It solves
+no more targets and takes 1.7 times the CPU, and giving 0.6.0's search that
+time as more starts changes nothing (16,728 characters). (The earlier three
+sets were spent on earlier versions, see
+[docs/method.md](docs/method.md#beyond-the-development-set).)
 
 **Known optima.** On 40 tiny targets (up to four grid-aligned boxes and
 ellipses), an exact solver finds the shortest program that cssynth's own

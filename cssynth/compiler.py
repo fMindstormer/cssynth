@@ -37,8 +37,9 @@ RHO = 0.5
 
 # How many of the best distinct results the re-search starts from (see
 # compile_image). On the benchmark, 3 instead of 1 lowered J by 3.7% in
-# Chromium for 1.5 to 2 times the CPU; with several processes they run in
-# parallel, so the wall time grows less.
+# Chromium, and the whole compile took 1.5 to 2.1 times the CPU (development
+# and training splits); with several processes they run in parallel, so the
+# wall time grows less.
 RESEARCH = 3
 
 

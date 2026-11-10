@@ -188,9 +188,12 @@ several processes) and the best wins (`research=3`, the default):
 | Development (66) | 57,305 | 56,623 (−1.2%) | 55,994 (−2.3%) | 3.5× |
 | Training (48) | 70,284 | 70,222 (−0.1%) | 68,534 (−2.5%) | 5.8× |
 
-The whole compile takes 1.5 to 2 times the CPU, but little more wall time
-on 8 cores (the lotus: 16.9 s against 17.8 s). The lotus drops to 291
-characters (human: 418), from the second-best result. The winners come
+The whole compile takes 1.5 (development) to 2.1 (training) times the CPU,
+but little more wall time on 8 cores (the lotus: 16.9 s against 17.8 s).
+With the parts as well, 0.7.0 took 1.7 times the CPU of 0.6.0's search on
+the fourth held-out set, and 2.9 times on every third training target.
+The lotus drops to 291 characters (human: 418), from the second-best
+result. The winners come
 from many different variants, so re-searching one fixed extra variant
 wouldn't do the same. (The training figures here include the shorter
 `inset`, which the table above doesn't.)
@@ -366,7 +369,7 @@ from six structures: a shape and its mirror image (*mirror*), copies at a
 constant offset (*repeat*), concentric circles or squares (*rings*), leaves
 turned about a center (*petals*), bands with an emblem (*stripes*), and
 unrelated layered shapes as a control (*scatter*). A development split
-(seeds 0–7) was used to diagnose failures. Three held-out sets of 8 per
+(seeds 0–7) was used to diagnose failures. Four held-out sets of 8 per
 family, from fixed seeds, are committed as programs (`bench/heldout*/`).
 Each was compiled once per version under test and spent on one version (see
 [Motifs](#motifs)); their pictures were never looked at. The targets are
@@ -463,7 +466,8 @@ but on the 43 that the default also solves the code is 6.5% and 6.8% longer
 let a step win by more, and, as the learned proposals showed, a step that wins
 by more can still lead somewhere worse. More starts didn't shorten v0.5.0's
 code either: 2.4% longer on the development split and 0.8% longer on the 66
-targets. So there is no new version to spend a fourth held-out set on.
+targets. So there was no new version to spend a fourth held-out set on
+(it went to 0.7.0, below).
 
 **The held-out sets, honestly.** Each held-out set is compiled once per
 version, and its pictures are never looked at. The first was spent on the
@@ -479,7 +483,28 @@ characters against 9,994 (and 9,912), and 3,405 s against 3,029 s (and
 
 On the 66 development targets that version still lost 400 characters on two
 of them, so motifs moved to half the variants (above). The third set was
-spent on that, which is the shipped version.
+spent on that, which shipped as 0.6.0.
+
+The fourth set was spent on 0.7.0 (redrawing a color in parts, re-searching
+the three best results), in the Held-out workflow: the three methods ran one
+after another on one runner, rendered by the same Chromium as the
+development targets. The baseline at equal compute is 0.6.0's search with
+48 starts per step: on every third training target, 48 starts cost at least
+the CPU of 0.7.0 (each extra start about 33 s there), while 20 and 24 starts
+lowered nothing.
+
+| | solved | characters, on the 43 all solve | CPU |
+|---|---|---|---|
+| 0.6.0's search | 43 / 48 | 16,722 | 4,667 s |
+| 0.6.0's search, 48 starts | 43 / 48 | 16,728 | 9,143 s |
+| 0.7.0 | 43 / 48 | 14,696 (−12.1%) | 8,141 s |
+
+All three solve the same 43 targets. Against 0.6.0's search, 0.7.0 is
+shorter on 9 and longer on 3 (95% bootstrap interval for the total: 22.7%
+to 1.4% shorter); against the baseline with more starts, shorter on 12 and
+longer on 7 (23.1% to 1.5% shorter). Rings fall from 2,564 to 1,528
+characters and petals from 4,333 to 3,292; repeats and mirrors don't
+change, stripes lose 19 characters and scatter gains 70.
 
 **Rendering, again.** Chromium's edge on a turned straight side matches box
 filtering. On curved sides (rounded corners, leaves) the ramp has tails out
