@@ -4,6 +4,10 @@ name: Benchmark
 
 on:
   workflow_dispatch:
+    inputs:
+      research:
+        description: "Re-search the N best results (compile_image research=N)"
+        default: "1"
 
 jobs:
   bench:
@@ -21,7 +25,7 @@ jobs:
       - run: npm ci
         working-directory: bench
       - run: python bench/fetch.py
-      - run: python bench/run.py
+      - run: python bench/run.py --research ${{ inputs.research }}
       - run: python bench/tradeoff.py
       - run: python bench/build_page.py
       - uses: actions/upload-artifact@v7

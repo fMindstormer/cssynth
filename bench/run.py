@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compile every target, render the output in Chromium, and score it.
 
-    python bench/run.py [--only id,id] [--jobs 8]
+    python bench/run.py [--only id,id] [--jobs 8] [--research 3]
 
 Writes bench/out/<id>.html, bench/out/<id>.png and bench/results.json.
 Match = share of pixels whose largest channel difference is at most 8/255,
@@ -15,6 +15,7 @@ import os
 import subprocess
 import sys
 import time
+from functools import partial
 from multiprocessing import Pool
 from pathlib import Path
 
@@ -34,10 +35,10 @@ def match(a, b, tol=8):
     return float((np.abs(a.astype(int) - b.astype(int)).max(2) <= tol).mean() * 100)
 
 
-def work(case):
+def work(case, research=1):
     t = time.time()
     target = BENCH / "human" / f"{case['id']}.png"
-    code, info, (pal, bg, T, shapes) = compile_image(target)
+    code, info, (pal, bg, T, shapes) = compile_image(target, research=research)
     sim = render_rgb(bg, pal, shapes)
     img = np.asarray(Image.open(target).convert("RGB"))
     (OUT / f"{case['id']}.html").write_text(code)
@@ -52,6 +53,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only")
     ap.add_argument("--jobs", type=int, default=os.cpu_count())
+    ap.add_argument("--research", type=int, default=1, help="re-search the N best results (see compile_image)")
     args = ap.parse_args()
     cases = json.loads((BENCH / "cases.json").read_text())
     if args.only:
@@ -59,7 +61,7 @@ def main():
         cases = [c for c in cases if c["id"] in keep]
     OUT.mkdir(exist_ok=True)
     with Pool(args.jobs) as p:
-        res = p.map(work, cases)
+        res = p.map(partial(work, research=args.research), cases)
 
     jobs = [{"html": r["code"], "out": str(OUT / f"{r['id']}.png")} for r in res]
     (BENCH / "jobs_out.json").write_text(json.dumps(jobs))
