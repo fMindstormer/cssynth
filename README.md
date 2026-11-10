@@ -115,7 +115,7 @@ sets were spent on earlier versions, see
 **Known optima.** On 40 tiny targets (up to four grid-aligned boxes and
 ellipses), an exact solver finds the shortest program that cssynth's own
 emitter can write. cssynth reproduces 35 exactly and is optimal on 33 of
-them (30 before this round); the other two are 40 characters over.
+them (30 before 0.6.0; the same in 0.7.0); the other two are 40 characters over.
 
 Petals (leaves turned about a center) remain the weak family: Chromium
 antialiases turned and curved edges differently from cssynth's model, so the
