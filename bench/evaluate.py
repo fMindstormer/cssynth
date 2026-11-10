@@ -68,14 +68,23 @@ def _full_more(n):
 
 
 def _no_parts(path):
-    """The default compiler without re-searching colors in parts (v0.6.0)."""
+    """The default compiler without redrawing colors in parts."""
     improve.PARTS = False
     return compiler.compile_image(path)
 
 
 def _top1(path):
-    """The default compiler, re-searching only the best result (v0.6.0)."""
+    """The default compiler, re-searching only the best result."""
     return compiler.compile_image(path, research=1)
+
+
+def _v06(starts=10):
+    """The search of v0.6.0: no parts, the best result re-searched only;
+    climbing more starts per step, for comparisons at equal compute."""
+    def run(path):
+        improve.PARTS, search.TOP_STARTS = False, starts
+        return compiler.compile_image(path, research=1)
+    return run
 
 
 def _fixes(path):
@@ -108,6 +117,7 @@ _policy = None
 # name: path -> (code, info, model)
 METHODS = {"full": _full, "fast": _fast, "base": _base, "base-more": _base_more,
            **{f"full-{n}": _full_more(n) for n in (16, 20)}, "fixes": _fixes, "no-parts": _no_parts, "top1": _top1,
+           "v0.6": _v06(), **{f"v0.6-{n}": _v06(n) for n in (16, 20, 24)},
            "nest": _motifs(["nest"]), "nest-sym": _motifs(["nest", "symmetric"]),
            "all-motifs": _motifs(["nest", "symmetric", "seeded"]),
            "nest-allcolors": _motifs(["nest"], same_color=-1), "learned": _learned}

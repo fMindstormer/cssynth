@@ -1,0 +1,46 @@
+# Held-out evaluation: generate one held-out set of structural families
+# (bench/families.py), compile it with each method one after another on the
+# same runner (so CPU times compare), render in Chromium and print the
+# summary (bench/evaluate.py). Run it by hand from the Actions tab, once per
+# version: a set is spent once it has been run (see docs/method.md).
+name: Held-out
+
+on:
+  workflow_dispatch:
+    inputs:
+      set:
+        description: "Held-out set, a key of HELDOUT_SEEDS in bench/families.py"
+        required: true
+      methods:
+        description: "Methods of bench/evaluate.py, space-separated"
+        required: true
+        default: "full"
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      SET: ${{ inputs.set }}
+      METHODS: ${{ inputs.methods }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - run: pip install -e .
+      - run: npm ci
+        working-directory: bench
+      - run: python bench/families.py "$SET"
+      - run: for m in $METHODS; do python bench/evaluate.py --set "$SET" --method "$m"; done
+      - run: python bench/evaluate.py --set "$SET" --compare $METHODS | tee bench/eval/summary.txt
+      - uses: actions/upload-artifact@v7
+        with:
+          name: heldout
+          path: |
+            bench/${{ inputs.set }}/cases.json
+            bench/${{ inputs.set }}/*.html
+            bench/eval/

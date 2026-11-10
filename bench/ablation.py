@@ -40,7 +40,9 @@ def _no_simplify(T, bg, pal, shapes, **kw):
 # name: (what is switched off, how)
 ABLATIONS = {
     "full": ("nothing", lambda: None),
-    "no-research": ("re-search of the best result", None),
+    "no-research": ("re-search of the best results", None),
+    "no-parts": ("redrawing a color in parts (re-search)", lambda: setattr(improve, "PARTS", False)),
+    "research-1": ("re-searching the 3 best results (the best only)", None),
     "no-cleanup": ("length-aware clean-up", lambda: (setattr(compiler, "simplify", _no_simplify),
                                                      setattr(improve, "simplify", _no_simplify))),
     "no-exact-grouping": ("exact (CP-SAT) shadow grouping; greedy only",
@@ -82,7 +84,7 @@ def work(args):
     name, case = args
     t = time.time()
     code, info, _ = compiler.compile_image(BENCH / "human" / f"{case['id']}.png", variants=variants(name),
-                                           research=0 if name == "no-research" else compiler.RESEARCH)
+                                           research={"no-research": 0, "research-1": 1}.get(name, compiler.RESEARCH))
     return {"id": case["id"], "chars": len(code), "wrong_px": info["wrong_px"], "J": info["J"],
             "human_min_len": case["human_min_len"], "seconds": round(time.time() - t, 1)}
 

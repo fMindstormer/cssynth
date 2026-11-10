@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        config: [full, no-research, no-cleanup, no-exact-grouping, no-box-shadows, no-tag-rules,
+        config: [full, no-research, no-parts, research-1, no-cleanup, no-exact-grouping, no-box-shadows, no-tag-rules,
                  no-clip-reuse, top-only, no-corner-split, no-outline-polygons, no-length-aware, no-gradient-base,
                  no-soft-stops, no-motifs]
     steps:

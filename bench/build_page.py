@@ -19,7 +19,8 @@ def fmt(n):
 
 
 ABLATION_NAMES = {
-    "no-research": "Re-search of the best result", "no-cleanup": "Length-aware clean-up",
+    "no-research": "Re-search of the best results", "no-parts": "Redrawing a color in parts (re-search)",
+    "research-1": "Re-searching the 3 best results (the best only)", "no-cleanup": "Length-aware clean-up",
     "no-exact-grouping": "Exact shadow grouping (greedy kept)", "no-box-shadows": "Box-shadows",
     "no-tag-rules": "Per-tag rules (&lt;i&gt;, &lt;u&gt;, &lt;s&gt;)",
     "no-clip-reuse": "clip-path reuse for copies and mirrors",
