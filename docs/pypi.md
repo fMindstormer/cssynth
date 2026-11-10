@@ -8,7 +8,7 @@ redraw in as few characters as they can.
 
 On the 66 targets it was developed on (its development set), rendered in
 Chromium, cssynth's code is shorter than the (minified, not golfed) human
-solution on 56, with all 66 at a 99%+ pixel match.
+solution on 60, with all 66 at a 99%+ pixel match.
 
 ```sh
 pip install cssynth

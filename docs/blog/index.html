@@ -99,9 +99,9 @@ footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule
     <div><img src="img/om-20240222-o.png" alt="cssynth's rendering of the three rings" width="400" height="300"><span>cssynth, {{chars:om-20240222}} characters (human: {{human:om-20240222}})</span></div>
   </div>
 <pre>{{code:om-20240222}}</pre>
-  <figcaption>The last element is a dark disc: a spread shadow (<code>0 0 0 20px</code>) draws the top ring around it, and two more dark shadows punch the holes into the two light discs below.</figcaption>
+  <figcaption>The last element is a dark disc. Spread shadows (<code>0 0 0 20px</code>) draw the top ring around it and the right ring around a copy of it, and two dark shadows punch the holes into the lower rings.</figcaption>
 </figure>
-<p>Switching insertion at any depth off, so that new shapes always go on top, raises the total J over the benchmark by {{abl:top-only}}, one of the three largest effects of any single part.</p>
+<p>Switching insertion at any depth off, so that new shapes always go on top, raises the total J over the benchmark by {{abl:top-only}}, one of the largest effects of any single part.</p>
 
 <h2>Putting length into the search</h2>
 <p>A plain greedy search picks the shape that fixes the most pixels. That ignores what it costs to write: a polygon and a rounded box that fix about as many pixels look the same, though one is twice as long. So the search has a second mode, which picks the shape with the best</p>
@@ -132,7 +132,7 @@ footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule
     <div><img src="img/om-20240301-t.png" alt="Target: a white sunburst with a central disc on sky blue" width="400" height="300"><span>target</span></div>
     <div><img src="img/om-20240301-o.png" alt="cssynth's rendering of the sunburst" width="400" height="300"><span>cssynth, {{chars:om-20240301}} characters (human: {{human:om-20240301}})</span></div>
   </div>
-  <figcaption>The background is a <code>linear-gradient</code> fitted by dynamic programming over every angle; turned copies of a rounded bar share one <code>&lt;u&gt;</code> rule; polygons that mirror each other share a <code>clip-path</code> and flip with <code>scale:-1</code>.</figcaption>
+  <figcaption>Four white wedges and a disc. The left and right wedges share the <code>clip-path</code> in the <code>&lt;i&gt;</code> rule, and one is the other flipped with <code>scale:-1</code>. Version 0.6.0 took 935 characters here, with a fitted gradient background and turned bars; re-searching the three best results found this program.</figcaption>
 </figure>
 
 <h2>What each part buys</h2>
@@ -147,17 +147,27 @@ footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule
 <p>The held-out families found a blind spot. Three concentric circles need a filled disc first, and that disc on its own breaks every correct pixel inside it, so a search that adds one shape at a time never places it. A <em>nested-ring motif</em> fills a ring's hole, fits a shape to the filled region, recurses into the hole, and offers the whole stack as one step. Rings went from 5 of 8 solved to 7 of 8 on the held-out set. Over all 48, 43 are solved against 40, with less CPU time than v0.5.0 given 40% more search. On the tiny targets, cssynth's code is provably optimal on 33 of the 35 it reproduces exactly.</p>
 <p>Not everything transferred. Mirror and turn motifs made as many targets longer as shorter. A filter learned from the outcome of 989 proposals didn't recognize structures it hadn't been trained on. And petals stay weak, because Chromium smooths curved, turned edges differently from cssynth's model, so the right program looks wrong to the search. The details are in <a href="https://github.com/fMindstormer/cssynth/blob/main/docs/method.md#beyond-the-development-set">the method notes</a>.</p>
 
-<h2>Where it still loses</h2>
-<p>The greedy search commits to the shape that looks best now. A re-search pass takes the best result apart (one polygon at a time, then one color at a time), refills the gap and keeps whatever lowers J, which repairs some of those choices, but not the structural ones.</p>
+<h2>Comparing whole programs</h2>
+<p>The greedy search commits to the shape that looks best now. On this target, version 0.6.0 took one tall rounded box over both circles, because it fixes more pixels than either circle, and then patched the purple waist the box covered with slivers: 706 characters. Hill climbing can't repair that locally: start from one circle, and the climb grows it back into the tall box.</p>
 <figure>
   <div class="pair">
     <div><img src="img/om-20240227-t.png" alt="Target: two light circles stacked on a purple oval" width="400" height="300"><span>target</span></div>
     <div><img src="img/om-20240227-o.png" alt="cssynth's rendering of the flower" width="400" height="300"><span>cssynth, {{chars:om-20240227}} characters (human: {{human:om-20240227}})</span></div>
   </div>
 <pre>{{code:om-20240227}}</pre>
-  <figcaption>A person draws an oval and two circles. The search sees one tall rounded box that covers both circles at once, fixes more pixels than either circle, and takes it. Then it patches the purple waist the box covered with small slivers.</figcaption>
+  <figcaption>The light region comes apart into two parts where its distance to the edge narrows, so the re-search draws one shape per part, refills the rest and finishes the program. That program has the lower J, so it stays: the oval, one circle, and a <code>box-shadow</code> copy of it.</figcaption>
 </figure>
-<p>Hill climbing makes this hard to fix locally: start from one circle, and the climb grows it back into the tall box, because that fixes more pixels. What would find the human plan is a search that compares whole programs: two circles plus a cheap shadow against one box plus patches. That is the next step, along with gradients on shapes, borders and repeating a shape with <code>::before</code>/<code>::after</code>.</p>
+<p>The re-search takes a result apart in several ways (one polygon at a time, one color at a time, one color redrawn as parts), refills the gap, finishes the program and keeps it when J drops. It runs on the three best results, not only the best, because a result that starts a little worse sometimes ends much better. Without the parts, the total J rises by {{abl:no-parts}}; re-searching only the best result, by {{abl:research-1}}.</p>
+
+<h2>Where it still loses</h2>
+<p>Some programs need a primitive cssynth doesn't have. The human solution draws this pin as one rounded element, clipped to a point, whose background is a three-band gradient: the light stripe. cssynth has no gradients on shapes, so it draws the stripe as its own box and the dark arcs as polygons, and comes out longer.</p>
+<figure>
+  <div class="pair">
+    <div><img src="img/om-20240326-t.png" alt="Target: a pink map pin with a light stripe down its rounded top" width="400" height="300"><span>target</span></div>
+    <div><img src="img/om-20240326-o.png" alt="cssynth's rendering of the pin" width="400" height="300"><span>cssynth, {{chars:om-20240326}} characters (human: {{human:om-20240326}})</span></div>
+  </div>
+</figure>
+<p>Gradients on shapes are the next step, along with borders and repeating a shape with <code>::before</code>/<code>::after</code>. Choices that aren't parts of one color are also still made one step at a time.</p>
 
 <h2>Try it</h2>
 <p>The compiler is pure Python (NumPy and SciPy, with OR-Tools for the shadow grouping when it is installed), so it also runs in the browser. The <a href="../demo/">demo</a> loads it with Pyodide and compiles your picture locally. The source, the benchmark and a longer write-up of the method are <a href="https://github.com/fMindstormer/cssynth">on GitHub</a>.</p>

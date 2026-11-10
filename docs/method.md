@@ -196,17 +196,20 @@ wouldn't do the same. (The training figures here include the shorter
 `inset`, which the table above doesn't.)
 
 Measured in Chromium on Linux (the Benchmark workflow), against 0.6.0. J
-here counts Chromium's wrong pixels; these runs predate a fix that keeps a
-shared `padding` when `inset` would be shorter for one element, worth
-about 55 more characters:
+here counts Chromium's wrong pixels:
 
 | | Total J | Characters | ≥ 99% match | Shorter than human |
 |---|---|---|---|---|
 | 0.6.0 | 52,153 | 23,329 | 66 / 66 | 56 / 66 |
 | Parts, plus the shorter `inset` | 48,985 (−6.1%) | 21,817 | 66 / 66 | 59 / 66 |
 | The same, re-searching the 3 best | 47,179 (−9.5%) | 21,283 | 66 / 66 | 59 / 66 |
+| 0.7.0: the same, keeping a shared `padding` | 47,263 (−9.4%) | 21,175 | 66 / 66 | 60 / 66 |
 
-The lowest match stays at 99.21%. Re-searching the 3 best puts the lotus
+The last row keeps a `padding` that elements share when `inset` would be
+shorter for one of them. Code generation is never longer for the same
+shapes, but the clean-up reacts to the new lengths and ends elsewhere on a
+few targets, so the total J moved by +0.2% (108 fewer characters). The
+lowest match stays at 99.21%. Re-searching the 3 best puts the lotus
 under the human length and takes the wig over it (227 characters to 285,
 human: 264), for fewer wrong pixels.
 
@@ -295,25 +298,29 @@ add up):
 
 | Switched off | Total J | Characters | Shorter than human |
 |---|---|---|---|
-| nothing (full compiler) | 60,441 | 23,329 | 56 / 66 |
-| Insertion at any depth (shapes go on top) | 64,637 (+6.9%) | 24,887 (+1,558) | 54 / 66 |
-| Polygons traced from outlines | 64,449 (+6.6%) | 25,791 (+2,462) | 52 / 66 |
-| Re-search of the best result | 64,444 (+6.6%) | 24,652 (+1,323) | 55 / 66 |
-| Gradient backgrounds | 63,265 (+4.7%) | 24,077 (+748) | 54 / 66 |
-| Length-aware shape choice (by pixels only) | 62,921 (+4.1%) | 24,017 (+688) | 54 / 66 |
-| Length-aware clean-up | 61,982 (+2.5%) | 24,914 (+1,585) | 52 / 66 |
-| Splitting regions that touch at corners | 61,705 (+2.1%) | 24,005 (+676) | 55 / 66 |
-| Nested-ring motifs | 61,309 (+1.4%) | 23,495 (+166) | 56 / 66 |
-| Box-shadows | 61,258 (+1.4%) | 24,150 (+821) | 56 / 66 |
-| Soft gradient stops | 61,106 (+1.1%) | 23,680 (+351) | 55 / 66 |
-| Per-tag rules (`<i>`, `<u>`, `<s>`) | 60,807 (+0.6%) | 23,583 (+254) | 55 / 66 |
-| `clip-path` reuse for copies and mirrors | 60,708 (+0.4%) | 23,544 (+215) | 55 / 66 |
-| Exact (CP-SAT) shadow grouping, greedy kept | 60,554 (+0.2%) | 23,442 (+113) | 56 / 66 |
+| nothing (full compiler) | 55,925 | 21,175 | 60 / 66 |
+| Re-search of the best results | 63,980 (+14.4%) | 24,086 (+2,911) | 56 / 66 |
+| Redrawing a color in parts (re-search) | 59,350 (+6.1%) | 22,692 (+1,517) | 57 / 66 |
+| Polygons traced from outlines | 59,032 (+5.6%) | 23,074 (+1,899) | 59 / 66 |
+| Insertion at any depth (shapes go on top) | 58,545 (+4.7%) | 21,819 (+644) | 59 / 66 |
+| Length-aware shape choice (by pixels only) | 57,824 (+3.4%) | 21,386 (+211) | 61 / 66 |
+| Gradient backgrounds | 57,462 (+2.7%) | 21,514 (+339) | 59 / 66 |
+| Re-searching the 3 best results (only the best) | 57,269 (+2.4%) | 21,691 (+516) | 60 / 66 |
+| Nested-ring motifs | 56,758 (+1.5%) | 21,260 (+85) | 60 / 66 |
+| Box-shadows | 56,674 (+1.3%) | 21,876 (+701) | 60 / 66 |
+| Length-aware clean-up | 56,567 (+1.1%) | 21,779 (+604) | 61 / 66 |
+| `clip-path` reuse for copies and mirrors | 56,184 (+0.5%) | 21,254 (+79) | 59 / 66 |
+| Per-tag rules (`<i>`, `<u>`, `<s>`) | 56,171 (+0.4%) | 21,293 (+118) | 59 / 66 |
+| Splitting regions that touch at corners | 55,990 (+0.1%) | 21,158 (−17) | 61 / 66 |
+| Exact (CP-SAT) shadow grouping, greedy kept | 55,971 (+0.1%) | 21,221 (+46) | 60 / 66 |
+| Soft gradient stops | 55,961 (+0.1%) | 21,167 (−8) | 60 / 66 |
 
-The two ideas that shape the search, inserting shapes at any depth and
-re-searching the result, are worth the most; so are outline polygons, which
-replace stacks of slivers. Code-generation tricks are smaller on average,
-but each decides a few targets.
+Re-searching the results is worth the most, and redrawing a color in parts
+is 6.1% of that on its own; outline polygons, which replace stacks of
+slivers, and inserting shapes at any depth come next. Code-generation tricks
+are smaller on average. Splitting regions at corners, soft gradient stops
+and exact shadow grouping now move the total by 0.1% or less (in 0.6.0:
+2.1%, 1.1% and 0.2%).
 
 ## Experiment: learned start ranking
 

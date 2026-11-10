@@ -40,10 +40,10 @@ Chromium and compared pixel by pixel:
 
 | | |
 |---|---|
-| Shorter than the human solution (minified) | **56 of 66** |
-| Total code length | **23,329** characters (human: 35,532) |
+| Shorter than the human solution (minified) | **60 of 66** |
+| Total code length | **21,175** characters (human: 35,532) |
 | Targets at ≥ 99% pixel match | **66 of 66** (lowest 99.21%) |
-| Mean pixel match | 99.82% |
+| Mean pixel match | 99.84% |
 
 The human solutions are readable code from two public repositories, minified
 but not golfed. Top CSSBattle players write far shorter code, so these
@@ -61,25 +61,28 @@ rows don't add up.
 
 | Switched off | Total J | Characters | Shorter than human |
 |---|---|---|---|
-| nothing (full compiler) | 60,441 | 23,329 | 56 / 66 |
-| Insertion at any depth (shapes go on top) | 64,637 (+6.9%) | 24,887 (+1,558) | 54 / 66 |
-| Polygons traced from outlines | 64,449 (+6.6%) | 25,791 (+2,462) | 52 / 66 |
-| Re-search of the best result | 64,444 (+6.6%) | 24,652 (+1,323) | 55 / 66 |
-| Gradient backgrounds | 63,265 (+4.7%) | 24,077 (+748) | 54 / 66 |
-| Length-aware shape choice (by pixels only) | 62,921 (+4.1%) | 24,017 (+688) | 54 / 66 |
-| Length-aware clean-up | 61,982 (+2.5%) | 24,914 (+1,585) | 52 / 66 |
-| Splitting regions that touch at corners | 61,705 (+2.1%) | 24,005 (+676) | 55 / 66 |
-| Nested-ring motifs | 61,309 (+1.4%) | 23,495 (+166) | 56 / 66 |
-| Box-shadows | 61,258 (+1.4%) | 24,150 (+821) | 56 / 66 |
-| Soft gradient stops | 61,106 (+1.1%) | 23,680 (+351) | 55 / 66 |
-| Per-tag rules (`<i>`, `<u>`, `<s>`) | 60,807 (+0.6%) | 23,583 (+254) | 55 / 66 |
-| `clip-path` reuse for copies and mirrors | 60,708 (+0.4%) | 23,544 (+215) | 55 / 66 |
-| Exact (CP-SAT) shadow grouping, greedy kept | 60,554 (+0.2%) | 23,442 (+113) | 56 / 66 |
+| nothing (full compiler) | 55,925 | 21,175 | 60 / 66 |
+| Re-search of the best results | 63,980 (+14.4%) | 24,086 (+2,911) | 56 / 66 |
+| Redrawing a color in parts (re-search) | 59,350 (+6.1%) | 22,692 (+1,517) | 57 / 66 |
+| Polygons traced from outlines | 59,032 (+5.6%) | 23,074 (+1,899) | 59 / 66 |
+| Insertion at any depth (shapes go on top) | 58,545 (+4.7%) | 21,819 (+644) | 59 / 66 |
+| Length-aware shape choice (by pixels only) | 57,824 (+3.4%) | 21,386 (+211) | 61 / 66 |
+| Gradient backgrounds | 57,462 (+2.7%) | 21,514 (+339) | 59 / 66 |
+| Re-searching the 3 best results (only the best) | 57,269 (+2.4%) | 21,691 (+516) | 60 / 66 |
+| Nested-ring motifs | 56,758 (+1.5%) | 21,260 (+85) | 60 / 66 |
+| Box-shadows | 56,674 (+1.3%) | 21,876 (+701) | 60 / 66 |
+| Length-aware clean-up | 56,567 (+1.1%) | 21,779 (+604) | 61 / 66 |
+| `clip-path` reuse for copies and mirrors | 56,184 (+0.5%) | 21,254 (+79) | 59 / 66 |
+| Per-tag rules (`<i>`, `<u>`, `<s>`) | 56,171 (+0.4%) | 21,293 (+118) | 59 / 66 |
+| Splitting regions that touch at corners | 55,990 (+0.1%) | 21,158 (−17) | 61 / 66 |
+| Exact (CP-SAT) shadow grouping, greedy kept | 55,971 (+0.1%) | 21,221 (+46) | 60 / 66 |
+| Soft gradient stops | 55,961 (+0.1%) | 21,167 (−8) | 60 / 66 |
 
-Inserting shapes below existing ones, outline polygons and the re-search
-matter most; gradient backgrounds and choosing shapes by length as well as
-pixels come next. Exact shadow grouping and `clip-path` reuse are small on
-average but decide a few targets.
+The re-search matters most, and its step that redraws a color in parts is
+worth 6.1% on its own; outline polygons and inserting shapes below existing
+ones come next. Three parts now move the total by 0.1% or less: splitting
+regions at corners, soft gradient stops and exact shadow grouping. Rows that
+show more targets shorter than human (61) do so at a higher total J.
 
 ### Beyond the development set
 
