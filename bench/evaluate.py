@@ -117,7 +117,7 @@ _policy = None
 # name: path -> (code, info, model)
 METHODS = {"full": _full, "fast": _fast, "base": _base, "base-more": _base_more,
            **{f"full-{n}": _full_more(n) for n in (16, 20)}, "fixes": _fixes, "no-parts": _no_parts, "top1": _top1,
-           "v0.6": _v06(), **{f"v0.6-{n}": _v06(n) for n in (16, 20, 24)},
+           "v0.6": _v06(), **{f"v0.6-{n}": _v06(n) for n in (16, 20, 24, 48)},
            "nest": _motifs(["nest"]), "nest-sym": _motifs(["nest", "symmetric"]),
            "all-motifs": _motifs(["nest", "symmetric", "seeded"]),
            "nest-allcolors": _motifs(["nest"], same_color=-1), "learned": _learned}
