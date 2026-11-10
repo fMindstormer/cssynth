@@ -176,8 +176,7 @@ The whole compile takes 5–8% more CPU. The two circles on the oval
 circle and its `box-shadow` copy. The cloud goes from 512 to 380, and the
 lotus from 551 to 484 (human: 418) with fewer wrong pixels. Three
 development targets (the oval, the cloud, 2024-03-30) become shorter than
-the human code, counting characters only; the match has yet to be checked
-in Chromium.
+the human code.
 
 Re-searching only the best result can miss a better program: a result that
 starts a little worse sometimes re-searches to a much better one. With
@@ -193,9 +192,23 @@ The whole compile takes 1.5 to 2 times the CPU, but little more wall time
 on 8 cores (the lotus: 16.9 s against 17.8 s). The lotus drops to 291
 characters (human: 418), from the second-best result. The winners come
 from many different variants, so re-searching one fixed extra variant
-wouldn't do the same. It isn't the default yet, since the published numbers
-are the default's, measured in Chromium. (The training figures here include
-the shorter `inset`, which the table above doesn't.)
+wouldn't do the same. It isn't the default yet. (The training figures here
+include the shorter `inset`, which the table above doesn't.)
+
+Measured in Chromium on Linux (the Benchmark workflow), against 0.6.0. J
+here counts Chromium's wrong pixels; these runs predate a fix that keeps a
+shared `padding` when `inset` would be shorter for one element, worth
+about 55 more characters:
+
+| | Total J | Characters | ≥ 99% match | Shorter than human |
+|---|---|---|---|---|
+| 0.6.0 | 52,153 | 23,329 | 66 / 66 | 56 / 66 |
+| Parts, plus the shorter `inset` | 48,985 (−6.1%) | 21,817 | 66 / 66 | 59 / 66 |
+| The same, re-searching the 3 best | 47,179 (−9.5%) | 21,283 | 66 / 66 | 59 / 66 |
+
+The lowest match stays at 99.21%. Re-searching the 3 best puts the lotus
+under the human length and takes the wig over it (227 characters to 285,
+human: 264), for fewer wrong pixels.
 
 ### Length-aware clean-up
 

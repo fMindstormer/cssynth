@@ -626,8 +626,15 @@ def _elements(shapes, palette, edges, group_of, members):
 def _code(body_opts, elements) -> str:
     if not elements:
         return assemble(body_opts, [])
-    per_element = [min(size_encodings(e), key=lambda d: len(_style(d))) for e in elements]
-    return min((assemble(body_opts, els, tags, inline) for els in (per_element, elements)
+    encodings = [size_encodings(e) for e in elements]
+    # each element's shortest encoding; the same without inset, which can
+    # break a padding the elements would share; the plain properties
+    candidates = []
+    for els in ([min(es, key=lambda d: len(_style(d))) for es in encodings],
+                [min(es[:-1], key=lambda d: len(_style(d))) for es in encodings], elements):
+        if els not in candidates:
+            candidates.append(els)
+    return min((assemble(body_opts, els, tags, inline) for els in candidates
                 for inline in [_inline(els)] for tags in tag_options(els)), key=len)
 
 

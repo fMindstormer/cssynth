@@ -74,3 +74,10 @@ def test_sides_drop_what_css_repeats():
     assert sides(50, 100, 70, 100) == "50px 100px 70px"
     assert sides(50, 100, 50, 0) == "50px 100px 50px 0"
     assert sides(0, 0, 0, 0) == "0"
+
+
+def test_a_shorter_inset_does_not_break_a_shared_padding():
+    pal = np.array([(0, 0, 0), (255, 255, 255)])
+    bowl, dome = Shape(50, 150, 100, 100, 1, radii=(0, 0, 50, 50)), Shape(150, 50, 100, 100, 1, radii=(50, 50, 0, 0))
+    code, _ = emit(pal, 0, [bowl, dome])
+    assert "inset" not in code and code.count("padding:50") == 1

@@ -328,8 +328,9 @@ tests/
   whose region falls into parts (two circles stacked on an oval, a cloud of
   discs) is redrawn with one shape per part, finished, and kept if the
   finished program scores better. On cssynth's own scores this lowered the
-  development total by 4.6% and made no target worse (docs/method.md); it
-  hasn't been measured in Chromium yet. Choices that don't show up as parts
+  development total by 4.6% and made no target worse; measured in
+  Chromium, 59 targets instead of 56 come out shorter than the human code
+  (docs/method.md). Choices that don't show up as parts
   of one color still go one step at a time, and a beam over partial J
   doesn't fix that: on 2024-02-27 the two-circle branch trails for two
   steps before it pulls ahead.
